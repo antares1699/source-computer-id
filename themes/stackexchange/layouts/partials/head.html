@@ -1,0 +1,51 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ "/favicon.ico" | relURL }}">
+    <title>
+        {{- if .Page.IsHome -}}
+            {{ .Site.Title }}
+        {{- else -}}
+            {{ .Title }}
+        {{- end -}}
+    </title>
+
+    {{ if .Page.IsHome }}
+        <meta name="description" content="{{ .Site.Params.description }}">
+        <link rel="canonical" href="{{ .Site.BaseURL }}">
+
+        <meta property="og:title"           content="{{ .Site.Title }}">
+        <meta property="og:description"     content="{{ .Site.Params.description }}">
+        <meta property="og:type"            content="website">
+        <meta property="og:url"             content="{{ .Site.BaseURL }}">
+        <meta property="og:site_name"       content="{{ .Site.Title }}">
+        <meta property="og:locale"          content="{{ .Site.Params.open_graph_locale }}">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="{{ .Site.Title }}">
+        <meta name="twitter:description" content="{{ .Site.Params.description }}">
+    {{ end }}
+
+    {{ if eq .Page.Type "questions" }}
+        <meta name="description" content="{{ .Page.Params.snippet }}">
+        <link rel="canonical" href="{{ .Page.Permalink }}">
+
+        <meta property="og:title"           content="{{ .Page.Title }}">
+        <meta property="og:description"     content="{{ .Page.Params.snippet }}">
+        <meta property="og:type"            content="website">
+        <meta property="og:url"             content="{{ .Page.Permalink }}">
+        <meta property="og:site_name"       content="{{ .Site.Title }}">
+        <meta property="og:locale"          content="{{ .Site.Params.open_graph_locale }}">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="{{ .Page.Title }}">
+        <meta name="twitter:description" content="{{ .Page.Params.snippet }}">
+    {{ end }}
+
+    {{ $css := resources.Get "css/style.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+    <link rel="stylesheet" href="{{ "/vendor/fontawesome/css/all.min.css" | relURL }}">
+    {{ if .Site.Params.cookieAlert }}
+    <link rel="stylesheet" href="{{ "/vendor/cookie-alert/cookiealert.min.css" | relURL }}">
+    {{ end }}
+</head>

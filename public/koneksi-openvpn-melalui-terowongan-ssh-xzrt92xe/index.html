@@ -1,0 +1,107 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Koneksi OpenVPN melalui terowongan SSH</title><meta name=description content="Saat ini saya mengunjungi China, jadi saya memiliki beberapa opsi untuk penyiapan VPN. Namun, server VPN saya memiliki kebiasaan tiba-tiba menghilang dari jaringan setelah saya menggunakannya untuk beberapa saat.  Saya pikir ini..."><link rel=canonical href=https://www.idxstack.com/koneksi-openvpn-melalui-terowongan-ssh-xzrt92xe/><meta property="og:title" content="Koneksi OpenVPN melalui terowongan SSH"><meta property="og:description" content="Saat ini saya mengunjungi China, jadi saya memiliki beberapa opsi untuk penyiapan VPN. Namun, server VPN saya memiliki kebiasaan tiba-tiba menghilang dari jaringan setelah saya menggunakannya untuk beberapa saat.  Saya pikir ini..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/koneksi-openvpn-melalui-terowongan-ssh-xzrt92xe/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Koneksi OpenVPN melalui terowongan SSH"><meta name=twitter:description content="Saat ini saya mengunjungi China, jadi saya memiliki beberapa opsi untuk penyiapan VPN. Namun, server VPN saya memiliki kebiasaan tiba-tiba menghilang dari jaringan setelah saya menggunakannya untuk beberapa saat.  Saya pikir ini..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Koneksi OpenVPN melalui terowongan SSH</h1><div itemprop=text><p>Saat ini saya mengunjungi China, jadi saya memiliki beberapa opsi untuk penyiapan VPN. Namun, server VPN saya memiliki kebiasaan tiba-tiba menghilang dari jaringan setelah saya menggunakannya untuk beberapa saat.</p><p>Saya pikir ini mungkin opsi untuk menggunakan terowongan SSH ke server lain, dan menghubungkan VPN melalui itu, untuk mencegah lalu lintas VPN terdeteksi. Dengan begitu, kemungkinan lalu lintas hanya terbaca sebagai koneksi SSH ke penyedia.</p><p>Jadi, saya terhubung ke server seperti ini:</p><pre><code>ssh peter@some-server -L 4444:vpn-server:1194 -N
+</code></pre><p>Dan kemudian tambahkan ini ke konfigurasi klien openvpn saya:</p><pre><code>remote localhost 1194
+</code></pre><p>Sayangnya, ini tidak berhasil. Sambungan diautentikasi, tetapi setelah itu, saya tidak dapat terhubung ke bagian dalam VPN (<code>ping 10.8.0.1</code>) atau luar (<code>ping 8.8.8.8</code>). Haruskah ini berhasil, atau apakah saya salah paham?</p><p>Apakah ada beberapa aturan nat iptables yang harus saya tambahkan? Satu-satunya aturan nat yang saya tambahkan sejauh ini adalah:</p><pre><code>-A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+</code></pre></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/368253/peter target=_blank rel="nofollow noopener"><span itemprop=name>Peter</span></a>
+—
+<a href=https://superuser.com/questions/1356330/openvpn-connection-through-ssh-tunnel target=_blank rel="nofollow noopener">Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm" id=showQuestionReplies>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 d-none" id=questionRepliesContainer><ul class="list-group list-group-flush"><li class=list-group-item><div>Server VPN menghilang karena server Pemerintah Cina mengidentifikasi bahwa Anda menggunakan VPN. Pertanyaannya, apakah Anda BENAR-BENAR membutuhkan VPN ini? Terlepas dari tantangan teknis, adakah alasan yang cukup untuk melakukan sesuatu yang bisa ilegal? Jika mereka melacak penggunaan VPN Anda dan sampai kepada Anda, mereka dapat menahan Anda karena menggunakan VPN. China bukanlah negara asing tempat Anda ingin ditangkap. Mereka bisa memenjarakan Anda selama berbulan-bulan hampir tanpa bayaran. Apakah itu layak?</div><div>— <a href=https://superuser.com/users/913277/mguima target=_blank rel="nofollow noopener">mguima</a></div></li><li class=list-group-item><div>@mguima Saya rasa Anda telah melihat terlalu banyak film.</div><div>— <a href=https://superuser.com/users/368253/peter target=_blank rel="nofollow noopener">Peter</a></div></li><li class=list-group-item><div>Mungkin. Ingat, mereka bukan orang Barat. Ini menghubungkan dunia lain.</div><div>— <a href=https://superuser.com/users/913277/mguima target=_blank rel="nofollow noopener">mguima</a></div></li></ul></div></div></div><hr><h2 class=h4><span itemprop=answerCount>4</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>4</div><div class=card-body><div itemprop=text><p>Pendekatan sederhana untuk menyiapkan koneksi VPN Anda melalui terowongan SSH tidak akan berfungsi. Masalah pertama: Anda hanya melakukan tunneling koneksi ke server VPN itu sendiri, yang kemudian tidak mengizinkan semua lalu lintas lain untuk dirutekan melalui server VPN <strong>LEBIH</strong> koneksi <code>ssh</code> (sehingga mengaburkan koneksi). Perbaikan untuk ini adalah dengan menggunakan proxy SOCKS [5] dinamis dan memberi tahu OpenVPN untuk terhubung melalui proxy itu. Tambahkan ke file konfigurasi OpenVPN Anda:</p><pre><code>socks-proxy localhost 6886
+socks-proxy-retry
+</code></pre><p>Kemudian, mulai sesi <code>ssh</code> Anda dengan proxy SOCKS dinamis:</p><pre><code>ssh -D 6886 -N REMOTE
+</code></pre><p>Kemudian Anda dapat memulai koneksi OpenVPN Anda. Namun, ini masih memiliki satu kegagalan lagi, setidaknya dengan asumsi Anda ingin mengalihkan <strong>semua lalu lintas</strong> melalui VPN (OpenVPN directive <code>redirect-gateway def1</code>). Agar berfungsi, Anda perlu mempertahankan rute ke titik akhir proxy SOCKS yang tidak ditutupi oleh rute yang ditambahkan oleh klien OpenVPN. Untuk melakukan ini, tambahkan arahan lain ke konfigurasi OpenVPN Anda yang terlihat seperti ini:</p><pre><code>route REMOTE-IP 255.255.255.255 net_gateway default
+</code></pre><p>Kamu <strong>mungkin</strong> dapat menggunakan nama host REMOTE dalam arahan itu, tetapi Anda mungkin perlu mengatasinya ke alamat IP secara manual.</p><p>Itu harus bekerja, setidaknya untuk lalu lintas ipv4. Pencarian google cepat muncul <a href=https://kiljan.org/2017/11/15/routing-traffic-through-openvpn-using-a-local-socks-proxy/ rel="nofollow noopener" target=_blank>posting blog ini</a> yang pada dasarnya melakukan hal yang sama, memiliki deskripsi yang baik tentang apa yang terjadi, tetapi tampaknya lebih rumit dalam solusi (menggunakan skrip koneksi)</p><p>Atau, Anda mungkin juga melihat menggunakan <code>obfs4proxy</code> (mis. <a href=https://trac.torproject.org/projects/tor/wiki/doc/PluggableTransports/obfs4proxy rel="nofollow noopener" target=_blank>ini</a> dan <a href=https://github.com/Yawning/obfs4 rel="nofollow noopener" target=_blank>ini</a> atau <a href=http://manpages.ubuntu.com/manpages/xenial/man1/obfs4proxy.1.html rel="nofollow noopener" target=_blank>dikemas untuk ubuntu</a> )</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/koneksi-openvpn-melalui-terowongan-ssh-xzrt92xe/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/367026/crimson-egret target=_blank rel="nofollow noopener"><span itemprop=name>crimson-egret</span></a>
+—
+<a href=https://superuser.com/a/1356991 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>3</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>3</div><div class=card-body><div itemprop=text><p>Terowongan SSH dengan VPN berfungsi di Cina, meskipun sangat lambat. Menurunkan pengaturan enkripsi tidak akan meningkatkan kecepatan. Saya pikir kecepatan koneksi umumnya dibatasi dari China ke bagian mana pun di dunia.</p><p>Bagaimana saya melakukannya adalah terowongan SSH dengan penerusan port yang diaktifkan. Dan kemudian gunakan OpenVPN dengan SOCKS Proxy melalui terowongan SSH itu. Nomor port non-default juga berfungsi.</p><p>Tidak perlu firewall atau konfigurasi rute. Bekerja dengan baik untuk saya. :)</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/koneksi-openvpn-melalui-terowongan-ssh-xzrt92xe/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1131450/overseas-chinese target=_blank rel="nofollow noopener"><span itemprop=name>overseas.chinese</span></a>
+—
+<a href=https://superuser.com/a/1518507 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-2><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><p>Saya berhasil membuat koneksi ke Raspberry Pi saya (dengan PiVPN)
+melalui TCP dan VPS eksternal. Lalu saya melakukan ini:</p><p>izinkan penerusan ke publik di server Anda (VPS / VPN). Ubah <code>GatewayPorts</code> menjadi <code>yes</code> atau tambahkan jika belum ada.</p><pre><code>/etc/ssh/sshd_config:
+GatewayPorts yes
+</code></pre><p>Ubah <code>proto udp</code> menjadi <code>tcp</code> (karena ssh menggunakan protokol tcp)</p><pre><code>/etc/openvpn/server.conf:
+proto tcp
+</code></pre><p>Sekali lagi, ubah <code>proto udp</code> menjadi <code>tcp-client</code>:</p><pre><code>openvpn-client.ovpn:
+proto tcp-client
+</code></pre><p>Sekarang mulai ssh forwarding
+(0.0.0.0 untuk mengizinkan semua koneksi IPv4; -N untuk tidak memulai bash di server)</p><pre><code>ssh -R 0.0.0.0:1194:localhost:1194 user@server -N
+</code></pre><p>Anda juga harus memeriksa apakah server VPS / VPN Anda memungkinkan koneksi dan memiliki pengaturan firewall yang benar. Jika Anda menggunakan ufw untuk iptables, cukup lakukan ini:</p><pre><code>ufw allow 1194/tcp
+ufw enable
+</code></pre><p>Ini mungkin bukan yang tercepat tapi berhasil untuk saya.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/koneksi-openvpn-melalui-terowongan-ssh-xzrt92xe/#answer-2 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/947906/bostrot target=_blank rel="nofollow noopener"><span itemprop=name>Bostrot</span></a>
+—
+<a href=https://superuser.com/a/1418581 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-3><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><p>Anda tidak perlu menjalankan VPN lain <em>melalui</em> ssh. Anda dapat menggunakan ssh <em>SEBAGAI</em> VPN. lihat opsi "-w X: Y" ssh.</p><p>Ini adalah jawaban yang berpusat pada linux. Asumsikan server, kita akan menyebutnya "hub", yang terhubung dengan klien terowongan ssh. Mereka akan menggunakan 172.17.2.0/24 sebagai jaringan "operator" VPN. Beberapa host umum dan terkenal, kami memberi mereka konfigurasi tetap. Orang lain juga dapat terhubung tetapi harus menggunakan konfigurasi lain.</p><pre><code>#!/bin/sh -e
+#
+# make-ssh-tunnel HITHER YON INTERFACE GW
+#
+# HITHER ...... this host's VPN address.
+# YON ......... $GW's VPN address.
+# INTERFACE ... number of the tun device, same at both ends.
+# GW .......... server host.
+#
+# /etc/ssh/sshd_config on $GW must include:
+#   PermitRootLogin yes
+#   PermitTunnel yes
+# and clients must be able to ssh to $GW as root.
+#
+# this creates a star topology with $GW at center,
+# which is generally the .1 address in the VPN /24 net.
+# others connect and route through $GW to reach
+# the other members of the /24 net.
+# ________________________________________________
+#
+# the setup.
+#
+if [ &quot;$#&quot; = 0 ] ; then
+    # automatic, for specific, known, regularly-connected hosts.
+    case &quot;`hostname -s`&quot; in
+    ThisHost) HITHER=172.17.2.2 IFACE=12 ;;
+    ThatHost) HITHER=172.17.2.3 IFACE=13 ;;
+    Another)  HITHER=172.17.2.4 IFACE=14 ;;
+    *)        echo who are you? ; exit 1 ;;
+    esac
+    YON=172.17.2.1
+    GW=hub
+    SUBNET=172.17.2.0
+else
+    # manual, for random, probably temporary connections.
+    HITHER=&quot;${1:-172.17.2.5}&quot;
+    YON=&quot;${2:-172.17.2.1}&quot;
+    IFACE=&quot;${3:-15}&quot;
+    GW=&quot;${4:-hub}&quot;
+    SUBNET=&quot;${YON%.[0-9]*}&quot;.0
+    #
+    [ &quot;$HITHER&quot; = &quot;$YON&quot; ] &amp;&amp; echo &quot;${0##*/}&quot;: identical addresses not allowed &amp;&amp; exit 1
+fi
+#
+# the business.
+#
+set -x
+# 1st: do it there.
+ssh -f -T -w $IFACE:$IFACE root@$GW \
+&quot;ifconfig tun$IFACE $YON pointopoint $HITHER netmask 255.255.255.255
+ ifconfig tun$IFACE
+ route -n | grep tun$IFACE&quot;
+# 2nd: do it here.
+ ifconfig tun$IFACE $HITHER pointopoint $YON netmask 255.255.255.255
+ ifconfig tun$IFACE
+ route add -net $SUBNET/24 gw $YON
+ route -n | grep tun$IFACE
+#
+# the afterthought.
+#
+# to make the tunnel a default route replacement:
+#
+# route add -host $GW gw 192.168.0.1 # that is, your real.defa.ult.route
+# ip route add   0.0.0.0/1 via $YON
+# ip route add 128.0.0.0/1 via $YON
+#
+# 1st preserves real route to $GW, avoiding route loop.
+# 2nd and 3rd override default route without replacing it.
+#
+# in addition, $GW must NAT on behalf of the VPN hosts.
+# iptables -t nat -A POSTROUTING -s 172.17.2.0/24 -o eth0 -j SNAT --to-source 11.22.33.44
+# where --to-source is $GW's real external address.
+#
+# Embellish to taste.
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/koneksi-openvpn-melalui-terowongan-ssh-xzrt92xe/#answer-3 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1260401/karl target=_blank rel="nofollow noopener"><span itemprop=name>karl</span></a>
+—
+<a href=https://superuser.com/a/1616347 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=3>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=3><ul class="list-group list-group-flush"><li class=list-group-item><div>Jawaban yang bagus memang, tapi tolong jelaskan apa yang dilakukan setiap baris kode selain memberi komentar di kode.</div><div>— <a href=https://superuser.com/users/1250181/xe%d0%bd%ce%b5i-%ce%9e%d1%8dn%d0%b2%cf%b5%cf%82 target=_blank rel="nofollow noopener">Xe&#1085;&#949;i &#926;&#1101;n&#1074;&#1013;&#962;</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/linux-ps-menunjukkan-dari-mana-proses-dijalankan-ql4bekev/>linux ps menunjukkan dari mana proses dijalankan</a></div></li><li class=list-group-item><div><a href=/berapa-lama-saya-harus-tetap-menghubungkan-hard-drive-eksternal-ke-komputer-saya-6gsxko9y/>Berapa lama saya harus tetap menghubungkan hard drive eksternal ke komputer saya</a></div></li><li class=list-group-item><div><a href=/xampp-tidak-dapat-menjalankan-apache-di-mac-os-x-10103-yosemite-tnwbigkm/>XAMPP tidak dapat menjalankan Apache di Mac OS X 10.10.3 Yosemite</a></div></li><li class=list-group-item><div><a href=/file-testtxt-yang-aneh-selalu-muncul-di-folder-dev-zoa6kybt/>File test.txt yang aneh selalu muncul di folder dev</a></div></li><li class=list-group-item><div><a href=/apakah-sublime-text-3-menyimpan-log-perintah-jika-ya-di-mana-saya-dapat-menemukannya-jdfhsd0z/>Apakah Sublime Text 3 menyimpan log perintah? Jika ya, di mana saya dapat menemukannya?</a></div></li><li class=list-group-item><div><a href=/strange-intermittent-background-sound-di-windows-7-bazlny2n/>Strange Intermittent Background Sound di Windows 7</a></div></li><li class=list-group-item><div><a href=/bagaimana-anda-membuat-windows-10-enterprise-app-store-crvd1lgs/>Bagaimana Anda membuat Windows 10 Enterprise App Store?</a></div></li><li class=list-group-item><div><a href=/apa-yang-harus-saya-lakukan-saat-iphone-saya-terhenti-di-layar-dengan-kabel-usb-dan-logo-itunes-x4ivtgzv/>Apa yang harus saya lakukan saat iPhone saya terhenti di layar dengan kabel USB dan logo iTunes?</a></div></li><li class=list-group-item><div><a href=/cara-memfilter-daftar-wmic-diskdrive-dengan-benar-g4usgi4q/>Cara memfilter daftar wmic diskdrive dengan benar</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-agar-joystick-microsoft-sidewinder-precision-2-berfungsi-di-windows-8-wg2qmwcu/>Bagaimana cara agar joystick Microsoft Sidewinder Precision 2 berfungsi di Windows 8?</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

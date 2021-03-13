@@ -1,0 +1,99 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Tombol touchpad ElanTech kanan tidak berfungsi di Linux</title><meta name=description content="Masalah: Tombol kanan perangkat keras touchpad tidak berfungsi di Linux, tetapi berfungsi dengan baik di Win8.  Telah mencoba beberapa tambalan psmouse, konfigurasi xinput, dll ... tidak ada yang membantu :(  OS: Debian..."><link rel=canonical href=https://www.idxstack.com/tombol-touchpad-elantech-kanan-tidak-berfungsi-di-linux-rp62vqe2/><meta property="og:title" content="Tombol touchpad ElanTech kanan tidak berfungsi di Linux"><meta property="og:description" content="Masalah: Tombol kanan perangkat keras touchpad tidak berfungsi di Linux, tetapi berfungsi dengan baik di Win8.  Telah mencoba beberapa tambalan psmouse, konfigurasi xinput, dll ... tidak ada yang membantu :(  OS: Debian..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/tombol-touchpad-elantech-kanan-tidak-berfungsi-di-linux-rp62vqe2/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Tombol touchpad ElanTech kanan tidak berfungsi di Linux"><meta name=twitter:description content="Masalah: Tombol kanan perangkat keras touchpad tidak berfungsi di Linux, tetapi berfungsi dengan baik di Win8.  Telah mencoba beberapa tambalan psmouse, konfigurasi xinput, dll ... tidak ada yang membantu :(  OS: Debian..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Tombol touchpad ElanTech kanan tidak berfungsi di Linux</h1><div itemprop=text><p>Masalah: Tombol kanan perangkat keras touchpad tidak berfungsi di Linux, tetapi berfungsi dengan baik di Win8.</p><p>Telah mencoba beberapa tambalan psmouse, konfigurasi xinput, dll ... tidak ada yang membantu :(</p><ul><li>OS: Debian Jessie 64bit</li><li>Notebook: G46VW</li></ul><p><strong>dmesg</strong> :</p><pre><code>[    3.898598] psmouse serio4: elantech: assuming hardware version 4 (with firmware version 0x460f02)
+[    3.912080] psmouse serio4: elantech: Synaptics capabilities query result 0x00, 0x18, 0x0c.
+</code></pre><p><strong>Xorg.log</strong> :</p><pre><code>[46.491] (II) LoadModule: "synaptics"
+[46.491] (II) Loading /usr/lib/xorg/modules/input/synaptics_drv.so
+[46.494] (II) Module synaptics: vendor="X.Org Foundation"
+[46.494] (II) Using input driver 'synaptics' for 'ETPS/2 Elantech Touchpad'
+[46.499] (II) synaptics: ETPS/2 Elantech Touchpad: found clickpad property
+[46.499] (--) synaptics: ETPS/2 Elantech Touchpad: x-axis range 0 - 3036
+[46.499] (--) synaptics: ETPS/2 Elantech Touchpad: y-axis range 0 - 1452
+[46.499] (--) synaptics: ETPS/2 Elantech Touchpad: pressure range 0 - 255
+[46.499] (--) synaptics: ETPS/2 Elantech Touchpad: finger width range 0 - 15
+[46.499] (--) synaptics: ETPS/2 Elantech Touchpad: buttons: left double triple
+[46.499] (--) synaptics: ETPS/2 Elantech Touchpad: Vendor 0x2 Product 0xe
+[46.499] (--) synaptics: ETPS/2 Elantech Touchpad: touchpad found
+[46.500] (**) synaptics: ETPS/2 Elantech Touchpad: (accel) MinSpeed is now constant  zeceleration 2.5
+[46.500] (**) synaptics: ETPS/2 Elantech Touchpad: MaxSpeed is now 1.75
+[46.500] (**) synaptics: ETPS/2 Elantech Touchpad: AccelFactor is now 0.059
+[46.500] (--) synaptics: ETPS/2 Elantech Touchpad: touchpad found
+</code></pre><p><strong>Alat peraga daftar</strong> :</p><pre><code>Device 'ETPS/2 Elantech Touchpad':
+Device Enabled (134):   1
+Coordinate Transformation Matrix (136): 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+Device Accel Profile (261): 1
+Device Accel Constant Deceleration (262):   2.500000
+Device Accel Adaptive Deceleration (263):   1.000000
+Device Accel Velocity Scaling (264):    12.500000
+Synaptics Edges (292):  121, 2915, 78, 1374
+Synaptics Finger (293): 1, 1, 256
+Synaptics Tap Time (294):   180
+Synaptics Tap Move (295):   148
+Synaptics Tap Durations (296):  180, 180, 100
+Synaptics ClickPad (297):   1
+Synaptics Tap FastTap (298):    0
+Synaptics Middle Button Timeout (299):  0
+Synaptics Two-Finger Pressure (300):    282
+Synaptics Two-Finger Width (301):   7
+Synaptics Scrolling Distance (302): 67, 67
+Synaptics Edge Scrolling (303): 0, 0, 0
+Synaptics Two-Finger Scrolling (304):   1, 0
+Synaptics Move Speed (305): 1.000000, 1.750000, 0.059435, 40.000000
+Synaptics Edge Motion Pressure (306):   30, 160
+Synaptics Edge Motion Speed (307):  1, 269
+Synaptics Edge Motion Always (308): 0
+Synaptics Off (309):    2
+Synaptics Locked Drags (310):   0
+Synaptics Locked Drags Timeout (311):   5000
+Synaptics Tap Action (312): 0, 0, 0, 0, 1, 3, 2
+Synaptics Click Action (313):   1, 3, 2
+Synaptics Circular Scrolling (314): 0
+Synaptics Circular Scrolling Distance (315):    0.100000
+Synaptics Circular Scrolling Trigger (316): 0
+Synaptics Circular Pad (317):   0
+Synaptics Palm Detection (318): 0
+Synaptics Palm Dimensions (319):    10, 200
+Synaptics Coasting Speed (320): 20.000000, 50.000000
+Synaptics Pressure Motion (321):    30, 160
+Synaptics Pressure Motion Factor (322): 1.000000, 1.000000
+Synaptics Grab Event Device (323):  1
+Synaptics Gestures (324):   1
+Synaptics Capabilities (325):   1, 0, 0, 1, 1, 1, 1
+Synaptics Pad Resolution (326): 33, 32
+Synaptics Area (327):   0, 0, 0, 0
+Synaptics Soft Button Areas (328):  1518, 0, 1190, 0, 0, 0, 0, 0
+Synaptics Noise Cancellation (329): 16, 16
+Device Product ID (255):    2, 14
+Device Node (256):  "/dev/input/event8"
+</code></pre></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/106934/datacompboy target=_blank rel="nofollow noopener"><span itemprop=name>datacompboy</span></a>
+—
+<a href=https://superuser.com/questions/619582/right-elantech-touchpad-button-not-working-in-linux target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>1</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>8</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>8</div><div class=card-body><div itemprop=text><p>Masalah yang ditemukan: psmouse / elantech.c hanya berasumsi, bahwa protokol perangkat keras V4 tidak memiliki tombol kanan sama sekali.</p><p>Perbaiki itu sepele:</p><pre><code>--- elantech.c.orig 2013-06-14 00:52:08.000000000 +0700
++++ elantech.c  2013-07-15 12:45:52.000000000 +0700
+@@ -486,6 +486,7 @@ elantech_input_sync_v4
+    unsigned char *packet = psmouse-&gt;packet;
+
+    input_report_key(dev, BTN_LEFT, packet[0] &amp; 0x01);
++   input_report_key(dev, BTN_RIGHT, packet[0] &amp; 0x02);
+    input_mt_report_pointer_emulation(dev, true);
+    input_sync(dev);
+ }
+@@ -1019,7 +1018,7 @@ elantech_set_input_params { case 4: }
+        }
+        /* v4 is clickpad, with only one button. */
+        __set_bit(INPUT_PROP_BUTTONPAD, dev-&gt;propbit);
+-       __clear_bit(BTN_RIGHT, dev-&gt;keybit);
++       //__clear_bit(BTN_RIGHT, dev-&gt;keybit);
+        __set_bit(BTN_TOOL_QUADTAP, dev-&gt;keybit);
+        /* For X to recognize me as touchpad. */
+        input_set_abs_params(dev, ABS_X, x_min, x_max, 0, 0);
+</code></pre><p>Solusi siap pakai:</p><pre><code>wget http://datacompboy.ru/psmouse-elantech-v7right.tar.bz2
+tar xfj psmouse-elantech-v7right.tar.bz2
+sudo mv psmouse-elantech-v7right /usr/src/
+sudo dkms install -m psmouse -v elantech-v7right
+sudo modprobe -r psmouse
+sudo modprobe psmouse
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/tombol-touchpad-elantech-kanan-tidak-berfungsi-di-linux-rp62vqe2/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/106934/datacompboy target=_blank rel="nofollow noopener"><span itemprop=name>datacompboy</span></a>
+—
+<a href=https://superuser.com/a/619853 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Apakah Anda mengirimkan perbaikan ini ke debian?</div><div>— <a href=https://superuser.com/users/235569/braiam target=_blank rel="nofollow noopener">Braiam</a></div></li><li class=list-group-item><div>Saya telah mengirim ke milis, tetapi tidak yakin apakah itu tertanam atau tidak.</div><div>— <a href=https://superuser.com/users/106934/datacompboy target=_blank rel="nofollow noopener">datacompboy</a></div></li><li class=list-group-item><div>Terima kasih banyak, solusi ini bekerja dengan sempurna untuk saya! (Linux Mint 16, Asus B400A)</div><div>— <a href=https://superuser.com/users/125109/rick target=_blank rel="nofollow noopener">Rick</a></div></li><li class=list-group-item><div>bisakah Anda memperbarui jawaban Anda untuk Debian 9? Terima kasih.</div><div>— <a href=https://superuser.com/users/924970/parsa target=_blank rel="nofollow noopener">Parsa</a></div></li><li class=list-group-item><div>Kernel upstream saat ini memiliki deteksi clickpads yang tepat, lihat <a href=https://github.com/torvalds/linux/blob/master/drivers/input/mouse/elantech.c#L1115 rel="nofollow noopener" target=_blank>github.com/torvalds/linux/blob/master/drivers/input/mouse/…</a></div><div>— <a href=https://superuser.com/users/106934/datacompboy target=_blank rel="nofollow noopener">datacompboy</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/salin-hanya-baris-yang-tersisa-setelah-filter-ke-buku-kerja-excel-baru-duplikat-kehhouec/>Salin hanya baris yang tersisa setelah filter ke Buku Kerja Excel baru [duplikat]</a></div></li><li class=list-group-item><div><a href=/menjalankan-server-di-ruangan-yang-sama-dengan-mesin-cuci-4bg7eqnn/>Menjalankan server di ruangan yang sama dengan mesin cuci</a></div></li><li class=list-group-item><div><a href=/selesaikan-uninstall-virtualbox-hi2rw2dv/>Selesaikan uninstall Virtualbox</a></div></li><li class=list-group-item><div><a href=/login-sidik-jari-windows-10-mengubah-metode-login-default-kembali-ke-kata-sandi-aboobwry/>Login sidik jari Windows 10 mengubah metode login default kembali ke kata sandi</a></div></li><li class=list-group-item><div><a href=/windows-7-path-tidak-berkembang-zbu90ulg/>Windows 7 PATH tidak berkembang</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-menambahkan-file-el-custome-ke-jalur-saya-3ioqvtlt/>Bagaimana cara menambahkan file .el custome ke jalur saya?</a></div></li><li class=list-group-item><div><a href=/menonton-mythtv-di-windows-wjev1sar/>Menonton MythTV di windows</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengubah-ukuran-volume-ntfs-untuk-mengisi-partisi-6bv484d0/>Bagaimana cara mengubah ukuran volume NTFS untuk mengisi partisi?</a></div></li><li class=list-group-item><div><a href=/apakah-mungkin-terkena-infeksi-virus-malware-dari-membuka-file-7-zip-7z-0ayxxma4/>Apakah mungkin terkena infeksi virus / malware dari membuka file 7-zip (.7z)?</a></div></li><li class=list-group-item><div><a href=/apa-itu-ssh-agent-bin-bash-dan-mengapa-saya-harus-ssh-add-setiap-saat-5upo62ut/>apa itu `ssh-agent bin / bash` dan mengapa saya harus` ssh-add` setiap saat</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

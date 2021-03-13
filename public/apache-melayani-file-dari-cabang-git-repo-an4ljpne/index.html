@@ -1,0 +1,145 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Apache melayani file dari cabang git repo</title><meta name=description content="Apakah ada cara untuk melayani file dari cabang dalam repo git tanpa memeriksanya ke direktori yang berbeda?  Saya ingin kemudahan untuk dapat membuat cabang baru, mendorongnya ke repo server pengujian dan kemudian..."><link rel=canonical href=https://www.idxstack.com/apache-melayani-file-dari-cabang-git-repo-an4ljpne/><meta property="og:title" content="Apache melayani file dari cabang git repo"><meta property="og:description" content="Apakah ada cara untuk melayani file dari cabang dalam repo git tanpa memeriksanya ke direktori yang berbeda?  Saya ingin kemudahan untuk dapat membuat cabang baru, mendorongnya ke repo server pengujian dan kemudian..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/apache-melayani-file-dari-cabang-git-repo-an4ljpne/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Apache melayani file dari cabang git repo"><meta name=twitter:description content="Apakah ada cara untuk melayani file dari cabang dalam repo git tanpa memeriksanya ke direktori yang berbeda?  Saya ingin kemudahan untuk dapat membuat cabang baru, mendorongnya ke repo server pengujian dan kemudian..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Apache melayani file dari cabang git repo</h1><div itemprop=text><p>Apakah ada cara untuk melayani file dari cabang dalam repo git tanpa memeriksanya ke direktori yang berbeda?</p><p>Saya ingin kemudahan untuk dapat membuat cabang baru, mendorongnya ke repo server pengujian dan kemudian melakukan sesuatu seperti menelusuri http: // <em>nama cabang</em> .test.com. Saya dapat menggunakan aturan penulisan ulang untuk menangani subdomain nama cabang agar mengarah ke jalur root yang berbeda tetapi tentu saja Apache tidak dapat membaca repo kosong.</p><p><a href=http://www.sfgoth.com/~mitch/linux/gitfs/ rel="nofollow noopener" target=_blank>gitfs</a> mungkin berhasil, tetapi tampaknya ditinggalkan.</p><p>Saya juga tidak terlalu membutuhkan Apache.</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/7978/van-gale target=_blank rel="nofollow noopener"><span itemprop=name>Van Gale</span></a>
+—
+<a href=https://superuser.com/questions/103516/apache-serve-files-from-git-repo-branches target=_blank rel="nofollow noopener">Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm" id=showQuestionReplies>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 d-none" id=questionRepliesContainer><ul class="list-group list-group-flush"><li class=list-group-item><div>Dimungkinkan untuk membaca 'blob's out of a repository' tanpa memiliki pohon yang berfungsi (checkout). Alat seperti gitweb <a href=http://git.wiki.kernel.org/index.php/Gitweb rel="nofollow noopener" target=_blank>git.wiki.kernel.org/index.php/Gitweb</a> melayani terutama dari repositori telanjang. Mungkin gitweb dan sejenisnya menawarkan lebih dari yang Anda inginkan, tetapi mungkin Anda dapat menghapus satu untuk hanya menyajikan file kosong ( <a href="http://git.kernel.org/?p=git/git.git;a=blob_plain;f=README" rel="nofollow noopener" target=_blank>git.kernel.org/?p=git/git.git;a=blob_plain;f=README</a> ) dengan cara yang memungkinkan tautan relatif berfungsi.</div><div>— <a href=https://superuser.com/users/14827/chris-johnsen target=_blank rel="nofollow noopener">Chris Johnsen</a></div></li><li class=list-group-item><div>Ide yang menarik, tapi mungkin terlalu banyak kerja atm. Saya mencoba untuk menguji cabang aplikasi Django, jadi Python harus bisa mengimpor modul dari repo, dll.</div><div>— <a href=https://superuser.com/users/7978/van-gale target=_blank rel="nofollow noopener">Van Gale</a></div></li><li class=list-group-item><div>Kecuali dalam skenario paling dasar (konten statis), menyajikan konten umum dengan server web tidak memerlukan file sebenarnya. Jika yang Anda inginkan adalah cara menyediakan akses normal ke file di repositori Git tanpa benar-benar membuat file nyata (sistem file virtual; versi gitfs yang diperbarui / dipelihara / berfungsi), Anda mungkin harus mengabaikan semua penyebutan Apache, URL, dll.</div><div>— <a href=https://superuser.com/users/14827/chris-johnsen target=_blank rel="nofollow noopener">Chris Johnsen</a></div></li></ul></div></div></div><hr><h2 class=h4><span itemprop=answerCount>3</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>3</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>3</div><div class=card-body><div itemprop=text><p>Pendekatan paling sederhana akan memeriksa setiap cabang dan membuat klon untuk setiap cabang di subdirektori. Sangat mudah untuk melakukannya dengan skrip yang dijalankan oleh cron (atau dalam hook pasca-komit) seperti:</p><pre><code>#!/bin/sh
+ROOT=/srv/repos/control
+cd ${ROOT} # it's an internal repo
+git fetch
+for ref in .git/refs/remotes/origin/*; do
+  BRANCH=`basename ${ref}`
+  if ! [ -d ../${BRANCH} ]; then
+    git clone --local ${ROOT} ../${BRANCH}
+    cd ../${BRANCH}
+    git branch --track ${BRANCH} remotes/origin/${BRANCH}
+    git checkout ${BRANCH}
+  else
+    cd ../${BRANCH}
+    git pull
+  fi
+done
+</code></pre><p>Setelah berhasil, Anda akan mendapatkan banyak direktori dengan cabang di <code>/srv/repos</code>.</p><p><code>git clone --local</code> sangat cepat dan optimal bahkan pada repositori besar seperti kernel Linux karena tidak membuat semua objek dalam repositori melainkan membuat tautan keras ke sana, jadi Anda tidak akan menyia-nyiakan ruang apa pun pada salinan repositori. Anda akan, melalui, membuang-buang ruang pada salinan yang telah diperiksa, tetapi a) salinan tersebut mungkin tidak terlalu besar dan b) ini akan membuat akses berbasis web jauh lebih mudah dan lebih cepat.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/apache-melayani-file-dari-cabang-git-repo-an4ljpne/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/25472/whitequark target=_blank rel="nofollow noopener"><span itemprop=name>whitequark</span></a>
+—
+<a href=https://superuser.com/a/103527 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Terima kasih, ini terlihat masuk akal untuk diterapkan. Semoga saya dapat menemukan waktu di minggu depan untuk mencobanya :)</div><div>— <a href=https://superuser.com/users/7978/van-gale target=_blank rel="nofollow noopener">Van Gale</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>3</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>3</div><div class=card-body><div itemprop=text><p>Anda dapat menyajikan konten langsung dari repositori menggunakan kombinasi git-show (atau git cat-file) dan Apache CGI atau yang serupa. Saya telah menyiapkan contoh menggunakan .htaccess dan skrip zsh sederhana, sebagai berikut:</p><p>.htaccess</p><pre><code>Options +ExecCGI
+AddHandler cgi-script .sh
+
+RewriteEngine On
+RewriteRule ^(?!index.sh)(.*)$ /index.sh [L]
+</code></pre><p>index.sh</p><pre><code>#!/bin/zsh
+
+# Strips the initial slash, as git show ain't got time for that!
+# REQUEST_URI is set by Apache when executing the script.
+# You may also be interested in HTTP_HOST which is the request host.
+# Don't get confused with HOST which is a default shell variable.
+function get_request_uri {
+    if [ $REQUEST_URI[0,1] = '/' ]
+    then
+        REQUEST_URI=$REQUEST_URI:s#/##
+    fi
+
+    echo $REQUEST_URI
+}
+
+# You may not want to show the folders (represented by trees).
+# Or you may want to manipulate the output to produce a proper directory index.
+function is_file_folder {
+    [ $(git cat-file -t HEAD:$1) = 'tree' ]
+}
+
+# Just gets the content of the file.
+# For trees will produce a directory listing, one line per file.
+# To show different branches, pass them to git show in place of HEAD
+function get_file_content {
+    local file=$1
+
+    git show HEAD:${file}
+}
+
+# Attempts to determine the file type without writing the data to a file.
+# Has to resort to manually looking up the type in /usr/share/mime/globs
+# to test by extension, you may have to adjust that code to your environment.
+function get_file_type {
+    local file=$1
+    local content=$2
+
+    mime_type=$(echo ${content} | mimetype -b --stdin)
+    if [ -e /usr/share/mime/globs ]
+    then
+        file_mime_type=$(
+            grep "\*.${file:e}\$" /usr/share/mime/globs |
+                sed -ne 's/:.*$//' -e '1p'
+                    )
+
+        # Conflict resolution is also something you should work on.
+        if [ $file_mime_type != '' ]
+        then
+            mime_type=$file_mime_type
+        fi
+    fi
+
+    echo $mime_type
+}
+
+function do_404 {
+    echo 'Status: 404 Not Found'
+    echo ''
+}
+
+# Just does the header because there can be problems
+# getting binary data to the client by echoing it.
+# A little something for you to explore a fix for :)
+function do_200 {
+    mime_type=$1
+
+    echo "Content-Type: $mime_type"
+    echo ''
+}
+
+
+cd site.git
+
+uri=$(get_request_uri)
+file_content=$(get_file_content $uri)
+
+# A non zero exit status from git show probably means the file does not exist.
+# Even if the error was something else, you still have nothing to show for it.
+if [ $? -ne 0 ]
+then
+    do_404
+fi
+
+# You may not want to do the directory listing. Even if you do, you may
+# not want to use the default directory listing (which is very primitive).
+# If you wanted to redirect to index or similar, you would also handle that
+# here.
+if is_file_folder $uri
+then
+    file_type='text/plain'
+else
+    file_type=$(get_file_type $uri "$file_content")
+fi
+
+do_200 $file_type
+
+# Doing this twice is not optimal, but it is very easy to
+# mangle binary data accidentally when passing around the
+# $file_content. Just reading the file directly to the client
+# seems to sidestep this. Another thing for you to fix :)
+get_file_content $uri
+
+# You might want to uncomment the two lines below (commenting out 
+# any response code from above first), to show all of the variables
+# available to you. This list will include the variables set by this
+# script - to filter them out just run this earlier, with an exit after.
+
+# do_200 'text/plain'
+# set
+
+# vim: set ai et sw=4 syntax=zsh :
+</code></pre><p>Ini mengasumsikan bahwa situs Anda ada di site.git dalam folder yang sama dengan dua file di atas. Ada banyak perbaikan yang dapat dilakukan pada skrip - seperti yang dikomentari. Ini lebih merupakan bukti konsep.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/apache-melayani-file-dari-cabang-git-repo-an4ljpne/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/193949/matthew-franglen target=_blank rel="nofollow noopener"><span itemprop=name>Matthew Franglen</span></a>
+—
+<a href=https://superuser.com/a/543890 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-2><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><p>Lihat juga <a href=http://cosmos.layervault.com/divergence.html rel="nofollow noopener" target=_blank>Perbedaan</a> , aplikasi rak yang memetakan cabang git ke subdomain. Saya belum pernah menggunakannya sendiri, tetapi tampaknya cukup sesuai dengan kebutuhan Anda.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/apache-melayani-file-dari-cabang-git-repo-an4ljpne/#answer-2 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/195512/tfischbach target=_blank rel="nofollow noopener"><span itemprop=name>tfischbach</span></a>
+—
+<a href=https://superuser.com/a/546591 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/bagaimana-cara-membuka-quotlokasi-khususquot-di-windows-seperti-quotpanel-kontrolquot-dari-baris-perintah-iqn1u6jg/>Bagaimana cara membuka "lokasi khusus" di Windows, seperti "Panel Kontrol" dari baris perintah?</a></div></li><li class=list-group-item><div><a href=/tampilkan-wi-fi-hanya-untuk-perangkat-yang-dipilih-vnukphg1/>Tampilkan Wi-Fi hanya untuk perangkat yang dipilih</a></div></li><li class=list-group-item><div><a href=/cara-menyembunyikan-perekam-suara-di-windows-7-efw6en4l/>cara menyembunyikan perekam suara di windows 7</a></div></li><li class=list-group-item><div><a href=/script-atau-alat-untuk-mendapatkan-alamat-ip-dari-sebuah-remote-host-8be6znor/>Script atau alat untuk mendapatkan alamat IP dari sebuah remote host</a></div></li><li class=list-group-item><div><a href=/ekstrak-i-frame-ke-gambar-dengan-cepat-gw1rq1ka/>Ekstrak I-frame ke gambar dengan cepat</a></div></li><li class=list-group-item><div><a href=/pangkas-area-segitiga-dengan-ffmpeg-p2sggrrm/>Pangkas area segitiga dengan FFMPEG</a></div></li><li class=list-group-item><div><a href=/adobe-reader-setelah-penutupan-harus-mengingat-halaman-duplikat-muhskb3u/>Adobe Reader setelah penutupan harus mengingat halaman [duplikat]</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengaktifkan-intel-vt-x-qdhluqvb/>Bagaimana cara mengaktifkan Intel VT-x?</a></div></li><li class=list-group-item><div><a href=/menyiapkan-klien-email-di-arch-linux-hj4zlfjl/>Menyiapkan klien email di Arch Linux</a></div></li><li class=list-group-item><div><a href=/unggah-massal-ke-skydrive-wxi0vgc4/>Unggah massal ke Skydrive?</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

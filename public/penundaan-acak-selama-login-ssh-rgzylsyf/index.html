@@ -1,0 +1,56 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Penundaan Acak selama login SSH</title><meta name=description content="Ketika saya mencoba masuk ke mesin linux jarak jauh (ubuntu) dari MacBook Air (10.6) saya, saya mendapatkan penundaan sekitar 4-5 detik setiap kali sebelum saya dipromosikan untuk kata sandi. Verbose menghasilkan yang..."><link rel=canonical href=https://www.idxstack.com/penundaan-acak-selama-login-ssh-rgzylsyf/><meta property="og:title" content="Penundaan Acak selama login SSH"><meta property="og:description" content="Ketika saya mencoba masuk ke mesin linux jarak jauh (ubuntu) dari MacBook Air (10.6) saya, saya mendapatkan penundaan sekitar 4-5 detik setiap kali sebelum saya dipromosikan untuk kata sandi. Verbose menghasilkan yang..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/penundaan-acak-selama-login-ssh-rgzylsyf/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Penundaan Acak selama login SSH"><meta name=twitter:description content="Ketika saya mencoba masuk ke mesin linux jarak jauh (ubuntu) dari MacBook Air (10.6) saya, saya mendapatkan penundaan sekitar 4-5 detik setiap kali sebelum saya dipromosikan untuk kata sandi. Verbose menghasilkan yang..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Penundaan Acak selama login SSH</h1><div itemprop=text><p>Ketika saya mencoba masuk ke mesin linux jarak jauh (ubuntu) dari MacBook Air (10.6) saya, saya mendapatkan penundaan sekitar 4-5 detik setiap kali sebelum saya dipromosikan untuk kata sandi. Verbose menghasilkan yang berikut:</p><pre><code>:~ ssh -v username@IPADDRESS
+
+OpenSSH_5.2p1, OpenSSL 0.9.8r 8 Feb 2011
+debug1: Reading configuration data /etc/ssh_config
+debug1: Applying options for *
+debug1: Connecting to 18.78.4.61 [18.78.4.61] port 22.
+debug1: Connection established.
+debug1: identity file /Users/Fabrice/.ssh/identity type -1
+debug1: identity file /Users/Fabrice/.ssh/id_rsa type -1
+debug1: identity file /Users/Fabrice/.ssh/id_dsa type -1
+debug1: Remote protocol version 2.0, remote software version OpenSSH_5.8p1 Debian-1ubuntu3
+debug1: match: OpenSSH_5.8p1 Debian-1ubuntu3 pat OpenSSH*
+debug1: Enabling compatibility mode for protocol 2.0
+debug1: Local version string SSH-2.0-OpenSSH_5.2
+debug1: Unspecified GSS failure.  Minor code may provide more information
+No credentials cache found
+
+debug1: Unspecified GSS failure.  Minor code may provide more information
+No credentials cache found
+
+debug1: Unspecified GSS failure.  Minor code may provide more information
+
+debug1: SSH2_MSG_KEXINIT sent
+debug1: SSH2_MSG_KEXINIT received
+debug1: kex: server-&gt;client aes128-ctr hmac-md5 none
+debug1: kex: client-&gt;server aes128-ctr hmac-md5 none
+debug1: SSH2_MSG_KEX_DH_GEX_REQUEST(1024&lt;1024&lt;8192) sent
+debug1: expecting SSH2_MSG_KEX_DH_GEX_GROUP
+debug1: SSH2_MSG_KEX_DH_GEX_INIT sent
+debug1: expecting SSH2_MSG_KEX_DH_GEX_REPLY
+debug1: Host '18.78.4.61' is known and matches the RSA host key.
+debug1: Found key in /Users/Fabrice/.ssh/known_hosts:6
+debug1: ssh_rsa_verify: signature correct
+debug1: SSH2_MSG_NEWKEYS sent
+debug1: expecting SSH2_MSG_NEWKEYS
+debug1: SSH2_MSG_NEWKEYS received
+debug1: SSH2_MSG_SERVICE_REQUEST sent
+debug1: SSH2_MSG_SERVICE_ACCEPT received
+
+**------------------- 4-5 seconds Delay -----------------------**
+
+debug1: Authentications that can continue: publickey,password
+debug1: Next authentication method: publickey
+debug1: Trying private key: /Users/Fabrice/.ssh/identity
+debug1: Trying private key: /Users/Fabrice/.ssh/id_rsa
+debug1: Trying private key: /Users/Fabrice/.ssh/id_dsa
+debug1: Next authentication method: password
+</code></pre><p>Ini tampak aneh bagi saya - ada ide tentang bagaimana saya bisa mengubahnya? Saya membaca sesuatu tentang resolusi DNS yang mungkin menjadi penyebabnya ...</p><p>Terima kasih!</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1174066/nodapic target=_blank rel="nofollow noopener"><span itemprop=name>nodapic</span></a>
+—
+<a href=https://superuser.com/questions/372238/random-delay-during-ssh-login target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>1</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>8</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>8</div><div class=card-body><div itemprop=text><p>Ini adalah masalah umum di Ubuntu. Anda harus menonaktifkan pencarian DNS terbalik di server Ubuntu Anda dengan menyetel <code>UseDNS</code> ke <code>no</code> di <code>/etc/ssh/sshd_config</code>. Ada banyak artikel tentang topik ini, <a href=http://unsharptech.com/2009/04/11/fix-slow-connections-to-ubuntu-ssh-servers/ rel="nofollow noopener" target=_blank>ini</a> hanyalah salah satunya.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/penundaan-acak-selama-login-ssh-rgzylsyf/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>user49531</span>
+—
+<a href=https://superuser.com/a/372239 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Terima kasih! Saya telah mencoba ini tetapi lupa untuk me-restart server ssh dengan sudo /etc/init.d/ssh restart.</div><div>— User</div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/kualitas-headset-bluetooth-sebagai-mikrofon-8urnmi66/>Kualitas headset bluetooth sebagai mikrofon</a></div></li><li class=list-group-item><div><a href=/apakah-mungkin-menggunakan-dua-kartu-grafis-yang-berbeda-di-dalam-satu-sistem-psfy1yjo/>Apakah mungkin menggunakan dua kartu grafis yang berbeda di dalam satu sistem?</a></div></li><li class=list-group-item><div><a href=/apakah-keychain-lebih-aman-daripada-pengelola-kata-sandi-firefox-hpuk07nb/>Apakah Keychain lebih aman daripada Pengelola Kata Sandi Firefox?</a></div></li><li class=list-group-item><div><a href=/apa-yang-menyebabkan-quotmesin-virtualquot-virtual-pc-terkunci-ry9hnyff/>Apa yang menyebabkan "mesin virtual" Virtual PC terkunci?</a></div></li><li class=list-group-item><div><a href=/menentukan-dari-mana-python-dijalankan-di-linux-xlrzuuix/>menentukan dari mana python dijalankan di linux</a></div></li><li class=list-group-item><div><a href=/periksa-dua-kondisi-dalam-dua-kolom-berbeda-di-excel-dan-hitung-kecocokan-hr1zkgnj/>periksa dua kondisi dalam dua kolom berbeda di excel dan hitung kecocokan</a></div></li><li class=list-group-item><div><a href=/picu-autohotkey-di-jendela-baru-ztqyulax/>Picu Autohotkey di jendela baru</a></div></li><li class=list-group-item><div><a href=/mulai-ulang-nanti-tapi-kapan-tlrxg8nb/>Mulai ulang nanti tapi kapan?</a></div></li><li class=list-group-item><div><a href=/sistem-file-yang-dapat-dipasang-yang-secara-otomatis-membagi-file-ubpdryko/>Sistem file yang dapat dipasang yang secara otomatis membagi file</a></div></li><li class=list-group-item><div><a href=/tangani-nama-file-dengan-spasi-di-dalam-skrip-bash-soux0vgd/>Tangani nama file dengan spasi di dalam skrip Bash</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

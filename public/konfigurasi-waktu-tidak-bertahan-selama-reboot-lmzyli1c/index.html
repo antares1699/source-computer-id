@@ -1,0 +1,133 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Konfigurasi waktu tidak bertahan selama reboot</title><meta name=description content="Saya menggunakan ArchLinux dan saya memiliki masalah dengan waktu sistem saya selama berbulan-bulan.  Sebelumnya ini berfungsi, tetapi setelah saya memperbarui PC saya, waktu sistem bergeser di setiap startup (seperti tidak mendeteksi zona..."><link rel=canonical href=https://www.idxstack.com/konfigurasi-waktu-tidak-bertahan-selama-reboot-lmzyli1c/><meta property="og:title" content="Konfigurasi waktu tidak bertahan selama reboot"><meta property="og:description" content="Saya menggunakan ArchLinux dan saya memiliki masalah dengan waktu sistem saya selama berbulan-bulan.  Sebelumnya ini berfungsi, tetapi setelah saya memperbarui PC saya, waktu sistem bergeser di setiap startup (seperti tidak mendeteksi zona..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/konfigurasi-waktu-tidak-bertahan-selama-reboot-lmzyli1c/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Konfigurasi waktu tidak bertahan selama reboot"><meta name=twitter:description content="Saya menggunakan ArchLinux dan saya memiliki masalah dengan waktu sistem saya selama berbulan-bulan.  Sebelumnya ini berfungsi, tetapi setelah saya memperbarui PC saya, waktu sistem bergeser di setiap startup (seperti tidak mendeteksi zona..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Konfigurasi waktu tidak bertahan selama reboot</h1><div itemprop=text><p>Saya menggunakan ArchLinux dan saya memiliki masalah dengan waktu sistem saya selama berbulan-bulan.</p><p>Sebelumnya ini berfungsi, tetapi setelah saya memperbarui PC saya, waktu sistem bergeser di setiap startup (seperti tidak mendeteksi zona waktu, sedangkan zona waktu di rc.conf sudah dan benar).</p><p>Lalu saya menambahkan hwclock dan itu sama, dan menghapusnya. Jika saya ingat dengan benar, ini sepertinya telah menyelesaikan masalah.</p><p>Ketika waktu Daylight Saving berubah di negara saya, Waktu bergeser 1 jam pada setiap startup (tidak peduli berapa kali saya mengatur waktu sistem secara manual atau dengan ntpdate).</p><p>Saya kembali mencoba untuk memperbaikinya, dan sekarang ada banyak jam shift seperti sebelumnya (Nilai pergeserannya adalah perbedaan UTC dan waktu lokal). Dan sekarang, sepertinya waktu sistem saya tidak dapat diubah. Saya mengatur waktu dengan <code>date -s ...</code> dan <code>ntpdate pool.ntp.org</code> misalnya ... tetapi langkah-langkah ini tampaknya tidak bertahan setelah reboot. Saya mencobanya dengan daemon hwclock berjalan, ntpd berjalan, dan tidak satupun dari mereka berjalan di DAEMONS. Saya sangat bingung tentang ini.</p><p>Saya tidak terlalu banyak menggunakan windows. Dan saya tahu mem-boot windows dapat menyebabkan masalah di linux dengan sistem waktu. Tapi itu bukan masalahku. Setiap kali saya mem-boot windows dan linux, saya dapat mengatur ulang waktu sistem dengan tangan atau perintah ntpdate. Jadi Anda bisa mengira saya tidak memiliki jendela di komputer saya.</p><p>Saya hanya ingin waktu sistem saya berfungsi dan tidak berubah secara otomatis (melalui ntp atau sesuatu), cukup atur secara manual (dengan tangan, atau perintah ntpdate) saat saya mau. Tolong bantu.</p><p>Ini rc.conf saya</p><pre><code>#
+# /etc/rc.conf - Main Configuration for Arch Linux
+#
+
+# -----------------------------------------------------------------------
+# LOCALIZATION
+# -----------------------------------------------------------------------
+#
+# LOCALE: available languages can be listed with the 'locale -a' command
+# DAEMON_LOCALE: If set to 'yes', use $LOCALE as the locale during daemon
+# startup and during the boot process. If set to 'no', the C locale is used.
+# HARDWARECLOCK: set to "", "UTC" or "localtime", any other value will result
+#   in the hardware clock being left untouched (useful for virtualization)
+#   Note: Using "localtime" is discouraged, using "" makes hwclock fall back
+#   to the value in /var/lib/hwclock/adjfile
+# TIMEZONE: timezones are found in /usr/share/zoneinfo
+#   Note: if unset, the value in /etc/localtime is used unchanged
+# KEYMAP: keymaps are found in /usr/share/kbd/keymaps
+# CONSOLEFONT: found in /usr/share/kbd/consolefonts (only needed for non-US)
+# CONSOLEMAP: found in /usr/share/kbd/consoletrans
+# USECOLOR: use ANSI color sequences in startup messages
+#
+LOCALE="en_US.UTF-8"
+DAEMON_LOCALE="no"
+HARDWARECLOCK="UTC"
+TIMEZONE="Asia/Tehran"
+KEYMAP="us"
+CONSOLEFONT=
+CONSOLEMAP=
+USECOLOR="yes"
+
+# -----------------------------------------------------------------------
+# HARDWARE
+# -----------------------------------------------------------------------
+#
+# MODULES: Modules to load at boot-up. Blacklisting is no longer supported.
+#   Replace every !module by an entry as on the following line in a file in
+#   /etc/modprobe.d:
+#     blacklist module
+#   See "man modprobe.conf" for details.
+#
+MODULES=(wl vboxdrv)
+
+# Udev settle timeout (default to 30)
+UDEV_TIMEOUT=30
+
+# Scan for FakeRAID (dmraid) Volumes at startup
+USEDMRAID="no"
+
+# Scan for BTRFS volumes at startup
+USEBTRFS="no"
+
+# Scan for LVM volume groups at startup, required if you use LVM
+USELVM="no"
+
+# -----------------------------------------------------------------------
+# NETWORKING
+# -----------------------------------------------------------------------
+#
+# HOSTNAME: Hostname of machine. Should also be put in /etc/hosts
+#
+HOSTNAME="ilius-vostro3300"
+
+# Use 'ip addr' or 'ls /sys/class/net/' to see all available interfaces.
+#
+# Wired network setup
+#   - interface: name of device (required)
+#   - address: IP address (leave blank for DHCP)
+#   - netmask: subnet mask (ignored for DHCP) (optional, defaults to 255.255.255.0)
+#   - broadcast: broadcast address (ignored for DHCP) (optional)
+#   - gateway: default route (ignored for DHCP)
+# 
+# Static IP example
+# interface=eth0
+# address=192.168.0.2
+# netmask=255.255.255.0
+# broadcast=192.168.0.255
+# gateway=192.168.0.1
+#
+# DHCP example
+# interface=eth0
+# address=
+# netmask=
+# gateway=
+
+interface=
+address=
+netmask=
+broadcast=
+gateway=
+
+# Setting this to "yes" will skip network shutdown.
+# This is required if your root device is on NFS.
+NETWORK_PERSIST="no"
+
+# Enable these netcfg profiles at boot-up. These are useful if you happen to
+# need more advanced network features than the simple network service
+# supports, such as multiple network configurations (ie, laptop users)
+#   - set to 'menu' to present a menu during boot-up (dialog package required)
+#   - prefix an entry with a ! to disable it
+#
+# Network profiles are found in /etc/network.d
+#
+# This requires the netcfg package
+#
+#NETWORKS=(main)
+
+# -----------------------------------------------------------------------
+# DAEMONS
+# -----------------------------------------------------------------------
+#
+# Daemons to start at boot-up (in this order)
+#   - prefix a daemon with a ! to disable it
+#   - prefix a daemon with a @ to start it up in the background
+#
+# If something other takes care of your hardware clock (ntpd, dual-boot...)
+# you should disable 'hwclock' here.
+#
+DAEMONS=(syslog-ng dbus wicd)
+
+## REMOVED: netfs network crond hwclock 
+## ADDED: dbus networkmanager sshd nfs-common bluetooth samba httpd postgresql IBSng starcal2d wicd
+</code></pre></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/76973/saeedgnu target=_blank rel="nofollow noopener"><span itemprop=name>saeedgnu</span></a>
+—
+<a href=https://superuser.com/questions/339953/time-configuration-does-not-persist-through-reboots target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>4</div><div class=card-body><div itemprop=text><p>Ilius, saya rasa saya pernah menemukan masalah ini sebelumnya.</p><ol><li>Pertama, coba setel waktu sistem dengan benar. (ntp / apapun)</li><li>Kemudian, jalankan <code>hwclock --systohc</code></li></ol><p>Ini harus mengatur ulang jam Anda ke waktu sistem, dan harus terus-menerus selama reboot.</p><p>maukah Anda memberi tahu kami jika berhasil?</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/konfigurasi-waktu-tidak-bertahan-selama-reboot-lmzyli1c/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/25890/brice target=_blank rel="nofollow noopener"><span itemprop=name>brice</span></a>
+—
+<a href=https://superuser.com/a/339961 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Tetapi bekerja dengan memiliki hwclock di DAEMONS dan tidak memiliki. Bisakah Anda menjelaskan kepada saya apa yang sebenarnya dilakukan hwclock?</div><div>— <a href=https://superuser.com/users/76973/saeedgnu target=_blank rel="nofollow noopener">saeedgnu</a></div></li><li class=list-group-item><div>hwclock bukanlah sebuah daemon. Ini adalah utilitas yang menulis ke register jam perangkat keras (menurut saya) pada prosesor / motherboard Anda. Register ini terus berdetak dengan tombol baterai saat Anda mematikan komputer Anda. Coba <code>man hwclock</code> untuk mengetahui lebih lanjut.</div><div>— <a href=https://superuser.com/users/25890/brice target=_blank rel="nofollow noopener">brice</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>2</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>2</div><div class=card-body><div itemprop=text><p><strong>KELUAR</strong></p><p>Solusi berikut layak untuk instalasi Arch Linux yang lebih lama dan pra-sistem. Saya tinggalkan di sini untuk referensi sejarah.</p><p><strong>KELUAR</strong></p><p>Anda memiliki HARDWARECLOCK yang disetel ke UTC di rc.conf Anda. Saya pikir itu pelakunya. Jika Anda berada dalam situasi dual boot dengan windows, Anda harus mengaturnya ke "localtime" (lihat dokumen instalasi archs IIRC).</p><p>Penyebab lain dari masalah Anda adalah skrip startup yang kacau karena arch harus menjalankan "--hctosys" dan "--systohc" selama startup / shutdown.</p><p>Di linux Anda harus membedakan antara jam sistem (sebut saja SC) dan jam perangkat keras (HC). Mereka terpisah tetapi saling berhubungan. Waktu di SC (waktu nyata) dihitung dengan mengetahui bagaimana HC diatur (waktu lokal atau UTC) dan zona waktu sistem apa. Di windows tidak ada perhitungan - nilai HC adalah nilai SC. Jadi, jika UTC berbeda dengan waktu lokal Anda, linux diatur untuk memperlakukan HC sebagai UTC dan linux SC menunjukkan waktu yang tepat, jendela akan menampilkan sampah. Jika, sebaliknya, waktu windows diatur dengan benar dan linux memperlakukan HC sebagai UTC maka SC linux menunjukkan waktu "bergeser". Solusinya adalah membuat linux memperlakukan HC sebagai waktu lokal (HARDWARECLOCK = "localtime").</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/konfigurasi-waktu-tidak-bertahan-selama-reboot-lmzyli1c/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/88084/thebodzio target=_blank rel="nofollow noopener"><span itemprop=name>thebodzio</span></a>
+—
+<a href=https://superuser.com/a/359351 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/gelandangan-tiba-tiba-membangun-kotak-baru-dan-tidak-mengenali-kotak-lama-ikgwkhky/>Gelandangan tiba-tiba membangun kotak baru dan tidak mengenali kotak lama</a></div></li><li class=list-group-item><div><a href=/applescript-untuk-mengunci-layar-h42hpcnc/>Applescript untuk mengunci layar</a></div></li><li class=list-group-item><div><a href=/singkirkan-quotpenerbit-tidak-dapat-diverifikasi-apakah-anda-yakin-ingin-menjalankan-perangkat-lunak-ini-bxtql7ra/>Singkirkan "Penerbit tidak dapat diverifikasi. Apakah Anda yakin ingin menjalankan perangkat lunak ini ”?</a></div></li><li class=list-group-item><div><a href=/melewati-keylogger-keyboard-virtual-mh16bdim/>Melewati keylogger - keyboard virtual</a></div></li><li class=list-group-item><div><a href=/menggunakan-ikon-dari-windows-dll-di-autoruninf-iwesb6wb/>Menggunakan ikon dari Windows DLL di autorun.inf</a></div></li><li class=list-group-item><div><a href=/mengapa-ignoreeof-tidak-berfungsi-di-zsh-8nzwspkd/>Mengapa IGNOREEOF tidak berfungsi di Zsh?</a></div></li><li class=list-group-item><div><a href=/kde-menciutkan-jendela-secara-otomatis-0yio7st4/>KDE menciutkan jendela secara otomatis?</a></div></li><li class=list-group-item><div><a href=/di-vim-bagaimana-anda-menghapus-ke-akhir-baris-saat-dalam-mode-perintah-cijnktkn/>Di VIM, bagaimana Anda menghapus ke akhir baris saat dalam mode perintah:?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-menghentikan-orang-lain-melihat-semua-folder-saya-di-jaringan-ufmrxyz9/>Bagaimana cara menghentikan orang lain melihat semua folder saya di jaringan?</a></div></li><li class=list-group-item><div><a href=/catat-hanya-perubahan-dalam-keluaran-robocopy-scvoemcz/>Catat hanya perubahan dalam keluaran robocopy</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

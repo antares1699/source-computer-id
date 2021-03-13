@@ -1,0 +1,11 @@
+<div class="mt-5 bg-light">
+    <div class="container">
+        <div class="py-4 d-flex justify-content-between small text-muted">
+            <div>
+                {{ .Site.Params.terms.tos | safeHTML }}
+            </div>
+            {{ $link := "<a href=\"https://creativecommons.org/licenses/by-sa/4.0/\" target=\"_blank\" rel=\"nofollow noopener\">CC BY-SA 4.0</a>" }}
+            <div>{{ replace .Site.Params.terms.license "#" $link | safeHTML }}</div>
+        </div>
+    </div>
+</div>

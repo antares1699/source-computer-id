@@ -1,0 +1,129 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>SSH dari jarak jauh ke Bash di Ubuntu pada Windows</title><meta name=description content="Jawaban ini  bekerja bagi saya untuk dapat ssh ke subsistem Linux dari localhost, tetapi itu tidak cukup untuk membiarkan saya masuk dari jarak jauh.  Saya sudah:  Jalankan item Bash Start Menu sebagai..."><link rel=canonical href=https://www.idxstack.com/ssh-dari-jarak-jauh-ke-bash-di-ubuntu-pada-windows-x32vjnur/><meta property="og:title" content="SSH dari jarak jauh ke Bash di Ubuntu pada Windows"><meta property="og:description" content="Jawaban ini  bekerja bagi saya untuk dapat ssh ke subsistem Linux dari localhost, tetapi itu tidak cukup untuk membiarkan saya masuk dari jarak jauh.  Saya sudah:  Jalankan item Bash Start Menu sebagai..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/ssh-dari-jarak-jauh-ke-bash-di-ubuntu-pada-windows-x32vjnur/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="SSH dari jarak jauh ke Bash di Ubuntu pada Windows"><meta name=twitter:description content="Jawaban ini  bekerja bagi saya untuk dapat ssh ke subsistem Linux dari localhost, tetapi itu tidak cukup untuk membiarkan saya masuk dari jarak jauh.  Saya sudah:  Jalankan item Bash Start Menu sebagai..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>SSH dari jarak jauh ke Bash di Ubuntu pada Windows</h1><div itemprop=text><p><a href=https://superuser.com/a/1114162/634819 target=_blank rel="nofollow noopener">Jawaban ini</a> bekerja bagi saya untuk dapat ssh ke subsistem Linux dari localhost, tetapi itu tidak cukup untuk membiarkan saya masuk dari jarak jauh.</p><p>Saya sudah:</p><ol><li>Jalankan item Bash Start Menu sebagai administrator;</li><li>Membuat semua <code>/etc/ssh/sshd_config</code> modifikasi yang direkomendasikan dalam jawaban tertaut di atas;</li><li>Diubah dari port 22 ke port 2222 untuk mencoba menghindari masalah keamanan apa pun dengan menggunakan port sistem;</li><li>Diverifikasi bahwa melakukan <code>ssh trey@localhost -p 2222</code> berfungsi seperti yang diharapkan.</li></ol><p>Namun, itu tidak memungkinkan saya untuk masuk dari host lain di LAN saya. Jika saya menghentikan layanan (<code>sudo service ssh stop</code>) dan berjalan dalam mode debug (<code>sudo /usr/sbin/sshd -d</code>), saya mendapatkan output berikut:</p><pre><code>sudo: unable to resolve host SYCORAX
+debug1: sshd version OpenSSH_6.6.1, OpenSSL 1.0.1f 6 Jan 2014
+debug1: key_parse_private2: missing begin marker
+debug1: read PEM private key done: type RSA
+debug1: private host key: #0 type 1 RSA
+debug1: key_parse_private2: missing begin marker
+debug1: read PEM private key done: type DSA
+debug1: private host key: #1 type 2 DSA
+debug1: key_parse_private2: missing begin marker
+debug1: read PEM private key done: type ECDSA
+debug1: private host key: #2 type 3 ECDSA
+debug1: private host key: #3 type 4 ED25519
+debug1: rexec_argv[0]='/usr/sbin/sshd'
+debug1: rexec_argv[1]='-d'
+Set /proc/self/oom_adj from 0 to -17
+debug1: Bind to port 2222 on 0.0.0.0.
+Server listening on 0.0.0.0 port 2222.
+debug1: Bind to port 2222 on ::.
+Bind to port 2222 on :: failed: Address already in use.
+</code></pre><p>Itu bertahan di sana dan tidak berubah jika saya mencoba ssh dari host lain menggunakan alamat IP Ethernet (yang dapat di-ping). Jika saya mencoba ssh dari localhost, itu berlanjut:</p><pre><code>debug1: Server will not fork when running in debugging mode.
+debug1: rexec start in 4 out 4 newsock 4 pipe -1 sock 7
+debug1: inetd sockets after dupping: 3, 3
+Connection from 127.0.0.1 port 60453 on 127.0.0.1 port 2222
+debug1: Client protocol version 2.0; client software version OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.8
+debug1: match: OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.8 pat OpenSSH_6.6.1* compat 0x04000000
+debug1: Enabling compatibility mode for protocol 2.0
+debug1: Local version string SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.8
+debug1: list_hostkey_types: ssh-rsa,ssh-dss,ecdsa-sha2-nistp256,ssh-ed25519
+debug1: SSH2_MSG_KEXINIT sent
+debug1: SSH2_MSG_KEXINIT received
+debug1: kex: client-&gt;server aes128-ctr hmac-md5-etm@openssh.com none
+debug1: kex: server-&gt;client aes128-ctr hmac-md5-etm@openssh.com none
+debug1: expecting SSH2_MSG_KEX_ECDH_INIT
+debug1: SSH2_MSG_NEWKEYS sent
+debug1: expecting SSH2_MSG_NEWKEYS
+debug1: SSH2_MSG_NEWKEYS received
+debug1: KEX done
+debug1: userauth-request for user trey service ssh-connection method none
+debug1: attempt 0 failures 0
+debug1: PAM: initializing for "trey"
+debug1: PAM: setting PAM_RHOST to "localhost"
+debug1: PAM: setting PAM_TTY to "ssh"
+Failed none for trey from 127.0.0.1 port 60453 ssh2
+debug1: userauth-request for user trey service ssh-connection method password
+debug1: attempt 1 failures 0
+debug1: PAM: password authentication accepted for trey
+Accepted password for trey from 127.0.0.1 port 60453 ssh2
+debug1: do_pam_account: called
+debug1: PAM: establishing credentials
+debug1: Entering interactive session for SSH2.
+debug1: server_init_dispatch_20
+debug1: server_input_channel_open: ctype session rchan 0 win 1048576 max 16384
+debug1: input_session_request
+debug1: channel 0: new [server-session]
+debug1: session_new: session 0
+debug1: session_open: channel 0
+debug1: session_open: session 0: link with channel 0
+debug1: server_input_channel_open: confirm session
+debug1: server_input_global_request: rtype no-more-sessions@openssh.com want_reply 0
+debug1: server_input_channel_req: channel 0 request pty-req reply 1
+debug1: session_by_channel: session 0 channel 0
+debug1: session_input_channel_req: session 0 req pty-req
+debug1: Allocating pty.
+debug1: session_pty_req: session 0 alloc /dev/pts/0
+debug1: SELinux support disabled
+debug1: server_input_channel_req: channel 0 request env reply 0
+debug1: session_by_channel: session 0 channel 0
+debug1: session_input_channel_req: session 0 req env
+debug1: server_input_channel_req: channel 0 request shell reply 1
+debug1: session_by_channel: session 0 channel 0
+debug1: session_input_channel_req: session 0 req shell
+Starting session: shell on pts/0 for trey from 127.0.0.1 port 60453
+debug1: Setting controlling tty using TIOCSCTTY.
+</code></pre><p>Dan saya berhasil masuk dari klien SSH lokal, yang mencetak pesan debug berikut:</p><pre><code>trey@localhost's password:
+Welcome to Ubuntu 14.04.5 LTS (GNU/Linux 3.4.0+ x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+
+Last login: Sat Aug 27 14:51:29 2016 from localhost
+debug1: PAM: reinitializing credentials
+debug1: permanently_set_uid: 1000/1000
+debug1: Unable to open session: Failed to connect to socket /var/run/dbus/system_bus_socket: No such file or directory
+Environment:
+  LANG=en_US.UTF-8
+  USER=trey
+  LOGNAME=trey
+  HOME=/home/trey
+  PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+  MAIL=/var/mail/trey
+  SHELL=/bin/bash
+  SSH_CLIENT=127.0.0.1 60453 2222
+  SSH_CONNECTION=127.0.0.1 60453 127.0.0.1 2222
+  SSH_TTY=/dev/pts/0
+  TERM=xterm
+trey@SYCORAX:~$
+</code></pre><p>Setelah saya logout dari lokal itu <em>ssh</em> , Saya mendapatkan yang berikut dari <em>sshd</em> proses sebelum keluar:</p><pre><code>debug1: Received SIGCHLD.
+debug1: session_by_pid: pid 677
+debug1: session_exit_message: session 0 channel 0 pid 677
+debug1: session_exit_message: release channel 0
+debug1: session_pty_cleanup: session 0 release /dev/pts/0
+syslogin_perform_logout: logout() returned an error
+debug1: session_by_channel: session 0 channel 0
+debug1: session_close_by_channel: channel 0 child 0
+debug1: session_close: session 0 pid 0
+debug1: channel 0: free: server-session, nchannels 1
+Received disconnect from 127.0.0.1: 11: disconnected by user
+debug1: do_cleanup
+debug1: PAM: cleanup
+debug1: PAM: closing session
+debug1: PAM: deleting credentials
+debug1: audit_event: unhandled event 12
+</code></pre><p>Menariknya, saya tidak mengalami masalah apa pun ssh'ing (baik secara lokal atau jarak jauh) ke virtual Hyper-V yang menjalankan Ubuntu 16 pada host yang sama dengan <em>sshd</em> berjalan pada port 22. (Tentu saja, tamu VM Hyper-V berada di alamat IP yang berbeda dari host Windows.)</p><p>Telnet ke port 2222 juga tidak berhasil.</p><p>Saya menduga ketidakmampuan <em>sshd</em> mengikat ke port IPv6 adalah kunci untuk memahami apa yang terjadi, tetapi alat yang saya ketahui (baik dari sisi Windows dan Linux) tidak menunjukkan apa pun yang terikat ke port 2222 di TCP v4 atau v6.</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/634819/trey target=_blank rel="nofollow noopener"><span itemprop=name>Trey</span></a>
+—
+<a href=https://superuser.com/questions/1118333/ssh-remotely-into-bash-on-ubuntu-on-windows target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>3</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>6</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>6</div><div class=card-body><div itemprop=text><p>Anda mungkin harus membuat lubang di Windows Firewall Anda. Saya mengalami masalah ini dan memverifikasi dengan mematikan WF sebentar dan mengonfirmasi bahwa saya dapat mengakses dari mesin eksternal.</p><p>Saya kemudian menambahkan aturan untuk mengizinkan port yang saya siapkan, untuk Anda itu adalah 2222.</p><p>Saya mengaktifkan kembali WF dan semuanya baik-baik saja.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/ssh-dari-jarak-jauh-ke-bash-di-ubuntu-pada-windows-x32vjnur/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/649961/shadowzen target=_blank rel="nofollow noopener"><span itemprop=name>shadowzen</span></a>
+—
+<a href=https://superuser.com/a/1132686 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Bisakah Anda lebih spesifik tentang pengaturan WF?</div><div>— <a href=https://superuser.com/users/362782/qinsi target=_blank rel="nofollow noopener">Qinsi</a></div></li><li class=list-group-item><div>Apakah Anda bertanya tentang secara khusus tentang cara menambahkan aturan ke Windows Firewall? Jika demikian, akses WF melalui panel kontrol, klik Pengaturan lanjutan, lalu pilih Aturan masuk atau Keluar. Biasanya, Anda ingin menambahkan aturan masuk dan, khusus untuk ssh, Anda ingin menambahkan aturan untuk membuka (mengizinkan) port untuk TCP, menambahkan satu untuk UDP tidak diperlukan. Dari sana, ada sejumlah variabel terserah Anda untuk menentukan apa yang harus dipilih untuk situasi Anda, wizard akan meminta Anda dengan opsi.</div><div>— <a href=https://superuser.com/users/649961/shadowzen target=_blank rel="nofollow noopener">shadowzen</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>0</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>0</div><div class=card-body><div itemprop=text><pre><code>debug1: Bind to port 2222 on 0.0.0.0.
+Server listening on 0.0.0.0 port 2222.
+debug1: Bind to port 2222 on ::.
+Bind to port 2222 on :: failed: Address already in use.
+</code></pre><p>Anda melakukan bind ke port <code>2222</code> dua kali di <code>sshd_config</code>. Bagaimana tampilan file tersebut?</p><p>Tidak yakin apakah ada masalah lain yang tersembunyi di antara baris, jika demikian, harap jelaskan.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/ssh-dari-jarak-jauh-ke-bash-di-ubuntu-pada-windows-x32vjnur/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/466930/jakuje target=_blank rel="nofollow noopener"><span itemprop=name>Jakuje</span></a>
+—
+<a href=https://superuser.com/a/1118334 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=1>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=1><ul class="list-group list-group-flush"><li class=list-group-item><div>Saya tidak mengikuti .... Saya tidak menjalankan <code>sshd -d</code> <i>server</i> dengan <code>-p 2222</code>, saya menjalankan <code>ssh</code> <i>klien</i> lewat sana. (Meskipun ssh lokal dapat membaca file <code>/etc/ssh/sshd_config</code> mencari nomor port, ssh jarak jauh jelas tidak bisa.). Satu ikatan adalah ke port IPv4, yang lainnya ke port IPv6. Itu perilaku normal, meskipun ketidakmampuan untuk mengikat port IPv6 tidak.</div><div>— <a href=https://superuser.com/users/634819/trey target=_blank rel="nofollow noopener">Trey</a></div></li><li class=list-group-item><div>Dan untuk menjawab pertanyaan Anda secara langsung: $ grep -i port / etc / ssh / sshd_config &lt;NL> # Port, IP dan protokol apa yang kami dengarkan &lt;NL> Port 2222 &lt;NL></div><div>— <a href=https://superuser.com/users/634819/trey target=_blank rel="nofollow noopener">Trey</a></div></li><li class=list-group-item><div>maaf, itu bug di postingan, sudah diperbaiki. Mungkin ada <code>Port</code> dan <code>ListenAddress</code>. Tapi saya tidak yakin seberapa baik itu didukung oleh Windows sekarang. Apakah ini berfungsi untuk Anda jika Anda hanya mengatur IPv4 (<code>AddressFamily inet</code>)?</div><div>— <a href=https://superuser.com/users/466930/jakuje target=_blank rel="nofollow noopener">Jakuje</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>0</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-2><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>0</div><div class=card-body><div itemprop=text><p>Dari Konsol PowerShell Anda yang ditinggikan di Win 10, keluarkan perintah berikut:</p><pre><code>New-NetFirewallRule -DisplayName "Allow Inbound Port 2222" -Direction Inbound -LocalPort 2222 -Protocol TCP -Action Allow
+</code></pre><p>Dengan perintah PS di atas, Anda akan membuka porta masuk 2222 di Windows Firewall. Itu akan memungkinkan host LAN Anda yang lain untuk masuk ke Instans WSL Anda pada host Win 10 Anda saat ini.</p><p>HTH</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/ssh-dari-jarak-jauh-ke-bash-di-ubuntu-pada-windows-x32vjnur/#answer-2 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/871318/the-bahree target=_blank rel="nofollow noopener"><span itemprop=name>The Bahree</span></a>
+—
+<a href=https://superuser.com/a/1419560 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/cara-menemukan-pdf-yang-tidak-dapat-dicari-secara-otomatis-max4vxal/>Cara menemukan PDF yang tidak dapat dicari secara otomatis</a></div></li><li class=list-group-item><div><a href=/perangkat-lunak-kontrol-kipas-atau-pengaturan-bios-untuk-notebook-yang-berisik-rdbve5tl/>Perangkat lunak kontrol kipas atau pengaturan BIOS untuk notebook yang berisik?</a></div></li><li class=list-group-item><div><a href=/magnet-aneh-di-dell-vostro-3460-ksbrilic/>Magnet aneh di Dell Vostro 3460</a></div></li><li class=list-group-item><div><a href=/folder-startup-windows-10-hilang-fgqc0iim/>Folder startup Windows 10 hilang</a></div></li><li class=list-group-item><div><a href=/apa-perbedaan-antara-dvi-i-dan-dvi-d-cwht82qx/>Apa perbedaan antara DVI-I dan DVI-D</a></div></li><li class=list-group-item><div><a href=/cara-melihat-mengedit-nilai-registri-x86-di-windows-7-x64-9hnljfdo/>Cara melihat / mengedit nilai registri x86 di windows 7 x64</a></div></li><li class=list-group-item><div><a href=/keyboard-terbaik-dengan-perangkat-penunjuk-internal-untuk-pusat-media-mac-tutup-ckwvruyt/>Keyboard Terbaik dengan perangkat penunjuk internal untuk pusat media Mac? [Tutup]</a></div></li><li class=list-group-item><div><a href=/pembaruan-mse-gagal-tidak-ada-peringatan-atau-pesan-kesalahan-wzmknela/>Pembaruan MSE gagal, tidak ada peringatan atau pesan kesalahan</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengatur-penundaan-default-untuk-bingkai-saat-menganimasikan-22zsyekl/>Bagaimana cara mengatur penundaan default untuk bingkai saat menganimasikan?</a></div></li><li class=list-group-item><div><a href=/windows-81-hyper-v-tidak-akan-terhubung-ke-jaringan-dengan-ubuntu-1404-vm-vv2yl64u/>Windows 8.1- Hyper-V tidak akan terhubung ke jaringan dengan Ubuntu 14.04 VM</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

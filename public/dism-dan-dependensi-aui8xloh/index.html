@@ -1,0 +1,87 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>DISM dan Dependensi</title><meta name=description content="Apakah ada cara untuk membuat daftar dependensi untuk setiap fitur yang ingin Anda instal melalui DISM?  Misalnya. jika saya ingin menginstal IIS-ASPNET, saya perlu menginstal IIS-BasicAuthentication dan IIS-Core (atau apa pun dependensinya)..."><link rel=canonical href=https://www.idxstack.com/dism-dan-dependensi-aui8xloh/><meta property="og:title" content="DISM dan Dependensi"><meta property="og:description" content="Apakah ada cara untuk membuat daftar dependensi untuk setiap fitur yang ingin Anda instal melalui DISM?  Misalnya. jika saya ingin menginstal IIS-ASPNET, saya perlu menginstal IIS-BasicAuthentication dan IIS-Core (atau apa pun dependensinya)..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/dism-dan-dependensi-aui8xloh/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="DISM dan Dependensi"><meta name=twitter:description content="Apakah ada cara untuk membuat daftar dependensi untuk setiap fitur yang ingin Anda instal melalui DISM?  Misalnya. jika saya ingin menginstal IIS-ASPNET, saya perlu menginstal IIS-BasicAuthentication dan IIS-Core (atau apa pun dependensinya)..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>DISM dan Dependensi</h1><div itemprop=text><p>Apakah ada cara untuk membuat daftar dependensi untuk setiap fitur yang ingin Anda instal melalui DISM?</p><p>Misalnya. jika saya ingin menginstal IIS-ASPNET, saya perlu menginstal IIS-BasicAuthentication dan IIS-Core (atau apa pun dependensinya)</p><p>Hal terakhir yang ingin saya lakukan adalah mengerjakan semua ini dengan tangan!</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/2978/surgical-coder target=_blank rel="nofollow noopener"><span itemprop=name>Surgical Coder</span></a>
+—
+<a href=https://superuser.com/questions/656663/dism-and-dependencies target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>1</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>8</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>8</div><div class=card-body><div itemprop=text><p>Versi Windows yang mana? Berikut adalah paket / fitur yang tersedia di Windows 7 yang terkait dengan IIS, disajikan sebagai pohon ketergantungan terbalik (anak-anak memerlukan induknya untuk diinstal, karena ini adalah cara sumber menyajikannya, dan saya tidak punya waktu untuk membalikkannya dengan benar sekarang):</p><pre><code>IIS-HostableWebCore
+IIS-WebServerRole
+ +-IIS-FTPServer
+ |  +-IIS-FTPExtensibility
+ |  +-IIS-FTPSvc
+ |  `-IIS-FTPExtensibility
+ +-IIS-WebServer
+ |  +-IIS-ApplicationDevelopment
+ |  |  +-IIS-ASP
+ |  |  +-IIS-ASPNET
+ |  |  +-IIS-CGI
+ |  |  +-IIS-ISAPIExtensions
+ |  |  |  +-IIS-ASP
+ |  |  |  +-IIS-ASPNET
+ |  |  |  `-MSMQ-HTTP
+ |  |  +-IIS-ISAPIFilter
+ |  |  |  `-IIS-ASPNET
+ |  |  +-IIS-NetFxExtensibility
+ |  |  |  +-IIS-ASPNET
+ |  |  |  +-MSMQ-HTTP
+ |  |  |  `-WCF-HTTP-Activation
+ |  |  `-IIS-ServerSideIncludes
+ |  +-IIS-CommonHttpFeatures
+ |  |  +-IIS-DefaultDocument
+ |  |  |  +-IIS-ASPNET
+ |  |  |  `-MSMQ-HTTP
+ |  |  +-IIS-DirectoryBrowsing
+ |  |  |  `-MSMQ-HTTP
+ |  |  +-IIS-HttpErrors
+ |  |  |  `-MSMQ-HTTP
+ |  |  +-IIS-HttpRedirect
+ |  |  |  `-MSMQ-HTTP
+ |  |  +-IIS-StaticContent
+ |  |  |  +-IIS-WebDAV
+ |  |  |  `-MSMQ-HTTP
+ |  |  `-IIS-WebDAV
+ |  +-IIS-HealthAndDiagnostics
+ |  |  +-IIS-CustomLogging
+ |  |  +-IIS-HttpLogging
+ |  |  |  `-MSMQ-HTTP
+ |  |  +-IIS-HttpTracing
+ |  |  |  `-MSMQ-HTTP
+ |  |  +-IIS-LoggingLibraries
+ |  |  |  `-MSMQ-HTTP
+ |  |  +-IIS-ODBCLogging
+ |  |  `-IIS-RequestMonitor
+ |  |     `-MSMQ-HTTP
+ |  +-IIS-Performance
+ |  |  +-IIS-HttpCompressionDynamic
+ |  |  `-IIS-HttpCompressionStatic
+ |  |     `-MSMQ-HTTP
+ |  `-IIS-Security
+ |     +-IIS-BasicAuthentication
+ |     +-IIS-ClientCertificateMappingAuthentication
+ |     +-IIS-DigestAuthentication
+ |     +-IIS-IISCertificateMappingAuthentication
+ |     +-IIS-IPSecurity
+ |     +-IIS-RequestFiltering
+ |     |  +-IIS-ASP
+ |     |  `-IIS-NetFxExtensibility
+ |     |     +-IIS-ASPNET
+ |     |     `-WCF-HTTP-Activation
+ |     +-IIS-URLAuthorization
+ |     `-IIS-WindowsAuthentication
+ `-IIS-WebServerManagementTools
+    +-IIS-IIS6ManagementCompatibility
+    |  +-IIS-LegacyScripts
+    |  +-IIS-LegacySnapIn
+    |  +-IIS-Metabase
+    |  |  +-IIS-LegacyScripts
+    |  |  +-IIS-LegacySnapIn
+    |  |  `-MSMQ-HTTP
+    |  `-IIS-WMICompatibility
+    |     `-IIS-LegacyScripts
+    +-IIS-ManagementConsole
+    |  `-MSMQ-HTTP
+    +-IIS-ManagementScriptingTools
+    `-IIS-ManagementService
+</code></pre><p><sup><a href=http://technet.microsoft.com/en-us/library/ff716257.aspx rel="nofollow noopener" target=_blank>Sumber</a></sup></p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/dism-dan-dependensi-aui8xloh/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/19841/darth-android target=_blank rel="nofollow noopener"><span itemprop=name>Darth Android</span></a>
+—
+<a href=https://superuser.com/a/656701 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Itu terutama semua jendela yang menggunakan DISM (7 dan 8 di tempat kerja), terima kasih!</div><div>— <a href=https://superuser.com/users/2978/surgical-coder target=_blank rel="nofollow noopener">Surgical Coder</a></div></li><li class=list-group-item><div>Bagaimana Anda mengerjakan pohon ini?</div><div>— <a href=https://superuser.com/users/238140/nebffa target=_blank rel="nofollow noopener">nebffa</a></div></li><li class=list-group-item><div>@nebffa Periksa tautan sumber di bawah pohon. Jalur paket diberi nama <code>A\B\C\PackageName</code>, di mana <code>PackageName</code> memerlukan paket <code>C</code>, <code>B</code>, dan <code>A</code> untuk diinstal juga.</div><div>— <a href=https://superuser.com/users/19841/darth-android target=_blank rel="nofollow noopener">Darth Android</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/bisakah-kartu-grafis-nvidia-ditambahkan-ke-laptop-1rfgrjjs/>Bisakah kartu grafis (Nvidia) ditambahkan ke laptop?</a></div></li><li class=list-group-item><div><a href=/dari-manakah-nilai-path-di-fedora-env-terisi-swjtdcqm/>Dari manakah nilai PATH di Fedora env terisi?</a></div></li><li class=list-group-item><div><a href=/nonaktifkan-blue-record-light-di-microsoft-lifecam-cinema-s9pd3i63/>Nonaktifkan Blue Record Light di Microsoft LifeCam Cinema</a></div></li><li class=list-group-item><div><a href=/mengubah-struktur-direktori-default-ga5qkxl0/>Mengubah struktur direktori default</a></div></li><li class=list-group-item><div><a href=/tidak-yakin-apa-port-seperti-dvi-ini-di-pc-saya-qmpuwbvl/>Tidak yakin apa port seperti DVI ini di PC saya</a></div></li><li class=list-group-item><div><a href=/apakah-ada-aplikasi-load-balancer-sederhana-untuk-lingkungan-pengembangan-di-windows-cwm2pr7o/>Apakah ada aplikasi Load Balancer sederhana untuk lingkungan pengembangan di Windows?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengetahui-jika-ada-file-di-sektor-buruk-tertentu-sc1xgbo0/>Bagaimana cara mengetahui jika ada file di sektor buruk tertentu?</a></div></li><li class=list-group-item><div><a href=/jumlah-vlookup-menggunakan-rumus-array-hqu0trwp/>jumlah vlookup menggunakan rumus array</a></div></li><li class=list-group-item><div><a href=/alat-aplikasi-untuk-mendeteksi-foto-yang-diubah-ditutup-xpw3znrr/>Alat / Aplikasi untuk mendeteksi foto yang diubah [ditutup]</a></div></li><li class=list-group-item><div><a href=/apakah-ada-cara-untuk-menggunakan-memori-di-atas-325-gb-menggunakan-windows-xp-duplikat-pzfxpugq/>Apakah ada cara untuk menggunakan memori di atas 3,25 GB menggunakan Windows XP [duplikat]</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

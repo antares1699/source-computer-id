@@ -1,0 +1,227 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Mewakili nilai sumbu sebagai 10 pangkat 1, 2, 3, dll… di Microsoft Excel</title><meta name=description content="Saya memiliki bagan berikut di tangan saya:  Saya ingin itu mengganti nilai sumbu X dan Y yang saat ini dimilikinya dengan 10 pangkat notasi bilangan bulat. Saya tidak ingin notasi ilmiah (eksponensial)...."><link rel=canonical href=https://www.idxstack.com/mewakili-nilai-sumbu-sebagai-10-pangkat-1-2-3-dll-di-microsoft-excel-4igzlyj7/><meta property="og:title" content="Mewakili nilai sumbu sebagai 10 pangkat 1, 2, 3, dll… di Microsoft Excel"><meta property="og:description" content="Saya memiliki bagan berikut di tangan saya:  Saya ingin itu mengganti nilai sumbu X dan Y yang saat ini dimilikinya dengan 10 pangkat notasi bilangan bulat. Saya tidak ingin notasi ilmiah (eksponensial)...."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/mewakili-nilai-sumbu-sebagai-10-pangkat-1-2-3-dll-di-microsoft-excel-4igzlyj7/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Mewakili nilai sumbu sebagai 10 pangkat 1, 2, 3, dll… di Microsoft Excel"><meta name=twitter:description content="Saya memiliki bagan berikut di tangan saya:  Saya ingin itu mengganti nilai sumbu X dan Y yang saat ini dimilikinya dengan 10 pangkat notasi bilangan bulat. Saya tidak ingin notasi ilmiah (eksponensial)...."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Mewakili nilai sumbu sebagai 10 pangkat 1, 2, 3, dll… di Microsoft Excel</h1><div itemprop=text><p>Saya memiliki bagan berikut di tangan saya:</p><p><a href=https://i.stack.imgur.com/LQynQ.png rel="nofollow noopener" target=_blank><img src=https://i.stack.imgur.com/LQynQ.png alt=Chart class="img-fluid d-block my-2" loading=lazy></a></p><p>Saya ingin itu mengganti nilai sumbu X dan Y yang saat ini dimilikinya dengan 10 pangkat notasi bilangan bulat. Saya tidak ingin notasi ilmiah (eksponensial). Terima kasih sebelumnya.</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/452863/omar-metwally target=_blank rel="nofollow noopener"><span itemprop=name>Omar Metwally</span></a>
+—
+<a href=https://superuser.com/questions/1175631/representing-axis-values-as-10-to-the-power-of-1-2-3-etc-in-microsoft-exce target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>6</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>6</div><div class=card-body><div itemprop=text><p>Anda harus melakukan sedikit pekerjaan pemformatan manual, karena Excel tidak memiliki format angka yang Anda inginkan.</p><p>Anda bisa membuat grafik terlihat seperti ini dengan sedikit usaha: <a href=https://i.stack.imgur.com/JK5Ty.png rel="nofollow noopener" target=_blank><img src=https://i.stack.imgur.com/JK5Ty.png alt="log plot" class="img-fluid d-block my-2" loading=lazy></a></p><p><strong>1 - Format angka khusus</strong></p><p>Klik kanan pada nomor sumbu, pilih "format sumbu", pergi ke bagian "angka", dan masukkan format Kustom berikut:</p><pre><code>"10^"#
+</code></pre><p>Buat sumbu Anda menggunakan format kustom ini.</p><p>Ini akan menambahkan teks "10 ^" ke depan nomor yang ditampilkan.</p><p><strong>2 - Loggifikasi data Anda</strong></p><p>Format kustom dari 1) mengasumsikan bahwa data Anda sudah dicatat. Jadi kami perlu mencatat data Anda, dan membuat grafik sebagai gantinya. Temukan log dari setiap titik data:</p><pre><code>Data            
+X   Y   Log10(X)    Log10(Y)
+30  300 1.477121255 2.477121255
+28  300 1.447158031 2.477121255
+26  300 1.414973348 2.477121255
+300 200 2.477121255 2.301029996
+280 200 2.447158031 2.301029996
+260 200 2.414973348 2.301029996
+</code></pre><p>Buat grafik plot Anda menjadi dua kolom kanan.</p><p><strong>3 - Perbaiki garis log</strong></p><p>Plot log Excel mengasumsikan bahwa baris log utama harus di 1, 10, 100, 1000 dll. Tetapi Anda ingin baris utama di 1, 2, 3 karena Anda sudah mencatat data Anda.</p><p>Jadi kita perlu membuat garis kita sendiri, dan memformatnya menjadi garis abu-abu tipis.</p><p>Pertama, hapus garis kisi dari plot saat kita membuatnya sendiri.</p><p>Kemudian tambahkan pasangan titik data yang menentukan awal dan akhir setiap baris setiap 10, 100, 1000 dll, lalu catat datanya. Letakkan spasi di antara setiap pasangan titik untuk memutus garis dan juga memudahkan untuk melihat apa yang terjadi. Anda harus mendapatkan tabel seperti:</p><pre><code>Lines           
+X   Y   Log(X)  Log(Y)
+10     10   1.0 1.0
+10  100000  1.0 5.0
+
+20     10   1.3 1.0
+20  100000  1.3 5.0
+
+30     10   1.5 1.0
+30  100000  1.5 5.0
+
+40     10   1.6 1.0
+40  100000  1.6 5.0
+
+50     10   1.7 1.0
+50  100000  1.7 5.0
+
+60     10   1.8 1.0
+60  100000  1.8 5.0
+
+70     10   1.8 1.0
+70  100000  1.8 5.0
+
+80     10   1.9 1.0
+80  100000  1.9 5.0
+
+90     10   2.0 1.0
+90  100000  2.0 5.0
+
+100    10   2.0 1.0
+100 100000  2.0 5.0
+
+200    10   2.3 1.0
+200 100000  2.3 5.0
+
+300    10   2.5 1.0
+300 100000  2.5 5.0
+
+400    10   2.6 1.0
+400 100000  2.6 5.0
+
+500    10   2.7 1.0
+500 100000  2.7 5.0
+
+600    10   2.8 1.0
+600 100000  2.8 5.0
+
+700    10   2.8 1.0
+700 100000  2.8 5.0
+
+800    10   2.9 1.0
+800 100000  2.9 5.0
+
+900    10   3.0 1.0
+900 100000  3.0 5.0
+
+1000       10   3.0 1.0
+1000    100000  3.0 5.0
+
+   10     100   1.0 2.0
+10000     100   4.0 2.0
+
+   10     200   1.0 2.3
+10000     200   4.0 2.3
+
+   10     300   1.0 2.5
+10000     300   4.0 2.5
+
+   10     400   1.0 2.6
+10000     400   4.0 2.6
+
+   10     500   1.0 2.7
+10000     500   4.0 2.7
+
+   10     600   1.0 2.8
+10000     600   4.0 2.8
+
+   10     700   1.0 2.8
+10000     700   4.0 2.8
+
+   10     800   1.0 2.9
+10000     800   4.0 2.9
+
+   10     900   1.0 3.0
+10000     900   4.0 3.0
+
+   10    1000   1.0 3.0
+10000    1000   4.0 3.0
+
+   10    2000   1.0 3.3
+10000    2000   4.0 3.3
+
+   10    3000   1.0 3.5
+10000    3000   4.0 3.5
+
+   10    4000   1.0 3.6
+10000    4000   4.0 3.6
+
+   10    5000   1.0 3.7
+10000    5000   4.0 3.7
+
+   10    6000   1.0 3.8
+10000    6000   4.0 3.8
+
+   10    7000   1.0 3.8
+10000    7000   4.0 3.8
+
+   10    8000   1.0 3.9
+10000    8000   4.0 3.9
+
+   10    9000   1.0 4.0
+10000    9000   4.0 4.0
+
+   10   10000   1.0 4.0
+10000   10000   4.0 4.0
+</code></pre><p>Tambahkan kolom Log (x) dan Log (y) sebagai rangkaian data ke plot, lalu format rangkaian data agar tidak menampilkan titik, melainkan garis abu-abu tipis.</p><p><strong>4 - Label sumbu</strong></p><ul><li>Kami sudah mencatat semuanya, jadi ubah sumbu untuk tidak mencatat
+data - Anda tidak perlu mencatatnya dua kali.</li><li>Ubah Unit Mayor menjadi 1,
+untuk mendapatkan label setiap siklus log.</li><li>Hapus tanda centang mayor dan minor karena akan berada di tempat yang salah.</li></ul><p>Tambahkan label data, legenda dll, dan Anda selesai.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/mewakili-nilai-sumbu-sebagai-10-pangkat-1-2-3-dll-di-microsoft-excel-4igzlyj7/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/655861/sir-adelaide target=_blank rel="nofollow noopener"><span itemprop=name>Sir Adelaide</span></a>
+—
+<a href=https://superuser.com/a/1175648 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Terima kasih. Saya akhirnya menyerah pada semuanya dan terpaksa menggunakan MATLAB. Excel mungkin membuat grafik yang penuh warna dan terlihat bagus, tetapi terkadang menakutkan dan rumitnya membuat beberapa penyesuaian sederhana di atasnya.</div><div>— <a href=https://superuser.com/users/452863/omar-metwally target=_blank rel="nofollow noopener">Omar Metwally</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>4</div><div class=card-body><div itemprop=text><p>Jadi pendekatannya adalah menambahkan deret dummy di sepanjang setiap sumbu, di tempat yang Anda inginkan label sumbu. Sembunyikan titik-titik ini, dan tambahkan label data, masukkan 101, 102, dll (untuk 10 ^ 1, 10 ^ 2, dll), dan format eksponen menjadi superskrip. Dan ini sulit dilakukan dengan tangan, karena sulit untuk memilih eksponen dan menerapkan pemformatan, di antara hal-hal sulit lainnya.</p><p>Jadi saya rutin menulis sedikit. Pilih plot log-log dengan sumbu di tepi kiri dan bawahnya, dan jalankan kode di bawah ini.</p><pre><code>Sub NiceExponentialAxisLabels()
+  Dim cht As Chart
+  Dim iPt As Long, iLog As Long, iMin As Long, iMax As Long
+  Dim vXVals As Variant, vYVals As Variant
+  Dim dFont As Double
+
+  Set cht = ActiveChart
+
+  ' HORIZONTAL AXIS ------------------------------------
+  cht.Axes(xlCategory).TickLabels.NumberFormat = ";;;" ' hide tick labels
+
+  ' build arrays of X and Y values
+  iMin = WorksheetFunction.Log10(cht.Axes(xlCategory).MinimumScale)
+  iMax = WorksheetFunction.Log10(cht.Axes(xlCategory).MaximumScale)
+  ReDim vXVals(1 To 1)
+  ReDim vYVals(1 To 1)
+  iPt = 0
+  For iLog = iMin To iMax
+    iPt = iPt + 1
+    ReDim Preserve vXVals(1 To iPt)
+    ReDim Preserve vYVals(1 To iPt)
+    vXVals(iPt) = 10 ^ iLog
+    vYVals(iPt) = cht.Axes(xlValue).MinimumScale
+  Next
+
+  ' add series, hide points, add and format labels
+  With cht.SeriesCollection.NewSeries
+    .Name = "horizontal"
+    .XValues = vXVals
+    .Values = vYVals
+    .Format.Line.Visible = False
+    .MarkerStyle = xlMarkerStyleNone
+    .HasDataLabels = True
+    .DataLabels.Position = xlLabelPositionBelow
+    For iPt = 1 To .Points.Count
+      With .DataLabels(iPt)
+        dFont = .Font.Size
+        .Text = 10 &amp; WorksheetFunction.Log10(vXVals(iPt))
+        With .Characters(3, Len(.Text) - 2)
+          .Font.Superscript = True
+          .Font.Size = dFont + 2
+        End With
+        With .Characters(1, 2)
+          .Font.Size = dFont
+        End With
+      End With
+    Next
+  End With
+
+  ' VERTICAL AXIS ------------------------------------
+  cht.Axes(xlValue).TickLabels.NumberFormat = "_0_0_0_0_0_0_0" ' hide but maintain margin
+
+  ' build arrays of X and Y values
+  iMin = WorksheetFunction.Log10(cht.Axes(xlValue).MinimumScale)
+  iMax = WorksheetFunction.Log10(cht.Axes(xlValue).MaximumScale)
+  ReDim vXVals(1 To 1)
+  ReDim vYVals(1 To 1)
+  iPt = 0
+  For iLog = iMin To iMax
+    iPt = iPt + 1
+    ReDim Preserve vXVals(1 To iPt)
+    ReDim Preserve vYVals(1 To iPt)
+    vXVals(iPt) = cht.Axes(xlCategory).MinimumScale
+    vYVals(iPt) = 10 ^ iLog
+  Next
+
+  ' add series, hide points, add and format labels
+  With cht.SeriesCollection.NewSeries
+    .Name = "vertical"
+    .XValues = vXVals
+    .Values = vYVals
+    .Format.Line.Visible = False
+    .MarkerStyle = xlMarkerStyleNone
+    .HasDataLabels = True
+    .DataLabels.Position = xlLabelPositionLeft
+    For iPt = 1 To .Points.Count
+      With .DataLabels(iPt)
+        dFont = .Font.Size
+        .Text = 10 &amp; WorksheetFunction.Log10(vYVals(iPt))
+        With .Characters(3, Len(.Text) - 2)
+          .Font.Superscript = True
+          .Font.Size = dFont + 2
+        End With
+        With .Characters(1, 2)
+          .Font.Size = dFont
+        End With
+      End With
+    Next
+  End With
+End Sub
+</code></pre><p>Catatan: kode dapat disalin dari sini dan ditempelkan ke modul kode biasa. Lihat <a href=http://peltiertech.com/how-to-use-someone-elses-macro/ rel="nofollow noopener" target=_blank>Cara: Menggunakan Makro Orang Lain</a> di blog saya jika Anda belum pernah melakukan ini sebelumnya.</p><p>Di bawah ini adalah dua bagan, yang asli, dan yang satu dengan label eksponensial yang bagus.</p><p><a href=https://i.stack.imgur.com/yVVmG.png rel="nofollow noopener" target=_blank><img src=https://i.stack.imgur.com/yVVmG.png alt="Nice Exponential Axis Labels" class="img-fluid d-block my-2" loading=lazy></a></p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/mewakili-nilai-sumbu-sebagai-10-pangkat-1-2-3-dll-di-microsoft-excel-4igzlyj7/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/95825/jon-peltier target=_blank rel="nofollow noopener"><span itemprop=name>Jon Peltier</span></a>
+—
+<a href=https://superuser.com/a/1177235 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=1>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=1><ul class="list-group list-group-flush"><li class=list-group-item><div>Jawaban, pengantar, kode, tautan ke "Bagaimana", dan gambar hasil yang dinyatakan dengan baik. Superskrip eksponen membuat ini terlihat sangat profesional. Bagus semua putaran +1 akan menjadi +2, tetapi tidak mungkin. Iv'e menyalin kode tersebut ke dalam "Modul Besar makro saya (hanya untuk penggunaan saya sendiri, tetapi saya tetap menyimpan tautannya di sini.)</div><div>— <a href=https://superuser.com/users/253375/elderdelp target=_blank rel="nofollow noopener">ElderDelp</a></div></li><li class=list-group-item><div>Ini jawaban yang cukup bagus. Itu membuat seri dummy, memberi label, dan menempatkan label di tempat label sumbu akan pergi. Ini terlihat lebih bagus daripada jawaban yang diterima, tetapi memiliki beberapa masalah dengan pengeditan plot setelahnya, terutama mengubah luas sumbu Y. Tidak ada yang tidak bisa diperbaiki dengan sedikit pengeditan lagi.</div><div>— <a href=https://superuser.com/users/655861/sir-adelaide target=_blank rel="nofollow noopener">Sir Adelaide</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/di-mana-saya-mengunduh-safari-versi-lama-untuk-windows-d5rhrab6/>Di mana saya mengunduh Safari versi lama untuk Windows</a></div></li><li class=list-group-item><div><a href=/salinan-berlisensi-volume-dari-ms-office-2007-menunjukkan-quotpenggunaan-non-komersialquot-di-bilah-judul-8e37qmuv/>Salinan berlisensi volume dari MS Office 2007 menunjukkan "Penggunaan Non Komersial" di bilah judul</a></div></li><li class=list-group-item><div><a href=/dd-perintah-untuk-membuat-image-iso-bootable-dari-hard-disk-gyaqxrbp/>dd perintah untuk membuat image iso bootable dari hard disk</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-membuat-tombol-roda-mouse-melakukan-klik-dua-kali-di-windows-7-4zkqftsw/>Bagaimana cara membuat tombol roda mouse melakukan klik dua kali di windows 7?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengetahui-jika-ada-file-di-sektor-buruk-tertentu-sc1xgbo0/>Bagaimana cara mengetahui jika ada file di sektor buruk tertentu?</a></div></li><li class=list-group-item><div><a href=/jenis-kabel-listrik-apa-ini-dan-untuk-apa-digunakan-ldpq3rd4/>Jenis kabel listrik apa ini dan untuk apa digunakan?</a></div></li><li class=list-group-item><div><a href=/apakah-ada-add-on-untuk-excel-yang-memungkinkan-saya-mengurutkan-menurut-kolom-arbitrer-dengan-satu-klik-iodspspv/>Apakah ada add-on untuk Excel yang memungkinkan saya mengurutkan menurut kolom arbitrer dengan satu klik?</a></div></li><li class=list-group-item><div><a href=/bagaimana-saya-menggunakan-terminal-layar-saat-di-chroot-ouvfm3it/>Bagaimana saya menggunakan terminal LAYAR saat di-chroot?</a></div></li><li class=list-group-item><div><a href=/ekstrak-iso-secara-native-dari-cd-dengan-windows-7-4bwpgyba/>Ekstrak ISO secara native dari CD dengan Windows 7</a></div></li><li class=list-group-item><div><a href=/kesalahan-saat-memasang-share-arch-linux-nfs-di-windows-7-ultimate-ouoiohqx/>Kesalahan saat memasang share Arch Linux NFS di Windows 7 Ultimate</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

@@ -1,0 +1,101 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Bagaimana saya bisa menerapkan beberapa pengaturan ke host ssh tidak termasuk satu host lain?</title><meta name=description content="Saya memiliki pengaturan yang relatif lengkap untuk ~/.ssh/config saya. Inilah yang ada di atas:  Host *   ControlMaster auto   ControlPath /tmp/ssh_mux_%h_%p_%r   ControlPersist 24h   BatchMode yes   Ciphers blowfish-cbc   Compression yes   VisualHostKey yes  Saya ingin..."><link rel=canonical href=https://www.idxstack.com/bagaimana-saya-bisa-menerapkan-beberapa-pengaturan-ke-host-ssh-tidak-termasuk-satu-host-lain-sij2xxiv/><meta property="og:title" content="Bagaimana saya bisa menerapkan beberapa pengaturan ke host ssh tidak termasuk satu host lain?"><meta property="og:description" content="Saya memiliki pengaturan yang relatif lengkap untuk ~/.ssh/config saya. Inilah yang ada di atas:  Host *   ControlMaster auto   ControlPath /tmp/ssh_mux_%h_%p_%r   ControlPersist 24h   BatchMode yes   Ciphers blowfish-cbc   Compression yes   VisualHostKey yes  Saya ingin..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/bagaimana-saya-bisa-menerapkan-beberapa-pengaturan-ke-host-ssh-tidak-termasuk-satu-host-lain-sij2xxiv/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Bagaimana saya bisa menerapkan beberapa pengaturan ke host ssh tidak termasuk satu host lain?"><meta name=twitter:description content="Saya memiliki pengaturan yang relatif lengkap untuk ~/.ssh/config saya. Inilah yang ada di atas:  Host *   ControlMaster auto   ControlPath /tmp/ssh_mux_%h_%p_%r   ControlPersist 24h   BatchMode yes   Ciphers blowfish-cbc   Compression yes   VisualHostKey yes  Saya ingin..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Bagaimana saya bisa menerapkan beberapa pengaturan ke host ssh tidak termasuk satu host lain?</h1><div itemprop=text><p>Saya memiliki pengaturan yang relatif lengkap untuk <code>~/.ssh/config</code> saya. Inilah yang ada di atas:</p><pre><code>Host *
+   ControlMaster auto
+   ControlPath /tmp/ssh_mux_%h_%p_%r
+   ControlPersist 24h
+   BatchMode yes
+   Ciphers blowfish-cbc
+   Compression yes
+   VisualHostKey yes
+</code></pre><p>Saya ingin membuatnya sedemikian rupa sehingga <code>ControlMaster</code> dll tidak berlaku untuk github; mereka
+tampaknya secara aktif memutuskan koneksi persisten ini, yang saya mengerti
+dan hormat.</p><p>Jadi untuk lebih jelasnya:</p><pre><code> $ rm /tmp/ssh_mux_*
+ $ ssh git@github.com
+   PTY allocation request failed
+   Hi frioux! You've successfully authenticated, but GitHub does not provide shell access.
+   Shared connection to github.com closed.
+
+ $ ls /tmp/ssh_mux_*
+   /tmp/ssh_mux_github.com_22_git
+</code></pre><p>Jadi saya membaca beberapa dokumen, saya bertanya di IRC, dan inilah yang akhirnya saya dapatkan:</p><pre><code>Host !github.com
+   ControlMaster auto
+   ControlPath /tmp/ssh_mux_%h_%p_%r
+   ControlPersist 24h
+
+Host *
+   BatchMode yes
+   Ciphers blowfish-cbc
+   Compression yes
+   VisualHostKey yes
+</code></pre><p>Jadi sekarang github tidak menggunakan ControlMaster dengan benar:</p><pre><code> $ rm /tmp/ssh_mux_*
+ $ ssh git@github.com
+   Host key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48
+   +--[ RSA 2048]----+
+   |        .        |
+   |       + .       |
+   |      . B .      |
+   |     o * +       |
+   |    X * S        |
+   |   + O o . .     |
+   |    .   E . o    |
+   |       . . o     |
+   |        . .      |
+   +-----------------+
+
+   PTY allocation request failed
+   Hi frioux! You've successfully authenticated, but GitHub does not provide shell access.
+   Shared connection to github.com closed.
+
+ $ ls /tmp/ssh_mux_*
+</code></pre><p>Tapi begitu juga yang lainnya:</p><pre><code> $ rm /tmp/ssh_mux_*
+ $ ssh cs ls
+   Host key fingerprint is 89:d1:40:7f:0d:11:28:10:ce:23:e6:a9:12:9d:a1:5b
+   +--[ RSA 2048]----+
+   |    o+o  .+o     |
+   |   o  .+.  o     |
+   |  + + ..o . .    |
+   | = = . o o       |
+   |o E   . S        |
+   | =               |
+   |+                |
+   |.                |
+   |                 |
+   +-----------------+
+
+   /home/frew
+   bin
+   code
+   irclogs
+   lib
+   out
+   test
+
+ $ ls /tmp/ssh_mux_*
+</code></pre><p>Saya mencoba membuat baris host <code>Host !github.com, *</code> dan <code>Host *, !github.com</code> tetapi
+sejauh yang saya tahu ketika saya melakukannya, itu selalu berlaku untuk github.</p><p>Bagaimana saya bisa melakukan apa yang saya inginkan?</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1314/frew-schmidt target=_blank rel="nofollow noopener"><span itemprop=name>Frew Schmidt</span></a>
+—
+<a href=https://superuser.com/questions/732231/how-can-i-apply-some-settings-to-a-ssh-hosts-excluding-one-other-host target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>9</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>9</div><div class=card-body><div itemprop=text><p>Pola setelah <code>Host</code> dipisahkan dengan spasi, bukan koma, jadi ini akan berfungsi:</p><pre><code>Host * !github.com
+    ControlMaster auto
+    ControlPath /tmp/ssh_mux_%h_%p_%r
+    ControlPersist 24h
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/bagaimana-saya-bisa-menerapkan-beberapa-pengaturan-ke-host-ssh-tidak-termasuk-satu-host-lain-sij2xxiv/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/309749/tom%c3%a1%c5%a1-janou%c5%a1ek target=_blank rel="nofollow noopener"><span itemprop=name>Tom&#225;š Janoušek</span></a>
+—
+<a href=https://superuser.com/a/732274 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Terima kasih. Setidaknya di macOS BigSur, saya menemukan bahwa (1) <code>Host !bitbucket.org</code> berfungsi untuk saya daripada (2) <code>Host * !bitbucket.org</code> - yang berarti saya mendapat "Terlarang fatal: Tidak dapat membaca dari repositori jarak jauh.". Menggunakan (1) memungkinkannya bekerja - saya bisa git pull. Saya menggunakan ini bersama dengan <a href=https://superuser.com/a/1077869/21353 target=_blank rel="nofollow noopener">superuser.com/a/1077869/21353</a></div><div>— <a href=https://superuser.com/users/21353/therobyouknow target=_blank rel="nofollow noopener">therobyouknow</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>2</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>2</div><div class=card-body><div itemprop=text><p>rudi_s di IRC membantu saya menemukan solusi:</p><pre><code>Host github.com
+   ControlMaster  no
+   ControlPath    no
+   ControlPersist no
+
+Host *
+   ControlMaster auto
+   ControlPath /tmp/ssh_mux_%h_%p_%r
+   ControlPersist 24h
+   BatchMode yes
+   Ciphers blowfish-cbc
+   Compression yes
+   VisualHostKey yes
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/bagaimana-saya-bisa-menerapkan-beberapa-pengaturan-ke-host-ssh-tidak-termasuk-satu-host-lain-sij2xxiv/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1314/frew-schmidt target=_blank rel="nofollow noopener"><span itemprop=name>Frew Schmidt</span></a>
+—
+<a href=https://superuser.com/a/732262 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=1>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=1><ul class="list-group list-group-flush"><li class=list-group-item><div>Alasan ini berfungsi adalah karena entri Host &lt;match> diuraikan secara berurutan, jadi entri pertama yang cocok digunakan. Saya tidak terbiasa dengan pola pencocokan! &lt;hostname>, jadi tidak bisa mengatakan dengan pasti mengapa itu tidak berhasil. Saya menyarankan bahwa ini mungkin fitur yang lebih baru dari klien SSH Anda.</div><div>— <a href=https://superuser.com/users/40350/slartibartfast target=_blank rel="nofollow noopener">Slartibartfast</a></div></li><li class=list-group-item><div>Sementara ini berhasil, jawaban lainnya adalah apa yang saya coba dan berakhir dengan solusi yang lebih ringkas jadi saya akan menandainya sebagai benar.</div><div>— <a href=https://superuser.com/users/1314/frew-schmidt target=_blank rel="nofollow noopener">Frew Schmidt</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/video-youtube-hanya-diputar-selama-50-detik-hingga-satu-setengah-menit-szka8roj/>Video Youtube hanya diputar selama 50 detik hingga satu setengah menit</a></div></li><li class=list-group-item><div><a href=/karakter-khusus-seperti-at-dll-dicetak-di-layar-sebagai-quottanda-kutip-dan-ps-w7dun3dw/>Karakter khusus seperti @, # dll dicetak di layar sebagai "(tanda kutip) dan £</a></div></li><li class=list-group-item><div><a href=/menghapus-desktop-dari-alt-tab-di-windows-7-64-bit-duplikat-ftvsr7ms/>Menghapus desktop dari Alt + Tab di Windows 7 64-bit [duplikat]</a></div></li><li class=list-group-item><div><a href=/berbagi-daftar-vim-yank-s4szxt1d/>Berbagi Daftar Vim Yank</a></div></li><li class=list-group-item><div><a href=/tingkat-kebisingan-harddisk-1039000-rpm-minq6g7i/>Tingkat kebisingan harddisk 10'000 rpm</a></div></li><li class=list-group-item><div><a href=/tooltip-aplikasi-gtk-tidak-dapat-dibaca-di-dalam-kde-evk1a5j0/>Tooltip aplikasi GTK tidak dapat dibaca di dalam KDE</a></div></li><li class=list-group-item><div><a href=/apakah-saya-perlu-mematikan-ups-saya-ketika-saya-mematikan-pc-saya-kwkrq7ng/>Apakah saya perlu mematikan UPS saya ketika saya mematikan PC saya?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-membuat-pintasan-ke-vmware-workstation-player-15-vm-uohqvmfh/>Bagaimana cara membuat pintasan ke VMWare Workstation Player 15 VM?</a></div></li><li class=list-group-item><div><a href=/bagaimana-router-saya-memiliki-mac-yang-sama-dengan-komputer-di-lan-sz6cinlx/>Bagaimana router saya memiliki MAC yang sama dengan komputer di LAN?</a></div></li><li class=list-group-item><div><a href=/pengkabelan-motherboard-d4twcpl4/>Pengkabelan Motherboard</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

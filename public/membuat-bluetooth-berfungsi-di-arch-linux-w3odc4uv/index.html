@@ -1,0 +1,137 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Membuat Bluetooth berfungsi di Arch Linux</title><meta name=description content="Saya baru saja menginstal BBQLinux di USB flash drive. Nirkabel berfungsi dengan baik, tetapi saya tidak tahu cara mengaktifkan bluetooth untuk menghubungkan keyboard saya. Berikut adalah daftar modul yang dimuat:  mmc_block              34914..."><link rel=canonical href=https://www.idxstack.com/membuat-bluetooth-berfungsi-di-arch-linux-w3odc4uv/><meta property="og:title" content="Membuat Bluetooth berfungsi di Arch Linux"><meta property="og:description" content="Saya baru saja menginstal BBQLinux di USB flash drive. Nirkabel berfungsi dengan baik, tetapi saya tidak tahu cara mengaktifkan bluetooth untuk menghubungkan keyboard saya. Berikut adalah daftar modul yang dimuat:  mmc_block              34914..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/membuat-bluetooth-berfungsi-di-arch-linux-w3odc4uv/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Membuat Bluetooth berfungsi di Arch Linux"><meta name=twitter:description content="Saya baru saja menginstal BBQLinux di USB flash drive. Nirkabel berfungsi dengan baik, tetapi saya tidak tahu cara mengaktifkan bluetooth untuk menghubungkan keyboard saya. Berikut adalah daftar modul yang dimuat:  mmc_block              34914..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Membuat Bluetooth berfungsi di Arch Linux</h1><div itemprop=text><p>Saya baru saja menginstal BBQLinux di USB flash drive. Nirkabel berfungsi dengan baik, tetapi saya tidak tahu cara mengaktifkan bluetooth untuk menghubungkan keyboard saya. Berikut adalah daftar modul yang dimuat:</p><pre><code>mmc_block              34914  0 
+cdc_acm                30362  0 
+fuse                   87590  3 
+ctr                    12927  3 
+ccm                    17534  3 
+rtsx_usb_ms            16899  0 
+memstick               13696  1 rtsx_usb_ms
+nls_iso8859_1          12461  1 
+nls_cp437              16553  1 
+vfat                   21231  1 
+fat                    62032  1 vfat
+ecb                    12737  1 
+iTCO_wdt               12831  0 
+coretemp               12820  0 
+ath3k                  12685  0 
+hwmon                  12930  1 coretemp
+intel_rapl             17605  0 
+iTCO_vendor_support    12649  1 iTCO_wdt
+btusb                  30036  0 
+intel_powerclamp       17122  0 
+bluetooth             433830  3 ath3k,btusb
+joydev                 17063  0 
+mousedev               17272  0 
+kvm_intel             143417  0 
+arc4                   12536  2 
+kvm                   435299  1 kvm_intel
+r8169                  76869  0 
+snd_hda_codec_hdmi     49263  1 
+crct10dif_pclmul       13394  0 
+ath9k                 129093  0 
+crc32_pclmul           12915  0 
+crc32c_intel           21809  0 
+ath9k_common           26722  1 ath9k
+ath9k_hw              428874  2 ath9k_common,ath9k
+ghash_clmulni_intel    12978  0 
+cryptd                 18553  1 ghash_clmulni_intel
+ath                    26067  3 ath9k_common,ath9k,ath9k_hw
+evdev                  21544  13 
+mac_hid                12633  0 
+mac80211              648753  1 ath9k
+pcspkr                 12595  0 
+psmouse               107442  0 
+serio_raw              12849  0 
+mii                    12675  1 r8169
+snd_hda_codec_realtek    67322  1 
+cfg80211              476584  4 ath,ath9k_common,ath9k,mac80211
+snd_hda_codec_generic    63087  1 snd_hda_codec_realtek
+i2c_i801               16965  0 
+i915                 1002472  2 
+rfkill_gpio            12531  0 
+toshiba_bluetooth      12641  0 
+snd_hda_intel          26387  3 
+snd_hda_controller     26857  1 snd_hda_intel
+toshiba_acpi           27156  0 
+sparse_keymap          12818  1 toshiba_acpi
+thermal                17559  0 
+ac                     12715  0 
+fan                    12726  0 
+battery                17452  0 
+dw_dmac                12610  0 
+dw_dmac_core           21699  1 dw_dmac
+spi_pxa2xx_platform    22562  0 
+rfkill                 18867  5 cfg80211,toshiba_acpi,bluetooth,rfkill_gpio
+8250_dw                13067  0 
+snd_hda_codec         112621  5 snd_hda_codec_realtek,snd_hda_codec_hdmi,snd_hda_codec_generic,snd_hda_intel,snd_hda_controller
+snd_hwdep              17244  1 snd_hda_codec
+snd_pcm                88779  4 snd_hda_codec_hdmi,snd_hda_codec,snd_hda_intel,snd_hda_controller
+snd_timer              26614  1 snd_pcm
+wmi                    17339  1 toshiba_acpi
+video                  22205  1 i915
+drm_kms_helper         98881  1 i915
+i2c_hid                17403  0 
+intel_gtt              17848  1 i915
+snd                    73436  14 snd_hda_codec_realtek,snd_hwdep,snd_timer,snd_hda_codec_hdmi,snd_pcm,snd_hda_codec_generic,snd_hda_codec,snd_hda_intel
+i2c_designware_platform    12645  0 
+i2c_designware_core    12813  1 i2c_designware_platform
+button                 12953  1 i915
+iosf_mbi               12682  1 intel_rapl
+i2c_algo_bit           12744  1 i915
+shpchp                 35210  0 
+mei_txe                18098  0 
+mei                    75468  1 mei_txe
+lpc_ich                20768  0 
+soundcore              13031  2 snd,snd_hda_codec
+processor              27777  0 
+sch_fq_codel           17343  6 
+vboxvideo              12437  0 
+drm                   273125  5 i915,drm_kms_helper,vboxvideo
+i2c_core               50240  7 drm,i915,i2c_i801,i2c_hid,i2c_designware_platform,drm_kms_helper,i2c_algo_bit
+nfs                   208487  0 
+lockd                  87230  1 nfs
+grace                  12586  1 lockd
+sunrpc                275966  2 nfs,lockd
+fscache                53701  1 nfs
+ext4                  514390  1 
+crc16                  12343  2 ext4,bluetooth
+mbcache                17171  1 ext4
+jbd2                   86379  1 ext4
+rtsx_usb_sdmmc         25280  0 
+rtsx_usb               17487  2 rtsx_usb_sdmmc,rtsx_usb_ms
+uas                    21817  0 
+usb_storage            60311  3 uas
+hid_generic            12393  0 
+usbhid                 48596  0 
+hid                   110513  4 i2c_hid,hid_generic,usbhid
+sr_mod                 21903  0 
+cdrom                  47479  1 sr_mod
+sd_mod                 43575  3 
+atkbd                  22254  0 
+libps2                 12739  2 atkbd,psmouse
+xhci_pci               12675  0 
+xhci_hcd              152471  1 xhci_pci
+ahci                   33248  0 
+libahci                27215  1 ahci
+usbcore               199382  9 uas,ath3k,btusb,rtsx_usb,usb_storage,usbhid,cdc_acm,xhci_hcd,xhci_pci
+libata                181461  2 ahci,libahci
+usb_common             12561  1 usbcore
+scsi_mod              147395  5 uas,usb_storage,libata,sd_mod,sr_mod
+i8042                  18002  2 toshiba_acpi,libps2
+serio                  18282  6 serio_raw,atkbd,i8042,psmouse
+sdhci_acpi             12961  0 
+sdhci                  39102  1 sdhci_acpi
+led_class              12855  4 ath9k,toshiba_acpi,sdhci,rtsx_usb_sdmmc
+mmc_core              110613  4 mmc_block,sdhci,sdhci_acpi,rtsx_usb_sdmmc
+</code></pre><p>Saya perhatikan ada beberapa modul bluetooth yang dimuat:</p><pre><code>   bluetooth             433830  3 ath3k,btusb 
+   toshiba_bluetooth      12641  0 
+   rfkill                 18867  5 cfg80211,toshiba_acpi,bluetooth,rfkill_gpio
+   crc16                  12343  2 ext4,bluetooth
+</code></pre><p>Di Kubuntu saya telah bluedevil yang mengatur semuanya, di sini saya tidak yakin ke mana harus pergi dari sini. Ada saran, tolong? Terima kasih!</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/442271/user3578847 target=_blank rel="nofollow noopener"><span itemprop=name>user3578847</span></a>
+—
+<a href=https://superuser.com/questions/908462/getting-bluetooth-to-work-in-arch-linux target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>1</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>11</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>11</div><div class=card-body><div itemprop=text><p>Jika Anda menjalankan Arch, Anda ingin menginstal bluez dan bluez-utils. Keduanya tersedia dari repositori resmi. Jadi jalankan saja:</p><p><code>sudo pacman -S bluez bluez-utils</code></p><p>Kemudian mulai layanan bluetooth dengan:</p><p><code>sudo systemctl start bluetooth</code></p><p>Dan jika Anda juga ingin bluetooth dimulai saat boot:</p><p><code>sudo systemctl enable bluetooth</code></p><p>Ikuti instruksi lengkap di Arch wiki <a href=https://wiki.archlinux.org/index.php/Bluetooth#Installation rel="nofollow noopener" target=_blank>sini</a> . Untuk bantuan menggunakan perintah <code>bluetoothctl</code>.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/membuat-bluetooth-berfungsi-di-arch-linux-w3odc4uv/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/385383/supajord target=_blank rel="nofollow noopener"><span itemprop=name>SupaJord</span></a>
+—
+<a href=https://superuser.com/a/909852 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Untuk alasan apa pun, segera setelah keyboard saya dipasangkan, itu terputus, tetapi saya berhasil menyelesaikan masalah hanya dengan menghubungkannya menggunakan <code>connect my:keyboard:mac</code>. Terima kasih banyak !!</div><div>— <a href=https://superuser.com/users/442271/user3578847 target=_blank rel="nofollow noopener">user3578847</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/cara-mengekstrak-pertandingan-regex-dari-file-di-windows-fjnxoush/>Cara mengekstrak pertandingan regex dari file di windows</a></div></li><li class=list-group-item><div><a href=/mengedit-php-di-microsoft-visual-studio-express-2012-2roresex/>Mengedit PHP di Microsoft Visual Studio Express 2012</a></div></li><li class=list-group-item><div><a href=/dapatkan-daftar-subtitle-menggunakan-mediainfo-di-windows-thxu0fxq/>Dapatkan daftar subtitle menggunakan mediainfo di Windows</a></div></li><li class=list-group-item><div><a href=/dapatkah-dvd-windows-7-digunakan-untuk-menginstal-versi-32-bit-dan-64-bit-obdgutqt/>Dapatkah DVD Windows 7 digunakan untuk menginstal versi 32-bit dan 64-bit?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengatur-pengaturan-khusus-sintaks-di-vimrc-saya-q7h44bhi/>Bagaimana cara mengatur pengaturan khusus sintaks di VIMRC saya?</a></div></li><li class=list-group-item><div><a href=/bagaimana-menemukan-berapa-banyak-host-yang-ada-di-subnet-mask-255255255252-qbilde9m/>Bagaimana menemukan berapa banyak host yang ada di subnet mask: 255.255.255.252?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-kembali-ke-baris-perintah-setelah-meluncurkan-skrip-nodejs-7s32q0tk/>Bagaimana cara kembali ke baris perintah setelah meluncurkan skrip Node.js?</a></div></li><li class=list-group-item><div><a href=/cara-menghapus-akun-kerja-sekolah-yang-tidak-ada-dari-akun-lokal-windows-10-kqlq0b4e/>Cara menghapus akun kerja / sekolah yang tidak ada dari akun lokal windows 10</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengikuti-perangkat-blokir-di-linux-zk2bwv3l/>Bagaimana cara mengikuti perangkat blokir di Linux?</a></div></li><li class=list-group-item><div><a href=/listrik-statis-mengikat-halaman-selama-pencetakan-4seatiz8/>listrik statis mengikat halaman selama pencetakan</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

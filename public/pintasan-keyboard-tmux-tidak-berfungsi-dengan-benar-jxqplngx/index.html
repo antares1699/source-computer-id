@@ -1,0 +1,86 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Pintasan keyboard tmux tidak berfungsi dengan benar</title><meta name=description content="Saya sudah mulai menggunakan tmux baru-baru ini, dan mengubah binding sehingga itu akan merespons C-a, bukan C-b.Ini adalah baris di file .tmux.conf untuk melakukan ini:  unbind C-bset -g prefix C-a..."><link rel=canonical href=https://www.idxstack.com/pintasan-keyboard-tmux-tidak-berfungsi-dengan-benar-jxqplngx/><meta property="og:title" content="Pintasan keyboard tmux tidak berfungsi dengan benar"><meta property="og:description" content="Saya sudah mulai menggunakan tmux baru-baru ini, dan mengubah binding sehingga itu akan merespons C-a, bukan C-b.Ini adalah baris di file .tmux.conf untuk melakukan ini:  unbind C-bset -g prefix C-a..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/pintasan-keyboard-tmux-tidak-berfungsi-dengan-benar-jxqplngx/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Pintasan keyboard tmux tidak berfungsi dengan benar"><meta name=twitter:description content="Saya sudah mulai menggunakan tmux baru-baru ini, dan mengubah binding sehingga itu akan merespons C-a, bukan C-b.Ini adalah baris di file .tmux.conf untuk melakukan ini:  unbind C-bset -g prefix C-a..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Pintasan keyboard tmux tidak berfungsi dengan benar</h1><div itemprop=text><p>Saya sudah mulai menggunakan tmux baru-baru ini, dan mengubah binding sehingga itu akan merespons C-a, bukan C-b.
+Ini adalah baris di file .tmux.conf untuk melakukan ini:</p><pre><code>unbind C-b
+set -g prefix C-a
+</code></pre><p>Tapi, saya tidak bisa membuat C-a bekerja untuk pergi ke awal baris. C-a, C-a tidak berfungsi, begitu pula C-a, a.
+Selain itu, pintasan lain seperti C-a, &lt;beberapa tombol panah> untuk berpindah antar panel tidak berfungsi.
+Apa yang saya lewatkan?</p><p>Terima kasih!</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/62239/shlomoid target=_blank rel="nofollow noopener"><span itemprop=name>shlomoid</span></a>
+—
+<a href=https://superuser.com/questions/367313/tmux-keyboard-shortcuts-not-working-properly target=_blank rel="nofollow noopener">Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm" id=showQuestionReplies>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 d-none" id=questionRepliesContainer><ul class="list-group list-group-flush"><li class=list-group-item><div>C-a, Panah bergerak melalui panel, tapi saya bertaruh Anda mencoba untuk berpindah melalui apa yang disebut tmux sebagai jendela. Itu akan menjadi C-a, p atau C-a, n</div><div>— <a href=https://superuser.com/users/97687/rob target=_blank rel="nofollow noopener">Rob</a></div></li><li class=list-group-item><div>Saya telah memetakan ulang C-b untuk tidak melakukan apa-apa, dan C-a menjadi kontrol pemanggilan perintah, seperti di layar. Inilah mengapa saya mengharapkan C-a, C-a bekerja. Pertama adalah perintah, yang kedua harus pergi ke awal baris. Apa yang saya lewatkan? :)</div><div>— <a href=https://superuser.com/users/62239/shlomoid target=_blank rel="nofollow noopener">shlomoid</a></div></li><li class=list-group-item><div>Karena Anda memberi tahu tmux kirim awalan lagi. Jika Anda membuka tmux <i>di</i> tmux, Anda harus menekan C-a, C-a, keybind untuk membuatnya bekerja di tmux kedua. Itulah mengapa itu tidak akan berhasil.</div><div>— <a href=https://superuser.com/users/97687/rob target=_blank rel="nofollow noopener">Rob</a></div></li><li class=list-group-item><div>Hmm. Jadi bagaimana cara yang tepat untuk menggunakan C-a?</div><div>— <a href=https://superuser.com/users/62239/shlomoid target=_blank rel="nofollow noopener">shlomoid</a></div></li></ul></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>7</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>7</div><div class=card-body><div itemprop=text><p>Anda adalah bagian dari perjalanan ke sana. <code>unbind C-b</code> menonaktifkan awalan default, dan <code>set -g prefix C-a</code> menyiapkan C-a sebagai awalan perintah baru seperti layar. Untuk mendapatkan perilaku layar lainnya, tambahkan beberapa baris lagi:</p><pre><code>set -g prefix C-a
+unbind C-b
+
+# C-a a should send ctrl-a to the underlying shell (move to start of line)
+bind-key a send-prefix    
+
+# C-a C-a
+bind-key C-a last-window
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/pintasan-keyboard-tmux-tidak-berfungsi-dengan-benar-jxqplngx/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/120698/jason-clark target=_blank rel="nofollow noopener"><span itemprop=name>Jason Clark</span></a>
+—
+<a href=https://superuser.com/a/395425 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><p>C-a, C-a tidak akan bekerja karena alasan yang sangat jelas. Man menunjukkan ini sebagai keybinds default:</p><pre><code> The default command key bindings are:
+
+       C-b         Send the prefix key (C-b) through to the application.
+       C-o         Rotate the panes in the current window forwards.
+       C-z         Suspend the tmux client.
+       !           Break the current pane out of the window.
+       "           Split the current pane into two, top and bottom.
+       #           List all paste buffers.
+       $           Rename the current session.
+       %           Split the current pane into two, left and right.
+       &amp;           Kill the current window.
+       '           Prompt for a window index to select.
+       ,           Rename the current window.
+       -           Delete the most recently copied buffer of text.
+       .           Prompt for an index to move the current window.
+       0 to 9      Select windows 0 to 9.
+       :           Enter the tmux command prompt.
+       ;           Move to the previously active pane.
+       =           Choose which buffer to paste interactively from a list.
+       ?           List all key bindings.
+       D           Choose a client to detach.
+       [           Enter copy mode to copy text or view the history.
+       ]           Paste the most recently copied buffer of text.
+       c           Create a new window.
+       d           Detach the current client.
+       f           Prompt to search for text in open windows.
+       i           Display some information about the current window.
+       l           Move to the previously selected window.
+       n           Change to the next window.
+       o           Select the next pane in the current window.
+       p           Change to the previous window.
+       q           Briefly display pane indexes.
+       r           Force redraw of the attached client.
+       s           Select a new session for the attached client interac‐
+                   tively.
+       L           Switch the attached client back to the last session.
+       t           Show the time.
+       w           Choose the current window interactively.
+       x           Kill the current pane.
+       {           Swap the current pane with the previous pane.
+       }           Swap the current pane with the next pane.
+       ~           Show previous messages from tmux, if any.
+       Page Up     Enter copy mode and scroll one page up.
+       Up, Down
+       Left, Right
+                   Change to the pane above, below, to the left, or to the
+                   right of the current pane.
+       M-1 to M-5  Arrange panes in one of the five preset layouts: even-
+                   horizontal, even-vertical, main-horizontal, main-verti‐
+                   cal, or tiled.
+       M-n         Move to the next window with a bell or activity marker.
+       M-o         Rotate the panes in the current window backwards.
+       M-p         Move to the previous window with a bell or activity
+                   marker.
+       C-Up, C-Down
+       C-Left, C-Right
+                   Resize the current pane in steps of one cell.
+       M-Up, M-Down
+       M-Left, M-Right
+                   Resize the current pane in steps of five cells.
+
+ Key bindings may be changed with the bind-key and unbind-key commands.
+</code></pre><p>Keybind saya saat ini (yang telah saya ubah beberapa) ada di sini: <a href=http://pastie.org/3016561 rel="nofollow noopener" target=_blank>http://pastie.org/3016561</a></p><p>~ / .Tmux.conf saya ada di sini: <a href=http://pastie.org/3016564 rel="nofollow noopener" target=_blank>http://pastie.org/3016564</a></p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/pintasan-keyboard-tmux-tidak-berfungsi-dengan-benar-jxqplngx/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/97687/rob target=_blank rel="nofollow noopener"><span itemprop=name>Rob</span></a>
+—
+<a href=https://superuser.com/a/367977 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/berapa-lama-waktu-yang-dibutuhkan-gparted-untuk-mengecilkan-partisi-44-gb-menjadi-10-gb-zytgo6of/>Berapa lama waktu yang dibutuhkan gparted untuk mengecilkan partisi 44 GB menjadi 10 GB</a></div></li><li class=list-group-item><div><a href=/link-google-chrome-sekarang-tampil-seperti-dicoret-bukan-digarisbawahi-kenapa-ojgynjes/>Link Google Chrome sekarang tampil seperti dicoret bukan digarisbawahi kenapa?</a></div></li><li class=list-group-item><div><a href=/di-linux-file-amp-direktori-dot-apa-yang-harus-saya-cadangkan-ziavfv9q/>Di Linux, file & direktori dot apa yang harus saya cadangkan?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-meregangkan-os-tamu-di-vmware-iovqk7jn/>Bagaimana cara meregangkan OS tamu di VMware?</a></div></li><li class=list-group-item><div><a href=/dekompresi-lrzip-di-windows-iw4eeyah/>Dekompresi lrzip di Windows</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengetahui-apakah-laptop-memiliki-slot-pci-e-gratis-tanpa-membukanya-untuk-diperiksa-27umxlw4/>Bagaimana cara mengetahui apakah laptop memiliki slot PCI-E gratis tanpa membukanya untuk diperiksa?</a></div></li><li class=list-group-item><div><a href=/tombol-placeholder-windows-8-duplikat-n0oyjdz6/>Tombol placeholder Windows 8 [duplikat]</a></div></li><li class=list-group-item><div><a href=/memperluas-formula-excel-tanpa-menimpa-warna-latar-belakang-pcusibic/>Memperluas Formula Excel Tanpa Menimpa Warna Latar Belakang</a></div></li><li class=list-group-item><div><a href=/dapatkah-saya-meniru-beberapa-perangkat-keras-untuk-mesin-virtual-dengan-menjalankan-program-pada-sistem-operasi-host-xzm944kk/>Dapatkah saya meniru beberapa perangkat keras untuk mesin virtual dengan menjalankan program pada sistem operasi host?</a></div></li><li class=list-group-item><div><a href=/usb-30-lebih-lambat-dari-sata-untuk-ssd-9lrc5z15/>USB 3.0 lebih lambat dari SATA untuk SSD</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

@@ -1,0 +1,81 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Keluar / b 0 tidak menyetel% errorlevel% ke 0</title><meta name=description content="Saya memiliki perilaku aneh pengaturan tingkat kesalahan wrt dalam skrip batch ke 0.  Saya memanggil skrip batch a.bat pada pekerjaan Jenkins, yang pada gilirannya memanggil skrip kedua b.cmd dan mengevaluasi tingkat kesalahan..."><link rel=canonical href=https://www.idxstack.com/keluar-b-0-tidak-menyetel-errorlevel-ke-0-hdiwij0c/><meta property="og:title" content="Keluar / b 0 tidak menyetel% errorlevel% ke 0"><meta property="og:description" content="Saya memiliki perilaku aneh pengaturan tingkat kesalahan wrt dalam skrip batch ke 0.  Saya memanggil skrip batch a.bat pada pekerjaan Jenkins, yang pada gilirannya memanggil skrip kedua b.cmd dan mengevaluasi tingkat kesalahan..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/keluar-b-0-tidak-menyetel-errorlevel-ke-0-hdiwij0c/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Keluar / b 0 tidak menyetel% errorlevel% ke 0"><meta name=twitter:description content="Saya memiliki perilaku aneh pengaturan tingkat kesalahan wrt dalam skrip batch ke 0.  Saya memanggil skrip batch a.bat pada pekerjaan Jenkins, yang pada gilirannya memanggil skrip kedua b.cmd dan mengevaluasi tingkat kesalahan..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Keluar / b 0 tidak menyetel% errorlevel% ke 0</h1><div itemprop=text><p>Saya memiliki perilaku aneh pengaturan tingkat kesalahan wrt dalam skrip batch ke 0.</p><p>Saya memanggil skrip batch <code>a.bat</code> pada pekerjaan Jenkins, yang pada gilirannya memanggil skrip kedua <code>b.cmd</code> dan mengevaluasi tingkat kesalahan setelah panggilan:</p><pre><code>:: b.cmd
+:: some stuff, but relevant is only this:
+@echo b errorlevel: %errorlevel%
+EXIT /B 0
+</code></pre><p>Skrip "utama":</p><pre><code>:: a.bat
+pushd %CD%
+cd..
+
+@echo a errorlevel: %errorlevel%
+
+set outputdir=".\some\exisiting\dir"
+:: (1)
+md %outpurdir%
+@echo a errorlevel: %errorlevel%
+
+:: (!)
+if "$somevar" = "FOO" ( 
+  cd .\WhereBIs
+
+  :: (2)
+  call :seterr 0
+  @echo a errorlevel: %errorlevel%
+
+  :: (3)
+  call b.cmd
+
+  @if %errorlevel% neq 0 (
+    @echo a errorlevel: %errorlevel%
+    set errmsg=Error calling b
+    goto error
+  )
+
+  :: more stuff
+)
+
+:error
+@echo %errmsg%
+popd
+:: (4)
+@echo a errorlevel: %errorlevel%
+@if %errorlevel% neq 0 exit %errorlevel%
+Exit /B 1
+
+:seterr
+exit /b %1
+</code></pre><p>(Saya meminjam barang <code>:seterr</code> dari <a href=https://superuser.com/questions/649303/setting-errorlevel-to-0 target=_blank rel="nofollow noopener">pertanyaan ini</a> )</p><p>Apa yang tampaknya terjadi ketika saya menjalankan pekerjaan Jenkins:</p><ol><li><code>md</code> kembali dan errorlevel diatur ke 1, karena direktori sudah ada.</li><li>panggilan ke <code>:seterr</code> tidak memiliki efek yang diharapkan, tingkat kesalahan tetap 1</li><li>panggilan ke <code>b.cmd</code> selesai tanpa masalah, tingkat kesalahan pada <code>b</code> adalah 0, tetapi setelah panggilan tingkat kesalahan pada <code>a</code> adalah <em>masih</em> 1, yang pasti tidak saya harapkan setelah membaca jawaban atas pertanyaan terkait.</li><li>setelah lompatan ke <code>:error</code> dan panggilan <code>popd</code>, errorlevel tiba-tiba direset ke 0 - yang juga tidak saya harapkan.</li></ol><p>Adakah yang tahu apa yang mungkin terjadi di sini? Saya tidak sengaja mengatur errorlevel secara manual, jadi itu harus variabel sistem, bukan yang ditentukan pengguna.</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/233255/arne-mertz target=_blank rel="nofollow noopener"><span itemprop=name>Arne Mertz</span></a>
+—
+<a href=https://superuser.com/questions/858418/exit-b-0-does-not-set-errorlevel-to-0 target=_blank rel="nofollow noopener">Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm" id=showQuestionReplies>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 d-none" id=questionRepliesContainer><ul class="list-group list-group-flush"><li class=list-group-item><div>Apakah Anda bekerja dengan setlocal / endlocal di mana saja?</div><div>— <a href=https://superuser.com/users/339147/marsh-wiggle target=_blank rel="nofollow noopener">marsh-wiggle</a></div></li><li class=list-group-item><div>@boboes tidak ada setlocal / endlocal di salah satu skrip.</div><div>— <a href=https://superuser.com/users/233255/arne-mertz target=_blank rel="nofollow noopener">Arne Mertz</a></div></li></ul></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>7</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>7</div><div class=card-body><div itemprop=text><p>Anda belum menampilkan seluruh skrip. Satu-satunya penjelasan yang mungkin saya ketahui adalah kode Anda berada dalam blok kode yang lebih besar, mungkin bagian dari loop FOR atau kondisi IF.</p><p>% ERRORLEVEL% diperluas saat garis diurai, dan seluruh blok yang diberi tanda kurung diurai pada waktu yang sama. Jadi KESALAHAN yang Anda lihat pasti sudah ada sebelum dimulainya paranthesis terluar.</p><p>Anda harus menggunakan perluasan tertunda jika Anda ingin melihat nilai yang berubah dalam blok kode.</p><p>Berikut ini demonstrasi sederhana:</p><pre><code>@echo off
+setlocal enableDelayedExpansion
+set var=BEFORE
+(
+  set var=AFTER
+  echo Normal expansion shows value before block started: %var%
+  echo Delayed expansion shows the current value: !var!
+)
+</code></pre><p>- KELUARAN -</p><pre><code>Normal expansion shows value before block started: BEFORE
+Delayed expansion shows the current value: AFTER
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/keluar-b-0-tidak-menyetel-errorlevel-ke-0-hdiwij0c/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/109090/dbenham target=_blank rel="nofollow noopener"><span itemprop=name>dbenham</span></a>
+—
+<a href=https://superuser.com/a/858681 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Terima kasih. Anda benar, saya tidak menunjukkan keseluruhan ~ 120 Garis. Saya akan memeriksa blok kode dalam tanda kurung segera setelah saya kembali bekerja.</div><div>— <a href=https://superuser.com/users/233255/arne-mertz target=_blank rel="nofollow noopener">Arne Mertz</a></div></li><li class=list-group-item><div>Itu memang blok if, saya mengedit pertanyaan (blok if dimulai setelah komentar <code>:: (!)</code>. Bahasa Thansk untuk mengklarifikasi kesalahan saya!</div><div>— <a href=https://superuser.com/users/233255/arne-mertz target=_blank rel="nofollow noopener">Arne Mertz</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>0</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>0</div><div class=card-body><div itemprop=text><p>Meskipun permintaan ini diselesaikan, ada alasan lain untuk perilaku seperti yang dijelaskan. Contoh, letakkan ini ke dalam file batch dan jalankan:</p><pre><code>@set errorlevel=
+@dir &gt;nul
+@if %errorlevel% equ 0 (echo 1: Correctly detected: No error!) else echo.
+@if not errorlevel 1 (echo A: Correctly detected: No error!) else echo.
+@dir nonexistent &gt;nul
+@if %errorlevel% neq 0 (echo 2: Correctly detected: An error!) else echo.
+@if errorlevel 1 (echo B: Correctly detected: An error!) else echo.
+
+@set errorlevel=7
+@dir &gt;nul
+@if %errorlevel% equ 0 (echo 3: Correctly detected: No error!) else echo.
+@if not errorlevel 1 (echo C: Correctly detected: No error!) else echo.
+@dir nonexistent &gt;nul
+@if %errorlevel% neq 0 (echo 4: Correctly detected: An error!) else echo.
+@if errorlevel 1 (echo D: Correctly detected: An error!) else echo.
+</code></pre><p>Jika Anda mengamati keluaran kelompok ini, baris yang dimulai dengan 3: akan hilang, dan baris yang dimulai dengan 4: akan nakal.</p><p>Kesimpulan: Jangan mengevaluasi errorlevel dengan% errorlevel% tetapi dengan if errorlevel.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/keluar-b-0-tidak-menyetel-errorlevel-ke-0-hdiwij0c/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/419397/hint target=_blank rel="nofollow noopener"><span itemprop=name>hint</span></a>
+—
+<a href=https://superuser.com/a/878525 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=1>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=1><ul class="list-group list-group-flush"><li class=list-group-item><div>Anda melompat ke kesimpulan yang salah. Ada kalanya nilai pasti ERRORLEVEL diperlukan, dalam hal ini <code>%ERRORLEVEL%</code> adalah satu-satunya opsi yang masuk akal. Kesimpulan yang benar adalah Anda tidak boleh menentukan variabel lingkungan ERRORLEVEL Anda sendiri, karena variabel tersebut menggantikan nilai dinamis. Hal yang sama berlaku untuk variabel semu dinamis lainnya seperti <code>%CD%</code>, <code>%TIME%</code>, <code>%DATE%</code>, <code>%RANDOM%</code>, dll. Jika variabel ditentukan, maka perilaku dinamis dipulihkan dengan membatalkan definisi variabel dengan <code>set "errorlevel="</code></div><div>— <a href=https://superuser.com/users/109090/dbenham target=_blank rel="nofollow noopener">dbenham</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/bagaimana-cara-menghentikan-peringatan-firefox-tentang-mengunduh-file-yang-dapat-dieksekusi-xbu7zdwj/>Bagaimana cara menghentikan peringatan Firefox tentang mengunduh file yang dapat dieksekusi?</a></div></li><li class=list-group-item><div><a href=/memutar-kotak-teks-di-word-2007-du8vml7i/>Memutar Kotak Teks di Word 2007</a></div></li><li class=list-group-item><div><a href=/pembaruan-windows-10-1511-memutus-sakelar-hyper-v-cewtwjul/>Pembaruan Windows 10 1511 Memutus Sakelar Hyper-V</a></div></li><li class=list-group-item><div><a href=/komputer-desktop-mana-yang-memiliki-chip-tpm-tutup-2qkds02l/>Komputer desktop mana yang memiliki chip TPM? [Tutup]</a></div></li><li class=list-group-item><div><a href=/menggunakan-quotrun-as-administratorquot-tidak-melakukan-apa-apa-lojgc1ba/>Menggunakan "Run as Administrator" tidak melakukan apa-apa</a></div></li><li class=list-group-item><div><a href=/cara-menghapus-gaya-karakter-di-word-2003-doc2lvjr/>Cara menghapus Gaya Karakter di Word 2003</a></div></li><li class=list-group-item><div><a href=/tidak-dapat-menginstal-windows-xp-sp1-gtbv0oaa/>Tidak Dapat Menginstal Windows XP SP1</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mendinginkan-komputer-saya-di-lingkungan-tropis-vmsooycc/>Bagaimana cara mendinginkan komputer saya di lingkungan tropis?</a></div></li><li class=list-group-item><div><a href=/apakah-packet-loss-di-traceroute-merupakan-tanda-pelambatan-kecepatan-rv0coimx/>Apakah packet loss di traceroute merupakan tanda pelambatan kecepatan?</a></div></li><li class=list-group-item><div><a href=/tidak-dapat-menonaktifkan-file-sesuai-permintaan-di-onedrive-fdtxmhgw/>Tidak dapat menonaktifkan File Sesuai Permintaan di OneDrive</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

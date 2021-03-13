@@ -1,0 +1,33 @@
+{
+    "baseURL": "https://www.idxstack.com/",
+    "languageCode": "id",
+    "title": "IDXStack",
+    "theme": "stackexchange",
+    "params": {
+        "description": "IDXStack",
+        "open_graph_locale": "id_ID",
+        "email": "kris1699@protonmail.com",
+        "cookieAlert": false,
+        "terms": {
+            "home": "Beranda",
+            "categories": "Kategori",
+            "answers": "# Jawaban",
+            "source": "Sumber",
+            "show_replies": "Tampilkan Balasan",
+            "share": "Bagikan",
+            "related_questions": "Pertanyaan Serupa",
+            "license": "Berlisensi di bawah # dengan attribusi",
+            "tos": "By using our site, you agree to our <a href=\"/terms-of-service\">Terms of Service</a>, <a href=\"/privacy-policy\">Privacy Policy</a>, and <a href=\"/cookie-policy\">Cookie Policy</a>",
+            "about": "About",
+            "contact": "Contact",
+            "disclaimer": "Disclaimer",
+            "cookie_alert": "We use cookies to ensure you get the best experience on our website.",
+            "learn_more": "Learn more",
+            "agree": "I agree"
+        }
+    },
+    "disableKinds": [
+        "RSS", "sitemap"
+    ],
+    "enableRobotsTXT": true
+}

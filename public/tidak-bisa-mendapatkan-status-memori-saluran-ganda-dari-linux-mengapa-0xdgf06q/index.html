@@ -1,0 +1,183 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Tidak bisa mendapatkan status memori saluran ganda dari Linux - mengapa?</title><meta name=description content="Saya memiliki motherboard slot A3 + (Gigabyte ATX GA990ZA-UD3-R5) dengan CPU AMD FX-8320E dan dua memory stick 8Gb (identik, dibeli bersama sebagai kit).Saya mengikuti instruksi pada manual dan menginstal memori untuk..."><link rel=canonical href=https://www.idxstack.com/tidak-bisa-mendapatkan-status-memori-saluran-ganda-dari-linux-mengapa-0xdgf06q/><meta property="og:title" content="Tidak bisa mendapatkan status memori saluran ganda dari Linux - mengapa?"><meta property="og:description" content="Saya memiliki motherboard slot A3 + (Gigabyte ATX GA990ZA-UD3-R5) dengan CPU AMD FX-8320E dan dua memory stick 8Gb (identik, dibeli bersama sebagai kit).Saya mengikuti instruksi pada manual dan menginstal memori untuk..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/tidak-bisa-mendapatkan-status-memori-saluran-ganda-dari-linux-mengapa-0xdgf06q/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Tidak bisa mendapatkan status memori saluran ganda dari Linux - mengapa?"><meta name=twitter:description content="Saya memiliki motherboard slot A3 + (Gigabyte ATX GA990ZA-UD3-R5) dengan CPU AMD FX-8320E dan dua memory stick 8Gb (identik, dibeli bersama sebagai kit).Saya mengikuti instruksi pada manual dan menginstal memori untuk..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Tidak bisa mendapatkan status memori saluran ganda dari Linux - mengapa?</h1><div itemprop=text><p>Saya memiliki motherboard slot A3 + (Gigabyte ATX GA990ZA-UD3-R5) dengan CPU AMD FX-8320E dan dua memory stick 8Gb (identik, dibeli bersama sebagai kit).
+Saya mengikuti instruksi pada manual dan menginstal memori untuk menggunakan memori saluran ganda, tetapi sejauh yang saya lihat saya tidak dapat menanyakan sistem tentang memori (menggunakan Linux):</p><p><code>lshw</code> tidak mengatakan apapun:</p><pre><code>$ sudo lshw -C memory
+  *-memory                
+       description: System memory
+       physical id: 0
+       size: 15GiB
+</code></pre><p>dan <code>dmidecode</code> tidak mengatakan apa-apa tentang interleaving:</p><pre><code>$ sudo dmidecode --type memory
+# dmidecode 3.0
+Getting SMBIOS data from sysfs.
+SMBIOS 2.7 present.
+
+Handle 0x0008, DMI type 5, 24 bytes
+Memory Controller Information
+    Error Detecting Method: 64-bit ECC
+    Error Correcting Capabilities:
+        None
+    Supported Interleave: One-way Interleave
+    Current Interleave: One-way Interleave
+    Maximum Memory Module Size: 2048 MB
+    Maximum Total Memory Size: 8192 MB
+    Supported Speeds:
+        70 ns
+        60 ns
+    Supported Memory Types:
+        DIMM
+        SDRAM
+    Memory Module Voltage: 3.3 V
+    Associated Memory Slots: 4
+        0x0009
+        0x000A
+        0x000B
+        0x000C
+    Enabled Error Correcting Capabilities:
+        None
+
+Handle 0x0009, DMI type 6, 12 bytes
+Memory Module Information
+    Socket Designation: DIMM0
+    Bank Connections: 0 1
+    Current Speed: 60 ns
+    Type: DIMM SDRAM
+    Installed Size: 536870912 MB (Single-bank Connection)
+    Enabled Size: 536870912 MB (Single-bank Connection)
+    Error Status: OK
+
+Handle 0x000A, DMI type 6, 12 bytes
+Memory Module Information
+    Socket Designation: DIMM1
+    Bank Connections: 2 3
+    Current Speed: 60 ns
+    Type: DIMM SDRAM
+    Installed Size: 536870912 MB (Single-bank Connection)
+    Enabled Size: 536870912 MB (Single-bank Connection)
+    Error Status: OK
+
+Handle 0x000B, DMI type 6, 12 bytes
+Memory Module Information
+    Socket Designation: DIMM2
+    Bank Connections: 4 5
+    Current Speed: 60 ns
+    Type: DIMM SDRAM
+    Installed Size: 536870912 MB (Single-bank Connection)
+    Enabled Size: 536870912 MB (Single-bank Connection)
+    Error Status: OK
+
+Handle 0x000C, DMI type 6, 12 bytes
+Memory Module Information
+    Socket Designation: DIMM3
+    Bank Connections: 6 7
+    Current Speed: 60 ns
+    Type: DIMM SDRAM
+    Installed Size: 536870912 MB (Single-bank Connection)
+    Enabled Size: 536870912 MB (Single-bank Connection)
+    Error Status: OK
+
+Handle 0x002C, DMI type 16, 23 bytes
+Physical Memory Array
+    Location: System Board Or Motherboard
+    Use: System Memory
+    Error Correction Type: None
+    Maximum Capacity: 32 GB
+    Error Information Handle: Not Provided
+    Number Of Devices: 4
+
+Handle 0x002E, DMI type 17, 34 bytes
+Memory Device
+    Array Handle: 0x002C
+    Error Information Handle: Not Provided
+    Total Width: Unknown
+    Data Width: 64 bits
+    Size: No Module Installed
+    Form Factor: DIMM
+    Set: None
+    Locator: Node0_Dimm0
+    Bank Locator: Node0_Bank0
+    Type: Unknown
+    Type Detail: Synchronous
+    Speed: Unknown
+    Manufacturer: Dimm0_Manufacturer
+    Serial Number: Dimm0_SerNum
+    Asset Tag: Dimm0_AssetTag
+    Part Number: Dimm0_PartNum
+    Rank: Unknown
+    Configured Clock Speed: Unknown
+
+Handle 0x0030, DMI type 17, 34 bytes
+Memory Device
+    Array Handle: 0x002C
+    Error Information Handle: Not Provided
+    Total Width: 64 bits
+    Data Width: 64 bits
+    Size: 8192 MB
+    Form Factor: DIMM
+    Set: None
+    Locator: Node0_Dimm1
+    Bank Locator: Node0_Bank0
+    Type: DDR3
+    Type Detail: Synchronous Unbuffered (Unregistered)
+    Speed: 933 MHz
+    Manufacturer: Kingston          
+    Serial Number: 4D384FFC    
+    Asset Tag: Dimm1_AssetTag
+    Part Number: KHX1866C10D3/
+    Rank: 2
+    Configured Clock Speed: 933 MHz
+
+Handle 0x0032, DMI type 17, 34 bytes
+Memory Device
+    Array Handle: 0x002C
+    Error Information Handle: Not Provided
+    Total Width: Unknown
+    Data Width: 64 bits
+    Size: No Module Installed
+    Form Factor: DIMM
+    Set: None
+    Locator: Node0_Dimm2
+    Bank Locator: Node0_Bank0
+    Type: Unknown
+    Type Detail: Synchronous
+    Speed: Unknown
+    Manufacturer: Dimm2_Manufacturer
+    Serial Number: Dimm2_SerNum
+    Asset Tag: Dimm2_AssetTag
+    Part Number: Dimm2_PartNum
+    Rank: Unknown
+    Configured Clock Speed: Unknown
+
+Handle 0x0034, DMI type 17, 34 bytes
+Memory Device
+    Array Handle: 0x002C
+    Error Information Handle: Not Provided
+    Total Width: 64 bits
+    Data Width: 64 bits
+    Size: 8192 MB
+    Form Factor: DIMM
+    Set: None
+    Locator: Node0_Dimm3
+    Bank Locator: Node0_Bank0
+    Type: DDR3
+    Type Detail: Synchronous Unbuffered (Unregistered)
+    Speed: 933 MHz
+    Manufacturer: Kingston          
+    Serial Number: 6B39AD31    
+    Asset Tag: Dimm3_AssetTag
+    Part Number: KHX1866C10D3/
+    Rank: 2
+    Configured Clock Speed: 933 MHz
+</code></pre><p>(Stik memori memiliki kecepatan 1866MHz, saya tidak yakin mengapa ia muncul sebagai 933MHz pada <code>dmidecode</code>. BIOS melaporkannya sebagai 1866MHz.)</p><p>Motherboard ini tidak menampilkan pesan POST. Ini menunjukkan layar splash, lalu menawarkan untuk memasuki pengaturan. Setelah itu, tidak mencetak apa pun sampai bootloader masuk. Saya telah mencari semua opsi pengaturan, dan saya juga tidak dapat melihat apa pun yang terkait dengan saluran ganda diaktifkan atau tidak.</p><p>Saya tidak yakin apakah ini relevan, tetapi saya memiliki IOMMU <em>diaktifkan</em> di BIOS, dan saya memberikan opsi <code>iommu=soft</code> ke kernel Linux saat boot.</p><p>Bagaimana saya bisa yakin jika saya memiliki saluran ganda yang berfungsi, dan juga, mengapa <code>lshw</code> dan <code>dmidecode</code> tidak menginformasikan tentang saluran ganda?</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/72621/jay target=_blank rel="nofollow noopener"><span itemprop=name>Jay</span></a>
+—
+<a href=https://superuser.com/questions/1092324/cant-get-dual-channel-memory-status-from-linux-why target=_blank rel="nofollow noopener">Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm" id=showQuestionReplies>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 d-none" id=questionRepliesContainer><ul class="list-group list-group-flush"><li class=list-group-item><div>Sekadar catatan, Modul 1866-nya, bukan 1833, dan RAM menyediakan rating saluran ganda mereka, jadi frekuensi per chip sebenarnya 933 per chip.</div><div>— <a href=https://superuser.com/users/171793/frank-thomas target=_blank rel="nofollow noopener">Frank Thomas</a></div></li><li class=list-group-item><div>Maaf - ya, 1833. Saya akan mengedit pertanyaannya.</div><div>— <a href=https://superuser.com/users/72621/jay target=_blank rel="nofollow noopener">Jay</a></div></li><li class=list-group-item><div>@ Frank Thomas: maksud Anda, karena kecepatan yang dilaporkan adalah 933MHz (setengah dari kecepatan setiap modul DDR), maka ini berarti saya sebenarnya memiliki saluran ganda yang berfungsi?</div><div>— <a href=https://superuser.com/users/72621/jay target=_blank rel="nofollow noopener">Jay</a></div></li><li class=list-group-item><div>Yah, saya tidak percaya kita bisa membuat asumsi itu karena dmidecode dan lshw melaporkan kapasitas perangkat keras yang diiklankan, belum tentu status berjalannya. kebanyakan orang merekomendasikan mencari nilai <code>Interleaved data Depth</code> di dmidecode, tetapi itu tidak selalu ada. itu sepele untuk memeriksa di windows (menggunakan CPU-Z atau Speccy) tetapi linux tampaknya tidak memiliki metode universal. periksa utas ini dan lihat apakah ada yang menarik perhatian Anda: <a href=http://superuser.com/questions/426445/how-to-check-if-two-memory-modules-are-being-used-with-dual-channel title="how to check if two memory modules are being used with dual channel" target=_blank rel="nofollow noopener">superuser.com/questions/426445/…</a></div><div>— <a href=https://superuser.com/users/171793/frank-thomas target=_blank rel="nofollow noopener">Frank Thomas</a></div></li><li class=list-group-item><div>Saya rasa saya menemukannya. memtest melaporkan bahwa memori berjalan dalam "mode 128 bit", jadi saya kira itu mengaktifkan saluran ganda. Apakah ini benar?</div><div>— <a href=https://superuser.com/users/72621/jay target=_blank rel="nofollow noopener">Jay</a></div></li></ul></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>6</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>6</div><div class=card-body><div itemprop=text><p>Coba ini:</p><p>dmidecode -t 17 | Saluran grep</p><p>Untuk saluran ganda, Anda harus melihat saluran A / B Anda sebagai:</p><pre><code>Locator: ChannelA-DIMM0
+Locator: ChannelA-DIMM1
+Locator: ChannelB-DIMM0
+Locator: ChannelB-DIMM1
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/tidak-bisa-mendapatkan-status-memori-saluran-ganda-dari-linux-mengapa-0xdgf06q/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/259397/csongor-fagyal target=_blank rel="nofollow noopener"><span itemprop=name>Csongor Fagyal</span></a>
+—
+<a href=https://superuser.com/a/1321569 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Tidak bekerja: <code>Locator: PROC 1 DIMM 1G Locator: PROC 1 DIMM 2D Locator: PROC 1 DIMM 3A Locator: PROC 1 DIMM 4H Locator: PROC 1 DIMM 5E Locator: PROC 1 DIMM 6B Locator: PROC 1 DIMM 7I Locator: PROC 1 DIMM 8F Locator: PROC 1 DIMM 9C Locator: PROC 2 DIMM 1G Locator: PROC 2 DIMM 2D Locator: PROC 2 DIMM 3A Locator: PROC 2 DIMM 4H Locator: PROC 2 DIMM 5E Locator: PROC 2 DIMM 6B Locator: PROC 2 DIMM 7I Locator: PROC 2 DIMM 8F Locator: PROC 2 DIMM 9C</code></div><div>— <a href=https://superuser.com/users/157377/imaskar target=_blank rel="nofollow noopener">Imaskar</a></div></li><li class=list-group-item><div>Saya mendapat informasi ini dari <code>dmidecode -t 17 | grep "Bank Locator"</code></div><div>— <a href=https://superuser.com/users/222858/dzamo-norton target=_blank rel="nofollow noopener">Dzamo Norton</a></div></li><li class=list-group-item><div>Saya mendapatkan ini dengan dmidecode -t memory | grep Bank</div><div>— <a href=https://superuser.com/users/726608/ajay-singh target=_blank rel="nofollow noopener">Ajay Singh</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><p>Kami melihat banyak tanggapan, di banyak tempat karena kami memiliki pertanyaan yang sama.
+Ada beberapa perdebatan tentang keluaran dmidecode, seolah menunjukkan lokasi, tetapi tidak menyatakan bahwa slot tertentu bekerja dengan bandwidth gabungan.</p><p>Jika Anda mengisi motherboard Anda dengan ram stick yang tidak kompatibel untuk konfigurasi saluran ganda, itu akan tetap menampilkan locator yang sama, tetapi tidak akan menggabungkan bandwidth.</p><p>Untuk Windows, banyak aplikasi menunjukkan apakah itu dalam mode saluran ganda, tiga atau empat; sedangkan untuk linux, kami kesulitan untuk menemukannya.</p><p>di sisi lain, old-school dan yeat sangat efektif memtest86 + akan menunjukkan bandwidth akses memori - 64, 128, 196, 256bits untuk single, dual, triple dan quad channel masing-masing.</p><p>Pada gambar di bawah kami memiliki motherboard berkemampuan tiga saluran, yang berjalan dalam mode tiga saluran.</p><p><a href=https://i.stack.imgur.com/5N7Kv.png rel="nofollow noopener" target=_blank><img src=https://i.stack.imgur.com/5N7Kv.png alt="enter image description here" class="img-fluid d-block my-2" loading=lazy></a></p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/tidak-bisa-mendapatkan-status-memori-saluran-ganda-dari-linux-mengapa-0xdgf06q/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/909435/thiago-conrado target=_blank rel="nofollow noopener"><span itemprop=name>Thiago Conrado</span></a>
+—
+<a href=https://superuser.com/a/1621323 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/mengapa-kipas-pendingin-cpu-saya-tertunda-saat-penyalaan-tylyt3yl/>Mengapa kipas pendingin CPU saya tertunda saat penyalaan?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mencegah-jendela-diubah-ukurannya-edunbggl/>Bagaimana cara mencegah jendela diubah ukurannya?</a></div></li><li class=list-group-item><div><a href=/kmplayer-item-menu-konteks-tidak-dihapus-setelah-uninstall-bug-kmp-odl9v0zy/>KMPlayer: Item menu konteks tidak dihapus setelah uninstall (bug KMP)</a></div></li><li class=list-group-item><div><a href=/sinkronkan-file-saya-di-beberapa-komputer-rczuhglt/>Sinkronkan file saya di beberapa komputer</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengganti-sekitar-wildcard-dalam-pencarian-regex-lwdmikq3/>Bagaimana cara mengganti sekitar wildcard dalam pencarian regex?</a></div></li><li class=list-group-item><div><a href=/pintasan-windows-10-start-menu-membeku-saat-menyeret-0y4hkudv/>Pintasan Windows 10 Start Menu membeku saat menyeret</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mendapatkan-warna-tekstur-39rata-rata39-ffw21nf8/>Bagaimana cara mendapatkan warna tekstur 'rata-rata'?</a></div></li><li class=list-group-item><div><a href=/memulai-emacs-hanya-sekali-dengan-file-berbeda-di-windows-mfl8ayq6/>Memulai Emacs hanya sekali dengan file berbeda di Windows</a></div></li><li class=list-group-item><div><a href=/utilitas-screenshot-untuk-linux-rsut8pxr/>Utilitas screenshot untuk linux</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mencegah-pemulihan-metadata-saat-menggunakan-exiftool-9qfbisl0/>Bagaimana cara mencegah pemulihan metadata saat menggunakan ExifTool?</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

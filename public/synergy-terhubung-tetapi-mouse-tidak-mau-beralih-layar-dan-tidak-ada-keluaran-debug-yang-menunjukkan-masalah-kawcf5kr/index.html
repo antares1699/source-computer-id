@@ -1,0 +1,116 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Synergy terhubung, tetapi mouse tidak mau beralih layar (dan tidak ada keluaran debug yang menunjukkan masalah)</title><meta name=description content="Mencoba mengatur Synergy, dan sepertinya tidak bisa melakukannya dengan benar. Inilah konfigurasinya:  Server: WinXP dengan layar bernama TV  Klien: Ubuntu 11.04 bernama LAPTOP  Konfigurasi server:  section: screens    LAPTOP:        halfDuplexCapsLock = false        halfDuplexNumLock..."><link rel=canonical href=https://www.idxstack.com/synergy-terhubung-tetapi-mouse-tidak-mau-beralih-layar-dan-tidak-ada-keluaran-debug-yang-menunjukkan-masalah-kawcf5kr/><meta property="og:title" content="Synergy terhubung, tetapi mouse tidak mau beralih layar (dan tidak ada keluaran debug yang menunjukkan masalah)"><meta property="og:description" content="Mencoba mengatur Synergy, dan sepertinya tidak bisa melakukannya dengan benar. Inilah konfigurasinya:  Server: WinXP dengan layar bernama TV  Klien: Ubuntu 11.04 bernama LAPTOP  Konfigurasi server:  section: screens    LAPTOP:        halfDuplexCapsLock = false        halfDuplexNumLock..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/synergy-terhubung-tetapi-mouse-tidak-mau-beralih-layar-dan-tidak-ada-keluaran-debug-yang-menunjukkan-masalah-kawcf5kr/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Synergy terhubung, tetapi mouse tidak mau beralih layar (dan tidak ada keluaran debug yang menunjukkan masalah)"><meta name=twitter:description content="Mencoba mengatur Synergy, dan sepertinya tidak bisa melakukannya dengan benar. Inilah konfigurasinya:  Server: WinXP dengan layar bernama TV  Klien: Ubuntu 11.04 bernama LAPTOP  Konfigurasi server:  section: screens    LAPTOP:        halfDuplexCapsLock = false        halfDuplexNumLock..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Synergy terhubung, tetapi mouse tidak mau beralih layar (dan tidak ada keluaran debug yang menunjukkan masalah)</h1><div itemprop=text><p>Mencoba mengatur Synergy, dan sepertinya tidak bisa melakukannya dengan benar. Inilah konfigurasinya:</p><ul><li>Server: WinXP dengan layar bernama TV</li><li>Klien: Ubuntu 11.04 bernama LAPTOP</li></ul><p>Konfigurasi server:</p><pre><code>section: screens
+    LAPTOP:
+        halfDuplexCapsLock = false
+        halfDuplexNumLock = false
+        halfDuplexScrollLock = false
+        xtestIsXineramaUnaware = false
+        switchCorners = none +top-left +bottom-left 
+        switchCornerSize = 0
+    TV:
+        halfDuplexCapsLock = false
+        halfDuplexNumLock = false
+        halfDuplexScrollLock = false
+        xtestIsXineramaUnaware = false
+        switchCorners = none +top-right +bottom-right 
+        switchCornerSize = 0
+end
+
+section: links
+    LAPTOP:
+        right = TV
+    TV:
+        left = LAPTOP
+end
+
+section: options
+    relativeMouseMoves = false
+    screenSaverSync = false
+    win32KeepForeground = false
+    switchCorners = none 
+    switchCornerSize = 0
+    keystroke(F12) = lockCursorToScreen(toggle)
+end
+</code></pre><p>Saat saya terhubung, log server menunjukkan:</p><pre><code>2011-07-04T09:57:18 NOTE: client "LAPTOP" has disconnected
+    ..\lib\server\CClientProxy1_0.cpp,209
+
+2011-07-04T09:57:21 NOTE: accepted client connection
+    ..\lib\server\CClientListener.cpp,130
+2011-07-04T09:57:21 NOTE: client "LAPTOP" has connected
+    ..\lib\server\CServer.cpp,299
+
+2011-07-04T09:57:38 NOTE: client "LAPTOP" has disconnected
+    ..\lib\server\CClientProxy1_0.cpp,209
+
+2011-07-04T10:01:48 NOTE: accepted client connection
+    ..\lib\server\CClientListener.cpp,130
+2011-07-04T10:01:48 NOTE: client "LAPTOP" has connected
+    ..\lib\server\CServer.cpp,299
+
+2011-07-04T10:01:53 INFO: screen "LAPTOP" grabbed clipboard 1 from "TV"
+    ..\lib\server\CServer.cpp,1239
+
+2011-07-04T10:01:53 INFO: screen "LAPTOP" updated clipboard 1
+    ..\lib\server\CServer.cpp,1524
+
+2011-07-04T10:02:02 NOTE: client "LAPTOP" has disconnected
+    ..\lib\server\CClientProxy1_0.cpp,209
+
+2011-07-04T10:07:01 NOTE: accepted client connection
+    ..\lib\server\CClientListener.cpp,130
+2011-07-04T10:07:01 NOTE: client "LAPTOP" has connected
+    ..\lib\server\CServer.cpp,299
+
+2011-07-04T10:08:40 INFO: screen "LAPTOP" grabbed clipboard 1 from "LAPTOP"
+    ..\lib\server\CServer.cpp,1239
+
+2011-07-04T10:08:40 INFO: screen "LAPTOP" updated clipboard 1
+    ..\lib\server\CServer.cpp,1524
+</code></pre><p>Di klien, saya menjalankan: <strong>synergyc -d DEBUG -f -n LAPTOP -l --log = / tmp / synergy.debug TV</strong></p><pre><code>2011-07-04T10:06:50 INFO: Synergy 1.3.6 Client on Linux 2.6.38-10-generic #44+kamal~mjgbacklight4-Ubuntu SMP Mon Jun 6 19:40:12 UTC 2011 x86_64
+    /build/buildd/synergy-1.3.6/cmd/synergyc/synergyc.cpp,765
+2011-07-04T10:06:50 DEBUG: XOpenDisplay(":0")
+    /build/buildd/synergy-1.3.6/lib/platform/CXWindowsScreen.cpp,889
+2011-07-04T10:06:50 DEBUG: xscreensaver window: 0x00000000
+    /build/buildd/synergy-1.3.6/lib/platform/CXWindowsScreenSaver.cpp,342
+2011-07-04T10:06:50 DEBUG: screen shape: 0,0 1920x1080 
+    /build/buildd/synergy-1.3.6/lib/platform/CXWindowsScreen.cpp,131
+2011-07-04T10:06:50 DEBUG: window is 0x07e00004
+    /build/buildd/synergy-1.3.6/lib/platform/CXWindowsScreen.cpp,132
+2011-07-04T10:06:50 DEBUG: opened display
+    /build/buildd/synergy-1.3.6/lib/synergy/CScreen.cpp,41
+2011-07-04T10:06:50 NOTE: started client
+    /build/buildd/synergy-1.3.6/cmd/synergyc/synergyc.cpp,339
+2011-07-04T10:06:50 NOTE: connecting to 'TV': 192.168.1.75:24800
+    /build/buildd/synergy-1.3.6/lib/client/CClient.cpp,115
+2011-07-04T10:06:59 DEBUG: open clipboard 0
+    /build/buildd/synergy-1.3.6/lib/platform/CXWindowsClipboard.cpp,316
+2011-07-04T10:06:59 DEBUG: empty clipboard 0
+    /build/buildd/synergy-1.3.6/lib/platform/CXWindowsClipboard.cpp,269
+2011-07-04T10:06:59 DEBUG: grabbed clipboard 0
+    /build/buildd/synergy-1.3.6/lib/platform/CXWindowsClipboard.cpp,292
+2011-07-04T10:06:59 DEBUG: close clipboard 0
+    /build/buildd/synergy-1.3.6/lib/platform/CXWindowsClipboard.cpp,351
+2011-07-04T10:06:59 DEBUG: open clipboard 1
+    /build/buildd/synergy-1.3.6/lib/platform/CXWindowsClipboard.cpp,316
+2011-07-04T10:06:59 DEBUG: empty clipboard 1
+    /build/buildd/synergy-1.3.6/lib/platform/CXWindowsClipboard.cpp,269
+2011-07-04T10:06:59 DEBUG: grabbed clipboard 1
+    /build/buildd/synergy-1.3.6/lib/platform/CXWindowsClipboard.cpp,292
+2011-07-04T10:06:59 DEBUG: close clipboard 1
+    /build/buildd/synergy-1.3.6/lib/platform/CXWindowsClipboard.cpp,351
+2011-07-04T10:06:59 NOTE: connected to server
+    /build/buildd/synergy-1.3.6/cmd/synergyc/synergyc.cpp,256
+</code></pre><p>Namun, meskipun semuanya tampak terhubung, mouse di laptop saya tidak pernah meninggalkan layarnya saat ini.</p><p>Saya tidak melihat pesan debug yang bisa membantu. Adakah yang melihat sesuatu yang saya lakukan salah?</p><p>TIA</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/12392/mike-crowe target=_blank rel="nofollow noopener"><span itemprop=name>Mike Crowe</span></a>
+—
+<a href=https://superuser.com/questions/306137/synergy-connects-but-mouse-wont-switch-screens-and-no-debug-output-showing-is target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>3</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>13</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>13</div><div class=card-body><div itemprop=text><p>Ternyata Anda dapat menggunakan Scroll Lock untuk menjaga mouse tetap di satu layar! Jadi coba tekan ScrollLock untuk melihat apakah itu melepaskan mouse.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/synergy-terhubung-tetapi-mouse-tidak-mau-beralih-layar-dan-tidak-ada-keluaran-debug-yang-menunjukkan-masalah-kawcf5kr/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/116155/andrew-chilcott target=_blank rel="nofollow noopener"><span itemprop=name>Andrew Chilcott</span></a>
+—
+<a href=https://superuser.com/a/384356 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Itu hampir sangat mudah.</div><div>— <a href=https://superuser.com/users/123369/isaaclw target=_blank rel="nofollow noopener">isaaclw</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><p>Saya baru saja menggunakan Fedora 28 dan Ubuntu 18.04 LTS, Scroll lock tidak membantu. Tapi apa yang membantu itu</p><ul><li>Fedora 28, saya kembali ke versi 1.8.8 yang sama dengan Ubuntu 18.04</li><li>Nonaktifkan Wayland di Fedora dan Ubuntu keduanya</li><li>Restart (ciuman keberuntungan)</li></ul><p>dan voila!</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/synergy-terhubung-tetapi-mouse-tidak-mau-beralih-layar-dan-tidak-ada-keluaran-debug-yang-menunjukkan-masalah-kawcf5kr/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/902385/ruturaj target=_blank rel="nofollow noopener"><span itemprop=name>ruturaj</span></a>
+—
+<a href=https://superuser.com/a/1320349 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>0</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-2><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>0</div><div class=card-body><div itemprop=text><p>ditingkatkan dari 1.4.8 menjadi 1.4.10 dan masalah ini muncul untuk saya</p><p>Server: win7-64bit Synergy-v1.4.10
+Klien: Thinkpad T430s Ubuntu-v12.04-32bit Synergy-v1.4.10</p><p>mencoba dengan mesin yang berbeda di sisi klien dan masih belum berhasil:
+Klien: Thinkpad T420s Ubuntu-v12.10-32bit Synergy-v1.4.10</p><p>juga mencoba menggunakan klien 1.4.8 di Ubuntu dengan 1.4.10 Server di windows dan masalah yang sama.</p><p>jadi saya akhirnya menghapus synergy 1.4.10 dari klien dan server dan menginstal ulang v1.4.8 pada keduanya dan semuanya bekerja dengan baik. konfigurasi yang sama digunakan pada kedua versi jadi bukan itu ...</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/synergy-terhubung-tetapi-mouse-tidak-mau-beralih-layar-dan-tidak-ada-keluaran-debug-yang-menunjukkan-masalah-kawcf5kr/#answer-2 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/178593/syner-marr target=_blank rel="nofollow noopener"><span itemprop=name>syner-marr</span></a>
+—
+<a href=https://superuser.com/a/515956 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=2>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=2><ul class="list-group list-group-flush"><li class=list-group-item><div>maaf lupa menyebutkan bahwa saya mencoba bermain-main dengan tombol SCRLK di kedua mesin terlalu lama. Saya membuatnya berfungsi sekali dan saya pikir saya memiliki beberapa kombinasi tombol tetapi saya tidak dapat menemukannya lagi sehingga saya tidak dapat membuatnya berfungsi setelah reboot atau layanan dimulai ulang.</div><div>— <a href=https://superuser.com/users/178593/syner-marr target=_blank rel="nofollow noopener">syner-marr</a></div></li><li class=list-group-item><div>Ini seharusnya bukan sebuah komentar, tapi sebuah edit. Klik <code>edit</code> di bawah pertanyaan Anda dan masukkan konten komentar Anda ke dalam pertanyaan, lalu hapus komentar Anda.</div><div>— <a href=https://superuser.com/users/148285/benjiwiebe target=_blank rel="nofollow noopener">BenjiWiebe</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/letakkan-spotify-di-baki-sistem-bukan-di-bilah-tugas-lsvoqqjk/>Letakkan spotify di baki sistem, bukan di bilah tugas</a></div></li><li class=list-group-item><div><a href=/aktivasi-diperlukan-setelah-mengembalikan-gambar-r4ttbqu6/>Aktivasi diperlukan setelah mengembalikan gambar</a></div></li><li class=list-group-item><div><a href=/hapus-bagian-dari-video-hanya-menggunakan-baris-perintah-mungkin-ffmpeg-w4pxjk3a/>Hapus bagian dari video hanya menggunakan baris perintah (mungkin FFMPEG)</a></div></li><li class=list-group-item><div><a href=/motherboard-baru-atau-pc-baru-untuk-mendapatkan-akses-ke-drive-raid-kentp8ww/>Motherboard baru atau PC baru untuk mendapatkan akses ke drive RAID</a></div></li><li class=list-group-item><div><a href=/masukkan-rentang-angka-di-sublime-text-2-xs95z37p/>Masukkan rentang angka di Sublime Text 2</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-membuat-kata-sandi-yang-mudah-diingat-dengan-aman-tutup-qgecizvq/>Bagaimana cara membuat kata sandi yang mudah diingat dengan aman? [Tutup]</a></div></li><li class=list-group-item><div><a href=/apa-yang-terlibat-dalam-menempatkan-linux-di-macbook-athqwhnn/>Apa yang terlibat dalam menempatkan Linux di Macbook?</a></div></li><li class=list-group-item><div><a href=/berapa-umur-pc-saya-rfoztdik/>Berapa umur PC saya?</a></div></li><li class=list-group-item><div><a href=/cara-mendapatkan-teks-alih-alih-true-false-di-excel-tvkkopaz/>cara mendapatkan teks alih-alih TRUE: FALSE di excel</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-memulihkan-info-yang-dihapus-dari-dokumen-word-setelah-menyimpan-dan-membuka-kembali-z4ht1oyg/>Bagaimana cara memulihkan info yang dihapus dari dokumen Word setelah menyimpan dan membuka kembali?</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

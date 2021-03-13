@@ -1,0 +1,128 @@
+{{ define "main" }}
+
+<div class="container my-2" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+    <div class="card shadow-sm mb-2">
+        <div class="card-body">
+            <div class="mb-2">
+                {{ range .Params.categories }}
+                    <span class="badge badge-dark">{{ . }}</span>
+                {{ end }}
+            </div>
+            <h1 class="h3" itemprop="name">{{ .Title | safeHTML }}</h1>
+<div itemprop="text">
+{{ .Params.body | safeHTML }}
+</div>
+        </div>
+
+        <div class="card-footer bg-white d-flex justify-content-between">
+            <div>
+                <i class="far fa-heart fa-fw text-danger"></i>
+                <span itemprop="upvoteCount">{{ .Params.votes }}</span>
+            </div>
+            <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                {{ .Params.author | safeHTML }}
+                —
+                <a href="{{ .Params.source }}" target="_blank" rel="nofollow noopener">{{ .Site.Params.terms.source }}</a>
+            </div>
+        </div>
+    </div>
+
+    {{ if gt (len .Params.replies) 0 }}
+        <div class="form-row">
+            <div class="col-2 col-lg-1"></div>
+            <div class="col-10 col-lg-11">
+                <div class="mb-2">
+                    <button class="btn btn-secondary btn-sm" id="showQuestionReplies">{{ .Site.Params.terms.show_replies }}</button>
+                </div>
+                <div class="card shadow-sm mb-2 d-none" id="questionRepliesContainer">
+                    <ul class="list-group list-group-flush">
+                        {{ range .Params.replies }}
+                            <li class="list-group-item">
+                                <div>{{ .reply | safeHTML }}</div>
+                                <div>— {{ .author | safeHTML }}</div>
+                            </li>
+                        {{ end }}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {{ end }}
+
+    <hr>
+    
+    {{ $counter := printf "<span itemprop=\"answerCount\">%s</span>" .Params.answers_count }}
+    <h2 class="h4">{{ replace .Site.Params.terms.answers "#" $counter | safeHTML }}</h2>
+
+    {{ range $index, $answer := .Params.answers }}
+        <div class="form-row" itemprop="{{ if eq $index 0 }}acceptedAnswer{{ else }}suggestedAnswer{{ end }}" itemscope itemtype="https://schema.org/Answer">
+            <div class="col-12 col-md-2 col-lg-1">
+                <div class="card shadow-sm mb-2 d-none d-md-block">
+                    <div class="card-body text-center px-1 py-3">
+                        <i class="far fa-heart fa-fw text-danger"></i>
+                        <span itemprop="upvoteCount">{{ $answer.votes }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-10 col-lg-11">
+                <div class="card mb-2 shadow-sm" id="answer-{{ $index }}">
+                    <div class="card-header d-block d-md-none">
+                        <i class="far fa-heart fa-fw text-danger"></i>
+                        {{ $answer.votes }}
+                    </div>
+                    <div class="card-body">
+<div itemprop="text">
+{{ $answer.answer | safeHTML }}
+</div>
+                    </div>
+                    <div class="card-footer text-right bg-white d-flex justify-content-between">
+                        <div>
+                            <a href="{{ $.Page.Permalink }}#answer-{{ $index }}" itemprop="url">{{ $.Site.Params.terms.share }}</a>
+                        </div>
+                        <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            {{ $answer.author | safeHTML }}
+                            —
+                            <a href="{{ $answer.source }}" rel="nofollow noopener" target="_blank">{{ $.Site.Params.terms.source }}</a>
+                        </div>
+                    </div>
+                </div>
+
+                {{ if gt (len $answer.replies) 0 }}
+                    <!-- Answer replies -->
+                    <div class="form-row">
+                        <div class="col-2 col-lg-1"></div>
+                        <div class="col-10 col-lg-11">
+                            <div class="mb-2">
+                                <button class="btn btn-secondary btn-sm show-answer-replies" data-id="{{ $index }}">{{ $.Site.Params.terms.show_replies }}</button>
+                            </div>
+                            <div class="card shadow-sm mb-2 answer-replies-container d-none" data-id="{{ $index }}">
+                                <ul class="list-group list-group-flush">
+                                    {{ range $answer.replies }}
+                                        <li class="list-group-item">
+                                            <div>{{ .reply | safeHTML }}</div>
+                                            <div>— {{ .author | safeHTML }}</div>
+                                        </li>
+                                    {{ end }}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [END] Answer replies -->
+                {{ end }}
+            </div>
+        </div>
+    {{ end }}
+
+    <div class="card shadow-sm my-2">
+        <div class="card-header">{{ .Site.Params.terms.related_questions }}</div>
+        <ul class="list-group list-group-flush">
+            {{ range shuffle (where .Site.RegularPages "Type" "in" "questions") | first 10 }}
+                <li class="list-group-item">
+                    <div><a href="{{ .RelPermalink }}">{{ .Title | safeHTML }}</a></div>
+                </li>
+            {{ end }}
+        </ul>
+    </div>
+
+</div>
+
+{{ end }}

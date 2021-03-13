@@ -1,0 +1,171 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Memperbarui waktu dan nama bab mp4 dengan ffmpeg?</title><meta name=description content="Saya mencoba menambahkan bab khusus dengan ffmpeg ke file mp4 dengan mengekstrak file metadata dan mengikuti  panduan ini  .  Namun, ketika saya mengedit file metadata untuk mengubah salah satu nama bab, perintah..."><link rel=canonical href=https://www.idxstack.com/memperbarui-waktu-dan-nama-bab-mp4-dengan-ffmpeg-v7fy9gcx/><meta property="og:title" content="Memperbarui waktu dan nama bab mp4 dengan ffmpeg?"><meta property="og:description" content="Saya mencoba menambahkan bab khusus dengan ffmpeg ke file mp4 dengan mengekstrak file metadata dan mengikuti  panduan ini  .  Namun, ketika saya mengedit file metadata untuk mengubah salah satu nama bab, perintah..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/memperbarui-waktu-dan-nama-bab-mp4-dengan-ffmpeg-v7fy9gcx/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Memperbarui waktu dan nama bab mp4 dengan ffmpeg?"><meta name=twitter:description content="Saya mencoba menambahkan bab khusus dengan ffmpeg ke file mp4 dengan mengekstrak file metadata dan mengikuti  panduan ini  .  Namun, ketika saya mengedit file metadata untuk mengubah salah satu nama bab, perintah..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Memperbarui waktu dan nama bab mp4 dengan ffmpeg?</h1><div itemprop=text><p>Saya mencoba menambahkan bab khusus dengan ffmpeg ke file mp4 dengan mengekstrak file metadata dan mengikuti <a href=https://ffmpeg.org/ffmpeg-formats.html#Metadata-1 rel="nofollow noopener" target=_blank>panduan ini</a> .</p><p>Namun, ketika saya mengedit file metadata untuk mengubah salah satu nama bab, perintah kedua untuk menambahkan kembali metadata mengabaikan perubahan pada bab dan membiarkannya apa adanya. Itu pasti membaca di file metadata dengan benar, seperti ketika ffmpeg mencetak data dari dua file masukan, itu mencetak aliran mp4 dan semua metadata dari file metadata, dengan semua bab diformat dan diurai dengan benar.</p><p>Segera setelah itu membuat file keluaran, ia memiliki nama bab yang lama lagi. Jika saya mengubah metadata lain yang berfungsi (seperti kunci judul atau kunci artis), tetapi bab tidak.</p><p>Log lengkap dari awal perintah:</p><pre><code>PS D:\ffmpeg&gt; ./bin/ffmpeg.exe -i .\new_file.mp4 -i FFMETADATAFILE -map_metadata 1 -codec copy .\output.mp4
+ffmpeg version N-90979-g08032331ac Copyright (c) 2000-2018 the FFmpeg developers
+  built with gcc 7.3.0 (GCC)
+  configuration: --enable-gpl --enable-version3 --enable-sdl2 --enable-bzlib --enable-fontconfig --enable-gnutls --enable-iconv --enable-libass --enable-libbluray --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libopus --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libtheora --enable-libtwolame --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libzimg --enable-lzma --enable-zlib --enable-gmp --enable-libvidstab --enable-libvorbis --enable-libvo-amrwbenc --enable-libmysofa --enable-libspeex --enable-libxvid --enable-libaom --enable-libmfx --enable-amf --enable-ffnvcodec --enable-cuvid --enable-d3d11va --enable-nvenc --enable-nvdec --enable-dxva2 --enable-avisynth
+  libavutil      56. 18.100 / 56. 18.100
+  libavcodec     58. 19.100 / 58. 19.100
+  libavformat    58. 13.101 / 58. 13.101
+  libavdevice    58.  4.100 / 58.  4.100
+  libavfilter     7. 21.100 /  7. 21.100
+  libswscale      5.  2.100 /  5.  2.100
+  libswresample   3.  2.100 /  3.  2.100
+  libpostproc    55.  2.100 / 55.  2.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '.\new_file.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    title           : new_file
+    encoder         : Lavf57.46.100
+  Duration: 02:01:34.85, start: 0.000000, bitrate: 2940 kb/s
+    Chapter #0:0: start 0.000000, end 628.962000
+    Metadata:
+      title           : Chapter 1
+    Chapter #0:1: start 628.962000, end 1042.083000
+    Metadata:
+      title           : Chapter 2
+    Chapter #0:2: start 1042.083000, end 1882.172000
+    Metadata:
+      title           : Chapter 3
+    Chapter #0:3: start 1882.172000, end 2479.102000
+    Metadata:
+      title           : Chapter 4
+    Chapter #0:4: start 2479.102000, end 3095.718000
+    Metadata:
+      title           : Chapter 5
+    Chapter #0:5: start 3095.718000, end 3681.511000
+    Metadata:
+      title           : Chapter 6
+    Chapter #0:6: start 3681.511000, end 4145.600000
+    Metadata:
+      title           : Chapter 7
+    Chapter #0:7: start 4145.600000, end 5149.019000
+    Metadata:
+      title           : Chapter 8
+    Chapter #0:8: start 5149.019000, end 5704.908000
+    Metadata:
+      title           : Chapter 9
+    Chapter #0:9: start 5704.908000, end 5980.850000
+    Metadata:
+      title           : Chapter 10
+    Chapter #0:10: start 5980.850000, end 6826.403000
+    Metadata:
+      title           : Chapter 11
+    Chapter #0:11: start 6826.403000, end 7294.746000
+    Metadata:
+      title           : Chapter 12
+    Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709), 1920x816 [SAR 1:1 DAR 40:17], 2678 kb/s, 23.98 fps, 23.98 tbr, 90k tbn, 47.95 tbc (default)
+    Metadata:
+      handler_name    : VideoHandler
+    Stream #0:1(eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 256 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+    Stream #0:2(eng): Data: bin_data (text / 0x74786574)
+    Metadata:
+      handler_name    : SubtitleHandler
+Input #1, ffmetadata, from 'FFMETADATAFILE':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    title           : Title
+    encoder         : Lavf58.13.101
+  Duration: 02:01:34.75, start: 0.000000, bitrate: 0 kb/s
+    Chapter #1:0: start 0.000000, end 628.962000
+    Metadata:
+      title           : Edited Name
+    Chapter #1:1: start 628.962000, end 1042.083000
+    Metadata:
+      title           : Chapter 2
+    Chapter #1:2: start 1042.083000, end 1882.172000
+    Metadata:
+      title           : Chapter 3
+    Chapter #1:3: start 1882.172000, end 2479.102000
+    Metadata:
+      title           : Chapter 4
+    Chapter #1:4: start 2479.102000, end 3095.718000
+    Metadata:
+      title           : Chapter 5
+    Chapter #1:5: start 3095.718000, end 3681.511000
+    Metadata:
+      title           : Chapter 6
+    Chapter #1:6: start 3681.511000, end 4145.600000
+    Metadata:
+      title           : Chapter 7
+    Chapter #1:7: start 4145.600000, end 5149.019000
+    Metadata:
+      title           : Chapter 8
+    Chapter #1:8: start 5149.019000, end 5704.908000
+    Metadata:
+      title           : Chapter 9
+    Chapter #1:9: start 5704.908000, end 5980.850000
+    Metadata:
+      title           : Chapter 10
+    Chapter #1:10: start 5980.850000, end 6826.403000
+    Metadata:
+      title           : Chapter 11
+    Chapter #1:11: start 6826.403000, end 7294.746000
+    Metadata:
+      title           : Chapter 12
+File '.\output.mp4' already exists. Overwrite ? [y/N] y
+Output #0, mp4, to '.\output.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    title           : Title
+    encoder         : Lavf58.13.101
+    Chapter #0:0: start 0.000000, end 628.962000
+    Metadata:
+      title           : Chapter 1
+    Chapter #0:1: start 628.962000, end 1042.083000
+    Metadata:
+      title           : Chapter 2
+    Chapter #0:2: start 1042.083000, end 1882.172000
+    Metadata:
+      title           : Chapter 3
+    Chapter #0:3: start 1882.172000, end 2479.102000
+    Metadata:
+      title           : Chapter 4
+    Chapter #0:4: start 2479.102000, end 3095.718000
+    Metadata:
+      title           : Chapter 5
+    Chapter #0:5: start 3095.718000, end 3681.511000
+    Metadata:
+      title           : Chapter 6
+    Chapter #0:6: start 3681.511000, end 4145.600000
+    Metadata:
+      title           : Chapter 7
+    Chapter #0:7: start 4145.600000, end 5149.019000
+    Metadata:
+      title           : Chapter 8
+    Chapter #0:8: start 5149.019000, end 5704.908000
+    Metadata:
+      title           : Chapter 9
+    Chapter #0:9: start 5704.908000, end 5980.850000
+    Metadata:
+      title           : Chapter 10
+    Chapter #0:10: start 5980.850000, end 6826.403000
+    Metadata:
+      title           : Chapter 11
+    Chapter #0:11: start 6826.403000, end 7294.746000
+    Metadata:
+      title           : Chapter 12
+    Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709), 1920x816 [SAR 1:1 DAR 40:17], q=2-31, 2678 kb/s, 23.98 fps, 23.98 tbr, 90k tbn, 90k tbc (default)
+    Metadata:
+      handler_name    : VideoHandler
+    Stream #0:1(eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 256 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+Stream mapping:
+  Stream #0:0 -&gt; #0:0 (copy)
+  Stream #0:1 -&gt; #0:1 (copy)
+</code></pre><p>Anda dapat melihat saya telah mengedit kunci judul dan nama bab pertama di Input # 1, file metadata, tetapi hanya judul yang berbeda di output.</p><p>Setiap bantuan dihargai.</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/902431/cogm target=_blank rel="nofollow noopener"><span itemprop=name>cogm</span></a>
+—
+<a href=https://superuser.com/questions/1320389/updating-mp4-chapter-times-and-names-with-ffmpeg target=_blank rel="nofollow noopener">Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm" id=showQuestionReplies>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 d-none" id=questionRepliesContainer><ul class="list-group list-group-flush"><li class=list-group-item><div>Bagikan perintah dan log lengkap.</div><div>— <a href=https://superuser.com/users/114058/gyan target=_blank rel="nofollow noopener">Gyan</a></div></li><li class=list-group-item><div>@Gyan Telah menambahkannya ke pertanyaan.</div><div>— <a href=https://superuser.com/users/902431/cogm target=_blank rel="nofollow noopener">cogm</a></div></li></ul></div></div></div><hr><h2 class=h4><span itemprop=answerCount>1</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>7</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>7</div><div class=card-body><div itemprop=text><p>Diselesaikan - sepertinya <code>-map_metadata</code> hanya melakukan tombol atas sebelum bab, Anda perlu <code>-map_chapters</code> untuk mendapatkan bab juga.</p><p><code>ffmpeg -i INPUT -i FFMETADATAFILE -map_metadata 1 -map_chapters 1 -codec copy OUTPUT</code></p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/memperbarui-waktu-dan-nama-bab-mp4-dengan-ffmpeg-v7fy9gcx/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/902431/cogm target=_blank rel="nofollow noopener"><span itemprop=name>cogm</span></a>
+—
+<a href=https://superuser.com/a/1320404 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/bagaimana-cara-mendapatkan-tautan-magnet-dengan-deluge-atau-bahkan-mungkin-rwlqlvea/>Bagaimana cara mendapatkan tautan Magnet dengan Deluge atau bahkan mungkin?</a></div></li><li class=list-group-item><div><a href=/mengapa-virtualbox-menggunakan-begitu-banyak-memori-host-qqznupoy/>Mengapa VirtualBox menggunakan begitu banyak memori host?</a></div></li><li class=list-group-item><div><a href=/usb-untuk-memberi-daya-pada-perangkat-lain-owxi8ihx/>USB untuk memberi daya pada perangkat lain</a></div></li><li class=list-group-item><div><a href=/setel-ulang-kata-sandi-berbagi-file-windows-7-yang-tersimpan-iob3tseq/>Setel ulang kata sandi berbagi file Windows 7 yang tersimpan</a></div></li><li class=list-group-item><div><a href=/beberapa-salinan-ikon-quotkomputerquot-secara-bertahap-muncul-di-desktop-saya-m3anjcjo/>Beberapa salinan ikon "Komputer" secara bertahap muncul di desktop saya</a></div></li><li class=list-group-item><div><a href=/mengontrol-catu-daya-amplifier-dari-squeezebox-squeezecenter-oz7vpesw/>Mengontrol catu daya amplifier dari Squeezebox / SqueezeCenter</a></div></li><li class=list-group-item><div><a href=/apa-mode-avr-dalam-manajemen-perangkat-lunak-ups-s2nt2ho1/>Apa Mode AVR Dalam Manajemen Perangkat Lunak UPS?</a></div></li><li class=list-group-item><div><a href=/remote-desktop-untuk-pengguna-saat-masih-logon-wmsseutl/>Remote Desktop untuk pengguna saat masih logon</a></div></li><li class=list-group-item><div><a href=/sesi-layar-gnu-mati-setelah-me-reboot-komputer-bagaimana-cara-memperbaikinya-5ttxraqp/>Sesi layar GNU mati setelah me-reboot komputer - bagaimana cara memperbaikinya?</a></div></li><li class=list-group-item><div><a href=/panel-navigasi-windows-explorer-penyusunan-ulang-manual-pbvgdhmm/>Panel Navigasi Windows Explorer - Penyusunan ulang manual</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

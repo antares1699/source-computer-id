@@ -1,0 +1,16 @@
+{{ define "main" }}
+
+<div class="container my-2">
+    <div class="card shadow-sm mb-2">
+        <div class="card-body text-center">
+            <h1 class="h3">Not Found</h1>
+            <p>Page not found</p>
+            <div>
+                <img src="/img/404.png" alt="Page not found" width="320" class="img-fluid">
+            </div>
+            <a href="/" class="btn btn-primary">{{ .Site.Params.terms.home }}</a>
+        </div>
+    </div>
+</div>
+
+{{ end }}

@@ -1,0 +1,199 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>MTU adalah 1500, mengapa panjang fragmen pertama adalah 1496 di IPv6?</title><meta name=description content="ping6 ipv6Address -s 1500  Perintah ini akan menghasilkan fragmen. Dilihat oleh wireshark, panjang paket fragmen pertama adalah 1496 (dari layer 3). Karena MTU adalah 1500, saya bingung dengan panjang 1496 ini. Dari..."><link rel=canonical href=https://www.idxstack.com/mtu-adalah-1500-mengapa-panjang-fragmen-pertama-adalah-1496-di-ipv6-fo85hn4h/><meta property="og:title" content="MTU adalah 1500, mengapa panjang fragmen pertama adalah 1496 di IPv6?"><meta property="og:description" content="ping6 ipv6Address -s 1500  Perintah ini akan menghasilkan fragmen. Dilihat oleh wireshark, panjang paket fragmen pertama adalah 1496 (dari layer 3). Karena MTU adalah 1500, saya bingung dengan panjang 1496 ini. Dari..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/mtu-adalah-1500-mengapa-panjang-fragmen-pertama-adalah-1496-di-ipv6-fo85hn4h/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="MTU adalah 1500, mengapa panjang fragmen pertama adalah 1496 di IPv6?"><meta name=twitter:description content="ping6 ipv6Address -s 1500  Perintah ini akan menghasilkan fragmen. Dilihat oleh wireshark, panjang paket fragmen pertama adalah 1496 (dari layer 3). Karena MTU adalah 1500, saya bingung dengan panjang 1496 ini. Dari..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>MTU adalah 1500, mengapa panjang fragmen pertama adalah 1496 di IPv6?</h1><div itemprop=text><pre><code>ping6 ipv6Address -s 1500
+</code></pre><p>Perintah ini akan menghasilkan fragmen. Dilihat oleh wireshark, panjang paket fragmen pertama adalah 1496 (dari layer 3). Karena MTU adalah 1500, saya bingung dengan panjang 1496 ini. Dari mana asalnya</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/87601/deepsky target=_blank rel="nofollow noopener"><span itemprop=name>deepsky</span></a>
+—
+<a href=https://superuser.com/questions/343107/mtu-is-1500-why-the-first-fragment-length-is-1496-in-ipv6 target=_blank rel="nofollow noopener">Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm" id=showQuestionReplies>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 d-none" id=questionRepliesContainer><ul class="list-group list-group-flush"><li class=list-group-item><div>Apakah Anda terhubung melalui layanan terowongan?</div><div>— <a href=https://superuser.com/users/1686/user1686 target=_blank rel="nofollow noopener">user1686</a></div></li><li class=list-group-item><div>Tidak. Jika saya menggunakan -s 1452, tidak akan ada fragmen dan panjang totalnya adalah 1500.</div><div>— <a href=https://superuser.com/users/87601/deepsky target=_blank rel="nofollow noopener">deepsky</a></div></li><li class=list-group-item><div>Saya tidak tahu IP6, tetapi dengan IP4 saya harus menyetel parameter TCP saya ke 1480 karena switcher saya, ini seperti truk 15 'tidak muat di bawah jembatan * / clunk * tetapi yang 14' 11 "terbang menembus. Dan masih berjalan 99mph seperti itu. 1% teratas dalam tes kecepatan untuk koneksi saya.Jadi saya tidak khawatir tentang perbedaan kecil</div><div>— <a href=https://superuser.com/users/98855/psycogeek target=_blank rel="nofollow noopener">Psycogeek</a></div></li></ul></div></div></div><hr><h2 class=h4><span itemprop=answerCount>4</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>6</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>6</div><div class=card-body><div itemprop=text><p>Ini hanya untuk referensi saya sendiri tentang IPv6 MTU. saya memerlukannya <em>beberapa</em> pertanyaan untuk menambahkannya ke - dan i cho-cho-memilih Anda.</p><p>Pertama adalah paket Ethernet kami, yang biasanya kami abaikan:</p><pre><code>+-------------------------+
+| Ethernet - 16 bytes     |
+|  6 byte destination MAC |
+|  6 byte source MAC      |
+|  4 byte type            |
++-------------------------+
+|                         |
+/  1,500 byte payload     /
+|                         |
++-------------------------+
+</code></pre><p>Sekarang kami menambahkan header IPv4 atau IPv6:</p><pre><code>IPv4                           IPv6
++-------------------------+    +-------------------------+
+| Ethernet - 12 bytes     |    | Ethernet - 12 bytes     |
+|  6 byte destination MAC |    |  6 byte destination MAC |
+|  6 byte source MAC      |    |  6 byte source MAC      |
+|  4 byte type            |    |  4 byte type            |
++-------------------------+    +-------------------------+
+| IPv4 - 20 bytes         |    | IPv6 - 40 bytes         |
+|  10  byte control flags |    |  6 byte control flags   |
+|  2 byte total length    |    |  2 byte payload length  |
+|  4 byte source addr     |    |  16 byte source addr    |
+|  4 byte dest addr       |    |                         |
++-------------------------+    |  16 byte dest addr      |
+|                         |    |                         |
+|                         |    +-------------------------|
+|                         |    |                         |
+/ 1,480 payload           /    / 1,460 payload           /
+|                         |    |                         |
++-------------------------+    +-------------------------+
+</code></pre><p>Selanjutnya kami menambahkan realitas saya tentang koneksi PPPoE, yang mengambil 8 byte dari paket untuk tag PADS PPPoE:</p><pre><code>+-------------------------+
+| Ethernet - 12 bytes     |
+|  6 byte destination MAC |
+|  6 byte source MAC      |
+|  4 byte type            |
++-------------------------+
+| PPPoE PADS - 8 bytes    |
++-------------------------+
+|                         |
+/ 1,492 payload           /
+|                         |
++-------------------------+
+</code></pre><p>Yang mengurangi MTU yang tersedia untuk lalu lintas IPv4 dan IPv6 kami:</p><pre><code>IPv4                           IPv6
++-------------------------+    +-------------------------+
+| Ethernet - 12 bytes     |    | Ethernet - 12 bytes     |
+|  6 byte destination MAC |    |  6 byte destination MAC |
+|  6 byte source MAC      |    |  6 byte source MAC      |
+|  4 byte type            |    |  4 byte type            |
++-------------------------+    +-------------------------+
+| PPPoE PADS - 8 bytes    |    | PPPoE PADS - 8 bytes    |
++-------------------------+    +-------------------------+
+| IPv4 - 20 bytes         |    | IPv6 - 40 bytes         |
+|  10  byte control flags |    |  6 byte control flags   |
+|  2 byte total length    |    |  2 byte payload length  |
+|  4 byte source addr     |    |  16 byte source addr    |
+|  4 byte dest addr       |    |                         |
++-------------------------+    |  16 byte dest addr      |
+|                         |    |                         |
+|                         |    +-------------------------|
+|                         |    |                         |
+/ 1,472 payload           /    / 1,452 payload           /
+|                         |    |                         |
++-------------------------+    +-------------------------+
+</code></pre><p>Dan kemudian, dalam kasus saya, saya menggunakan <a href=http://tunnelbroker.net rel="nofollow noopener" target=_blank>Badai Listrik</a> 's <a href=http://en.wikipedia.org/wiki/6in4 rel="nofollow noopener" target=_blank>6in4 tunneling</a> , karena ISP saya tidak menawarkan konektivitas IPv6 asli. Ini berarti lalu lintas IPv6 saya dibungkus dalam paket IPv4:</p><pre><code>IPv4                           IPv6
++-------------------------+    +-------------------------+
+| Ethernet - 12 bytes     |    | Ethernet - 12 bytes     |
+|  6 byte destination MAC |    |  6 byte destination MAC |
+|  6 byte source MAC      |    |  6 byte source MAC      |
+|  4 byte type            |    |  4 byte type            |
++-------------------------+    +-------------------------+
+| PPPoE PADS - 8 bytes    |    | PPPoE PADS - 8 bytes    |
++-------------------------+    +-------------------------+
+| IPv4 - 20 bytes         |    | IPv4 - 20 bytes         |
+|  10  byte control flags |    |  10  byte control flags |
+|  2 byte total length    |    |  2 byte total length    |
+|  4 byte source addr     |    |  4 byte source addr     |
+|  4 byte dest addr       |    |  4 byte dest addr       |
++-------------------------+    +-------------------------+
+|                         |    | IPv6 - 40 bytes         |
+|                         |    |  6 byte control flags   |
+|                         |    |  2 byte payload length  |
+|                         |    |  16 byte source addr    |
+|                         |    |                         |
+|                         |    |  16 byte dest addr      |
+|                         |    |                         |
+|                         |    +-------------------------|
+|                         |    |                         |
+/ 1,472 payload           /    / 1,432 payload           /
+|                         |    |                         |
++-------------------------+    +-------------------------+
+</code></pre><p>Tetapi nomor pentingnya adalah <strong>MTU</strong> , yang merupakan ukuran IPv4 atau IPv6 yang tersedia untuk dirinya sendiri (termasuk headernya):</p><pre><code>IPv4                           IPv6
++-------------------------+    +-------------------------+
+| Ethernet - 12 bytes     |    | Ethernet - 12 bytes     |
+|  6 byte destination MAC |    |  6 byte destination MAC |
+|  6 byte source MAC      |    |  6 byte source MAC      |
+|  4 byte type            |    |  4 byte type            |
++-------------------------+    +-------------------------+
+| PPPoE PADS - 8 bytes    |    | PPPoE PADS - 8 bytes    |
++-------------------------+    +-------------------------+
+|                         |    | IPv4 - 20 bytes         |
+/ MTU = 1492              /    |  10  byte control flags |
+|                         |    |  2 byte total length    |
++-------------------------+    |  4 byte source addr     |
+                               |  4 byte dest addr       |
+                               +-------------------------+
+                               |                         |
+                               / MTU = 1472              |
+                               |                         |
+                               +-------------------------+
+</code></pre><p>Selanjutnya adalah kebingungan tentang file <em>muatan</em> size, digunakan saat mem-ping seseorang dengan ekstensi <em>jangan terpecah</em> bendera. ICMP beroperasi melalui IP, dan menambahkan overhead headernya sendiri:</p><pre><code>IPv4                           IPv6
++-------------------------+    +-------------------------+
+| Ethernet - 12 bytes     |    | Ethernet - 12 bytes     |
+|  6 byte destination MAC |    |  6 byte destination MAC |
+|  6 byte source MAC      |    |  6 byte source MAC      |
+|  4 byte type            |    |  4 byte type            |
++-------------------------+    +-------------------------+
+| IPv4 - 20 bytes         |    | IPv6 - 40 bytes         |
+|  10  byte control flags |    |  6 byte control flags   |
+|  2 byte total length    |    |  2 byte payload length  |
+|  4 byte source addr     |    |  16 byte source addr    |
+|  4 byte dest addr       |    |                         |
++-------------------------+    |  16 byte dest addr      |
+| ICMP - 8 bytes          |    |                         |
++-------------------------+    +-------------------------|    
+|                         |    | ICMP - 8 bytes          |
+|                         |    +-------------------------+
+|                         |    |                         |
+/ 1,472 ping payload      /    / 1,452 ping payload      /
+|                         |    |                         |
++-------------------------+    +-------------------------+
+</code></pre><p><strong>Catatan</strong> : Ini sebabnya <em>kamu</em> dapat melakukan ping dengan payload <code>1,452</code> byte sebelum Anda perlu melakukan fragmen.</p><p>Dalam kasus saya, dengan overhead tag PPPoE PADS:</p><pre><code>IPv4                           IPv6
++-------------------------+    +-------------------------+
+| Ethernet - 12 bytes     |    | Ethernet - 12 bytes     |
+|  6 byte destination MAC |    |  6 byte destination MAC |
+|  6 byte source MAC      |    |  6 byte source MAC      |
+|  4 byte type            |    |  4 byte type            |
++-------------------------+    +-------------------------+
+| PPPoE PADS - 8 bytes    |    | PPPoE PADS - 8 bytes    |
++-------------------------+    +-------------------------+
+| IPv4 - 20 bytes         |    | IPv6 - 40 bytes         |
+|  10  byte control flags |    |  6 byte control flags   |
+|  2 byte total length    |    |  2 byte payload length  |
+|  4 byte source addr     |    |  16 byte source addr    |
+|  4 byte dest addr       |    |                         |
++-------------------------+    |  16 byte dest addr      |
+| ICMP - 8 bytes          |    |                         |
++-------------------------+    +-------------------------|    
+|                         |    | ICMP - 8 bytes          |
+|                         |    +-------------------------+
+|                         |    |                         |
+/ 1,464 ping payload      /    / 1,444 ping payload      /
+|                         |    |                         |
++-------------------------+    +-------------------------+
+</code></pre><p>Dan biaya tambahan saya sebesar <strong>6in4</strong> :</p><pre><code>IPv4                           IPv6
++-------------------------+    +-------------------------+
+| Ethernet - 12 bytes     |    | Ethernet - 12 bytes     |
+|  6 byte destination MAC |    |  6 byte destination MAC |
+|  6 byte source MAC      |    |  6 byte source MAC      |
+|  4 byte type            |    |  4 byte type            |
++-------------------------+    +-------------------------+
+| PPPoE PADS - 8 bytes    |    | PPPoE PADS - 8 bytes    |
++-------------------------+    +-------------------------+
+| IPv4 - 20 bytes         |    | IPv4 - 20 bytes         |
+|  10  byte control flags |    |  10  byte control flags |
+|  2 byte total length    |    |  2 byte total length    |
+|  4 byte source addr     |    |  4 byte source addr     |
+|  4 byte dest addr       |    |  4 byte dest addr       |
++-------------------------+    +-------------------------+
+| ICMP - 8 bytes          |    | IPv6 - 40 bytes         |
++-------------------------+    |  6 byte control flags   |    
+|                         |    |  2 byte payload length  |
+|                         |    |  16 byte source addr    |
+|                         |    |                         |
+|                         |    |  16 byte dest addr      |
+|                         |    |                         |
+|                         |    +-------------------------|
+|                         |    | ICMP - 8 bytes          |
+|                         |    +-------------------------+
+|                         |    |                         |
+/ 1,464 ping payload      /    / 1,424 ping payload      /
+|                         |    |                         |
++-------------------------+    +-------------------------+
+</code></pre><p>Dan Anda tahu mengapa saya hanya bisa melakukan ping dengan muatan 1.424 byte.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/mtu-adalah-1500-mengapa-panjang-fragmen-pertama-adalah-1496-di-ipv6-fo85hn4h/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/8169/ian-boyd target=_blank rel="nofollow noopener"><span itemprop=name>Ian Boyd</span></a>
+—
+<a href=https://superuser.com/a/407157 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>4</div><div class=card-body><div itemprop=text><p>Anda akan melihat ini jika Anda memiliki penandaan VLAN pada antarmuka yang tidak mendukungnya secara asli. Tag 802.1Q VLAN membutuhkan tambahan 4 byte. Jika NIC Anda mendukungnya secara native, NIC mendukung frame Ethernet 1522-byte (bukan yang lebih lama 1518-byte) sehingga Anda masih dapat memiliki MTU 1500 byte. Jika NIC Anda tidak mendukungnya secara asli, Anda dapat mendukungnya dalam perangkat lunak tetapi Anda harus mengecilkan MTU menjadi 1496 sehingga semuanya sesuai dengan bingkai lama 1518-byte yang didukung NIC Anda.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/mtu-adalah-1500-mengapa-panjang-fragmen-pertama-adalah-1496-di-ipv6-fo85hn4h/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/100251/paul target=_blank rel="nofollow noopener"><span itemprop=name>Paul</span></a>
+—
+<a href=https://superuser.com/a/343124 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=1>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=1><ul class="list-group list-group-flush"><li class=list-group-item><div>Tidak ada VLAN yang dikonfigurasi di jaringan saya. Dan bingkai Ethernet tidak berisi informasi 802.1q. Ini 14Bytes diamati dari wireshark.</div><div>— <a href=https://superuser.com/users/87601/deepsky target=_blank rel="nofollow noopener">deepsky</a></div></li><li class=list-group-item><div>Sebenarnya, menurut saya itu karena setiap segmen baru yang dibuat harus memiliki batas 8-byte, dan masih lebih kecil dari MTU. 1500 adalah 187 div 8 dengan sisa 4. Jadi, 1500-4 = 1496 harus menjadi batas baru. Ada detail yang lebih besar tentang fragmentasi di <a href=http://www.erg.abdn.ac.uk/~gorry/eg3567/inet-pages/ip-fragmentatiion.html rel="nofollow noopener" target=_blank>erg.abdn.ac.uk/~gorry/eg3567/inet-pages/ip-fragmentatiion.html</a> .</div><div>— <a href=https://superuser.com/users/100251/paul target=_blank rel="nofollow noopener">Paul</a></div></li><li class=list-group-item><div>Saya pikir ini masuk akal. Reputasi tidak cukup untuk memberikan suara ...</div><div>— <a href=https://superuser.com/users/87601/deepsky target=_blank rel="nofollow noopener">deepsky</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-2><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><p>Unit transmisi maksimum (MTU) dari protokol komunikasi sebuah lapisan adalah ukuran dalam byte dari unit data protokol terbesar yang dapat diteruskan oleh lapisan tersebut.
+Untuk contoh koneksi IP melalui DSL menggunakan PPPoA / VC-MUX, sekali lagi memilih untuk mengisi 31 sel ATM seperti sebelumnya, kami memperoleh angka MTU tereduksi optimal yang diinginkan dari 1478 = 31 * 48-10 dengan memperhitungkan overhead 10 byte yang terdiri overhead Protokol Point-to-Point sebesar 2 byte, dan overhead AAL5 sebesar 8 byte. Ini memberikan total biaya 31 * 53 = 1643 byte yang dikirim melalui ATM dari paket 1478 byte yang diteruskan ke PPPoA. Dalam kasus IP yang dikirim melalui ADSL menggunakan PPPoA, angka 1478 akan menjadi panjang total paket IP termasuk header IP. Jadi dalam contoh ini, mempertahankan MTU yang dipaksakan sendiri sebesar 1478 dibandingkan dengan mengirim paket IP dengan total panjang 1500 menghemat 53 byte per paket pada lapisan ATM dengan biaya pengurangan 22 byte dari panjang paket IP.</p><p>RFC 2516 menetapkan MTU maksimum untuk koneksi PPPoE / DSL 1492 byte: muatan ethernet maksimum 1500 byte dikurangi 8 byte header PPPoE (2 byte untuk overhead PPP, dan 6 byte untuk header PPPoE). Ini tidak serta merta mengisi bilangan bulat sel ATM.
+Lapisan data link adalah lapisan 2 dari model OSI tujuh lapis jaringan komputer. Ini sesuai dengan, atau merupakan bagian dari lapisan tautan model referensi TCP / IP. Anda mengukur di lapisan 3, sehingga perbedaannya jelas. Karena jenis jaringan yang Anda gunakan, 4 byte digunakan untuk tujuan manajemen jaringan.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/mtu-adalah-1500-mengapa-panjang-fragmen-pertama-adalah-1496-di-ipv6-fo85hn4h/#answer-2 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/126011/supstj target=_blank rel="nofollow noopener"><span itemprop=name>supstj</span></a>
+—
+<a href=https://superuser.com/a/407322 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-3><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><p>Apakah Anda menggunakan DSL? Header PPPoE menggunakan 8 byte.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/mtu-adalah-1500-mengapa-panjang-fragmen-pertama-adalah-1496-di-ipv6-fo85hn4h/#answer-3 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/51705/lawrencec target=_blank rel="nofollow noopener"><span itemprop=name>LawrenceC</span></a>
+—
+<a href=https://superuser.com/a/407423 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/link-google-chrome-sekarang-tampil-seperti-dicoret-bukan-digarisbawahi-kenapa-ojgynjes/>Link Google Chrome sekarang tampil seperti dicoret bukan digarisbawahi kenapa?</a></div></li><li class=list-group-item><div><a href=/apakah-aman-menggunakan-stopkontak-gt-pengisi-daya-usb-untuk-mengisi-daya-perangkat-usb-7knhoui6/>Apakah aman menggunakan stopkontak -> pengisi daya USB untuk mengisi daya perangkat USB?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-menyimpan-file-di-nano-dengan-cepat-wqpmksfc/>Bagaimana cara menyimpan file di Nano dengan cepat</a></div></li><li class=list-group-item><div><a href=/memulai-macbook-pro-dalam-mode-32-bit-rmaw4tbr/>Memulai MacBook Pro dalam mode 32 bit</a></div></li><li class=list-group-item><div><a href=/apakah-ada-cara-universal-untuk-mengingat-pesan-email-cvcgebxi/>Apakah ada cara universal untuk mengingat pesan email?</a></div></li><li class=list-group-item><div><a href=/memahami-kunci-enkripsi-8ikdq45z/>Memahami Kunci Enkripsi</a></div></li><li class=list-group-item><div><a href=/cara-termudah-untuk-memindai-buku-gzcorpur/>Cara termudah untuk memindai buku?</a></div></li><li class=list-group-item><div><a href=/konversi-mbr-ke-gpt-tanpa-os-apa-pun-rtbtgq93/>Konversi MBR ke GPT - Tanpa OS apa pun</a></div></li><li class=list-group-item><div><a href=/vim-bagaimana-cara-mengatur-preferensi-untuk-jenis-file-kustom-cvqzgijj/>Vim: Bagaimana cara mengatur preferensi untuk jenis file kustom?</a></div></li><li class=list-group-item><div><a href=/file-jpg-terlalu-kecil-saat-dikonversi-dari-pdf-dengan-imageemagick-p6sjemeo/>File JPG terlalu kecil saat dikonversi dari PDF dengan imageemagick</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

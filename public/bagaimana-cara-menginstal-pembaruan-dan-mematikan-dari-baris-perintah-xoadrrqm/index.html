@@ -1,0 +1,140 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Bagaimana cara menginstal pembaruan dan mematikan dari baris perintah?</title><meta name=description content="Saya tahu bahwa ada cara sederhana untuk mematikan komputer di command prompt, tetapi apakah mungkin untuk melakukan pembaruan sistem dan kemudian mematikan komputer di command prompt?  Misalnya, ketika Vista perlu menginstal pembaruan,..."><link rel=canonical href=https://www.idxstack.com/bagaimana-cara-menginstal-pembaruan-dan-mematikan-dari-baris-perintah-xoadrrqm/><meta property="og:title" content="Bagaimana cara menginstal pembaruan dan mematikan dari baris perintah?"><meta property="og:description" content="Saya tahu bahwa ada cara sederhana untuk mematikan komputer di command prompt, tetapi apakah mungkin untuk melakukan pembaruan sistem dan kemudian mematikan komputer di command prompt?  Misalnya, ketika Vista perlu menginstal pembaruan,..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/bagaimana-cara-menginstal-pembaruan-dan-mematikan-dari-baris-perintah-xoadrrqm/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Bagaimana cara menginstal pembaruan dan mematikan dari baris perintah?"><meta name=twitter:description content="Saya tahu bahwa ada cara sederhana untuk mematikan komputer di command prompt, tetapi apakah mungkin untuk melakukan pembaruan sistem dan kemudian mematikan komputer di command prompt?  Misalnya, ketika Vista perlu menginstal pembaruan,..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Bagaimana cara menginstal pembaruan dan mematikan dari baris perintah?</h1><div itemprop=text><p>Saya tahu bahwa ada cara sederhana untuk mematikan komputer di command prompt, tetapi apakah mungkin untuk melakukan pembaruan sistem dan kemudian mematikan komputer di command prompt?</p><p>Misalnya, ketika Vista perlu menginstal pembaruan, itu akan membiarkan saya menginstal dan mematikan dengan mengklik tombol <code>Shut Down</code> (sambil menurunkan tombol matikan normal ke dalam menu). Jadi apakah ada perintah untuk melakukan ini di command prompt?</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/95296/mendez target=_blank rel="nofollow noopener"><span itemprop=name>mendez</span></a>
+—
+<a href=https://superuser.com/questions/351703/how-can-i-install-updates-and-shut-down-from-the-command-line target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>6</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>6</div><div class=card-body><div itemprop=text><p>Tidak ada cara baris perintah bawaan untuk menginstal paksa pembaruan yang menunggu sebelum shutdown / reboot (Saya pernah mendengar desas-desus bahwa itu ada di Windows 8, tetapi belum diperiksa).</p><p>Taruhan terbaik Anda adalah membuat skrip (VBS, PowerScript, atau sejenisnya) yang akan melakukan pembaruan dan kemudian mematikan sistem.</p><p>Sebagai contoh:</p><pre><code>' NAME : &lt;wusforceupdate&gt;
+' AUTHOR : &lt;Samuel lambert&gt;
+' COMMENT : &lt;Find-Download-Install-reboot (with windows update system WUS)&gt;
+' www.wsus.info/forums/lofiversion/index.php?t5454.html
+
+'Shutdown flags;
+ const nLog_Off          =  0 
+ const nForced_Log_Off   =  4  '( 0 + 4 ) 
+ const nShutdown         =  1
+ const nForced_Shutdown  =  5  '( 1 + 4 ) 
+ const nReboot           =  2
+ const nForced_Reboot    =  6  '( 2 + 4 )
+ const nPower_Off        =  8
+ const nForced_Power_Off = 12  '( 8 + 4 )
+
+ShutdownOption = nForced_Reboot
+
+'Monthly log;
+dt = date() : nMonth = Year(dt)*1e2 + Month(dt)
+sLogFile = "C:\WUSforceupdate-" &amp; nMonth &amp; ".log"
+
+
+Set updateSession = CreateObject("Microsoft.Update.Session")
+Set updateSearcher = updateSession.CreateupdateSearcher()
+
+Set searchResult = _
+updateSearcher.Search("IsInstalled=0 and Type='Software'")
+
+Set File = CreateObject("Scripting.FileSystemObject")
+Set LogFile = File.OpenTextFile(sLogFile, 8, True)
+
+LogFile.WriteLine("***************************************************************")
+LogFile.WriteLine( "START TIME : " &amp; now)
+LogFile.WriteLine( "Searching for updates..." &amp; vbCRLF)
+LogFile.WriteLine( "List of applicable items on the machine:")
+
+For I = 0 To searchResult.Updates.Count-1
+  Set update = searchResult.Updates.Item(I)
+  LogFile.WriteLine( I + 1 &amp; "&gt; " &amp; update.Title)
+Next
+
+Set WshShell = WScript.CreateObject("WScript.Shell")
+
+If searchResult.Updates.Count = 0 Then
+  LogFile.WriteLine( "There are no applicable updates.")
+  WshShell.popup "There are no applicable updates.",1
+  ShutDown(ShutdownOption)  '&lt;-- O P T I O N A L
+  Wscript.quit
+End If
+
+LogFile.WriteLine( vbCRLF &amp; "Creating collection of updates to download:")
+
+Set updatesToDownload = CreateObject("Microsoft.Update.UpdateColl")
+
+For I = 0 to searchResult.Updates.Count-1
+  Set update = searchResult.Updates.Item(I)
+  LogFile.WriteLine( I + 1 &amp; "&gt; adding: " &amp; update.Title )
+  updatesToDownload.Add(update)
+Next
+
+LogFile.WriteLine( vbCRLF &amp; "Downloading updates...")
+
+Set downloader = updateSession.CreateUpdateDownloader() 
+downloader.Updates = updatesToDownload
+downloader.Download()
+
+LogFile.WriteLine( vbCRLF &amp; "List of downloaded updates:")
+
+For I = 0 To searchResult.Updates.Count-1
+  Set update = searchResult.Updates.Item(I)
+  If update.IsDownloaded Then
+    LogFile.WriteLine( I + 1 &amp; "&gt; " &amp; update.Title )
+  End If
+Next
+
+Set updatesToInstall = CreateObject("Microsoft.Update.UpdateColl")
+
+LogFile.WriteLine( vbCRLF &amp; _
+   "Creating collection of downloaded updates to install:" )
+
+For I = 0 To searchResult.Updates.Count-1
+  set update = searchResult.Updates.Item(I)
+  If update.IsDownloaded = true Then
+    'WshShell.popup "installing..." &amp; vbNewLine &amp; update.Title,1
+    LogFile.WriteLine( I + 1 &amp; "&gt; adding: " &amp; update.Title )
+    updatesToInstall.Add(update) 
+  End If
+Next
+
+logFile.WriteLine( "Installing updates...")
+Set installer = updateSession.CreateUpdateInstaller()
+installer.Updates = updatesToInstall
+Set installationResult = installer.Install()
+
+'Output results of install
+LogFile.WriteLine( "Installation Result: " &amp; installationResult.ResultCode )
+LogFile.WriteLine( "Reboot Required: " &amp; installationResult.RebootRequired &amp; vbCRLF )
+
+LogFile.WriteLine( "Listing of updates installed " _
+    &amp; "and individual installation results:" )
+
+For I = 0 to updatesToInstall.Count - 1
+  LogFile.WriteLine( I + 1 &amp; "&gt; " &amp; updatesToInstall.Item(i).Title _ 
+    &amp; ": " &amp; installationResult.GetUpdateResult(i).ResultCode ) 
+Next
+
+If installationResult.RebootRequired = -1 then
+  LogFile.WriteLine( "RebootRequired")
+  ' &lt;-- normally now you should call for a R E B O O T.....
+End if
+
+ShutDown(ShutdownOption)  '&lt;-- O P T I O N A L
+
+LogFile.WriteLine( "STOP TIME : " &amp; now)
+LogFile.WriteLine("***************************************************************")
+LogFile.Close
+
+wscript.echo "Updates are installed"
+
+
+Function ShutDown(sFlag)
+ wscript.sleep 600
+  Set OScoll = GetObject( _
+     "winmgmts:{(Shutdown)}").ExecQuery( _
+     "Select * from Win32_OperatingSystem") 
+  For Each osObj in OScoll
+    osObj.Win32Shutdown(sFlag)
+  Next
+End Function
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/bagaimana-cara-menginstal-pembaruan-dan-mematikan-dari-baris-perintah-xoadrrqm/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/23133/%c6%ac%e1%b4%87c%ca%9c%ce%b9%e1%b4%87007 target=_blank rel="nofollow noopener"><span itemprop=name>Ƭᴇcʜιᴇ007</span></a>
+—
+<a href=https://superuser.com/a/351716 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>wow semua kode itu lol! Saya akan mencobanya, terima kasih atas bantuannya.</div><div>— <a href=https://superuser.com/users/95296/mendez target=_blank rel="nofollow noopener">mendez</a></div></li><li class=list-group-item><div>@mendez Ya, itu contoh yang cukup menyeluruh. :)</div><div>— <a href=https://superuser.com/users/23133/%c6%ac%e1%b4%87c%ca%9c%ce%b9%e1%b4%87007 target=_blank rel="nofollow noopener">&#428;&#7431;c&#668;&#953;&#7431;007</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><ul><li><p><a href=http://wuinstall.com/ rel="nofollow noopener" target=_blank>WuInstall</a> 1.2 atau lebih tinggi mampu melakukan apa yang Anda inginkan. Tetapi situs web mengatakan bahwa setelah uji coba terbatas waktu Anda berakhir, Anda harus membeli lisensi. Lisensi hanya dijual dalam multi-paket besar: multi-paket terkecil seharga USD $ 250.</p><p>Saya menggunakan WuInstall 1.1, yang merupakan freeware. Itu dapat menginstal pembaruan dan reboot, tetapi tidak dapat menginstal pembaruan dan mematikan.</p><p>aku sudah menulis <a href=https://superuser.com/a/370091/51958 target=_blank rel="nofollow noopener">lebih lanjut tentang WuInstall</a> di tempat lain.</p></li><li><p>Hanya penasaran: Mengapa Anda ingin menginstal pembaruan dan menutup tanpa mengklik mouse? Jika Anda memiliki lab dari banyak komputer yang identik, pertimbangkan untuk menggunakan WSUS dan / atau perangkat lunak lain. Atau mungkin Anda bisa mengikis dengan perangkat lunak pemutaran makro.</p></li></ul></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/bagaimana-cara-menginstal-pembaruan-dan-mematikan-dari-baris-perintah-xoadrrqm/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/51958/jasonspiro target=_blank rel="nofollow noopener"><span itemprop=name>jasonspiro</span></a>
+—
+<a href=https://superuser.com/a/382505 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/apakah-ada-monitor-yang-berfungsi-dengan-windows-8-jbqla4z6/>Apakah ada monitor yang berfungsi dengan Windows 8?</a></div></li><li class=list-group-item><div><a href=/jalankan-perintah-di-antara-baris-bash-pipe-8rrthbpt/>Jalankan perintah di antara baris bash pipe…?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-memetakan-pengguna-root-klien-nfs-ke-pengguna-root-server-nfs-cqs6oluy/>Bagaimana cara memetakan pengguna root klien NFS ke pengguna root server NFS?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-berbagi-file-dari-windows-ke-mac-os-x-5z0nalw8/>Bagaimana cara berbagi file dari Windows ke Mac OS X?</a></div></li><li class=list-group-item><div><a href=/tidak-dapat-mengelompokkan-2-gambar-di-ms-word-dan-outlook-oyfocwti/>Tidak Dapat Mengelompokkan 2 Gambar di MS Word dan Outlook</a></div></li><li class=list-group-item><div><a href=/berapa-banyak-sensor-suhu-yang-dimiliki-laptop-tutup-g0i46ble/>Berapa banyak sensor suhu yang dimiliki laptop? [Tutup]</a></div></li><li class=list-group-item><div><a href=/apakah-berisiko-membeli-dua-kit-ram-64gb-daripada-satu-kit-ram-128gb-l807ibgq/>Apakah berisiko membeli dua kit RAM 64GB daripada satu kit RAM 128GB?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-membuka-terminal-dalam-ide-z9swqtw8/>Bagaimana cara membuka terminal dalam ide?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengisi-seri-besar-lebih-dari-10000-baris-di-microsoft-excel-tanpa-menyeret-atau-memilih-sel-thos5rsb/>Bagaimana cara mengisi seri besar (lebih dari 10.000 baris) di Microsoft Excel tanpa menyeret atau memilih sel?</a></div></li><li class=list-group-item><div><a href=/bagaimana-anda-memigrasi-lingkungan-dev-setelah-anda-mendapatkan-laptop-baru-ygpznheq/>Bagaimana Anda memigrasi lingkungan dev setelah Anda mendapatkan laptop baru?</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

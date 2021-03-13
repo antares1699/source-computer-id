@@ -1,0 +1,167 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>mengaktifkan ssl di wamp dengan startsl di situs langsung</title><meta name=description content="saya mencoba mengaktifkan ssl di situs web saya, saya menggunakan wamp untuk situs langsung, saya telah membaca BANYAK tutorial tentang cara mengaktifkan SSL tetapi tidak dapat menemukannya untuk menggunakan sertifikat dari startsl.com..."><link rel=canonical href=https://www.idxstack.com/mengaktifkan-ssl-di-wamp-dengan-startsl-di-situs-langsung-ed3di4vn/><meta property="og:title" content="mengaktifkan ssl di wamp dengan startsl di situs langsung"><meta property="og:description" content="saya mencoba mengaktifkan ssl di situs web saya, saya menggunakan wamp untuk situs langsung, saya telah membaca BANYAK tutorial tentang cara mengaktifkan SSL tetapi tidak dapat menemukannya untuk menggunakan sertifikat dari startsl.com..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/mengaktifkan-ssl-di-wamp-dengan-startsl-di-situs-langsung-ed3di4vn/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="mengaktifkan ssl di wamp dengan startsl di situs langsung"><meta name=twitter:description content="saya mencoba mengaktifkan ssl di situs web saya, saya menggunakan wamp untuk situs langsung, saya telah membaca BANYAK tutorial tentang cara mengaktifkan SSL tetapi tidak dapat menemukannya untuk menggunakan sertifikat dari startsl.com..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>mengaktifkan ssl di wamp dengan startsl di situs langsung</h1><div itemprop=text><p>saya mencoba mengaktifkan ssl di situs web saya, saya menggunakan wamp untuk situs langsung, saya telah membaca BANYAK tutorial tentang cara mengaktifkan SSL tetapi tidak dapat menemukannya untuk menggunakan sertifikat dari startsl.com</p><p>setiap modul yang perlu diaktifkan saya yakin diaktifkan, saat ini saya bahkan punya</p><pre><code>Include conf/extra/httpd-ssl.conf
+</code></pre><p>un berkomentar di httpd.conf saya, tetapi telah mengomentari SETIAP baris di httpd-ssl.conf saya agar situs saya berjalan.</p><p>Saya telah melalui setiap baris secara individual di httpd-ssl saya dan mengomentari baris 1 per 1 memeriksa dan saya sepertinya tidak memiliki masalah apa pun sampai saya menghapus komentar baris host virtual (ya saya melakukan ini, menyimpan dan memulai ulang server saya setiap saat)</p><p>Saya tidak tahu apa yang terjadi di sini, saya memiliki 4 file yang saya simpan dari startsl, crt untuk situs saya ... jadi saya berharap seseorang di sini mungkin dapat membantu. di bawah ini adalah httpd-ssl.conf saya</p><pre><code>SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5
+SSLPassPhraseDialog  builtin
+SLSessionCache         "dbm:Z:/wamp/logs/ssl_scache"
+SSLSessionCache        "shmcb:Z:/wamp/logs/ssl_scache(512000)"
+SSLSessionCacheTimeout  300
+
+Listen 443
+
+AddType application/x-x509-ca-cert .crt  
+AddType application/x-pkcs7-crl    .crl  
+SSLPassPhraseDialog  builtin  
+SSLSessionCache        "shmcb:Z:/wamp/bin/apache/Apache2.2.11/logs/ssl_scache(512000)"  
+SSLSessionCacheTimeout  300  
+SSLMutex default  
+
+NameVirtualHost *:443  
+
+&lt;VirtualHost *:443&gt;  
+ServerName "dirtrif.com"  
+DocumentRoot "Z:/wamp/www/"  
+
+SSLEngine on  
+SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
+SSLCACertificatePath "Z:/wamp/OpenSSL/certs/"
+SSLCACertificateFile "Z:/wamp/OpenSSL/certs/public.crt"
+SSLCACertificateFile "Z:/wamp/OpenSSL/certs/ca.pem"
+SSLCertificateKeyFile "Z:/wamp/OpenSSL/certs/ssl.key"
+SSLCertificateChainFile "Z:/wamp/OpenSSL/certs/sub.class1.server.ca.pem"
+&lt;/VirtualHost&gt;
+</code></pre><p>saya juga ingin mencatat: saya menjalankan apache 2.4.4 dan saya sudah menulis lebih dari file di apache dengan unduhan openSSL dari <a href=http://slproweb.com/products/Win32OpenSSL.html rel="nofollow noopener" target=_blank>http://slproweb.com/products/Win32OpenSSL.html</a> (karena saya membaca di suatu tempat untuk melakukan itu lol)</p><p>juga situs saya sebenarnya adalah situs langsung dari pc saya, saya memiliki port 80 terbuka, dan port 443 adalah setup yang sama dengan 80, berikan alasan canyouseeme.org tidak melihat port 443 = /</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/322471/your-mom target=_blank rel="nofollow noopener"><span itemprop=name>your mom</span></a>
+—
+<a href=https://superuser.com/questions/752889/enabling-ssl-on-wamp-with-startssl-on-a-live-site target=_blank rel="nofollow noopener">Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm" id=showQuestionReplies>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 d-none" id=questionRepliesContainer><ul class="list-group list-group-flush"><li class=list-group-item><div>Sudah dijawab: <b><a href=https://stackoverflow.com/questions/5065281/how-to-enable-install-ssl-in-wamp-server title="how to enable install ssl in wamp server" target=_blank rel="nofollow noopener">stackoverflow.com/questions/5065281/…</a></b></div><div>— <a href=https://superuser.com/users/249349/t-todua target=_blank rel="nofollow noopener">T.Todua</a></div></li></ul></div></div></div><hr><h2 class=h4><span itemprop=answerCount>1</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>9</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>9</div><div class=card-body><div itemprop=text><p><strong>Cara Mengkonfigurasi WAMPServer untuk menggunakan HTTPS SSL</strong></p><p>* Ini bukan proses yang sepele. Mudah-mudahan, tutorial ini akan membuat SSL berfungsi untuk Anda.
+Namun mendapatkan itu dikonfigurasi dengan benar setelah itu bekerja BENAR-BENAR DIKENAKAN UNTUK ANDA.</p><p><a href=http://httpd.apache.org/docs/current/ssl/ rel="nofollow noopener" target=_blank>Bacaan tambahan untuk semua orang yang melakukan perjalanan jalan ini</a></p><p>Baik,</p><p>Saya mendasarkan tutorial ini pada pembuatan situs bernama www.wamphelpers.dev Jadi, di mana pun Anda melihat nama itu, ubahlah menjadi nama situs yang Anda coba amankan.</p><p>Saya mulai dengan membuat situs tidak aman, di \ wamp \ www \ wamphelpers</p><p>menambahkan Host Virtual untuk situs itu, di httpd-vhosts.conf</p><pre><code>&lt;VirtualHost *:80&gt;
+    DocumentRoot "c:/wamp/www"
+    ServerName localhost
+    ServerAlias localhost
+    &lt;Directory  "c:/wamp/www"&gt;
+        AllowOverride All
+        Require local
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+    DocumentRoot "c:/wamp/www/wamphelpers"
+    ServerName wamphelpers.dev
+    ServerAlias www.wamphelpers.dev
+    &lt;Directory  "c:/wamp/www/wamphelpers"&gt;
+        AllowOverride All
+        Require local
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</code></pre><p>Menambahkan namanya ke C: \ windows \ system32 \ drivers \ etc \ hosts</p><pre><code>127.0.0.1 wamphelpers.dev www.wamphelpers.dev
+::1       wamphelpers.dev www.wamphelpers.dev
+</code></pre><p>Sekarang restart dnscache sebagai berikut dari jendela perintah yang diluncurkan menggunakan 'Run as Administrator'</p><pre><code>net stop dnscache
+net start dnscache
+</code></pre><p>Kemudian buat script sederhana di \ wamp \ www \ wamphelpers \ index.php</p><pre><code>&lt;?php
+    echo 'Hello, this is the WAMPHELPERS.DEV site homepage';
+?&gt;
+</code></pre><p>Sekarang restart Apache dan pastikan bahwa situs sederhana tanpa jaminan Anda berfungsi <code>before continuing</code></p><hr><p><strong>Toolkit openssl.</strong> Openssl.exe, ssleay32.dll dan libeay32.dll disertakan dengan, dan terletak di, folder C: \ wamp \ bin \ apache \ apachex.y.z \ bin
+Ini harus menjadi semua yang Anda butuhkan untuk membuat sertifikat yang ditandatangani sendiri !!</p><p><strong>NAMUN:</strong> Ini tidak berfungsi untuk saya pada salah satu versi Apache yang telah saya instal.
+Saya selalu mendapat pesan kesalahan ini.</p><p><img src=https://i.stack.imgur.com/OYuLk.jpg alt="error message" class="img-fluid d-block my-2" loading=lazy></p><p>Di mana nomor urut berubah tergantung pada folder versi apache tempat saya berada.</p><p>Jika Anda mendapatkan kesalahan ini jangan khawatir, inilah yang perlu Anda lakukan.</p><p><strong>instal OPENSSL TOOLKIT versi terbaru</strong></p><p>Ini bisa didapatkan <a href=http://slproweb.com/products/Win32OpenSSL.html rel="nofollow noopener" target=_blank>dari sini</a></p><p>Pilih versi terbaru dari 'Win32 OpenSSLv xxx Light' karena hanya ini yang Anda butuhkan.</p><p>Ini akan mengunduh file .exe yang dapat Anda jalankan untuk menginstal toolkit ini.</p><p>Ini akan menanyakan pertanyaan berikut, saya sarankan Anda menjawabnya seperti ini sehingga Anda tidak menginstal sesuatu ke C: \ windows \ system32.
+Lagipula ini adalah toolkit dan sering berubah. Yang terbaik adalah menjaga agar hal-hal ini tetap terpisah dan tidak menjadikannya sistem global.</p><p><img src=https://i.stack.imgur.com/2KEUo.jpg alt="openssl install suggestion" class="img-fluid d-block my-2" loading=lazy></p><p>Setelah itu diinstal (ke folder mana pun yang Anda tentukan dalam penginstalan), Anda harus siap untuk memulai proses pembuatan kunci dan sertifikat!</p><hr><p><strong>Hasilkan kunci dan Sertifikat.</strong></p><p><strong>LANGKAH 1: Buat Kunci Pribadi RSA</strong></p><p>Pertama kita perlu membuat sertifikat untuk diri kita sendiri.
+Proses normal (dibayar) adalah membuat sertifikat Anda dan kemudian meneruskannya ke otoritas penandatanganan.
+Inilah sebabnya mengapa membutuhkan uang, sebagaimana yang harus mereka lakukan, uji tuntas, untuk memeriksa bahwa Anda adalah yang Anda katakan dan bahwa situs tempat Anda akan menggunakan sertifikat itu nyata dan sah.</p><p>Toolkit openssl digunakan untuk menghasilkan Kunci Pribadi RSA dan CSR (Permintaan Penandatanganan Sertifikat) untuk digunakan pada Sertifikat kami.
+Langkah pertama adalah membuat Kunci Pribadi RSA Anda.
+Kunci ini adalah kunci RSA 1024 bit yang dienkripsi menggunakan Triple-DES dan disimpan dalam format PEM sehingga dapat dibaca sebagai teks ASCII.</p><p>Buka jendela Command (kotak Dos) menggunakan [b] Run as Administrator [/ b]
+Ubah Direktori ke tempat Anda menginstal OpenSSL Toolkit di atas.
+Dalam kasus saya ini</p><pre><code>CD c:\apps\OpenSSL-Win32\bin
+</code></pre><p>Buat folder untuk output yang akan dimasukkan (untuk menjaga folder bin rapi) Saya menggunakan situs web</p><pre><code>md website
+</code></pre><p>Sekarang masukkan perintah ini:</p><pre><code>openssl genrsa -out website\server.key 2048
+</code></pre><p>Ini seharusnya membuat file di folder situs web bernama privkey.pem, tanpa kunci frase sandi, periksa keberadaannya.</p><p><strong>Langkah 2: Buat CSR (Permintaan Penandatanganan Sertifikat)</strong></p><p>Selama pembuatan CSR, Anda akan diminta memberikan beberapa informasi.
+Ini adalah atribut X.509 dari sertifikat tersebut.
+Salah satu petunjuknya adalah untuk "Nama Umum (mis. FQDN server atau nama ANDA) []:". <strong>Kolom ini harus diisi dengan nama domain server yang memenuhi syarat untuk dilindungi oleh SSL.</strong> Jadi jika situs web yang akan dilindungi adalah <code>https://www.wamphelpers.dev</code>, kemudian masukkan <code>www.wampheplers.dev</code> pada prompt ini.</p><p>Jangan masukkan apa pun ke pertanyaan: <strong>Sandi tantangan []:</strong> ] Cukup tekan Enter.
+Jika Anda memasukkan kata sandi di sini ketika Anda memulai Apache dengan SSL dikonfigurasi Apache tidak akan mulai dan akan memberikan pesan kesalahan ini: -</p><p><em>[error] Init: SSLPassPhraseDialog builtin tidak didukung di Win32</em></p><p>Pada dasarnya jika Anda memasukkan frasa sandi, Apache seharusnya menantang Anda untuk frasa sandi itu setiap kali dimulai.
+Ini jelas tidak akan membuat hidup Anda lebih mudah tetapi terutama di windows itu tidak benar-benar berfungsi dan akan
+menyebabkan Apache macet ketika mencoba meminta frasa sandi, dengan kesalahan di atas.</p><p>Perintah untuk menghasilkan CSR adalah sebagai berikut:</p><pre><code>openssl req -new -key website\server.key -out website\server.csr
+
+
+Example question and answers:
+Country Name (2 letter code) [AU]:GB
+State or Province Name (full name) [Some-State]: Hampshire
+Locality Name (eg, city) []: Portsmouth
+Organization Name (eg, company) [Internet Widgits Pty Ltd]: Wamp Helpers Ltd
+Organizational Unit Name (eg, section) []: Information Technology
+Common Name (e.g. server FQDN or YOUR name) []: www.wamphelpers.dev
+Email Address []: me@wamphelpers.dev
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []: ( leave blank just hit the enter key )
+An optional company name []: ( leave blank just hit the enter key )
+</code></pre><p><strong>Langkah 3: Membuat Sertifikat yang Ditandatangani Sendiri</strong></p><p>Pada tahap ini Anda perlu membuat sertifikat yang ditandatangani sendiri karena
+Anda juga tidak berencana agar sertifikat Anda ditandatangani oleh CA, atau Anda ingin mengujinya
+implementasi SSL baru Anda saat CA menandatangani sertifikat Anda.</p><p><strong>PRA - PERINGATAN</strong> Sertifikat ini akan menghasilkan kesalahan di browser klien yang menyebabkan itu
+otoritas sertifikat penandatanganan tidak dikenal dan tidak dipercaya.
+Ini tidak dapat dihindari karena kami sendiri yang menandatangani sertifikat, tetapi tentu saja web kepercayaan tidak mengetahui siapa kami. <em>Lihat contoh nanti dalam dokumen ini yang menunjukkan cara memberi tahu browser Anda bahwa Anda benar-benar mempercayai sertifikat ini</em></p><pre><code>openssl x509 -req -days 365 -in website\server.csr -signkey website\server.key -out website\server.crt
+
+
+Example output:
+Loading 'screen' into random state - done
+Signature ok
+subject=/C=GB/ST=Hampshire/L=Portsmouth/O=WampHelpers Ltd/OU=Information Technology/CN=www.wamphelpers.dev/emailAddress=riggsfolly@wamphelpers.dev
+Getting Private key
+</code></pre><p><strong>Langkah 4: Memasang Kunci Pribadi dan Sertifikat</strong></p><p>Buat 2 direktori ini di bawah versi Apache yang Anda gunakan.</p><pre><code>md c:\wamp\bin\apache\apachex.y.z\conf\ssl.key
+md c:\wamp\bin\apache\apachex.y.z\conf\ssl.crt
+</code></pre><p>Dan salin file yang baru saja kita buat ke dalamnya seperti ini:</p><pre><code>copy website\server.crt c:\wamp\bin\apache\apachex.y.z\conf\ssl.crt
+copy website\server.key c:\wamp\bin\apache\apachex.y.z\conf\ssl.key
+</code></pre><p><strong>Langkah 5: Konfigurasi Apache untuk mengaktifkan SSL</strong></p><p>Edit httpd.conf, Periksa apakah baris ini tidak diberi komentar</p><pre><code>LoadModule ssl_module modules/mod_ssl.so
+</code></pre><p>Hapus juga komentar '#' dari baris ini</p><pre><code>Include conf/extra/httpd-ssl.conf
+</code></pre><p>Kemudian pindahkan garis itu setelah blok ini .... seperti itu</p><pre><code>&lt;IfModule ssl_module&gt;
+SSLRandomSeed startup builtin
+SSLRandomSeed connect builtin
+&lt;/IfModule&gt;
+
+# Secure (SSL/TLS) connections
+Include conf/extra/httpd-ssl.conf
+</code></pre><p><strong>Langkah 6: Konfigurasi PHP untuk mengaktifkan SSL</strong></p><p>Edit php.ini Anda (gunakan menu wampmanager sehingga Anda mengedit yang benar)</p><p>Hapus komentar ';' dari garis ini</p><pre><code>extension=php_openssl.dll
+</code></pre><p><strong>Langkah 7: Konfigurasikan Host Virtual situs aman Anda</strong></p><p>Yup untuk semua yang Anda Virtual Host dan katakan, sekarang Anda tidak dapat menghindari proses tersebut.</p><p>Edit <code>\wamp\bin\apache\apachex.y.z\conf\httpd-ssl.conf</code></p><p>File ini dirilis oleh Apache dan berisi beberapa lokasi file default.
+Kita dapat membiarkan sebagian besar file ini apa adanya, tetapi kita perlu mengkonfigurasi host virtual di sini agar sesuai dengan lokasi situs kita yang sebenarnya dan beberapa hal lain jadi:</p><p>temukan baris ini</p><pre><code>DocumentRoot "c:/Apache2/htdocs"
+ServerName www.example.com:443
+ServerAdmin admin@example.com
+ErrorLog "c:/Apache2/logs/error.log"
+TransferLog "c:/Apache2/logs/access.log"
+</code></pre><p>dan mengubahnya menjadi</p><pre><code>DocumentRoot "c:/wamp/www/wamphelpers"
+ServerName wamphelpers.dev:443
+ErrorLog "c:/wamp/logs/ssl_error.log"
+TransferLog "c:/wamp/logs/ssl_access.log"
+</code></pre><p>Temukan</p><pre><code>SSLCertificateFile "c:/Apache2/conf/server.crt"
+</code></pre><p>dan ubah menjadi</p><pre><code>SSLCertificateFile "c:/wamp/bin/apache/apachex.y.x/conf/ssl.crt/server.crt"
+</code></pre><p>Temukan</p><pre><code>SSLCertificateKeyFile "c:/Apache2/conf/server.key"
+</code></pre><p>dan ubah menjadi</p><pre><code>SSLCertificateKeyFile "c:/wamp/bin/apache/apache2.2.26/conf/ssl.key/server.key"
+</code></pre><p>Temukan</p><pre><code>&lt;Directory "c:/Apache2/cgi-bin"&gt;
+    SSLOptions +StdEnvVars
+&lt;/Directory&gt;
+</code></pre><p>dan ubah menjadi</p><pre><code>&lt;Directory "c:/wamp/www/wamphelpers"&gt;
+    SSLOptions +StdEnvVars
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride All
+    Order Deny,Allow
+    Deny from all
+    Allow from 127.0.0.1 localhost ::1
+&lt;/Directory&gt;
+</code></pre><p>Temukan</p><pre><code>SSLSessionCache        "shmcb:c:/Apache2/logs/ssl_scache(512000)"
+SSLSessionCacheTimeout  300
+</code></pre><p>dan mengubahnya menjadi</p><pre><code>SSLSessionCache        "shmcb:c:/wamp/logs/ssl_scache(512000)"
+SSLSessionCacheTimeout  300
+</code></pre><p>Temukan</p><pre><code>CustomLog "c:/Apache24/logs/ssl_request.log" \
+      "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+</code></pre><p>dan ubah menjadi</p><pre><code>CustomLog "c:/wamp/logs/ssl_request.log" \
+          "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+</code></pre><p>Pada dasarnya lihat melalui file conf dan perintah apa pun yang tidak diberi komentar, tetapi memiliki referensi ke file atau folder
+harus diubah untuk mereferensikan struktur folder WAMPServer dan bukan 'C: / Apache2 ....'</p><p>Sekarang pastikan semua file yang telah kita ubah ini disimpan, dan restart Apache menggunakan menu wampmanager.</p><p>Uji pertama apakah situs yang tidak dilindungi masih berfungsi.</p><p>Kemudian coba gunakan situs baru Anda yang dilindungi dengan menambahkan 'https: //' di depan nama domain
+yaitu <code>https://www.wamphelpers.dev</code> tanpa tanda kutip tunggal tentunya.</p><p><strong>Jika Apache tidak restart</strong> Anda mungkin salah mengeja. Uji konfigurasi seperti ini: -</p><p>Buka jendela perintah</p><pre><code>cd \wamp\bin\apache\apachex.y.z\bin
+httpd -t
+</code></pre><p>Ini akan mengurai semua file konfigurasi dan akan memberi Anda nama file dan nomor baris di mana kesalahan telah ditemukan.</p><p>Perbaiki dan coba lagi.</p><p>Akses pertama ke situs Anda akan menghasilkan halaman pesan seperti ini.
+Ini menggunakan FireFox, yang lain akan sedikit berbeda, tetapi konsepnya sama.</p><p><img src=https://i.stack.imgur.com/OIv0o.png alt="enter image description here" class="img-fluid d-block my-2" loading=lazy></p><p>Ini karena sertifikat Anda tidak ditandatangani oleh otoritas tepercaya, JANGAN PANIK, ini seharusnya terjadi.</p><p>Klik, 'Saya Memahami risikonya' dan itu akan menunjukkan kepada Anda tombol bertuliskan 'Tambahkan Pengecualian'
+Tekan tombol Add Exception, setelah memeriksa bahwa detail situs sertifikat memang milik Anda,
+dan Anda tidak akan melihat pesan ini lagi kecuali Anda menghapus daftar pengecualian.</p><p><strong>CATATAN BESAR</strong> Mulai Apache v2.2.12 dan OpenSSL v0.9.8j, sekarang dimungkinkan untuk mengamankan lebih dari satu situs per instance Apache.
+Tutorial ini tidak mencakup proses itu.
+Lihat di sini untuk lebih jelasnya:</p><p><a href=http://www.digicert.com/ssl-support/apache-multiple-ssl-certificates-using-sni.htm rel="nofollow noopener" target=_blank>Sini</a></p><p><a href=http://www.digicert.com/ssl-support/apache-secure-multiple-sites-sni.htm rel="nofollow noopener" target=_blank>dan di sini</a></p><p><a href=http://www.techrepublic.com/blog/linux-and-open-source/configure-apache-to-support-multiple-ssl-sites-on-a-single-ip-address/ rel="nofollow noopener" target=_blank>dan di sini</a></p><p><em>Dan seperti yang saya katakan di atas, sekarang Anda perlu melakukan penelitian pada semua opsi yang tersedia di konfigurasi SSL dan membuat semuanya berfungsi seperti yang Anda inginkan daripada menggunakan default.</em></p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/mengaktifkan-ssl-di-wamp-dengan-startsl-di-situs-langsung-ed3di4vn/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/220717/riggsfolly target=_blank rel="nofollow noopener"><span itemprop=name>RiggsFolly</span></a>
+—
+<a href=https://superuser.com/a/774106 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>+1 Ini juga berfungsi dengan baik di Server WAMP (32bit dan 64bit)!</div><div>— <a href=https://superuser.com/users/477820/suriyaa target=_blank rel="nofollow noopener">Suriyaa</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/tidak-dapat-masuk-ke-bios-setelah-instalasi-debian-layar-hitam-1nrnbtab/>Tidak dapat masuk ke BIOS setelah instalasi debian - layar hitam</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-memeriksa-koneksi-scp-yang-masuk-di-linux-auphtgby/>Bagaimana cara memeriksa koneksi SCP yang masuk di Linux?</a></div></li><li class=list-group-item><div><a href=/bagaimana-anda-mencari-frase-pada-halaman-di-chrome-bukan-pertandingan-string-ey04hz0j/>Bagaimana Anda mencari frase pada halaman di Chrome? (Bukan pertandingan string)</a></div></li><li class=list-group-item><div><a href=/mengosongkan-sampah-membutuhkan-waktu-selamanya-apakah-menggunakan-rm-r-aman-digunakan-di-mac-os-x-107-lion-gbhjl22h/>Mengosongkan sampah membutuhkan waktu “selamanya”: apakah menggunakan rm -r aman digunakan di Mac OS X 10.7 (Lion)?</a></div></li><li class=list-group-item><div><a href=/di-mana-anda-menginstal-aplikasi-di-ubuntu-yang-dapat-diakses-oleh-semua-pengguna-cdzkmsq0/>Di mana Anda menginstal aplikasi di Ubuntu yang dapat diakses oleh semua pengguna?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-menemukan-file-atau-folder-dengan-panjang-nama-tertentu-duplikat-di6lk0lh/>Bagaimana cara menemukan file atau folder dengan panjang nama tertentu? [duplikat]</a></div></li><li class=list-group-item><div><a href=/pilihan-opsional-dari-5-juta-baris-di-notepad-741fnjyx/>Pilihan opsional dari 5 juta + baris di Notepad ++</a></div></li><li class=list-group-item><div><a href=/saya-tidak-sengaja-menyembunyikan-panel-gnome-saya-npj5goml/>Saya tidak sengaja menyembunyikan Panel Gnome saya</a></div></li><li class=list-group-item><div><a href=/apakah-kartu-grafis-memiliki-prosesor-terpisah-untuk-tampilan-internal-dan-eksternal-wf4vbevs/>Apakah kartu grafis memiliki prosesor terpisah untuk tampilan internal dan eksternal?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-membatalkan-ketika-kode-runtuh-menjadi-elipsis-825xljmh/>Bagaimana cara membatalkan ketika kode runtuh menjadi elipsis?</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

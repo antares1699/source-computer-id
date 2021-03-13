@@ -1,0 +1,72 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>POP EMail dengan Alpine (Pine)</title><meta name=description content="Selama bertahun-tahun saya sering menggunakan Pine, terutama saat kuliah  Bagaimana cara menyiapkan Pine untuk POP ke email saya sehingga lokal di komputer saya? Saya tidak suka menyimpan email saya di server di..."><link rel=canonical href=https://www.idxstack.com/pop-email-dengan-alpine-pine-cuar2gq1/><meta property="og:title" content="POP EMail dengan Alpine (Pine)"><meta property="og:description" content="Selama bertahun-tahun saya sering menggunakan Pine, terutama saat kuliah  Bagaimana cara menyiapkan Pine untuk POP ke email saya sehingga lokal di komputer saya? Saya tidak suka menyimpan email saya di server di..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/pop-email-dengan-alpine-pine-cuar2gq1/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="POP EMail dengan Alpine (Pine)"><meta name=twitter:description content="Selama bertahun-tahun saya sering menggunakan Pine, terutama saat kuliah  Bagaimana cara menyiapkan Pine untuk POP ke email saya sehingga lokal di komputer saya? Saya tidak suka menyimpan email saya di server di..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>POP EMail dengan Alpine (Pine)</h1><div itemprop=text><p>Selama bertahun-tahun saya sering menggunakan Pine, terutama saat kuliah</p><p>Bagaimana cara menyiapkan Pine untuk POP ke email saya sehingga lokal di komputer saya? Saya tidak suka menyimpan email saya di server di suatu tempat, saya ingin menyimpannya secara lokal sehingga saya dapat mencadangkannya, dll</p><p>Ada yang punya saran?</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>user29734</span>
+—
+<a href=https://superuser.com/questions/119986/pop-email-with-alpine-pine target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>3</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>3</div><div class=card-body><div itemprop=text><p>Dari <em><a href=http://www.mediusrete.org/progs/calpine.html rel="nofollow noopener" target=_blank>Konfigurasi Alpine</a></em> :</p><blockquote><p>Mulailah dengan membuka "Setup
+Konfigurasi "layar (M S C) dan temukan
+bagian Preferensi Folder. Dibawah
+bagian ini, set
+aktifkan-folder-masuk dan mulai ulang
+alpine agar perubahan diterapkan.
+Sekarang buka Pesan Masuk Anda
+Folder (F Folder Masuk), tapi
+jangan buka folder INBOX Anda.</p><p>Sekarang tiba bagian menyenangkan.</p><p>Karena Anda ingin menambahkan folder baru,
+tipe A. Anda akan disajikan dengan file
+baris perintah yang menanyakan "Nama
+server berisi folder tambahan "dan
+empat opsi di bawah itu. Kami
+tertarik dengan opsi. Sejak
+Anda akan menarik email dari
+server pop3 jarak jauh, Anda mau
+mengkonfigurasi mail drop, yaitu file
+opsi terakhir, jadi tekan Ctrl W. Anda akan
+sekarang ditanyakan nama suratnya
+drop server (server yang Anda tarik
+surat dari). Masuk ke server
+(dan nomor port jika diinginkan), file
+nama pengguna (yang mungkin termasuk atau tidak termasuk
+bagian dari alamat server), dan pop3.
+Setelah selesai, Anda akan mendapatkan sesuatu
+yang terlihat seperti berikut ini:</p><p><code>pop.server.tld:port/user=username@server.tld/pop3</code></p><p>Jika Anda menggunakan koneksi aman,
+Anda perlu menambahkan dua hal ke file
+masuk. Pertama, tambahkan ssl ke bagian akhir.
+Ketika itu selesai (dan dengan asumsi Anda
+tidak mau, atau mengalami kesulitan
+pengaturan, validasi sertifikat),
+tambahkan novalidate-cert tepat setelah
+mail drop server. Setelah Anda selesai,
+Anda harus memiliki sesuatu itu
+menyerupai berikut ini:</p><p><code>pop.server.tld:port/novalidate-cert/user=username@server.tld/pop3/ssl</code></p><p>Sekarang tekan Enter. Anda sekarang akan diminta
+folder yang ingin Anda salin suratnya
+dari; jawaban: Inbox.</p><p>Berikutnya: "Nama server yang akan dimuat
+folder tujuan ". Biarkan kosong,
+dan lanjutkan.</p><p>Sekarang untuk "Folder untuk menyalin email ke".
+Anda dapat menamai ini apa pun yang Anda inginkan,
+tapi saya biasanya menggunakan nama pengguna
+akun email apa pun yang saya atur
+mail drop up untuk.</p><p>Dan saya melakukan hal yang sama seperti di atas untuk
+"Nama panggilan untuk folder" nama pengguna "".</p><p>Dan sekarang Anda memiliki mail drop baru
+map. Untuk menyiapkan lebih banyak, ulangi sebagai
+dibutuhkan.</p></blockquote><p><em><a href=http://shakthimaan.com/installs/alpine-email-setup.html rel="nofollow noopener" target=_blank>Pengaturan email Alpine</a></em> juga memiliki petunjuk penyiapan Alpine, termasuk cara menyiapkan Gmail menggunakan POP3 (termasuk gambar):</p><blockquote><p>Ini adalah contoh penggunaan POP3 dari
+Gmail. Anda harus mengaktifkan POP3
+dari akun Gmail Anda di bawah
+Pengaturan → Penerusan dan POP / IMAP.</p><p>Untuk membuat folder masuk baru untuk
+POP, gunakan Menu Utama → Folder
+Daftar → Folder-Masuk → Tambah.</p><p>Ini akan meminta Anda untuk Nama
+server berisi folder tambahan:</p><p><code>Name of server to contain added folder: pop.gmail.com:995/novalidate-cert/user=username@gmail.com/pop3/ssl</code></p><p>Ini kemudian akan meminta untuk meminta file
+'Folder di' pop.gmail.com… "untuk menambahkan:</p><p><code>Folder on "pop.gmail.com.." to add:
+INBOX</code></p><p>Isi nama panggilan:</p><p><code>Nickname for folder "INBOX" : INBOX at
+gmail.com</code></p><p>Ini kemudian akan terhubung ke
+server gmail dan akan meminta file
+namapengguna@gmail.com sandi. Masukkan itu,
+dan INBOX akan terbuka.</p></blockquote></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/pop-email-dengan-alpine-pine-cuar2gq1/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/2182/jared-harley target=_blank rel="nofollow noopener"><span itemprop=name>Jared Harley</span></a>
+—
+<a href=https://superuser.com/a/120030 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>3</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>3</div><div class=card-body><div itemprop=text><ol><li>Buka file <code>.pinerc</code> untuk mengedit.</li><li>Cari opsi <code>"incoming-folders="</code>.</li><li><p>Menambahkan:</p><pre><code>nick_name "#move {server}inbox_folder local_mail_folder"
+</code></pre></li><li>Simpan versi terbaru dari .pinerc</li><li><p>Buat folder email kosong di lokasi pilihan Anda:</p><pre><code>touch local_mail_folder
+</code></pre></li></ol><p>Contoh:</p><p>Menambahkan:</p><pre><code>incoming-folders=GMAIL "#move pop.gmail.com/ssl/user=user@gmail.com/novalidate-cert}INBOX /home/user/mail/gmail"
+</code></pre><p>Dan selanjutnya:</p><pre><code>$ touch /home/user/mail/gmail
+</code></pre><p>Jika Anda ingin menentukan ini untuk dua atau lebih akun, pisahkan dengan ",".</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/pop-email-dengan-alpine-pine-cuar2gq1/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/104064/user104064 target=_blank rel="nofollow noopener"><span itemprop=name>user104064</span></a>
+—
+<a href=https://superuser.com/a/353778 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=1>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=1><ul class="list-group list-group-flush"><li class=list-group-item><div>Sebenarnya, <code>local_mail_folder</code> adalah sebuah file.</div><div>— <a href=https://superuser.com/users/195224/mpy target=_blank rel="nofollow noopener">mpy</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/apakah-ada-alternatif-untuk-menambahkan-variabel-lingkungan-path-di-windows-ax0maxkr/>Apakah ada alternatif untuk menambahkan variabel lingkungan PATH di Windows?</a></div></li><li class=list-group-item><div><a href=/dengan-debian-bagaimana-cara-menghapus-direktori-yang-tidak-kosong-m7cppxqr/>Dengan Debian, bagaimana cara menghapus direktori yang tidak kosong?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-menonaktifkan-mengaktifkan-layanan-teamviewer-di-linux-dan-windows-djxxthqk/>Bagaimana cara menonaktifkan / mengaktifkan layanan TeamViewer di Linux dan Windows?</a></div></li><li class=list-group-item><div><a href=/di-mana-saya-dapat-menemukan-video-2160p-7dxilgjc/>Di mana saya dapat menemukan video 2160p?</a></div></li><li class=list-group-item><div><a href=/haruskah-saya-menggunakan-screensaver-atau-mematikan-monitor-setelah-saya-selesai-e8gbw2uh/>Haruskah saya menggunakan screensaver atau mematikan monitor setelah saya selesai?</a></div></li><li class=list-group-item><div><a href=/apakah-openssl-versi-098-saya-terpengaruh-oleh-heartbleed-ynmjxcun/>Apakah OpenSSL versi 0.9.8 saya terpengaruh oleh heartbleed?</a></div></li><li class=list-group-item><div><a href=/apakah-penginstalan-bersih-benar-benar-lebih-baik-daripada-peningkatan-versi-9dhhzivu/>Apakah penginstalan bersih benar-benar lebih baik daripada peningkatan versi?</a></div></li><li class=list-group-item><div><a href=/memotong-ubuntu-ke-tulang-untuk-virtualbox-vm-fsqftcrf/>Memotong Ubuntu ke tulang untuk Virtualbox VM</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-menghentikan-excel-2007-menyalin-sel-tersembunyi-b3ahxspf/>Bagaimana cara menghentikan Excel (2007) menyalin sel tersembunyi?</a></div></li><li class=list-group-item><div><a href=/bagaimana-anda-menonaktifkan-opsi-inspeksi-elemen-di-menu-dari-chrome-dan-firefox-dll-duplikat-zdq1uqws/>Bagaimana Anda menonaktifkan opsi INSPEKSI ELEMEN di menu dari Chrome dan Firefox dll? [duplikat]</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

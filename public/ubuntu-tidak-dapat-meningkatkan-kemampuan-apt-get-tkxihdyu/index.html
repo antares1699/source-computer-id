@@ -1,0 +1,521 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Ubuntu tidak dapat meningkatkan kemampuan apt-get</title><meta name=description content="Saya mencoba memutakhirkan Ubuntu dari 14 menjadi 15, dan selama proses tersebut saya mengalami beberapa masalah. Pembaruan mengatakan itu selesai dengan sukses tetapi ada kesalahan dalam prosesnya. Saya kemudian me-restart komputer saya..."><link rel=canonical href=https://www.idxstack.com/ubuntu-tidak-dapat-meningkatkan-kemampuan-apt-get-tkxihdyu/><meta property="og:title" content="Ubuntu tidak dapat meningkatkan kemampuan apt-get"><meta property="og:description" content="Saya mencoba memutakhirkan Ubuntu dari 14 menjadi 15, dan selama proses tersebut saya mengalami beberapa masalah. Pembaruan mengatakan itu selesai dengan sukses tetapi ada kesalahan dalam prosesnya. Saya kemudian me-restart komputer saya..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/ubuntu-tidak-dapat-meningkatkan-kemampuan-apt-get-tkxihdyu/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Ubuntu tidak dapat meningkatkan kemampuan apt-get"><meta name=twitter:description content="Saya mencoba memutakhirkan Ubuntu dari 14 menjadi 15, dan selama proses tersebut saya mengalami beberapa masalah. Pembaruan mengatakan itu selesai dengan sukses tetapi ada kesalahan dalam prosesnya. Saya kemudian me-restart komputer saya..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Ubuntu tidak dapat meningkatkan kemampuan apt-get</h1><div itemprop=text><p>Saya mencoba memutakhirkan Ubuntu dari 14 menjadi 15, dan selama proses tersebut saya mengalami beberapa masalah. Pembaruan mengatakan itu selesai dengan sukses tetapi ada kesalahan dalam prosesnya. Saya kemudian me-restart komputer saya dan itu tidak mau mulai. Jadi saya kemudian mendapatkan Live CD dan mengikuti langkah-langkah di sini:</p><p><a href=https://help.ubuntu.com/community/LiveCdRecovery#Update_Failure rel="nofollow noopener" target=_blank>https://help.ubuntu.com/community/LiveCdRecovery#Update_Failure</a></p><p>Pada langkah 9</p><pre><code>apt-get upgrade
+</code></pre><p>Saya mendapatkan pesan berikut:</p><pre><code>Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Calculating upgrade... The following packages were automatically installed and are no longer required:
+  jmeter-help libcgmanager0:i386 libgnome-media-profiles-3.0-0 libidl-common
+  libidl0 libjpeg62 libmirclient7 libmirclientplatform-mesa
+  libmono-addins-gui0.2-cil libmono-addins0.2-cil libnih-dbus1:i386
+  libnih1:i386 liborbit2 python-support
+Use 'apt-get autoremove' to remove them.
+Done
+The following packages have been kept back:
+  account-plugin-aim account-plugin-jabber account-plugin-salut
+  account-plugin-yahoo appmenu-qt5 aptdaemon bzip2 cabextract cheese
+  cheese-common colord compiz compiz-core compiz-gnome compiz-plugins
+  compiz-plugins-default console-setup cpp curl dictionaries-common
+  dnsmasq-base empathy empathy-common fonts-thai-tlwg fop g++ gcc gdb
+  gir1.2-clutter-1.0 gir1.2-cogl-1.0 gir1.2-coglpango-1.0 gir1.2-nmgtk-1.0
+  gir1.2-totem-1.0 gnome-orca gnome-session-flashback gnome-sudoku
+  gnome-terminal gnome-terminal-data gnome-tweak-tool gstreamer1.0-clutter hud
+  imagemagick indicator-appmenu initscripts isc-dhcp-client isc-dhcp-common
+  jmeter jmeter-http keyboard-configuration libaccount-plugin-1.0-0
+  libaccounts-qt5-1 libatk-bridge2.0-0 libatk-bridge2.0-0:i386
+  libatk-bridge2.0-dev libblas3 libbz2-1.0 libbz2-dev libcheese-gtk23
+  libcheese7 libcloog-isl4 libclutter-1.0-0 libclutter-1.0-dev
+  libclutter-gst-2.0-0 libclutter-gtk-1.0-0 libcogl-dev libcogl-pango-dev
+  libcompizconfig0 libcurl3 libcurl3-gnutls libcurl4-openssl-dev libdecoration0
+  libfop-java libfreerdp-plugins-standard libgcrypt11-dev libgexiv2-2
+  libgnutls-dev libgnutls-openssl27 libgtlcore0.8 libgtlfragment0.8
+  libgtlimageio0.8 libhud2 liblog-message-simple-perl libmm-glib0
+  libnm-gtk-common libnm-gtk0 libnunit-cil-dev libopenctl0.8
+  libopencv-calib3d2.4 libopencv-contrib2.4 libopencv-core2.4
+  libopencv-features2d2.4 libopencv-flann2.4 libopencv-highgui2.4
+  libopencv-imgproc2.4 libopencv-legacy2.4 libopencv-ml2.4
+  libopencv-objdetect2.4 libopencv-photo2.4 libopencv-video2.4 libopenshiva0.8
+  liboxideqt-qmlplugin liboxideqtcore0 liboxideqtquick0 libpam-modules
+  libpam-modules-bin libpam-systemd libprotobuf-dev libpulse-dev
+  libpulse-mainloop-glib0 libpulse0 libpulse0:i386 libpulsedsp libpython-stdlib
+  libpython2.7 libpython2.7-minimal libpython2.7-stdlib libqt5core5a
+  libqt5dbus5 libqt5feedback5 libqt5gui5 libqt5multimedia5 libqt5network5
+  libqt5opengl5 libqt5organizer5 libqt5positioning5 libqt5printsupport5
+  libqt5qml-graphicaleffects libqt5qml5 libqt5quick5 libqt5sensors5 libqt5sql5
+  libqt5sql5-sqlite libqt5svg5 libqt5test5 libqt5webkit5
+  libqt5webkit5-qmlwebkitplugin libqt5widgets5 libqt5xml5 librtmp-dev
+  libsignon-extension1 libstk0c2a libtotem-plparser18 libtotem0 libunityvoice1
+  libwacom-common libwacom2 libxml2 libxml2:i386 libxml2-dev lvm2
+  mcp-account-manager-uoa metacity metacity-common modemmanager
+  mysql-client-5.6 mysql-common mysql-server-5.6 mysql-server-core-5.6
+  network-manager network-manager-gnome network-manager-pptp
+  network-manager-pptp-gnome opengtl-dev oxideqt-codecs parted playonlinux ppp
+  pulseaudio pulseaudio-module-bluetooth pulseaudio-module-x11 pulseaudio-utils
+  python python-aptdaemon python-aptdaemon.gtk3widgets python-lxml
+  python-minimal python-pycurl python-requests python-twisted-core
+  python-twisted-web python-urllib3 python2.7 python2.7-minimal
+  python3-aptdaemon python3-aptdaemon.gtk3widgets python3-aptdaemon.pkcompat
+  python3-distupgrade python3-lxml qtdeclarative5-accounts-plugin
+  qtdeclarative5-dialogs-plugin qtdeclarative5-localstorage-plugin
+  qtdeclarative5-privatewidgets-plugin qtdeclarative5-qtfeedback-plugin
+  qtdeclarative5-qtquick2-plugin qtdeclarative5-ubuntu-ui-extras-browser-plugin
+  qtdeclarative5-ubuntu-ui-toolkit-plugin qtdeclarative5-window-plugin remmina
+  remmina-common remmina-plugin-rdp remmina-plugin-vnc rfkill shotwell
+  shotwell-common signon-plugin-oauth2 signon-ui signond stk
+  system-config-printer-common system-config-printer-udev systemd-shim totem
+  totem-common totem-plugins transmission-common transmission-gtk
+  ubuntu-minimal ubuntu-release-upgrader-core ubuntu-release-upgrader-gtk
+  ubuntu-standard ubuntu-wallpapers unity-control-center-signon unity-greeter
+  unity-voice-service unity-webapps-qml vino virtualbox virtualbox-dkms
+  virtualbox-qt webapp-container webbrowser-app
+0 upgraded, 0 newly installed, 0 to remove and 231 not upgraded.
+542 not fully installed or removed.
+After this operation, 0 B of additional disk space will be used.
+Do you want to continue? [Y/n]
+</code></pre><p>Saya mengatakan ya, dan mendapatkan kesalahan berikut:</p><pre><code>E: Can not write log (Is /dev/pts mounted?) - posix_openpt (2: No such file or directory)
+Setting up procps (1:3.3.9-1ubuntu8) ...
+update-rc.d: warning: start and stop actions are no longer supported; falling back to defaults
+insserv: Service mountkernfs has to be enabled to start service procps
+insserv: exiting now!
+update-rc.d: error: insserv rejected the script header
+dpkg: error processing package procps (--configure):
+ subprocess installed post-installation script returned error exit status 1
+dpkg: dependency problems prevent configuration of udev:
+ udev depends on procps; however:
+  Package procps is not configured yet.
+
+dpkg: error processing package udev (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of bluez:
+ bluez depends on udev (&gt;= 170-1); however:
+  Package udev is not configured yet.
+
+dpkg: error processing package bluez (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of plymouth:
+ plymouth depends on udev (&gt;= 166-0ubuntu4); however:
+  Package udev is not configured yet.
+
+dpkg: error processing package plymouth (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of mountall:
+ mountall depends on udev; however:
+  Package udev is not configured yet.
+ mountall depends on plymouth; however:
+  Package plymouth is not configured yet.
+
+dpkg: error processing package mountall (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of cmake:
+ cmake depends on procps; however:
+  Package procps is not configured yet.
+
+dpkg: error processing package cmake (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of samba:
+ samba depends on procps; however:
+  Package procps is not configured yet.
+
+dpkg: error processing package samba (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of winbind:
+ winbind depends on samba (= 2:4.1.13+dfsg-4ubuntu3); however:
+  Package samba is not configured yet.
+
+dpkg: error processing package winbind (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of libnss-winbind:amd64:
+ libnss-winbind:amd64 depends on winbind (= 2:4.1.13+dfsg-4ubuntu3); however:
+  Package winbind is not configured yet.
+
+dpkg: error processing package libnss-winbind:amd64 (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of libpam-winbind:amd64:
+ libpam-winbind:amd64 depends on winbind (= 2:4.1.13+dfsg-4ubuntu3); however:
+  Package winbind is not configured yet.
+
+dpkg: error processing package libpam-winbind:amd64 (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of lightdm:
+ lightdm depends on plymouth (&gt;= 0.8.8-0ubuntu18); however:
+  Package plymouth is not configured yet.
+
+dpkg: error processing package lightdm (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of ubuntu-drivers-common:
+ ubuntu-drivers-common depends on udev (&gt;= 204-0ubuntu4~); however:
+  Package udev is not configured yet.
+
+dpkg: error processing package ubuntu-drivers-common (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of nvidia-prime:
+ nvidia-prime depends on lightdm (&gt;= 1.9.1) | gdm | kdm | sddm; however:
+  Package lightdm is not configured yet.
+  Package gdm is not installed.
+  Package kdm is not installed.
+  Package sddm is not installed.
+
+dpkg: error processing package nvidia-prime (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of wine1.6:
+ wine1.6 depends on procps; however:
+  Package procps is not configured yet.
+
+dpkg: error processing package wine1.6 (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of wine1.6-i386:
+ wine1.6-i386 depends on wine1.6:any (= 1:1.6.2-0ubuntu8.1); however:
+  Package wine1.6 is not configured yet.
+
+dpkg: error processing package wine1.6-i386 (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of plymouth-theme-ubuntu-text:
+ plymouth-theme-ubuntu-text depends on plymouth; however:
+  Package plymouth is not configured yet.
+
+dpkg: error processing package plymouth-theme-ubuntu-text (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because the error message indicates its a followup error from a previous failure.
+No apport report written because the error message indicates its a followup error from a previous failure.
+No apport report written because MaxReports is reached already
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of apport-gtk:
+ apport-gtk depends on procps; however:
+  Package procps is not configured yet.
+
+No apport report written because MaxReports is reached alreadydpkg: error processing package apport-gtk (--configure):
+ dependency problems - leaving unconfigured
+
+No apport report written because MaxReports is reached already
+No apport report written because MaxReports is reached already
+No apport report written because MaxReports is reached already
+No apport report written because MaxReports is reached already
+No apport report written because MaxReports is reached already
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of software-properties-gtk:
+ software-properties-gtk depends on ubuntu-drivers-common (&gt;= 1:0.2.75); however:
+  Package ubuntu-drivers-common is not configured yet.
+
+No apport report written because MaxReports is reached alreadydpkg: error processing package software-properties-gtk (--configure):
+ dependency problems - leaving unconfigured
+
+No apport report written because MaxReports is reached already
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of apturl:
+ apturl depends on software-properties-gtk; however:
+  Package software-properties-gtk is not configured yet.
+
+No apport report written because MaxReports is reached alreadydpkg: error processing package apturl (--configure):
+ dependency problems - leaving unconfigured
+
+No apport report written because MaxReports is reached already
+No apport report written because MaxReports is reached already
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of bluez-alsa:amd64:
+ bluez-alsa:amd64 depends on bluez; however:
+  Package bluez is not configured yet.
+
+dpkg: error processing package bluez-alsa:amd64 (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of cups:
+ cups depends on procps; however:
+  Package procps is not configured yet.
+
+dpkg: error processing package cups (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of printer-driver-hpcups:
+ printer-driver-hpcups depends on cups (&gt;= 1.4.0) | cupsddk; however:
+  Package cups is not configured yet.
+  Package cupsddk is not installed.
+ printer-driver-hpcups depends on cups; however:
+  Package cups is not configured yet.
+
+dpkg: error processing package printer-driver-hpcups (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of hplip:
+ hplip depends on printer-driver-hpcups (= 3.15.2-0ubuntu4.2); however:
+  Package printer-driver-hpcups is not configured yet.
+ hplip depends on cups (&gt;= 1.1.20); however:
+  Package cups is not configured yet.
+
+dpkg: error processing package hplip (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached alreadydpkg: dependency problems prevent configuration of printer-driver-postscript-hp:
+ printer-driver-postscript-hp depends on hplip (&gt;= 3.15.2-0ubuntu4.2); however:
+  Package hplip is not configured yet.
+
+
+dpkg: error processing package printer-driver-postscript-hp (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached alreadydpkg: dependency problems prevent configuration of bluez-cups:
+ bluez-cups depends on cups; however:
+  Package cups is not configured yet.
+
+
+dpkg: error processing package bluez-cups (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of udisks2:
+ udisks2 depends on udev; however:
+  Package udev is not configured yet.
+
+dpkg: error processing package udisks2 (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of python3-checkbox-support:
+ python3-checkbox-support depends on udev; however:
+  Package udev is not configured yet.
+ python3-checkbox-support depends on udisks2; however:
+  Package udisks2 is not configured yet.
+
+No apport report written because MaxReports is reached alreadydpkg: error processing package python3-checkbox-support (--configure):
+ dependency problems - leaving unconfigured
+
+No apport report written because MaxReports is reached alreadydpkg: dependency problems prevent configuration of python3-checkbox-ng:
+ python3-checkbox-ng depends on python3-checkbox-support; however:
+  Package python3-checkbox-support is not configured yet.
+
+
+dpkg: error processing package python3-checkbox-ng (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of checkbox-ng:
+ checkbox-ng depends on python3-checkbox-ng (= 0.3.1-1); however:
+  Package python3-checkbox-ng is not configured yet.
+
+dpkg: error processing package checkbox-ng (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached alreadydpkg: dependency problems prevent configuration of checkbox-ng-service:
+ checkbox-ng-service depends on checkbox-ng (= 0.3.1-1); however:
+  Package checkbox-ng is not configured yet.
+
+
+dpkg: error processing package checkbox-ng-service (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of checkbox-gui:
+ checkbox-gui depends on checkbox-ng-service; however:
+  Package checkbox-ng-service is not configured yet.
+
+dpkg: error processing package checkbox-gui (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of upower:
+ upower depends on udev; however:
+  Package udev is not configured yet.
+
+dpkg: error processing package upower (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached alreadydpkg: dependency problems prevent configuration of gnome-applets:
+ gnome-applets depends on upower; however:
+  Package upower is not configured yet.
+
+
+dpkg: error processing package gnome-applets (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of indicator-power:
+ indicator-power depends on upower; however:
+  Package upower is not configured yet.
+
+dpkg: error processing package indicator-power (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached alreadydpkg: dependency problems prevent configuration of gnome-bluetooth:
+ gnome-bluetooth depends on bluez (&gt;= 4.36); however:
+  Package bluez is not configured yet.
+ gnome-bluetooth depends on udev (&gt;= 154); however:
+  Package udev is not configured yet.
+
+
+dpkg: error processing package gnome-bluetooth (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of indicator-bluetooth:
+ indicator-bluetooth depends on bluez (&gt;= 4.36); however:
+  Package bluez is not configured yet.
+ indicator-bluetooth depends on gnome-bluetooth | ubuntu-system-settings; however:
+  Package gnome-bluetooth is not configured yet.
+  Package ubuntu-system-settings is not installed.
+
+dpkg: error processing package indicator-bluetooth (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of unity-control-center:
+ unity-control-center depends on indicator-bluetooth; however:
+  Package indicator-bluetooth is not configured yet.
+ unity-control-center depends on indicator-power; however:
+  Package indicator-power is not configured yet.
+
+dpkg: error processing package unity-control-center (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of gnome-disk-utility:
+ gnome-disk-utility depends on udisks2 (&gt;= 2.1.1); however:
+  Package udisks2 is not configured yet.
+
+dpkg: error processing package gnome-disk-utility (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of gnome-power-manager:
+ gnome-power-manager depends on upower (&gt;= 0.99); however:
+  Package upower is not configured yet.
+
+dpkg: error processing package gnome-power-manager (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of gnome-session-bin:
+ gnome-session-bin depends on upower (&gt;= 0.9.0); however:
+  Package upower is not configured yet.
+
+dpkg: error processing package gnome-session-bin (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of media-player-info:
+ media-player-info depends on udev; however:
+  Package udev is not configured yet.
+
+dpkg: error processing package media-player-info (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of plymouth-label:
+ plymouth-label depends on plymouth (= 0.9.0-0ubuntu9); however:
+  Package plymouth is not configured yet.
+
+dpkg: error processing package plymouth-label (--configure):
+ dependency problems - leaving unconfigured
+dpkg: dependency problems prevent configuration of plymouth-theme-ubuntu-logo:
+ plymouth-theme-ubuntu-logo depends on plymouth; however:
+  Package plymouth is not configured yet.
+ plymouth-theme-ubuntu-logo depends on plymouth-label; however:
+  Package plymouth-label is not configured yet.
+
+No apport report written because MaxReports is reached alreadydpkg: error processing package plymouth-theme-ubuntu-logo (--configure):
+ dependency problems - leaving unconfigured
+
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of printer-driver-gutenprint:
+ printer-driver-gutenprint depends on cups (&gt;= 1.3.0); however:
+  Package cups is not configured yet.
+
+dpkg: error processing package printer-driver-gutenprint (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of printer-driver-splix:
+ printer-driver-splix depends on cups (&gt;= 1.5.0-3~); however:
+  Package cups is not configured yet.
+
+dpkg: error processing package printer-driver-splix (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of rhythmbox:
+ rhythmbox depends on media-player-info; however:
+  Package media-player-info is not configured yet.
+
+dpkg: error processing package rhythmbox (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached alreadydpkg: dependency problems prevent configuration of rhythmbox-plugins:
+ rhythmbox-plugins depends on rhythmbox (= 3.1-1ubuntu3); however:
+  Package rhythmbox is not configured yet.
+
+
+dpkg: error processing package rhythmbox-plugins (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of rhythmbox-plugin-zeitgeist:
+ rhythmbox-plugin-zeitgeist depends on rhythmbox (&gt;= 3.1-1ubuntu3); however:
+  Package rhythmbox is not configured yet.
+ rhythmbox-plugin-zeitgeist depends on rhythmbox (&lt;&lt; 3.2); however:
+  Package rhythmbox is not configured yet.
+
+dpkg: error processing package rhythmbox-plugin-zeitgeist (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached already
+dpkg: dependency problems prevent configuration of rhythmbox-plugin-cdrecorder:
+ rhythmbox-plugin-cdrecorder depends on rhythmbox (= 3.1-1ubuntu3); however:
+  Package rhythmbox is not configured yet.
+
+dpkg: error processing package rhythmbox-plugin-cdrecorder (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached alreadydpkg: dependency problems prevent configuration of rhythmbox-mozilla:
+ rhythmbox-mozilla depends on rhythmbox (= 3.1-1ubuntu3); however:
+  Package rhythmbox is not configured yet.
+
+
+dpkg: error processing package rhythmbox-mozilla (--configure):
+ dependency problems - leaving unconfigured
+No apport report written because MaxReports is reached alreadydpkg: dependency problems prevent configuration of rhythmbox-plugin-magnatune:
+ rhythmbox-plugin-magnatune depends on rhythmbox (= 3.1-1ubuntu3); however:
+  Package rhythmbox is not configured yet.
+
+
+dpkg: error processing package rhythmbox-plugin-magnatune (--configure):
+ dependency problems - leaving unconfigured
+dpkg: too many errors, stopping
+No apport report written because MaxReports is reached already
+Errors were encountered while processing:
+ procps
+ udev
+ bluez
+ plymouth
+ mountall
+ cmake
+ samba
+ winbind
+ libnss-winbind:amd64
+ libpam-winbind:amd64
+ lightdm
+ ubuntu-drivers-common
+ nvidia-prime
+ wine1.6
+ wine1.6-i386
+ plymouth-theme-ubuntu-text
+ apport-gtk
+ software-properties-gtk
+ apturl
+ bluez-alsa:amd64
+ cups
+ printer-driver-hpcups
+ hplip
+ printer-driver-postscript-hp
+ bluez-cups
+ udisks2
+ python3-checkbox-support
+ python3-checkbox-ng
+ checkbox-ng
+ checkbox-ng-service
+ checkbox-gui
+ upower
+ gnome-applets
+ indicator-power
+ gnome-bluetooth
+ indicator-bluetooth
+ unity-control-center
+ gnome-disk-utility
+ gnome-power-manager
+ gnome-session-bin
+ media-player-info
+ plymouth-label
+ plymouth-theme-ubuntu-logo
+ printer-driver-gutenprint
+ printer-driver-splix
+ rhythmbox
+ rhythmbox-plugins
+ rhythmbox-plugin-zeitgeist
+ rhythmbox-plugin-cdrecorder
+ rhythmbox-mozilla
+ rhythmbox-plugin-magnatune
+Processing was halted because there were too many errors.
+E: Sub-process /usr/bin/dpkg returned an error code (1)
+</code></pre><p>Apa yang dapat saya lakukan untuk memperbaikinya?</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/201829/get-off-my-lawn target=_blank rel="nofollow noopener"><span itemprop=name>Get Off My Lawn</span></a>
+—
+<a href=https://superuser.com/questions/991377/ubuntu-cant-apt-get-upgrade target=_blank rel="nofollow noopener">Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm" id=showQuestionReplies>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 d-none" id=questionRepliesContainer><ul class="list-group list-group-flush"><li class=list-group-item><div>Kesulitan menulis ke disk membuat saya berpikir Anda memiliki partisi penuh atau pemetaan yang tidak tepat atau semacamnya. Coba "df -h" untuk memeriksa.</div><div>— <a href=https://superuser.com/users/340405/mightypile target=_blank rel="nofollow noopener">mightypile</a></div></li><li class=list-group-item><div>Saya dapat melanjutkan dengan melakukan autoclean apt-get</div><div>— <a href=https://superuser.com/users/201829/get-off-my-lawn target=_blank rel="nofollow noopener">Get Off My Lawn</a></div></li><li class=list-group-item><div>Luar biasa. Anda dapat memposting solusi Anda sendiri sebagai jawaban, dan setelah penundaan, terima. Orang lain yang mencari masalah yang sama bisa mendapatkan keuntungan. :-)</div><div>— <a href=https://superuser.com/users/340405/mightypile target=_blank rel="nofollow noopener">mightypile</a></div></li><li class=list-group-item><div>Apakah Anda melakukan 'apt-get update' sebelum mencoba upgrade aslinya? Apa yang terjadi ketika Anda mencoba apa yang disarankan Ubuntu - 'apt-get autoremove'?</div><div>— <a href=https://superuser.com/users/231454/mark-ch target=_blank rel="nofollow noopener">Mark Ch</a></div></li></ul></div></div></div><hr><h2 class=h4><span itemprop=answerCount>1</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>7</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>7</div><div class=card-body><div itemprop=text><p>Saya dapat memperbaikinya dengan menjalankan perintah berikut:</p><pre><code>sudo apt-get autoclean
+sudo apt-get update
+sudo apt-get upgrade
+sudo do-release-upgrade
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/ubuntu-tidak-dapat-meningkatkan-kemampuan-apt-get-tkxihdyu/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/201829/get-off-my-lawn target=_blank rel="nofollow noopener"><span itemprop=name>Get Off My Lawn</span></a>
+—
+<a href=https://superuser.com/a/991406 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/cara-menggunakan-fx-autocomplete-di-excel-tanpa-mouse-z491jwt2/>Cara menggunakan fx autocomplete di Excel tanpa mouse</a></div></li><li class=list-group-item><div><a href=/windows-81-pro-mengubah-bahasa-ssxelpuh/>Windows 8.1 Pro mengubah bahasa</a></div></li><li class=list-group-item><div><a href=/membuat-anotasi-perekaman-layar-dilakukan-dengan-quicktime-1nsyojyy/>Membuat anotasi perekaman layar dilakukan dengan QuickTime?</a></div></li><li class=list-group-item><div><a href=/alternatif-untuk-39explorerexe39-h7neg330/>Alternatif untuk 'Explorer.exe'</a></div></li><li class=list-group-item><div><a href=/cara-mereboot-wag54g2-dari-manajemen-web-opw5r7tm/>Cara mereboot WAG54G2 dari Manajemen Web</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-membuat-perintah-man-tidak-menggunakan-pager-w8xbdlbt/>Bagaimana cara membuat perintah man tidak menggunakan pager?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengatur-posisi-jendela-awal-saya-di-cocoa-emacs-va36z1j8/>Bagaimana cara mengatur posisi jendela awal saya di Cocoa emacs?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-menonton-presentasi-lync-2013-dalam-layar-penuh-un3wv8rq/>Bagaimana cara menonton presentasi Lync 2013 dalam layar penuh?</a></div></li><li class=list-group-item><div><a href=/vim-navigasi-dalam-mode-penyisipan-secara-efektif-p37wqg0t/>Vim Navigasi dalam mode penyisipan secara efektif</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mematikan-inspect-element-q-di-firefox-ahqvvrvl/>Bagaimana cara mematikan Inspect Element (Q) di Firefox?</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

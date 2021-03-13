@@ -1,0 +1,612 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Tab &amp;quot;Kebijakan&amp;quot; Driver tidak muncul di Windows</title><meta name=description content="Saya memiliki driver Marvell yang di versi Windows sebelumnya menunjukkan tab &amp;quot;Kebijakan&amp;quot; di Properties-nya di Device Manager, tetapi tidak lagi di Windows 8 / 8.1.  Ini seperti ini:  Meskipun merender dengan baik..."><link rel=canonical href=https://www.idxstack.com/tab-quotkebijakanquot-driver-tidak-muncul-di-windows-ol6sbfpg/><meta property="og:title" content="Tab &amp;quot;Kebijakan&amp;quot; Driver tidak muncul di Windows"><meta property="og:description" content="Saya memiliki driver Marvell yang di versi Windows sebelumnya menunjukkan tab &amp;quot;Kebijakan&amp;quot; di Properties-nya di Device Manager, tetapi tidak lagi di Windows 8 / 8.1.  Ini seperti ini:  Meskipun merender dengan baik..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/tab-quotkebijakanquot-driver-tidak-muncul-di-windows-ol6sbfpg/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Tab &amp;quot;Kebijakan&amp;quot; Driver tidak muncul di Windows"><meta name=twitter:description content="Saya memiliki driver Marvell yang di versi Windows sebelumnya menunjukkan tab &amp;quot;Kebijakan&amp;quot; di Properties-nya di Device Manager, tetapi tidak lagi di Windows 8 / 8.1.  Ini seperti ini:  Meskipun merender dengan baik..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Tab "Kebijakan" Driver tidak muncul di Windows</h1><div itemprop=text><p>Saya memiliki driver Marvell yang di versi Windows sebelumnya menunjukkan tab "Kebijakan" di Properties-nya di Device Manager, tetapi tidak lagi di Windows 8 / 8.1.</p><p>Ini seperti ini: <img src=https://i.stack.imgur.com/8ZtZu.jpg alt class="img-fluid d-block my-2" loading=lazy></p><p>Meskipun merender dengan baik di Windows 7 dan Vista, di Windows 8 tab baru ini tidak ada. Saya menggali dan penyebab utama (?) Adalah <code>mv91xxm.dll</code>, yang menangani kotak dialog. Sebuah decompiler (NikPEViewer) menunjukkan kepada saya a <em>Ikon MFC</em> , sebuah <em>ekspor</em> disebut <code>ESATAPortPropPageProvider</code>, dan nama aslinya adalah <code>hotplug.exe</code> sekali. Para programmer malas di Marvell lupa memperbarui file ini sejak 2009.</p><p>Kegunaan utama dialog ini adalah untuk mengaktifkan Mode Cache Driver di Marvell Controller dan menonaktifkan perilaku "Safely Removal" di Windows (untuk drive yang terhubung ke pengontrol).</p><p>Saya tidak tahu cara memperbaiki masalah, juga tidak tahu apakah memperbarui atau membuat kunci registri (saya kira ada di <code>HKLM\System\CurrentControlSet\Services\mvs91xx</code>) atau mengedit beberapa file apa pun itu.</p><p>Segala jenis bantuan sangat dihargai.</p><p><strong>catatan:</strong> <a href=https://mega.co.nz/#!KERlSJ5J!9hsd1UdS9b8MbZc0c0vO0NHJNGtU9DyyHBMHQO0_To4 rel="nofollow noopener" target=_blank>Saya mengupload driver ke Mega</a> , jika Anda ingin menggali.</p><p><strong>[Perbarui 01-05-2014]</strong></p><p>Saya mengirim email ke Marvell <a href=http://www.overclock.net/t/974023/fix-ahci-sata-drives-showing-in-safely-remove-hardware rel="nofollow noopener" target=_blank>melalui situs resminya</a> , dan meskipun mereka adalah pembuat driver, mereka tidak menyediakan dukungan untuk driver yang tidak tersedia untuk diunduh di situs web mereka</p><blockquote><p>Kepada pelanggan yang terhormat,
+Satu-satunya driver yang disetujui yang dirilis Marvell untuk pengguna akhir terletak di situs web kami:</p><p><a href=http://www.marvell.com/support/downloads/search.do rel="nofollow noopener" target=_blank>http://www.marvell.com/support/downloads/search.do</a></p><p>Jika driver yang anda cari tidak ada disini, maka kami tidak menyediakannya.</p><p>Driver yang terdapat di situs web kami adalah satu-satunya dukungan yang kami sediakan untuk pengguna akhir> (pelanggan yang tidak memiliki NDA dengan Marvell).</p><p>Jika Anda memiliki kebutuhan dukungan lainnya, silakan hubungi pabrik komputer Anda.
+Terima kasih</p></blockquote><p>Menggunakan trik untuk menambahkan kunci registri <code>TreatAsInternalPort</code> tidak berfungsi, pada dasarnya karena port tidak dikelola oleh driver Microsoft default untuk AHCI. Naluri saya mengatakan itu juga karena Microsoft mengubah nilai konfigurasi driver ini di Windows 8.</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/79387/darkghosthunter target=_blank rel="nofollow noopener"><span itemprop=name>DarkGhostHunter</span></a>
+—
+<a href=https://superuser.com/questions/745228/driver-policies-tab-not-showing-in-windows target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>5</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>5</div><div class=card-body><div itemprop=text><h1 class=h3>Analisis</h1><p>Saya tidak memiliki perangkat keras yang sama atau saya menggunakan Windows 8.x, jadi yang akan saya sediakan adalah beberapa <a href=http://en.wikipedia.org/wiki/Static_program_analysis rel="nofollow noopener" target=_blank>analisis statis</a> .</p><h2 class=h4>String</h2><p>Pada awalnya saya memindai file pustaka 64-bit <code>mvs91xx.dll</code> menggunakan utilitas Strings.</p><blockquote><p>String hanya memindai file yang Anda berikan untuk string UNICODE (atau ASCII) dengan panjang default 3 atau lebih karakter UNICODE (atau ASCII).</p><p><sub>Sumber: <a href=http://technet.microsoft.com/en-us/sysinternals/bb897439.aspx rel="nofollow noopener" target=_blank>String</a></sub></p></blockquote><p>Berikut hasil lengkapnya:</p><pre><code>!This program cannot be run in DOS mode.
+Rich
+.text
+`.data
+.pdata
+@.rsrc
+@.reloc
+EEE
+('8PW
+700PP
+```hhh
+xppwpp
+SeShutdownPrivilege
+Change Cahce Module Policy
+You must restart your computer before the new settings will take effect.
+ Do you want to restart your computer now?
+RSDS
+d:\project\2013_10\magni_svn\windows\win\sys\amd64\mv91xxm.pdb
+%f&amp;
+B@H
+L$ H
+D$ `
+D$(H
+D$$
+D$HH
+D$0f
+D$XH
+\$P
+s I
+NtH
+(tL
+t?3
+\$0H
+t$8H
+D$PD
+D$1
+D$3A
+T$0A
+8M;
+t.H
+|$8H+
+T$0H
+tJH
+0t4H
+|$8H
+L$0
+D$(
+D$ 
+|$0H
+D$0D
+L$(H
+D$ 
+L$PH3
+\$`I
+s I
+d$X
+d$P
+!D$0
+D$T
+D$4
+D$8
+D$&lt;
+D$X
+D$PH
+D$PH
+L$XH
+d$(
+d$ 
+D$0A
+D$4
+D$0
+D$&lt;
+L$X
+D$0
+d$ 
+%L!
+u'H
+d$ 
+d$ 
+tUH
+D$(
+D$ 
+L$0H3
+\$XH
+D$(
+D$ 
+D$4H
+D$(H
+D$@E3
+D$4P
+D$ 
+D$4H
+D$(H
+D$0E3
+D$4
+D$ 
+L$0
+L$0
+L$@
+L$@
+ATH
+d$ 
+t2M
+d$ 
+t$@H
+0A\
+VWATAUAVH
+t7H
+t!H
+\$PH
+l$XH
+ A^A]A\_^
+SVWH
+\$ 
+\$ 
+uxH
+D$ 
+\$ 
+t/L
+D$ 
+\$ 
+D$ 
+\$ 
+uoE3
+\$ E3
+\$ H
+\$ 
+uaL
+D$ 
+\$ 
+D$ 
+\$ 
+_^[
+\$0H
+t$8H
+@SH
+McP
+A8H
+HcH&lt;H
+9PE
+f9Q
+LcA&lt;E3
+(E;
+t"M+
+d$0
+L$0
+\$0
+L$8D
+\$8L3
+\$@H
+\$XE3
+T$`H
+L$X
+D$PH
+|$P
+tAH
+D$8
+D$HH
+D$0H
+D$@H
+D$(H
+D$ L
+L$PL
+D$XH
+T$`3
+D$hH
+D$p3
+@UH
+EP=csm
+E0H
+@UH
+Ep=csm
+E8H
+@UH
+E`=csm
+EHH
+@UH
+=csm
+E$H
+@UH
+E(=csm
+E4H
+@UH
+E@=csm
+ELH
+@UH
+EX=csm
+EhH
+@UH
+Ex=csm
+@UH
+@UH
+pd 
+pd 
+strchr
+atol
+_XcptFilter
+malloc
+_initterm
+free
+_amsg_exit
+__C_specific_handler
+msvcrt.dll
+SetupDiOpenDevRegKey
+SETUPAPI.dll
+HeapAlloc
+GetCurrentProcess
+HeapFree
+GetProcessHeap
+GetLastError
+DisableThreadLibraryCalls
+OutputDebugStringA
+CloseHandle
+LocalFree
+Sleep
+RtlVirtualUnwind
+RtlLookupFunctionEntry
+RtlCaptureContext
+QueryPerformanceCounter
+GetTickCount
+GetCurrentThreadId
+GetCurrentProcessId
+GetSystemTimeAsFileTime
+TerminateProcess
+UnhandledExceptionFilter
+SetUnhandledExceptionFilter
+KERNEL32.dll
+OpenProcessToken
+RegSetValueExA
+RegQueryValueExA
+LookupPrivilegeValueA
+AdjustTokenPrivileges
+RegCloseKey
+InitiateSystemShutdownExA
+ADVAPI32.dll
+EnableWindow
+SetWindowLongPtrA
+GetDlgItem
+MessageBoxA
+GetFocus
+SendDlgItemMessageA
+GetWindowLongPtrA
+USER32.dll
+DestroyPropertySheetPage
+CreatePropertySheetPageA
+COMCTL32.dll
+MVCOINST.dll
+ESATAPortPropPageProvider
+N@ 
+kU'9
+&amp;D(
+HMXB
+9;5
+?q=
+?Zd;
+?3=
+?/L[
+S;uD
+?$#
+;1a
+z?aUY
+D?$?
+*?}
+d|F
+U&gt;c{
+#Tw
+zc%C1
+.:3q
+,%I
+-64OS
+NKeb
+eSATAport
+MatchingDeviceId
+eSATAportCount
+DriverPolicySet
+0123
+wwwwwwwwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwwwwwwwww
+www
+wwww
+wwwwwwwwwww}
+wwwwwwww
+wwwwwwwwwwwwww
+wwwwwwwwwwwwww
+wwwwwww}
+wwww
+wwwwwww}x
+}wwwwwww}
+wwww
+wXk
+qN]
+tno
+&lt;sa
+_`__``_``a`_`_aaaa`
+     !        !     
+i\\\\\\\\[\\\\\\\[\\a///2/////////2/22///
+i\^
+da2/
+BB&lt;&lt;&lt;&lt;777111,,,*/
+i\^
+na2/
+RFGHJCDKLL=&gt;&gt;88+/
+h\^
+}qq
+[`//"QRT$
+1=&gt;&gt;8+2
+j\^
+sccy
+\`2/"OQ
+$%=&gt;&gt;*2
+i\^
+sccy
+\a//"NO
+66**
+L=&gt;(2
+i\]~
+rccy
+\a//"WN
+FTHI*++LL=(/
+h\^|~
+rccs
+\`//'VW
+RFTHJCDKLL)2
+j\]x|~
+rccp~
+\_//'VV
+QRFTHJCDKL(/
+i\^wx|~pcccccb
+\`//'UV
+OQRFGHJCDK(/
+i\]wwx|pcckrss
+\a//0UU
+NOQRSGHIJD(2
+i\^vwwxpccr
+\`///YU
+WNOQRFTHIJ)/
+j\]uvwwmccp
+\`//9YY
+VWNO5;*THI)2
+j\]uuvwmccp
+\a//9XY
+VVWN
+STH)2
+i\]ouuvmccbbbbbs
+\a//@XX0
+RST)/
+i\]oouulefffggkt
+\`/2@ZXX:
+;NPRF(/
+h\]loouuvwwx|~
+\_2/@ZZXXYYUUUVWNOPQ(/
+i\]ffggkkqqqzzz{{{
+\_//?MMMMEEEAAAA3345
+i\\\\\\\\\\\\\\\\\\\`//&amp;&amp;&amp;&amp;&amp;--&amp;&amp;&amp;&amp;-&amp;&amp;&amp;&amp;./
+illlllllll
+##"
+nPh
+_s-
+&gt;w+
+3Zz
+]ZZZZZZZZZZZWV-1---------1-
+mV2.AHBC5D;&lt;&lt;(-
+kV2.P:#
+!!+=&gt;(-
+kV239
+$=(-
+{co
+kV73@
+GJ'
+0&lt;(-
+^e~
+xco
+kV78@
+OGJKD;*1
+]d}~wca``
+kV78F
+OOGJKD*1
+\dy}rch{
+kV7EF
+MNOGIK/1
+\buyrcj
+kV?EE
+RR.#:I/-
+[btuncfssv
+kV?LE
+&amp;%"
+9G41
+]_ptqhhhjj
+kV?LTE
+@NO41
+]_mptuy}~
+lV6SUTTQQQRRN91
+[WXXXYXXYXYYWV-)))))))))),,
+uVh
+_s-
+F5&gt;&lt;&lt;==.
+ECK2LPV.
+E@J3MOU.
+D?H31IT.
+-,%
+B;G1JKS.(
+E9A011R.&amp;#
+E/4678:."&amp;' 
+NQWhX^XXXe
+rpq
+t}~]
+djklnoc
+sgba`_f|
+ux||||
+#  #  # 
+#! # 
+#! #! # 
+#  # 
+#gdc 
+#  #! # 
+#  #  # 
+#  # 
+#  # 
+#  #  #  #
+! #
+t5! #! #
+lR! #
+.Bu
+mS! #
+&lt;Bv
+lR! #
+lR! #
+d0_
+lR! #
+b0`
+lR! #
+`0_
+lR! #
+]1`
+lR! #
+[0_
+lR! #
+V0_
+lR! #
+U0_
+lR! #
+O0_
+lR! #
+M0_
+lR! #
+K0_
+lR! #
+F0_
+lR! #
+lR! #
+lS! #
+lR! #
+lR! #
+b;wi=ua=ua=ua=ua&lt;u`=ua=ua&lt;u`9d[qikunntnntnnunntnnunnunntpwyr
+cVgdc
+y]q
+nkgdc
+wYl
+gdc
+rP`
+gdc
+oJY
+gdc
+y|~$s
+hJ[
+rcgdc
+4@egdc
+5@fgdc
+5@fgdc
+4@egdc
+5Afgdc
+4@egdc
+5@fgdc
+5@fgdc
+4@egdc
+4@egdc
+5@fgdc
+5Afgdc
+5@egdc
+5@fgdc
+BL@BM@BM@BL@BL@BL@BL@BM@CMABM@BL@BL@ 
+#w\Rv\Rw]Sw\Rw\Rw\Sv\Rv\Rw\Rw]Sw]Sw]StYQ1-/ 
+_s-
+t6REE 
+F_s-
+t6RDD 
+&lt;_s-
+t5REE 
+=^s,
+t5RDE 
+=_s-
+u6RDD 
+y0_
+=_s-
+=REE 
+t0_
+=^s,
+=REE 
+j0_
+=_s-
+=SEE 
+f0_
+=_s-
+=REE 
+[0_
+&gt;w+^
+=^s,
+=REE 
+=_s-
+=SEE 
+&lt;^s,
+=SEE 
+_s-
+;tcc 
+3ZzWo
+vWj
+pM\
+XBe
+4@e
+?Ru
+CXz
+CXz
+CYz
+CXz
+BXz
+CXz
+CY{
+=_s-
+|Xfdc
+_s-
+Zgec
+_s-
+Zfdc
+_s-
+Zfdc
+y=z
+^s-
+Zfdc
+^&lt;y
+_s-
+Yfdc
+&gt;_s-
+vVh
+7&lt;K
+8&lt;K
+7&lt;K
+8&lt;K
+Policies
+MS Shell Dlg
+This setting enables driver caching to improve disk performance. This setting will be ignored and un-checked if enabled safely remove disk
+Enable driver cache mode.
+Note:
+The setting will not take effect until you restart system
+This setting enables remove disk safely. To disconnect disk from controller, click the Safely Remove Hardware icon in the taskbar notification area.
+Enable safely remove disk.
+VS_VERSION_INFO
+StringFileInfo
+040904e4
+CompanyName
+&lt;Marvell&gt;
+FileDescription
+Coinstaller
+FileVersion
+1.0.0.2
+InternalName
+hotplug.exe
+LegalCopyright
+2009 (c) &lt;Marvell&gt;.  All rights reserved.
+OriginalFilename
+hotplug.exe
+ProductName
+driver feature policy
+ProductVersion
+1.0.0.2
+VarFileInfo
+Translation
+</code></pre><p>Tidak mengherankan, hasilnya tidak bebas sampah. Saya akan menyoroti hanya bagian yang paling penting.</p><h2 class=h4>Informasi perpustakaan</h2><p>Meskipun informasi hak cipta tidak diperbarui sejak 2009, file tersebut terakhir diubah pada Oktober 2013 menurut stempel waktunya. Ini tampaknya dikonfirmasi oleh direktori build yang tertanam dalam file:</p><pre><code>d:\project\2013_10\magni_svn\windows\win\sys\amd64\mv91xxm.pdb
+</code></pre><p>Ekstensi file <code>.pdb</code> adalah singkatan dari <a href=http://en.wikipedia.org/wiki/Program_database rel="nofollow noopener" target=_blank>Database Program</a> , format milik Microsoft yang menyimpan informasi debugging. Bahkan ada juga string <code>msvcrt.dll</code>, yang berarti pustaka tersebut dikompilasi menggunakan beberapa versi <a href=http://en.wikipedia.org/wiki/Visual_C%2B%2B rel="nofollow noopener" target=_blank>Microsoft Visual C ++</a> .</p><p>Sebagai catatan tambahan, mereka menggunakan (d) <a href=http://en.wikipedia.org/wiki/Apache_Subversion rel="nofollow noopener" target=_blank>Apache Subversion</a> sebagai versi perangkat lunak dan sistem kontrol revisi.</p><h2 class=h4>Kompatibilitas Windows 8.x.</h2><p>Karena pustaka diperbarui pada Oktober 2013, masuk akal untuk berpikir bahwa mereka akan menyediakan kompatibilitas dengan Windows 8, dan mungkin juga Windows 8.1. Memeriksa <code>mvs91xx.cat</code> <a href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff537872%28v=vs.85%29.aspx" rel="nofollow noopener" target=_blank>file katalog</a> , berikut detail yang terkait dengan file library <code>mvs91xx.dll</code>:</p><pre><code>Tag                     9B1349794EE18ECCCBBD7F38FEEA9D44CC42746E
+Thumbprint algorithm    sha1
+Thumbprint              9b 13 49 79 4e e1 8e cc cb bd 7f 38 fe ea 9d 44 cc 42 74 6e
+OSAttr                  2:6.1,2:6.2,2:6.3
+File                    mvs91xx.dll
+</code></pre><blockquote><p><code>OSAttr:2:6.0</code></p><p>Atribut <code>OSAttr</code> menentukan versi Windows target yang persyaratan penandatanganannya kompatibel dengan <a href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff544840(v=vs.85).aspx" rel="nofollow noopener" target=_blank>paket pengemudi</a> . Nilai atribut menentukan yang berikut:</p><ul><li>Nilai <code>2</code> menentukan file katalog kompatibel dengan versi sistem operasi Windows berbasis NT.</li><li>Nilai <code>6.0</code> menentukan file katalog kompatibel dengan Windows Vista.</li></ul><p><strong>Catatan</strong> Jika <a href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff544840(v=vs.85).aspx" rel="nofollow noopener" target=_blank>paket pengemudi</a> kompatibel dengan beberapa versi Windows, Anda harus menggunakan opsi <code>CATATTR</code> terpisah untuk menentukan atribut <code>OSAttr</code> untuk setiap versi Windows.</p><p><sub>Sumber: <a href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff540152%28v=vs.85%29.aspx" rel="nofollow noopener" target=_blank>Membuat File Katalog untuk Paket Driver Non-PnP</a></sub></p></blockquote><p>Dalam hal ini, nilai <code>OSAttr</code> mencakup tiga versi Windows berbasis NT: Windows 7 (<code>6.1</code>), Windows 8 (<code>6.2</code>), dan Windows 8.1 (<code>6.3</code>). Ini berarti paket driver tersebut kompatibel dengan Windows 8 / 8.1, setidaknya di atas kertas; masih <strong>Kebijakan</strong> panel tidak tersedia di Windows 8.x. Apakah sistem operasi atau file pustaka yang harus disalahkan, saya tidak akan tahu.</p><h2 class=h4>Fungsi registri</h2><p>Pengaturan driver biasanya disimpan di registri, dan perpustakaan menyertakan beberapa Windows <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms724875%28v=vs.85%29.aspx" rel="nofollow noopener" target=_blank>fungsi registri</a> :</p><pre><code>RegSetValueExA
+RegQueryValueExA
+RegCloseKey
+</code></pre><p>Mencari string terkait kebijakan, saya menemukan <code>DriverPolicySet</code>. Dengan rekayasa balik perpustakaan saya mengkonfirmasi bahwa fungsi registri memang digunakan, dan bahwa string yang disebutkan di atas adalah bagian dari jalur registri yang dibaca atau ditulis.</p><hr><h1 class=h3>Perubahan kebijakan manual</h1><p>Mencari <code>"DriverPolicySet"</code> di web memberikan hasil yang sedikit, namun menarik. Secara khusus a <a href=http://www.logsoku.com/r/jisaku/1303393844/ID:vsuvzTYb rel="nofollow noopener" target=_blank>posting di papan Jepang</a> dan a <a href="http://forum.ixbt.com/topic.cgi?id=9:66729:4#4" rel="nofollow noopener" target=_blank>membalas di forum Rusia</a> . Dengan menerjemahkan dan mengumpulkan potongan-potongan informasi, saya bisa mendapatkan gambaran yang lebih jelas - secara harfiah.</p><p><img src=https://i.stack.imgur.com/SrIfR.png alt=DriverPolicySet class="img-fluid d-block my-2" loading=lazy></p><p>Nilai <code>DriverPolicySet</code> adalah string (<code>REG_SZ</code>) yang dapat disetel ke:</p><ul><li><code>0</code> - Nonaktifkan semua kebijakan.</li><li><code>1</code> - Aktifkan hanya cache driver.</li><li><code>2</code> - Aktifkan penghapusan yang aman saja.</li><li><code>3</code> - Aktifkan cache driver dan penghapusan aman.</li></ul><p>Biasanya disimpan di kunci registri berikut:</p><pre><code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E97B-E325-11CE-BFC1-08002BE10318}\0001
+</code></pre><h2 class=h4>Catatan</h2><ul><li><p>Jika nilai registri tidak ada, Anda harus membuatnya sendiri.</p></li><li><p>Anda harus memulai ulang sistem untuk menerapkan perubahan.</p></li><li><p><code>{4D36E97B-E325-11CE-BFC1-08002BE10318}</code> adalah <a href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff553426%28v=vs.85%29.aspx" rel="nofollow noopener" target=_blank>kelas perangkat</a> <a href=http://en.wikipedia.org/wiki/Globally_unique_identifier rel="nofollow noopener" target=_blank>GUID</a> ditugaskan ke pengontrol SCSI dan RAID. Ini didefinisikan dalam file <code>mvs91xx.inf</code>.</p></li><li><p>Bagian penutup <code>0001</code> mungkin sedikit berbeda tergantung pada jumlah pengontrol yang tersedia. Misalnya, mungkin <code>0000</code>, atau <code>0002</code>, dll. Sebagai gantinya.</p></li></ul></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/tab-quotkebijakanquot-driver-tidak-muncul-di-windows-ol6sbfpg/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/289138/and31415 target=_blank rel="nofollow noopener"><span itemprop=name>and31415</span></a>
+—
+<a href=https://superuser.com/a/748939 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>ITU BERHASIL. SAYA ULANGI, ITU BERHASIL.</div><div>— <a href=https://superuser.com/users/79387/darkghosthunter target=_blank rel="nofollow noopener">DarkGhostHunter</a></div></li><li class=list-group-item><div>@DarkGhostHunter Saya senang mendengarnya. Bisakah Anda menentukan di mana tepatnya nilai registri disimpan?</div><div>— <a href=https://superuser.com/users/289138/and31415 target=_blank rel="nofollow noopener">and31415</a></div></li><li class=list-group-item><div>Pada dasarnya, menambahkan "DriverPolicySet" dan menyetelnya ke "1" membuat driver memperlakukan disk memiliki port internal - dengan demikian, mengubahnya ke nilai lain akan mengaktifkan atau menonaktifkan fitur yang diminta. Saya keluar ke kunci reg itu sebelumnya, tapi saya pikir itu tidak penting. Saya rasa saya melihat beberapa forum Rusia dan Jepang, tetapi saya tidak menggali sejauh itu. Selamat, Anda mendapatkan hadiahnya. Dan memperbaiki masalah yang sangat terkenal bagi pengguna Marvell. Bersulang!</div><div>— <a href=https://superuser.com/users/79387/darkghosthunter target=_blank rel="nofollow noopener">DarkGhostHunter</a></div></li><li class=list-group-item><div>@DarkGhostHunter Jadi, Anda harus menambahkan nilai <code>DriverPolicySet</code> secara manual, artinya nilai itu belum ada? Juga, manakah jalur registri? Sepertinya paket driver tersebut memang kompatibel dengan Windows 8.x, padahal Anda harus mengedit nilai registri secara manual.</div><div>— <a href=https://superuser.com/users/289138/and31415 target=_blank rel="nofollow noopener">and31415</a></div></li><li class=list-group-item><div>Itu tidak ada sejak awal, jadi mungkin Marvell melewatkan sasaran di sana. Jalur registri sama, tetapi akhirnya adalah <code>0002</code> (Saya memiliki pengontrol pohon). Memang, paket driver kompatibel, sehingga tab "Kebijakan" adalah satu-satunya fitur yang melanggar seluruh tujuan <code>mvx91xx.dll</code>.</div><div>— <a href=https://superuser.com/users/79387/darkghosthunter target=_blank rel="nofollow noopener">DarkGhostHunter</a></div></li><li class=list-group-item><div>Saya mencoba banyak 'solusi', selama berminggu-minggu sekarang, dan ini adalah satu-satunya yang berhasil.</div><div>— <a href=https://superuser.com/users/938242/ko-the-typo target=_blank rel="nofollow noopener">KO the typo</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>2</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>2</div><div class=card-body><div itemprop=text><h1 class=h3>Penjelasan</h1><p>Seperti yang Anda katakan, mereka tidak memperbaruinya ketika mereka mem-porting driver ke Windows 8. Meskipun demikian, itu juga mungkin (bahkan mungkin <em>mungkin</em> ) bahwa mereka <em>memilih untuk menghapus</em> dari driver Windows 8 karena bug dan / atau ketidakcocokan dengan Windows 8 dan / atau karena desain antarmuka Windows 8 yang berbeda (biasanya Anda tidak melihat ikon area pemberitahuan secara default).</p><h1 class=h3>Larutan</h1><p>Taruhan terbaik Anda adalah dengan sederhana <a href=http://www.marvell.com/support/contact/cust_support.do rel="nofollow noopener" target=_blank>kontak</a> Marvell dan beri tahu mereka bahwa tab tersebut hilang dan minta mereka memperbarui driver untuk memperbaikinya. Entah mereka akan melakukannya, atau mereka akan menjelaskan secara spesifik mengapa mereka menghapusnya.</p><h1 class=h3>Bekerja di sekitar</h1><p>Sementara itu, jika Anda memerlukan fungsionalitas halaman, Anda dapat menentukan dengan tepat entri registri mana yang disetel jika Anda memiliki akses ke sistem yang tersedia (mis., Di Windows 7):</p><ol><li>Lari <a href=http://technet.microsoft.com/en-us/sysinternals/bb896645.aspx rel="nofollow noopener" target=_blank>Monitor Proses</a></li><li>Setel untuk menyaring semuanya kecuali registri</li><li>Hentikan pengambilan dan hapus hasilnya</li><li>Buka <em>Kebijakan</em> tab</li><li>Alihkan kotak centang</li><li>Beralih ke ProcMon dan mulai tangkap</li><li>Cepat beralih kembali ke tab</li><li>Klik <code>[Apply]</code></li><li>Cepat beralih kembali ke ProcMon dan hentikan penangkapan</li><li>Periksa perubahan registri untuk menemukan yang relevan</li></ol><h1 class=h3>Solusi Alternatif</h1><p>Jika Anda tidak lagi memiliki akses ke sistem yang kompatibel (yaitu, Anda tidak dapat menginstal salinan sementara Windows 7 di sistem Anda), maka Anda dapat mencoba alternatif (dan <em>vendor-independen</em> ) solusi yang disebutkan di <a href=http://www.overclock.net/t/974023/fix-ahci-sata-drives-showing-in-safely-remove-hardware rel="nofollow noopener" target=_blank>halaman</a> tempat Anda menemukan tangkapan layar yang Anda poskan di pertanyaan Anda (orang yang mengeposkan belum mengujinya di Windows 8, tetapi ada baiknya jika Anda tidak sabar menunggu tanggapan dari Marvell):</p><ol><li>Arahkan ke <code>HKLM\SYSTEM\CurrentControlSet\services\msahci</code></li><li>Buat kunci bernama <code>Controller0</code></li><li>Buat subkunci bernama <code>Channel0</code></li><li>Buat DWORD bernama <code>TreatAsInternalPort</code> dan setel ke <code>1</code></li><li>Ulangi untuk <code>Channel1</code>, <code>Channel2</code>, dll., Dan jika perlu untuk <code>Controller1</code>, dll.</li><li>Mulai ulang</li></ol><p>Berikut ini skrip registri dengan setelan default yang dikatakan oleh orang-orang di untaian tersebut berfungsi untuk mereka:</p><pre><code>REGEDIT4
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\msahci\Controller0\Channel0]
+"TreatAsInternalPort"=dword:00000001
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\msahci\Controller0\Channel1]
+"TreatAsInternalPort"=dword:00000001
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\msahci\Controller0\Channel2]
+"TreatAsInternalPort"=dword:00000001
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\msahci\Controller0\Channel3]
+"TreatAsInternalPort"=dword:00000001
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\msahci\Controller0\Channel4]
+"TreatAsInternalPort"=dword:00000001
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\msahci\Controller0\Channel5]
+"TreatAsInternalPort"=dword:00000001
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/tab-quotkebijakanquot-driver-tidak-muncul-di-windows-ol6sbfpg/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/3279/synetech target=_blank rel="nofollow noopener"><span itemprop=name>Synetech</span></a>
+—
+<a href=https://superuser.com/a/748162 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=1>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=1><ul class="list-group list-group-flush"><li class=list-group-item><div>Saya akan mencoba solusi alternatif. Sementara itu, surat itu dikirimkan ke Marvell.</div><div>— <a href=https://superuser.com/users/79387/darkghosthunter target=_blank rel="nofollow noopener">DarkGhostHunter</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/minta-file-muncul-di-beberapa-folder-mbc0bpej/>Minta file muncul di beberapa folder</a></div></li><li class=list-group-item><div><a href=/tidak-lagi-dapat-menyalin-atau-memindahkan-file-1quqedh4/>Tidak lagi dapat menyalin atau memindahkan file</a></div></li><li class=list-group-item><div><a href=/apakah-ada-klien-baris-perintah-untuk-pemutaran-8trackscom-tutup-bghboood/>Apakah ada klien baris perintah untuk pemutaran 8tracks.com? [Tutup]</a></div></li><li class=list-group-item><div><a href=/instal-ulang-hapus-vim-sepenuhnya-bfivcstt/>Instal ulang / hapus VIM sepenuhnya</a></div></li><li class=list-group-item><div><a href=/di-manakah-file-customcss-di-google-chrome-pada-mac-db3tmftp/>Di manakah file custom.css di Google Chrome pada Mac?</a></div></li><li class=list-group-item><div><a href=/cli-linux-yang-setara-dengan-perintah-quotbukaquot-mac-atau-perintah-quotstartquot-windows-iydtncoi/>cli linux yang setara dengan perintah "buka" mac? atau perintah "start" windows?</a></div></li><li class=list-group-item><div><a href=/gagal-menginstal-grub-boot-loader-pada-hard-disk-di-pc-saya-np5drfze/>gagal menginstal grub boot loader pada hard disk` di pc saya</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-membuat-exe-menjadi-layanan-di-windows-pwzsuscr/>Bagaimana cara membuat exe menjadi layanan di Windows?</a></div></li><li class=list-group-item><div><a href=/buat-terminal-mengenali-pageup-dan-pagedown-saat-dipetakan-ulang-ke-kunci-yang-berbeda-7ytnetpv/>Buat Terminal mengenali PageUp dan PageDown saat dipetakan ulang ke kunci yang berbeda</a></div></li><li class=list-group-item><div><a href=/apakah-firefox-60-merupakan-pembaruan-keamanan-dan-stabilitas-tutup-gcrcvwyj/>Apakah Firefox 6.0 merupakan pembaruan keamanan dan stabilitas? [Tutup]</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

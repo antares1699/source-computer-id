@@ -1,0 +1,74 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Selesaikan contoh NAT masquerading menggunakan nftables di Linux?</title><meta name=description content="Saya mencari contoh lengkap bagaimana melakukan ini menggunakan nftables. Ini harus klien DHCP pada antarmuka upstream, memiliki LAN 192.168.0.0/24 pada antarmuka lain, dan juga bertindak sebagai firewall.  Kredit ekstra untuk membuka port..."><link rel=canonical href=https://www.idxstack.com/selesaikan-contoh-nat-masquerading-menggunakan-nftables-di-linux-7vvpdqm7/><meta property="og:title" content="Selesaikan contoh NAT masquerading menggunakan nftables di Linux?"><meta property="og:description" content="Saya mencari contoh lengkap bagaimana melakukan ini menggunakan nftables. Ini harus klien DHCP pada antarmuka upstream, memiliki LAN 192.168.0.0/24 pada antarmuka lain, dan juga bertindak sebagai firewall.  Kredit ekstra untuk membuka port..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/selesaikan-contoh-nat-masquerading-menggunakan-nftables-di-linux-7vvpdqm7/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Selesaikan contoh NAT masquerading menggunakan nftables di Linux?"><meta name=twitter:description content="Saya mencari contoh lengkap bagaimana melakukan ini menggunakan nftables. Ini harus klien DHCP pada antarmuka upstream, memiliki LAN 192.168.0.0/24 pada antarmuka lain, dan juga bertindak sebagai firewall.  Kredit ekstra untuk membuka port..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Selesaikan contoh NAT masquerading menggunakan nftables di Linux?</h1><div itemprop=text><p>Saya mencari contoh lengkap bagaimana melakukan ini menggunakan nftables. Ini harus klien DHCP pada antarmuka upstream, memiliki LAN 192.168.0.0/24 pada antarmuka lain, dan juga bertindak sebagai firewall.</p><p>Kredit ekstra untuk membuka port ssh pada antarmuka upstream, dan meneruskan lalu lintas port 80 ke beberapa server lain di LAN.</p><p>Wiki nftables meninggalkan beberapa pertanyaan yang belum terjawab. Misalnya, file <a href=http://wiki.nftables.org/wiki-nftables/index.php/Performing_Network_Address_Translation_%28NAT%29 rel="nofollow noopener" target=_blank>bagian tentang penyamaran</a> tidak menjelaskan cara memasang aturan masquerading ke satu antarmuka vs yang lain.</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/98013/johannes-ernst target=_blank rel="nofollow noopener"><span itemprop=name>Johannes Ernst</span></a>
+—
+<a href=https://superuser.com/questions/985800/complete-masquerading-nat-example-using-nftables-on-linux target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>6</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>6</div><div class=card-body><div itemprop=text><p>Inilah yang saya gunakan, dengan asumsi <code>lan0</code> terhubung ke jaringan internal Anda, dan <code>wan0</code> ke ISP Anda.</p><p>Saya tidak yakin apa yang Anda maksud dengan "klien DHCP di antarmuka upstream", karena ini dilakukan dengan klien DHCP, bukan nftables. Pengaturan di bawah ini tidak membatasi lalu lintas keluar sehingga permintaan DHCP akan diproses.</p><pre><code>#!/usr/bin/nft -f
+
+flush ruleset
+
+table inet filter {
+  chain input {
+    type filter hook input priority 0; policy drop;
+
+    # allow established/related connections
+    ct state {established, related} accept
+
+    # early drop of invalid connections
+    ct state invalid drop
+
+    # allow from loopback
+    iifname lo accept
+
+    # Allow from internal network
+    iifname lan0 accept
+
+    # allow icmp
+    ip protocol icmp accept
+
+    # allow ssh
+    tcp dport 22 accept comment "SSH in"
+
+    reject
+  }
+
+  chain forward {
+    type filter hook forward priority 0;
+
+    # Allow outgoing via wan0
+    oifname wan0 accept
+
+    # Allow incoming on wan0 for related &amp; established connections
+    iifname wan0 ct state related, established accept
+
+    # Drop any other incoming traffic on wan0
+    iifname wan0 drop
+  }
+
+  chain output {
+    type filter hook output priority 0;
+  }
+
+}
+
+table ip nat {
+  chain prerouting {
+    type nat hook prerouting priority 0;
+
+    # Forward traffic from wan0 to a LAN server
+    iifname wan0 tcp dport 80 dnat 192.168.0.8 comment "Port forwarding to web server"
+  }
+
+  chain postrouting {
+    type nat hook postrouting priority 0;
+
+    # Masquerade outgoing traffic
+    oifname wan0 masquerade
+  }
+}
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/selesaikan-contoh-nat-masquerading-menggunakan-nftables-di-linux-7vvpdqm7/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/744726/nico target=_blank rel="nofollow noopener"><span itemprop=name>Nico</span></a>
+—
+<a href=https://superuser.com/a/1225109 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>2</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>2</div><div class=card-body><div itemprop=text><p>Penyamaran adalah kasus khusus SNAT. Jika Anda ingin memasang lalu lintas ke antarmuka keluaran atau alamat keluaran (Alamat sumber untuk IP internal Anda) gunakan SNAT</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/selesaikan-contoh-nat-masquerading-menggunakan-nftables-di-linux-7vvpdqm7/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1056733/taybinakh target=_blank rel="nofollow noopener"><span itemprop=name>taybinakh</span></a>
+—
+<a href=https://superuser.com/a/1480121 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/mencadangkan-dari-command-prompt-r7kduwkm/>Mencadangkan dari command prompt</a></div></li><li class=list-group-item><div><a href=/indeks-baris-saat-ini-dalam-tabel-jap1flnb/>Indeks baris saat ini dalam tabel</a></div></li><li class=list-group-item><div><a href=/mengubah-ukuran-mengompresi-ribuan-gambar-ke-ukuran-yang-wajar-duplikat-wjcncviz/>mengubah ukuran / mengompresi ribuan gambar ke ukuran yang wajar [duplikat]</a></div></li><li class=list-group-item><div><a href=/bagaimana-saya-bisa-membandingkan-hanya-isi-file-dari-dua-file-zip-k5qypkwv/>Bagaimana saya bisa membandingkan hanya isi file dari dua file zip</a></div></li><li class=list-group-item><div><a href=/apakah-bitlocker-memungkinkan-anda-untuk-me-restart-komputer-anda-tanpa-memasukkan-kata-sandi-uzcgkqal/>Apakah Bitlocker memungkinkan Anda untuk me-restart komputer Anda tanpa memasukkan kata sandi?</a></div></li><li class=list-group-item><div><a href=/apakah-saya-akan-kehilangan-aktivasi-windows-8-saya-setelah-peningkatan-perangkat-keras-lnjiqufc/>Apakah saya akan kehilangan aktivasi Windows 8 saya setelah peningkatan perangkat keras?</a></div></li><li class=list-group-item><div><a href=/tidak-dapat-melihat-konten-file-chm-di-penampil-bantuan-windows-0bw9jknm/>Tidak dapat melihat konten file CHM di penampil bantuan Windows</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-agar-thunderbird-menampilkan-lampiran-yang-diperluas-ro7hf5rl/>Bagaimana cara agar Thunderbird menampilkan lampiran yang diperluas</a></div></li><li class=list-group-item><div><a href=/menonaktifkan-syslogd-di-freebsd-2xc0foj4/>Menonaktifkan syslogd di FreeBSD</a></div></li><li class=list-group-item><div><a href=/virtualhost-tidak-berfungsi-di-microsoft-edge-wi5punus/>VirtualHost tidak berfungsi di Microsoft Edge</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

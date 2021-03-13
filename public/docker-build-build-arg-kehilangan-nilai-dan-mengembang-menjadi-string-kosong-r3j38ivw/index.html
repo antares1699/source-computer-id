@@ -1,0 +1,76 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>docker build --build-arg kehilangan nilai dan mengembang menjadi string kosong</title><meta name=description content="Menggunakan buruh pelabuhan versi 1.9.0  Saya memiliki kontainer buruh pelabuhan yang menyediakan cermin terpercaya ubuntu (cermin terpercaya). Saya mencoba membangun wadah kedua dan ingin memperbarui dan menginstal paket dari trusty-mirror.  Dockerfile saya..."><link rel=canonical href=https://www.idxstack.com/docker-build-build-arg-kehilangan-nilai-dan-mengembang-menjadi-string-kosong-r3j38ivw/><meta property="og:title" content="docker build --build-arg kehilangan nilai dan mengembang menjadi string kosong"><meta property="og:description" content="Menggunakan buruh pelabuhan versi 1.9.0  Saya memiliki kontainer buruh pelabuhan yang menyediakan cermin terpercaya ubuntu (cermin terpercaya). Saya mencoba membangun wadah kedua dan ingin memperbarui dan menginstal paket dari trusty-mirror.  Dockerfile saya..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/docker-build-build-arg-kehilangan-nilai-dan-mengembang-menjadi-string-kosong-r3j38ivw/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="docker build --build-arg kehilangan nilai dan mengembang menjadi string kosong"><meta name=twitter:description content="Menggunakan buruh pelabuhan versi 1.9.0  Saya memiliki kontainer buruh pelabuhan yang menyediakan cermin terpercaya ubuntu (cermin terpercaya). Saya mencoba membangun wadah kedua dan ingin memperbarui dan menginstal paket dari trusty-mirror.  Dockerfile saya..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>docker build --build-arg kehilangan nilai dan mengembang menjadi string kosong</h1><div itemprop=text><p>Menggunakan buruh pelabuhan versi 1.9.0</p><p>Saya memiliki kontainer buruh pelabuhan yang menyediakan cermin terpercaya ubuntu (cermin terpercaya). Saya mencoba membangun wadah kedua dan ingin memperbarui dan menginstal paket dari trusty-mirror.</p><p>Dockerfile saya untuk container kedua memiliki;</p><pre><code>FROM ubuntu:14.04
+
+RUN sed -i -e s#http://archive.ubuntu.com#${MIRROR}#g \
+           -e s#http://security.ubuntu.com#${MIRROR}#g \
+           /etc/apt/sources.list
+RUN cat /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get -y upgrade
+RUN apt-get -y autoremove
+</code></pre><p>Saya meneruskan informasi CERMIN ke buruh pelabuhan menggunakan <a href=https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables-build-arg rel="nofollow noopener" target=_blank>opsi --build-arg</a> , seperti itu;</p><pre><code>ip=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' trusty-mirror 2&gt;/dev/null)
+docker build --build-arg MIRROR=ftp://$ip
+</code></pre><p>Saat ini berjalan;</p><pre><code>+++ docker inspect --format '{{ .NetworkSettings.IPAddress }}' trusty-mirror
+++ ip=172.17.0.2
+++ docker build --build-arg MIRROR=ftp://172.17.0.2 .
+Sending build context to Docker daemon 8.192 kB
+Step 1 : FROM ubuntu:14.04
+ ---&gt; e9ae3c220b23
+Step 2 : RUN sed -i -e s#http://archive.ubuntu.com#${MIRROR}#g            -e s#http://security.ubuntu.com#${MIRROR}#g            /etc/apt/sources.list
+ ---&gt; Using cache
+ ---&gt; 76f727c60ef8
+Step 3 : RUN cat /etc/apt/sources.list
+ ---&gt; Running in 55ff5ff46467
+# See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to
+# newer versions of the distribution.
+
+deb /ubuntu/ trusty main restricted
+deb-src /ubuntu/ trusty main restricted
+
+## Major bug fix updates produced after the final release of the
+## distribution.
+deb /ubuntu/ trusty-updates main restricted
+deb-src /ubuntu/ trusty-updates main restricted
+
+## Uncomment the following two lines to add software from the 'universe'
+## repository.
+## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu
+## team. Also, please note that software in universe WILL NOT receive any
+## review or updates from the Ubuntu security team.
+deb /ubuntu/ trusty universe
+deb-src /ubuntu/ trusty universe
+deb /ubuntu/ trusty-updates universe
+deb-src /ubuntu/ trusty-updates universe
+
+## N.B. software from this repository may not have been tested as
+## extensively as that contained in the main release, although it includes
+## newer versions of some applications which may provide useful features.
+## Also, please note that software in backports WILL NOT receive any review
+## or updates from the Ubuntu security team.
+# deb /ubuntu/ trusty-backports main restricted
+# deb-src /ubuntu/ trusty-backports main restricted
+
+deb /ubuntu/ trusty-security main restricted
+deb-src /ubuntu/ trusty-security main restricted
+deb /ubuntu/ trusty-security universe
+deb-src /ubuntu/ trusty-security universe
+# deb /ubuntu/ trusty-security multiverse
+# deb-src /ubuntu/ trusty-security multiverse
+ ---&gt; b296354b0b9e
+Removing intermediate container 55ff5ff46467
+Step 5 : RUN apt-get update
+ ---&gt; Running in 7251e0ffb6d2
+E: Malformed line 4 in source list /etc/apt/sources.list (URI parse)
+E: The list of sources could not be read.
+</code></pre><p>Perhatikan bahwa MIRROR build-arg diperluas menjadi "", yang merusak / etc / apt sources.list dan menyebabkan pembaruan gagal.</p><p>Saya telah memeriksa dua kali Dockerfile menggunakan nilai kode keras di Dockerfile;</p><pre><code>ENV MIRROR=ftp://172.17.0.2
+</code></pre><p>dan semuanya berjalan seperti yang diharapkan, KECUALI pembuatan buruh pelabuhan gagal dengan;</p><pre><code>One or more build-args [MIRROR] were not consumed, failing build.
+</code></pre><p>Apa yang kulewatkan di sini?</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/258947/cab target=_blank rel="nofollow noopener"><span itemprop=name>CAB</span></a>
+—
+<a href=https://superuser.com/questions/999383/docker-build-build-arg-loses-value-and-expands-to-empty-string target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>6</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>6</div><div class=card-body><div itemprop=text><p>Apa yang saya lewatkan adalah Dockerfile yang membutuhkan korespondensi <a href=https://docs.docker.com/engine/reference/builder/#arg rel="nofollow noopener" target=_blank>ARG</a> masuk.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/docker-build-build-arg-kehilangan-nilai-dan-mengembang-menjadi-string-kosong-r3j38ivw/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/258947/cab target=_blank rel="nofollow noopener"><span itemprop=name>CAB</span></a>
+—
+<a href=https://superuser.com/a/1000155 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>2</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>2</div><div class=card-body><div itemprop=text><p>Dari pada</p><blockquote><p>ENV CERMIN = <a href=ftp://172.17.0.2 rel="nofollow noopener" target=_blank>ftp://172.17.0.2</a></p></blockquote><p>Kamu bisa gunakan</p><blockquote><p>ARG CERMIN = <a href=ftp://172.17.0.2 rel="nofollow noopener" target=_blank>ftp://172.17.0.2</a></p></blockquote></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/docker-build-build-arg-kehilangan-nilai-dan-mengembang-menjadi-string-kosong-r3j38ivw/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/445430/ji-ruh target=_blank rel="nofollow noopener"><span itemprop=name>ji-ruh</span></a>
+—
+<a href=https://superuser.com/a/1062997 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/internet-tidak-berfungsi-di-mesin-virtualbox-linux-vgcpuvl8/>Internet tidak berfungsi di mesin VirtualBox Linux</a></div></li><li class=list-group-item><div><a href=/desain-grafis-di-email-html-outlook-58zb6brt/>Desain Grafis di Email HTML Outlook</a></div></li><li class=list-group-item><div><a href=/apa-yang-gagal-dalam-prosesor-pertama-kali-saat-prosesor-terlalu-panas-vrz9xox0/>Apa yang gagal (dalam prosesor) pertama kali saat prosesor terlalu panas?</a></div></li><li class=list-group-item><div><a href=/bsod-pada-windows-7-bahkan-pada-instalasi-baru-mpakzvwa/>BSOD pada Windows 7 bahkan pada instalasi baru</a></div></li><li class=list-group-item><div><a href=/pengalaman-membeli-macbook-rekondisi-tutup-ejcipxwk/>Pengalaman membeli MacBook rekondisi [tutup]</a></div></li><li class=list-group-item><div><a href=/gen-pubkey-openssl-ed25519-zldr19hp/>gen pubkey openssl ed25519</a></div></li><li class=list-group-item><div><a href=/linux-dapatkah-saya-membuat-direktori-yang-tidak-ada-saat-membuat-file-baru-v8yabbsa/>Linux: dapatkah saya membuat direktori yang tidak ada saat membuat file baru?</a></div></li><li class=list-group-item><div><a href=/terminal-mac-ulangi-subdirektori-dan-optimalkan-semua-gambar-wkvwjnm1/>Terminal Mac: Ulangi subdirektori dan optimalkan semua gambar</a></div></li><li class=list-group-item><div><a href=/membekukan-baris-atas-saat-mengurutkan-di-excel-2ogr83zl/>Membekukan baris atas saat mengurutkan di Excel</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-menambahkan-kolom-deskripsi-ke-tabel-pivot-2pumey18/>Bagaimana cara menambahkan kolom deskripsi ke Tabel Pivot</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

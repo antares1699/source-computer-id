@@ -1,0 +1,142 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>IRQL_NOT_LESS_OR_EQUAL dengan Asus PCE-n53 saat memperbarui ke Windows 8.1</title><meta name=description content="saya melihat  pertanyaan ini  dan itu adalah masalah yang sama persis di komputer saya.    Saya mencoba menginstal Windows 8.1 di komputer saya. Setelah bagian pertama dari penginstalan siap penginstal me-reboot PC saya,..."><link rel=canonical href=https://www.idxstack.com/irql-not-less-or-equal-dengan-asus-pce-n53-saat-memperbarui-ke-windows-81-nfbptjui/><meta property="og:title" content="IRQL_NOT_LESS_OR_EQUAL dengan Asus PCE-n53 saat memperbarui ke Windows 8.1"><meta property="og:description" content="saya melihat  pertanyaan ini  dan itu adalah masalah yang sama persis di komputer saya.    Saya mencoba menginstal Windows 8.1 di komputer saya. Setelah bagian pertama dari penginstalan siap penginstal me-reboot PC saya,..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/irql-not-less-or-equal-dengan-asus-pce-n53-saat-memperbarui-ke-windows-81-nfbptjui/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="IRQL_NOT_LESS_OR_EQUAL dengan Asus PCE-n53 saat memperbarui ke Windows 8.1"><meta name=twitter:description content="saya melihat  pertanyaan ini  dan itu adalah masalah yang sama persis di komputer saya.    Saya mencoba menginstal Windows 8.1 di komputer saya. Setelah bagian pertama dari penginstalan siap penginstal me-reboot PC saya,..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>IRQL_NOT_LESS_OR_EQUAL dengan Asus PCE-n53 saat memperbarui ke Windows 8.1</h1><div itemprop=text><p>saya melihat <a href=https://superuser.com/questions/646145/windows-8-1-rtm-installation-crashes target=_blank rel="nofollow noopener">pertanyaan ini</a> dan itu adalah masalah yang sama persis di komputer saya.</p><blockquote><p>Saya mencoba menginstal Windows 8.1 di komputer saya. Setelah bagian pertama dari penginstalan siap penginstal me-reboot PC saya, dan ketika penginstalan berlanjut, di layar "Getting Devices Ready" saya mendapatkan layar biru dengan kesalahan berikut: IRQL_NOT_LESS_OR_EQUAL. Instalasi Windows 8 berjalan dengan baik, seperti sistem operasi lainnya.</p></blockquote><p>Saya telah melacaknya ke kartu nirkabel ASUS PCE-n53 di desktop saya. Apakah ada yang tahu solusinya?</p><p>Adaptor bekerja dengan baik di windows 8. Ada ide?</p><p><strong>Edit:</strong> Analisis Crash Dump</p><pre><code>*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+IRQL_NOT_LESS_OR_EQUAL (a)
+An attempt was made to access a pageable (or completely invalid) address at an
+interrupt request level (IRQL) that is too high.  This is usually
+caused by drivers using improper addresses.
+If a kernel debugger is available get the stack backtrace.
+Arguments:
+Arg1: 0000000000000000, memory referenced
+Arg2: 0000000000000002, IRQL
+Arg3: 0000000000000001, bitfield :
+    bit 0 : value 0 = read operation, 1 = write operation
+    bit 3 : value 0 = not an execute operation, 1 = execute operation (only on chips which support this level of status)
+Arg4: fffff801ef4f1316, address which referenced memory
+
+Debugging Details:
+------------------
+
+
+WRITE_ADDRESS:  0000000000000000 
+
+CURRENT_IRQL:  2
+
+FAULTING_IP: 
+nt!KeReleaseSpinLock+16
+fffff801`ef4f1316 f048832100      lock and qword ptr [rcx],0
+
+DEFAULT_BUCKET_ID:  WIN8_DRIVER_FAULT
+
+BUGCHECK_STR:  AV
+
+PROCESS_NAME:  System
+
+ANALYSIS_VERSION: 6.3.9600.16384 (debuggers(dbg).130821-1623) amd64fre
+
+TRAP_FRAME:  ffffd00020d45550 -- (.trap 0xffffd00020d45550)
+NOTE: The trap frame does not contain all registers.
+Some register values may be zeroed or incorrect.
+rax=0000000000000001 rbx=0000000000000000 rcx=0000000000000000
+rdx=0000000055920200 rsi=0000000000000000 rdi=0000000000000000
+rip=fffff801ef4f1316 rsp=ffffd00020d456e0 rbp=ffffd00020d45768
+ r8=0000000055920222  r9=0000000035930000 r10=0000000055920222
+r11=ffffd00020d456a8 r12=0000000000000000 r13=0000000000000000
+r14=0000000000000000 r15=0000000000000000
+iopl=0         nv up ei pl zr na po nc
+nt!KeReleaseSpinLock+0x16:
+fffff801`ef4f1316 f048832100      lock and qword ptr [rcx],0 ds:00000000`00000000=????????????????
+Resetting default scope
+
+LOCK_ADDRESS:  fffff801ef6da360 -- (!locks fffff801ef6da360)
+
+Resource @ nt!PiEngineLock (0xfffff801ef6da360)    Exclusively owned
+    Contention Count = 6
+     Threads: ffffe000010ff040-01&lt;*&gt; 
+1 total locks, 1 locks currently held
+
+PNP_TRIAGE: 
+    Lock address  : 0xfffff801ef6da360
+    Thread Count  : 1
+    Thread address: 0xffffe000010ff040
+    Thread wait   : 0x1fbe
+
+LAST_CONTROL_TRANSFER:  from fffff801ef5647e9 to fffff801ef558ca0
+
+STACK_TEXT:  
+ffffd000`20d45408 fffff801`ef5647e9 : 00000000`0000000a 00000000`00000000 00000000`00000002 00000000`00000001 : nt!KeBugCheckEx
+ffffd000`20d45410 fffff801`ef56303a : 00000000`00000001 00000000`00000000 ffff0c83`e3e25300 ffffd000`20d45550 : nt!KiBugCheckDispatch+0x69
+ffffd000`20d45550 fffff801`ef4f1316 : 00000000`000a5890 00000000`00000001 00000000`00000000 ffffe000`04c00000 : nt!KiPageFault+0x23a
+ffffd000`20d456e0 fffff800`03b430ad : 00000000`000afe80 ffffe000`04c00000 00000000`000a2f80 00000000`35720000 : nt!KeReleaseSpinLock+0x16
+ffffd000`20d45710 fffff800`03ac249f : ffffe000`04c00000 00000000`000000a8 ffffe000`04c85050 00000000`00000800 : netr28x+0x840ad
+ffffd000`20d457b0 fffff800`00b76475 : ffffd000`20d459e8 ffffd000`20d459f0 ffffe000`04ac2006 ffffe000`04ac21a0 : netr28x+0x349f
+ffffd000`20d459a0 fffff800`00baa248 : ffffe000`04ac2eb8 00000000`00000000 ffffe000`00000000 ffffe000`04ac21a0 : ndis!ndisMInvokeInitialize+0x39
+ffffd000`20d459e0 fffff800`00b74784 : 00000000`00000050 ffffe000`04907ba0 00000000`00000000 01cecbbc`328e6cde : ndis!ndisMInitializeAdapter+0x4dc
+ffffd000`20d46050 fffff800`00b74d3d : 00000000`00000050 ffffe000`0443e770 ffffc000`00951480 ffffe000`04ac21a0 : ndis!ndisInitializeAdapter+0x60
+ffffd000`20d460a0 fffff800`00b74c14 : ffffe000`04ac21a0 ffffe000`04ac2050 ffffe000`047ec2a0 00000000`00000000 : ndis!ndisPnPStartDevice+0x89
+ffffd000`20d460f0 fffff800`00b87695 : ffffe000`04ac21a0 ffffe000`04ac21a0 ffffd000`20d461b0 ffffe000`047ec2a0 : ndis!ndisStartDeviceSynchronous+0x58
+ffffd000`20d46140 fffff800`00b6a760 : ffffe000`047ec2a0 ffffe000`04ac21a0 00000000`00000000 00000000`00000000 : ndis!ndisPnPIrpStartDevice+0x13471
+ffffd000`20d46170 fffff800`0032576c : ffffe000`04b11501 ffffe000`04b11570 00000000`00000001 fffff800`00325880 : ndis!ndisPnPDispatch+0x140
+ffffd000`20d461e0 fffff800`0030b40a : ffffe000`047ec2a0 00000000`00000106 ffffd000`20d462f0 ffffe000`04b116c0 : Wdf01000!FxPkgFdo::PnpSendStartDeviceDownTheStackOverload+0xe8
+ffffd000`20d46250 fffff800`00305942 : 00000000`00000106 ffffd000`20d462f0 00000000`00000105 ffffd000`20d464d0 : Wdf01000!FxPkgPnp::PnpEventInitStarting+0xa
+ffffd000`20d46280 fffff800`00305a5a : ffffe000`04b116c8 00000000`00000002 ffffe000`04b11570 ffffe000`04b11600 : Wdf01000!FxPkgPnp::PnpEnterNewState+0x102
+ffffd000`20d46310 fffff800`00305bc4 : 00000000`00000000 ffffd000`20d46400 ffffe000`04b116a0 00000000`00000000 : Wdf01000!FxPkgPnp::PnpProcessEventInner+0xc2
+ffffd000`20d46390 fffff800`0030c27a : 00000000`00000000 ffffe000`04b11570 00000000`00000000 ffffe000`04b11570 : Wdf01000!FxPkgPnp::PnpProcessEvent+0xe4
+ffffd000`20d46430 fffff800`00300936 : ffffe000`04b11570 ffffd000`20d464c0 00000000`00000000 ffffe000`04a0e630 : Wdf01000!FxPkgPnp::_PnpStartDevice+0x1e
+ffffd000`20d46460 fffff800`002fba18 : ffffe000`047ec2a0 ffffe000`047ec2a0 00000000`00000000 ffffe000`0486f020 : Wdf01000!FxPkgPnp::Dispatch+0xd2
+ffffd000`20d464d0 fffff801`ef838796 : 00000000`00000000 fffff801`ef6aa101 00000000`00000000 ffffd000`208aa180 : Wdf01000!FxDevice::DispatchWithLock+0x7d8
+ffffd000`20d465b0 fffff801`ef4d5bad : ffffe000`011dc3a0 ffffd000`20d46659 00000000`00000000 fffff801`ef7f5ba4 : nt!PnpAsynchronousCall+0x102
+ffffd000`20d465f0 fffff801`ef838e57 : ffffe000`011db8d0 ffffe000`011db8d0 ffffe000`04a8d060 ffffc000`02b11200 : nt!PnpStartDevice+0xc5
+ffffd000`20d466c0 fffff801`ef838fe7 : ffffe000`011db8d0 ffffe000`011db8d0 00000000`00000000 ffffe000`011db8d0 : nt!PnpStartDeviceNode+0x147
+ffffd000`20d46790 fffff801`ef7fd19e : ffffe000`011db8d0 00000000`00000001 00000000`00000001 ffffe000`00000001 : nt!PipProcessStartPhase1+0x53
+ffffd000`20d467d0 fffff801`ef897b17 : ffffe000`011db8d0 00000000`00000001 00000000`00000000 fffff801`ef7ef7b2 : nt!PipProcessDevNodeTree+0x3ce
+ffffd000`20d46a50 fffff801`ef4f5033 : 00000001`00000003 00000000`00000000 00000000`00000000 00000000`00000000 : nt!PiRestartDevice+0xaf
+ffffd000`20d46aa0 fffff801`ef44565d : fffff801`ef4f4c90 ffffd000`20d46bd0 00000000`00000000 ffffe000`04a10170 : nt!PnpDeviceActionWorker+0x3a3
+ffffd000`20d46b50 fffff801`ef4eec80 : 00000000`00000000 ffffe000`010ff040 ffffe000`010ff040 ffffe000`0035c900 : nt!ExpWorkerThread+0x2b5
+ffffd000`20d46c00 fffff801`ef55f2c6 : ffffd000`20472180 ffffe000`010ff040 ffffe000`00608040 ffffc000`00002710 : nt!PspSystemThreadStartup+0x58
+ffffd000`20d46c60 00000000`00000000 : ffffd000`20d47000 ffffd000`20d41000 00000000`00000000 00000000`00000000 : nt!KiStartSystemThread+0x16
+
+
+STACK_COMMAND:  kb
+
+FOLLOWUP_IP: 
+netr28x+840ad
+fffff800`03b430ad 4533e4          xor     r12d,r12d
+
+SYMBOL_STACK_INDEX:  4
+
+SYMBOL_NAME:  netr28x+840ad
+
+FOLLOWUP_NAME:  MachineOwner
+
+MODULE_NAME: netr28x
+
+IMAGE_NAME:  netr28x.sys
+
+DEBUG_FLR_IMAGE_TIMESTAMP:  51de7a8d
+
+FAILURE_BUCKET_ID:  AV_netr28x+840ad
+
+BUCKET_ID:  AV_netr28x+840ad
+
+ANALYSIS_SOURCE:  KM
+
+FAILURE_ID_HASH_STRING:  km:av_netr28x+840ad
+
+FAILURE_ID_HASH:  {a1f86ced-f566-ac23-afeb-1aa88ea5ab8f}
+
+Followup: MachineOwner
+</code></pre></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/264663/jarsenault89 target=_blank rel="nofollow noopener"><span itemprop=name>JArsenault89</span></a>
+—
+<a href=https://superuser.com/questions/661760/irql-not-less-or-equal-with-asus-pce-n53-when-updating-to-windows-8-1 target=_blank rel="nofollow noopener">Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm" id=showQuestionReplies>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 d-none" id=questionRepliesContainer><ul class="list-group list-group-flush"><li class=list-group-item><div>Ini bukanlah cara yang tepat untuk menarik perhatian ke sebuah pertanyaan. Jika Anda butuh bantuan, kami membutuhkan crash dump, jika Anda punya. Tidak jelas apakah Anda melakukan peningkatan atau penginstalan bersih. Sudahkah Anda mencoba melepas kartu WiFi, untuk saat ini, untuk melihat apakah itu menyelesaikan masalah?</div><div>— <a href=https://superuser.com/users/83283/ramhound target=_blank rel="nofollow noopener">Ramhound</a></div></li><li class=list-group-item><div>@ Rudolph - Agar adil, pertanyaan asli dilindungi, yang tidak berarti banyak, hanya membatasi siapa yang dapat menjawab pertanyaan</div><div>— <a href=https://superuser.com/users/83283/ramhound target=_blank rel="nofollow noopener">Ramhound</a></div></li><li class=list-group-item><div>@Ramhound - Setuju. Saya pikir itu bisa ditandai sebagai duplikat, tetapi Anda benar dalam hal jawaban terbatas yang diizinkan.</div><div>— <a href=https://superuser.com/users/228091/rudolph target=_blank rel="nofollow noopener">Rudolph</a></div></li><li class=list-group-item><div>Di sini adalah diskusi informatif tentang kesalahan tersebut <a href="http://social.technet.microsoft.com/Forums/en-US/3d77747b-60ab-4015-80e8-66bb3a49dba1/irql-not-less-or-equal-bsod-windows-8?forum=W8ITProPreRel" rel="nofollow noopener" target=_blank>social.technet.microsoft.com/Forums/en-US/…</a></div><div>— <a href=https://superuser.com/users/228091/rudolph target=_blank rel="nofollow noopener">Rudolph</a></div></li><li class=list-group-item><div>@ Rudolph - Saya membuka hadiah untuk pertanyaan lain. Semakin saya melihat masalah ini semakin saya percaya ini menjadi masalah pengemudi. Yang berarti tidak menginstal perangkat kemungkinan merupakan langkah kunci, pertanyaannya tetap, apakah driver akan dimigrasi jika itu terjadi.</div><div>— <a href=https://superuser.com/users/83283/ramhound target=_blank rel="nofollow noopener">Ramhound</a></div></li><li class=list-group-item><div>Ini juga, berdasarkan stempel waktu di thread technet tersebut, telah menjadi masalah selama beberapa waktu dan jika ASUS akan merilis driver untuk itu, mereka mungkin sudah melakukannya sekarang. Jadi jawabannya adalah 'Keluarkan kartunya, instal ulang 8.1', yang tidak bagus.</div><div>— <a href=https://superuser.com/users/232184/tjennings target=_blank rel="nofollow noopener">TJennings</a></div></li><li class=list-group-item><div>@ Rudolph menghapus kartu memungkinkan saya untuk boot ke windows, seperti halnya safe mode. Saya mempersempitnya menjadi kartu tadi malam. Saya akan memposting crashdump segera setelah saya mendapatkan konektivitas kembali ke mesin itu melalui adaptor nirkabel lain.</div><div>— <a href=https://superuser.com/users/264663/jarsenault89 target=_blank rel="nofollow noopener">JArsenault89</a></div></li></ul></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>5</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>5</div><div class=card-body><div itemprop=text><p>Saya mengalami masalah yang sama setelah memperbarui ke Windows 8.1 dengan PCE-N53 saya. Tampaknya driver yang digunakan di windows 8.1 tidak menyukai kartu wifi. Anda memerlukan driver pabrikan asli yang disertakan dengan CD instal kartu - Inilah yang saya lakukan untuk memperbaiki masalah:</p><ol><li>Windows 8.1 akan meminta Anda untuk mengizinkan Anda menggunakan opsi pengaktifan lanjutan setelah pasangan pertama gagal melakukan boot - boot ke mode aman tanpa jaringan.</li><li>Hapus driver dari Driver Store - Untuk menemukan lokasi driver (Buka Device Manager temukan kartu Anda di daftar -> klik kanan ke properti -> Driver -> Detail driver tulis lokasi driver.) Lalu hapus mereka.</li><li>Restart PC Anda dalam start-up normal seharusnya mulai OK - Jika tidak, Anda mungkin melewatkan driver.</li><li>Kembali ke Device Manager, temukan kartu Anda dan klik kanan -> Perbarui driver -> Arahkan ke drive CD Anda dengan driver Produsen, temukan folder untuk sistem operasi Anda Win8x86 atau Win8x64 dan perbarui driver.</li><li>Setelah itu Anda harus baik- (Jika Anda menjalankan pembaruan win dan melihat pembaruan untuk driver, JANGAN memperbaruinya) Inilah yang mengacaukan segalanya bagi saya di tempat pertama.</li></ol><p>Semoga berhasil!</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/irql-not-less-or-equal-dengan-asus-pce-n53-saat-memperbarui-ke-windows-81-nfbptjui/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/265440/nerdpower target=_blank rel="nofollow noopener"><span itemprop=name>NerdPower</span></a>
+—
+<a href=https://superuser.com/a/662971 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><p>Saya mengalami masalah ini semalaman ketika menginstal / memperbarui Windows ke 8.1.</p><ul><li>Pastikan Anda telah mencoba menginstal 8.1 sehingga pembaruan sudah diunduh sebelumnya.</li><li>Matikan PC dan lepaskan Kartu ASUS PCE dari slotnya.</li><li>Instal pembaruan (tanpa kesalahan).</li><li>Matikan PC dan masukkan kembali Kartu PCE, lalu hidupkan PC.</li><li>Instal driver dari CD ( <strong>Tidak</strong> reboot sesuai kebutuhan)</li><li>Pergi ke ' <em>Panel kendali</em> ' kemudian ' <em>Perangkat keras dan Suara</em> '</li><li>Dibawah ' <em>Perangkat dan Printer</em> ' pergi ke ' <em>Pengaturan perangkat</em> '.</li><li>Dibawah ' <em>Adaptor jaringan</em> 'klik kanan' <em>ASUS-PCE ... 'pilih' Update Driver Software ...</em> '</li><li>Pergi ke ' <em>Jelajahi komputer saya untuk perangkat lunak driver</em> ' kemudian ' <em>Izinkan saya memilih dari daftar driver perangkat di komputer saya</em> ' Pilih ' <em>Kartu LAN Nirkabel 802.11n (Ralink Technology, Corp.)</em> ' <strong>Tidak</strong> ' <em>... (Microsoft)</em> '- Yang ini menyebabkan kesalahan.</li><li>Mulai ulang PC.</li><li>Koneksi seharusnya berfungsi sekarang. <strong>Tidak</strong> instal pembaruan untuk perangkat karena ini akan menyebabkan kesalahan yang menyakitkan; klik kanan dan sembunyikan pembaruan itu agar tidak terinstal.</li></ul><p>Ini berhasil untuk saya, saya mencoba segalanya dan ini adalah satu-satunya cara, semoga pembaruan memperbaikinya. Jika tidak berhasil untuk Anda, mohon jangan mengeluh. Saya bukan pembuat keajaiban. Saya hanya mencoba membantu.</p><p>Terima kasih.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/irql-not-less-or-equal-dengan-asus-pce-n53-saat-memperbarui-ke-windows-81-nfbptjui/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/266414/user266414 target=_blank rel="nofollow noopener"><span itemprop=name>user266414</span></a>
+—
+<a href=https://superuser.com/a/664560 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/bagaimana-cara-menonaktifkan-format-warna-bilah-url-di-firefox-6-yrjdbema/>Bagaimana cara menonaktifkan format warna bilah URL di Firefox 6?</a></div></li><li class=list-group-item><div><a href=/bagaimana-saya-bisa-meyakinkan-onedrive-bahwa-itu-harus-menggunakan-folder-di-sd-card-saya-s1thl9q9/>Bagaimana saya bisa meyakinkan OneDrive bahwa itu harus menggunakan folder di SD-Card saya?</a></div></li><li class=list-group-item><div><a href=/chrome-nama-pengguna-sandi-yang-disimpan-dalam-mode-penyamaran-wrvczhfy/>Chrome: Nama pengguna / sandi yang disimpan dalam mode penyamaran</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengonversi-file-video-audio-m4v-ke-mp4-di-windows-7-ukcgo8sb/>Bagaimana cara mengonversi file video / audio .m4v ke .mp4 di Windows 7?</a></div></li><li class=list-group-item><div><a href=/haruskah-saya-menggunakan-screensaver-atau-mematikan-monitor-setelah-saya-selesai-e8gbw2uh/>Haruskah saya menggunakan screensaver atau mematikan monitor setelah saya selesai?</a></div></li><li class=list-group-item><div><a href=/internet-tidak-berfungsi-di-mesin-virtualbox-linux-vgcpuvl8/>Internet tidak berfungsi di mesin VirtualBox Linux</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengatur-server-web-yang-dapat-diakses-dari-jaringan-dalam-iognfzbq/>Bagaimana cara mengatur server web yang dapat diakses dari jaringan dalam?</a></div></li><li class=list-group-item><div><a href=/haruskah-saya-menggunakan-ms-excel-atau-ms-access-tutup-u9f7po82/>Haruskah saya menggunakan MS Excel atau MS Access? [Tutup]</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengedit-header-file-csv-yang-besar-di-tempat-xmnntzl4/>Bagaimana cara mengedit header file CSV yang besar di tempat?</a></div></li><li class=list-group-item><div><a href=/windows-10-wifi-tiba-tiba-menghilang-vnraf3i2/>windows 10 wifi tiba-tiba menghilang</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

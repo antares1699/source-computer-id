@@ -1,0 +1,171 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Windows 8: Tambahkan umlaut Jerman ke tata letak keyboard AS (mungkin menggunakan AutoHotKey)</title><meta name=description content="Saya baru menyadari bahwa  Pembuat Tata Letak Keyboard Microsoft  tidak berfungsi lagi di bawah Windows 8. Saya berhasil menggunakannya di bawah Windows 7 untuk membuat tata letak keyboard khusus di atas tata..."><link rel=canonical href=https://www.idxstack.com/windows-8-tambahkan-umlaut-jerman-ke-tata-letak-keyboard-as-mungkin-menggunakan-autohotkey-fdjsazje/><meta property="og:title" content="Windows 8: Tambahkan umlaut Jerman ke tata letak keyboard AS (mungkin menggunakan AutoHotKey)"><meta property="og:description" content="Saya baru menyadari bahwa  Pembuat Tata Letak Keyboard Microsoft  tidak berfungsi lagi di bawah Windows 8. Saya berhasil menggunakannya di bawah Windows 7 untuk membuat tata letak keyboard khusus di atas tata..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/windows-8-tambahkan-umlaut-jerman-ke-tata-letak-keyboard-as-mungkin-menggunakan-autohotkey-fdjsazje/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Windows 8: Tambahkan umlaut Jerman ke tata letak keyboard AS (mungkin menggunakan AutoHotKey)"><meta name=twitter:description content="Saya baru menyadari bahwa  Pembuat Tata Letak Keyboard Microsoft  tidak berfungsi lagi di bawah Windows 8. Saya berhasil menggunakannya di bawah Windows 7 untuk membuat tata letak keyboard khusus di atas tata..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Windows 8: Tambahkan umlaut Jerman ke tata letak keyboard AS (mungkin menggunakan AutoHotKey)</h1><div itemprop=text><p>Saya baru menyadari bahwa <a href="http://www.microsoft.com/en-us/download/details.aspx?id=22339" rel="nofollow noopener" target=_blank>Pembuat Tata Letak Keyboard Microsoft</a> tidak berfungsi lagi di bawah Windows 8. Saya berhasil menggunakannya di bawah Windows 7 untuk membuat tata letak keyboard khusus di atas tata letak AS, di mana saya menambahkan AltGr + a, AltGr + o, AltGr + u untuk umlaut yang sesuai ä, ö dan kamu.</p><p>Sekarang saya ingin melakukan hal yang sama di Windows 8, dengan kesulitan tambahan bahwa laptop baru saya tidak memiliki tombol AltGr, tetapi hanya SATU tombol Crtl dan SATU Alt, dan kombinasi yang sesuai dengan a, o dan u sudah cukup banyak digunakan. Jadi saya bertanya-tanya apakah saya bisa menggunakan <a href=http://www.autohotkey.com/ rel="nofollow noopener" target=_blank>AutoHotKey</a> untuk membuat tombol pintas untuk Spasi + a, Spasi + o dan Spasi + u. Sejauh ini saya dapatkan:</p><pre><code>~space &amp; a::
+Send ä
+</code></pre><p>Skrip ini akan memetakan Space + a ke umlaut yang benar, dan ampersand akan memastikan Anda masih dapat menggunakan tombol spasi saat tidak menggunakan hotkey ini. Namun, ini akan selalu menyisipkan spasi di depan 'ä'. Selain itu, suksesi yang cepat dari tombol Spasi dan juga akan menghasilkan umlaut, ketika saya benar-benar ingin mengetik 'a'.</p><p>Saya mencari solusi yang akan memasukkan karakter tunggal tanpa spasi ketika hotkey yang sesuai ditekan, dan itu tidak memiliki efek sebaliknya, yang berarti penekanan Spasi secara berurutan (berlawanan dengan simultan) dan {a, o, u} tidak akan melakukan apapun. Selain itu, itu tidak boleh mengacaukan hotkeys seluruh sistem seperti Windows + Space untuk mengganti bahasa input. Jika ini dapat dilakukan tanpa <code>AutoHotKey</code>, saya akan dengan senang hati menerima solusi itu juga.</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/255644/pederpansen target=_blank rel="nofollow noopener"><span itemprop=name>pederpansen</span></a>
+—
+<a href=https://superuser.com/questions/677727/windows-8-add-german-umlauts-to-us-keyboard-layout-maybe-using-autohotkey target=_blank rel="nofollow noopener">Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm" id=showQuestionReplies>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 d-none" id=questionRepliesContainer><ul class="list-group list-group-flush"><li class=list-group-item><div>Saya pikir Keyboard Layout Creator benar-benar berfungsi, tetapi Anda perlu memulai ulang untuk mengaktifkan tata letak baru setelah instalasi. Namun, Anda hanya dapat menggunakan Ctrl, Shift dan Alt sebagai pengubah hotkey, dan saya menyukai solusi AutoHotKey menggunakan spasi lebih baik.</div><div>— <a href=https://superuser.com/users/255644/pederpansen target=_blank rel="nofollow noopener">pederpansen</a></div></li></ul></div></div></div><hr><h2 class=h4><span itemprop=answerCount>4</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>4</div><div class=card-body><div itemprop=text><p>Saya melihat bahwa jawaban lain sudah dipilih, tetapi inilah solusi pribadi saya. Saya membuat sejumlah hotstring. misalnya <kbd>" </kbd><kbd>Sebuah</kbd> akan memberi <kbd>Sebuah</kbd></p><pre><code>:?C*:``a::à
+:?C*:``i::ì
+:?C*:``e::è
+:?C*:``o::ò
+:?C*:``u::ù
+:?C*:``A::À
+:?C*:``I::Ì
+:?C*:``E::È
+:?C*:``O::Ò
+:?C*:``U::Ù
+
+:?C*:^ :: ; Turn ^{Space} into neutral ^, else ^ will be used in next vowel.
+    Send, {^}{Space}{BackSpace}
+Return
+
+:?C*:^a::â
+:?C*:^i::î
+:?C*:^e::ê
+:?C*:^o::ô
+:?C*:^u::û
+:?C*:^A::Â
+:?C*:^I::Î
+:?C*:^E::Ê
+:?C*:^O::Ô
+:?C*:^U::Û
+
+
+:?C*:`" :: ; Turn "{Space} into neutral ", else " will be used in next vowel.
+    Send, +{'}{Space}{BackSpace}
+Return
+
+:?C*:`"a::ä
+:?C*:`"i::ï
+:?C*:`"e::ë
+:?C*:`"o::ö
+:?C*:`"u::ü
+:?C*:`"A::Ä
+:?C*:`"I::Ï
+:?C*:`"E::Ë
+:?C*:`"O::Ö
+:?C*:`"U::Ü
+
+:?C*:' :: ; Turn '{Space} into neutral ', else ' will be used in next vowel.
+    Send, {'}{Space}{BackSpace}
+Return
+
+:?C*:`'a::á
+:?C*:`'i::í
+:?C*:`'e::é
+:?C*:`'o::ó
+:?C*:`'u::ú
+:?C*:`'A::Á
+:?C*:`'I::Í
+:?C*:`'E::É
+:?C*:`'O::Ó
+:?C*:`'U::Ú
+
+:?C*:`'c::ç
+:?C*:`'C::Ç
+:?C*:ss\::ß
+:?C*:ae\::æ
+:?C*:AE\::Æ
+:?C*:oe\::œ
+:?C*:OE\::Œ
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/windows-8-tambahkan-umlaut-jerman-ke-tata-letak-keyboard-as-mungkin-menggunakan-autohotkey-fdjsazje/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/109022/robert-ilbrink target=_blank rel="nofollow noopener"><span itemprop=name>Robert Ilbrink</span></a>
+—
+<a href=https://superuser.com/a/784982 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Maaf atas tanggapan saya yang terlambat. Ini adalah skrip yang bagus, bekerja dengan sangat baik. Karena reputasi saya yang rendah, saya bahkan tidak dapat memberikan suara positif. Terima kasih telah berbagi!</div><div>— <a href=https://superuser.com/users/255644/pederpansen target=_blank rel="nofollow noopener">pederpansen</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>3</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>3</div><div class=card-body><div itemprop=text><p>Terinspirasi oleh posting terakhir, saya menemukan solusi tambahan, karena hal di atas terkadang menyebabkan masalah saat menulis.</p><ol><li>Saya pertama kali memetakan ulang <kbd>Kunci huruf kapital</kbd> untuk <kbd>RShift</kbd> karena saya selalu menggunakan <kbd>LShift</kbd> kunci modal sih</li><li>Siapkan pemetaan</li></ol><p></p><pre><code>Rshift &amp; a::
+{
+  GetKeyState, state, Lshift
+  if state = D
+    sendinput, Ä
+  else
+    sendinput, ä    
+  return
+}
+
+Rshift &amp; o::
+{
+  GetKeyState, state, Lshift
+  if state = D
+    sendinput, Ö
+  else
+    sendinput, ö    
+  return
+}
+
+Rshift &amp; u::
+{
+  GetKeyState, state, Lshift
+  if state = D
+    sendinput, Ü
+  else
+    sendinput, ü
+  return
+}
+
+Rshift &amp; s::
+{
+  sendinput, ß
+  return
+}
+
+Rshift &amp; e::
+{
+  sendinput, €
+  return
+}
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/windows-8-tambahkan-umlaut-jerman-ke-tata-letak-keyboard-as-mungkin-menggunakan-autohotkey-fdjsazje/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/381314/daniel target=_blank rel="nofollow noopener"><span itemprop=name>Daniel</span></a>
+—
+<a href=https://superuser.com/a/828614 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=1>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=1><ul class="list-group list-group-flush"><li class=list-group-item><div>Saya juga memperhatikan bahwa menggunakan spasi sebagai hotkey bukanlah ide yang baik secara umum. Jawaban saya sendiri di bawah ini dulu berfungsi untuk beberapa waktu, tetapi baru-baru ini mulai macet. Menggunakan shift kanan adalah solusi yang mudah dan efektif.</div><div>— <a href=https://superuser.com/users/255644/pederpansen target=_blank rel="nofollow noopener">pederpansen</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>0</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-2><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>0</div><div class=card-body><div itemprop=text><p>Rasanya aneh menjawab pertanyaanku sendiri, tapi karena tidak ada orang lain yang punya ide, aku mengetahuinya sendiri. Skrip <code>AutoHotKey</code> berikut melakukan triknya:</p><pre><code>#SingleInstance force
+
+~space &amp; a::
+{
+  GetKeyState, state, Shift
+  if state = D
+    sendinput, {backspace 1}Ä
+  else
+    sendinput, {backspace 1}ä
+
+  return
+}
+
+~space &amp; o::
+{
+  GetKeyState, state, Shift
+  if state = D
+    sendinput, {backspace 1}Ö
+  else
+    sendinput, {backspace 1}ö
+  return
+}
+
+~space &amp; u::
+{
+  GetKeyState, state, Shift
+  if state = D
+    sendinput, {backspace 1}Ü
+  else
+    sendinput, {backspace 1}ü
+  return
+}
+
+~space &amp; s::
+{
+  sendinput, {backspace 1}ß
+  return
+}
+
+~space &amp; e::
+{
+  sendinput, {backspace 1}€
+  return
+}
+</code></pre><p>Bagian terpenting adalah menggunakan fungsi <code>backspace</code>, yang menghapus ruang saat salah satu kotak pintas diaktifkan. Selain itu, memeriksa status tombol shift memungkinkan penyisipan karakter yang peka huruf besar kecil. Untuk kenyamanan, saya juga menambahkan tombol pintas untuk "sharp s" Jerman (yang hanya ada dalam huruf kecil) dan simbol Euro.</p><p>Harap pastikan untuk memulai skrip ini saat logon dengan hak admin, mengikuti instruksi yang sangat bagus <a href=http://blog.danskingdom.com/get-autohotkey-script-to-run-as-admin-at-startup/ rel="nofollow noopener" target=_blank>sini</a> .</p><p>Dengan skrip ini, tombol spasi berfungsi seperti sebelumnya, dan hanya jika ditekan bersamaan dengan salah satu tombol <code>a</code>, <code>o</code>, <code>u</code>, <code>s</code> atau <code>e</code>, ia melakukan sesuatu yang istimewa, yang merupakan solusi yang saya cari.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/windows-8-tambahkan-umlaut-jerman-ke-tata-letak-keyboard-as-mungkin-menggunakan-autohotkey-fdjsazje/#answer-2 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/255644/pederpansen target=_blank rel="nofollow noopener"><span itemprop=name>pederpansen</span></a>
+—
+<a href=https://superuser.com/a/679273 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>0</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-3><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>0</div><div class=card-body><div itemprop=text><p>Anda juga bisa menggunakan tombol yang lebih panjang tapi standar
+<code>Alt + 132 = ä
+Alt + 137 (or 0235) = ë
+Alt + 139 (or 0239) = ï
+Alt + 148 (or 0246) = ö
+Alt + 129 (or 0252) = ü</code></p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/windows-8-tambahkan-umlaut-jerman-ke-tata-letak-keyboard-as-mungkin-menggunakan-autohotkey-fdjsazje/#answer-3 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/347700/j%c3%bcrgen-brandstetter target=_blank rel="nofollow noopener"><span itemprop=name>J&#252;rgen Brandstetter</span></a>
+—
+<a href=https://superuser.com/a/784855 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/terminal-lokal-mobaxterm-tidak-berfungsi-segera-tutup-qx7mltso/>Terminal Lokal MobaXterm Tidak berfungsi - Segera tutup</a></div></li><li class=list-group-item><div><a href=/meningkatkan-dari-inti-tunggal-ke-inti-ganda-apakah-throughput-akan-berlipat-ganda-xcvr3cok/>Meningkatkan dari inti tunggal ke inti ganda - Apakah throughput akan berlipat ganda?</a></div></li><li class=list-group-item><div><a href=/hubungkan-ke-ftp-klien-dengan-alamat-ip-klien-dinamis-4iyouycv/>Hubungkan ke FTP klien dengan alamat IP klien dinamis</a></div></li><li class=list-group-item><div><a href=/osx-bagaimana-cara-mengkloning-hard-drive-yang-lebih-besar-ke-yang-lebih-kecil-c6alnfpc/>OSX: Bagaimana cara mengkloning hard drive yang lebih besar ke yang lebih kecil?</a></div></li><li class=list-group-item><div><a href=/apakah-logitech-h800-kompatibel-dengan-ubuntu-linux-c9oaluor/>Apakah Logitech H800 kompatibel dengan Ubuntu Linux?</a></div></li><li class=list-group-item><div><a href=/wifi-gangguan-bluetooth-m5zrkcr3/>WiFi - Gangguan Bluetooth</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-menambahkan-huruf-ke-ujung-sel-secara-otomatis-fftyhmwq/>Bagaimana cara menambahkan huruf ke ujung sel secara otomatis?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-membuka-properti-tcp-ip-dari-cmd-atau-menjalankan-langsung-lyf7bmdx/>bagaimana cara membuka properti tcp / ip dari cmd atau menjalankan langsung?</a></div></li><li class=list-group-item><div><a href=/skrip-bash-shell-yang-menambahkan-output-dari-perintah-kqn6jdiw/>skrip bash shell yang menambahkan output dari perintah</a></div></li><li class=list-group-item><div><a href=/cara-mendapatkan-daftar-kontrol-activex-yang-tersedia-eiifhljs/>Cara mendapatkan daftar kontrol Activex yang tersedia</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

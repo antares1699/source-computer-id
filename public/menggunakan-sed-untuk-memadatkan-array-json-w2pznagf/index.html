@@ -1,0 +1,117 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Menggunakan sed untuk memadatkan array JSON</title><meta name=description content="Saya memiliki keluaran JSON dalam format berikut:  {  &#34;DaysCfg&#34;: {    &#34;Range&#34;: {      &#34;lowerDate&#34;: &#34;2017-07-28T00:00:00.000-04:00&#34;,      &#34;upperDate&#34;: &#34;2017-08-04T00:00:00.000-04:00&#34;    },    &#34;DaysInPeriod&#34;: 8,    &#34;DaysToSchedule&#34;: [      0,      1,      2,      3,      4,      5,      6    ]  },  &#34;DepartmentsID&#34;: [..."><link rel=canonical href=https://www.idxstack.com/menggunakan-sed-untuk-memadatkan-array-json-w2pznagf/><meta property="og:title" content="Menggunakan sed untuk memadatkan array JSON"><meta property="og:description" content="Saya memiliki keluaran JSON dalam format berikut:  {  &#34;DaysCfg&#34;: {    &#34;Range&#34;: {      &#34;lowerDate&#34;: &#34;2017-07-28T00:00:00.000-04:00&#34;,      &#34;upperDate&#34;: &#34;2017-08-04T00:00:00.000-04:00&#34;    },    &#34;DaysInPeriod&#34;: 8,    &#34;DaysToSchedule&#34;: [      0,      1,      2,      3,      4,      5,      6    ]  },  &#34;DepartmentsID&#34;: [..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/menggunakan-sed-untuk-memadatkan-array-json-w2pznagf/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Menggunakan sed untuk memadatkan array JSON"><meta name=twitter:description content="Saya memiliki keluaran JSON dalam format berikut:  {  &#34;DaysCfg&#34;: {    &#34;Range&#34;: {      &#34;lowerDate&#34;: &#34;2017-07-28T00:00:00.000-04:00&#34;,      &#34;upperDate&#34;: &#34;2017-08-04T00:00:00.000-04:00&#34;    },    &#34;DaysInPeriod&#34;: 8,    &#34;DaysToSchedule&#34;: [      0,      1,      2,      3,      4,      5,      6    ]  },  &#34;DepartmentsID&#34;: [..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Menggunakan sed untuk memadatkan array JSON</h1><div itemprop=text><p>Saya memiliki keluaran JSON dalam format berikut:</p><pre><code>{
+  "DaysCfg": {
+    "Range": {
+      "lowerDate": "2017-07-28T00:00:00.000-04:00",
+      "upperDate": "2017-08-04T00:00:00.000-04:00"
+    },
+    "DaysInPeriod": 8,
+    "DaysToSchedule": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "DepartmentsID": [
+    138837,
+    139734,
+    141934,
+    142436,
+    149687,
+    151049
+  ],
+  "EmployeesID": [
+    5039,
+    5170,
+    5889,
+    6051,
+    6236,
+    7208,
+    7281,
+    8776,
+    8781,
+    8936,
+    9261
+  ],
+  "EndDate": "2017-08-03T23:59:00.000-04:00",
+  "IntervalSize": 15,
+  "IsActivitiesEnabled": true,
+  "ModifyExisting": false,
+  "OrignId": 134721,
+  "PrimaryOption": 0,
+  "SchoolDays": [],
+  "ScChanges": [],
+  "StartDate": "2017-07-28T00:00:00.000-04:00",
+  "ZonesToSchedule": [
+    5,
+    4,
+    6,
+    3,
+    3,
+    3,
+    2,
+    14
+  ]
+}
+</code></pre><p>Karena saya tidak dapat mengubah program yang mengeluarkannya, saya harus menggunakan <code>sed</code> (atau <code>awk</code>) untuk memadatkan array JSON sendiri. Output yang diinginkan adalah:</p><pre><code>{
+  "DaysCfg": {
+    "Range": {
+      "lowerDate": "2017-07-28T00:00:00.000-04:00",
+      "upperDate": "2017-08-04T00:00:00.000-04:00"
+    },
+    "DaysInPeriod": 8,
+    "DaysToSchedule": [0, 1, 2, 3, 4, 5, 6]
+  },
+  "DepartmentsID": [138837, 139734, 141934, 142436, 149687, 151049],
+  "EmployeesID": [5039, 5170, 5889, 6051, 6236, 7208, 7281, 8776, 8781, 8936, 9261],
+  "EndDate": "2017-08-03T23:59:00.000-04:00",
+  "IntervalSize": 15,
+  "IsActivitiesEnabled": true,
+  "ModifyExisting": false,
+  "OrignId": 134721,
+  "PrimaryOption": 0,
+  "SchoolDays": [],
+  "ScChanges": [],
+  "StartDate": "2017-07-28T00:00:00.000-04:00",
+  "ZonesToSchedule": [5, 4, 6, 3, 3, 3, 2, 14]
+}
+</code></pre><p>Saya telah mencoba membuat skrip <code>sed</code> sendiri, tetapi hanya setengah matang dan tidak berfungsi sepenuhnya:</p><pre><code>sed -r -e :a -e '/^ *[]}],*$/!N; /": \[/s/\n +//; ta' -e 'P;D'
+</code></pre><p>Tolong bantu. Terima kasih.</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/203539/xpt target=_blank rel="nofollow noopener"><span itemprop=name>xpt</span></a>
+—
+<a href=https://superuser.com/questions/1235487/using-sed-to-compact-json-arrays target=_blank rel="nofollow noopener">Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm" id=showQuestionReplies>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 d-none" id=questionRepliesContainer><ul class="list-group list-group-flush"><li class=list-group-item><div>Saya pikir <code>sed</code> bukanlah alat terbaik untuk masalah ini. Anda harus mencoba beberapa JSON-parser / formatter, misalnya <code>jq</code> ( <a href=https://stedolan.github.io/jq/ rel="nofollow noopener" target=_blank>stedolan.github.io/jq</a> ). Mungkin Anda ingin memeriksanya <a href=https://stackoverflow.com/questions/9105031/how-to-beautify-json-in-python-or-through-command-line title="how to beautify json in python or through command line" target=_blank rel="nofollow noopener">stackoverflow.com/questions/9105031/…</a> dan <a href=https://stackoverflow.com/questions/352098/how-can-i-pretty-print-json-in-unix-shell-script title="how can i pretty print json in unix shell script" target=_blank rel="nofollow noopener">stackoverflow.com/questions/352098/…</a></div><div>— <a href=https://superuser.com/users/99959/uzsolt target=_blank rel="nofollow noopener">uzsolt</a></div></li><li class=list-group-item><div>FYI, output yang ingin saya kerjakan, dibuat persis oleh <code>jq</code>, program <code>C</code>, jadi saya tidak tertarik dengan solusi Python apa pun. @uz. Apa yang Anda lihat di sini hanyalah representasi terpilih dari 4 ~ 6 juta keluaran yang saya miliki. Jika Anda tidak memahami perintah <code>sed</code> di atas, maka tidak pantas bagi Anda untuk membuat penilaian apakah <code>sed</code> adalah alat terbaik atau bukan.</div><div>— <a href=https://superuser.com/users/203539/xpt target=_blank rel="nofollow noopener">xpt</a></div></li><li class=list-group-item><div>Jadi, sebenarnya apa yang kamu inginkan? Anda ingin menghapus '\ n' (setelah koma) <i>jika</i> kita berada di dalam tanda kurung (<code>[</code> dan <code>]</code>). Jika Anda ingin melakukannya dengan <code>sed</code> lakukan saja! Bukan tidak mungkin tetapi "FYI" ada alat yang lebih baik. Saya ingin tahu tentang solusi <code>sed</code> cara. Lakukan! (Seseorang tidak menyukai pertanyaan Anda - FYI bukan saya)</div><div>— <a href=https://superuser.com/users/99959/uzsolt target=_blank rel="nofollow noopener">uzsolt</a></div></li><li class=list-group-item><div>Terima kasih atas masukannya @uzsolt. Oke, saya mengerti. Saya akan melupakan <code>sed</code> dan melakukannya pada <code>awk</code> nanti.</div><div>— <a href=https://superuser.com/users/203539/xpt target=_blank rel="nofollow noopener">xpt</a></div></li><li class=list-group-item><div>Pemungutan suara tidak menunjukkan apa-apa kecuali ada orang yang berpikiran sempit dan jahat di alam liar. Saya akan melakukannya pada <code>awk</code> dan memposting kembali.</div><div>— <a href=https://superuser.com/users/203539/xpt target=_blank rel="nofollow noopener">xpt</a></div></li><li class=list-group-item><div>Saya pikir <code>awk</code> lebih baik <i>pada kasus ini</i> :)</div><div>— <a href=https://superuser.com/users/99959/uzsolt target=_blank rel="nofollow noopener">uzsolt</a></div></li></ul></div></div></div><hr><h2 class=h4><span itemprop=answerCount>1</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>6</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>6</div><div class=card-body><div itemprop=text><p>Saya mengedit sed Anda, semoga ini membantu.</p><pre><code>sed -r '/\[$/ {:a;N;s/\]/&amp;/;Ta;s/\n +//g}'
+
+sed -r '
+
+# sed will apply the commands between '{}' only to lines that matches the address '/\[$/'.
+/\[$/ {
+
+# Set a mark with label 'a'.
+:a
+
+# N command, it appends a '\n' to the pattern space,
+# reads the next line of the input (file,stdin) and appends it to the pattern space.
+N
+
+# Substitute ']' for itself. If the substitution isn't made (if there isn't a ']' on the
+# pattern space), the 'T' command jumps to the 'a' label.
+# Here is the loop to put some lines (or all lines of a file) in the same line.
+# While there isn't a ']' in the pattern space (which is the last line OP wants to put
+# on the same line), sed will append '\n&lt;next line&gt;' to the pattern space.
+s/\]/&amp;/
+Ta
+
+# When the substitution is made, sed leaves the loop and applies other commands.
+# Substitute all occurrences (g flag) of new line character (with any
+# spaces after) for nothing.
+s/\n +//g
+}'
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/menggunakan-sed-untuk-memadatkan-array-json-w2pznagf/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/597091/paulo target=_blank rel="nofollow noopener"><span itemprop=name>Paulo</span></a>
+—
+<a href=https://superuser.com/a/1236009 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>YA TUHAN! Itu luar biasa. Saya telah dibujuk oleh orang-orang untuk menyerah pada <code>sed</code>, tetapi jauh di lubuk hati saya, saya masih percaya <code>sed</code> dapat melakukannya, dan ... BANG! inilah solusi sederhana Anda yang luar biasa, yang bekerja dengan sempurna !!! Silakan gunakan total +50 poin saya sebagai sambutan hangat untuk pengguna super!</div><div>— <a href=https://superuser.com/users/203539/xpt target=_blank rel="nofollow noopener">xpt</a></div></li><li class=list-group-item><div>Saya rasa saya mengerti hampir semuanya, tetapi bagaimana loop berakhir. Maukah Anda menjelaskan lebih lanjut?</div><div>— <a href=https://superuser.com/users/203539/xpt target=_blank rel="nofollow noopener">xpt</a></div></li><li class=list-group-item><div>Sekarang saya berharap saya mendapatkan lebih banyak suara negatif untuk pertanyaan ini - jelas mereka tidak memberikan suara negatif karena mereka tidak percaya akan ada solusi <code>sed</code>, <i>bahkan dalam imajinasi terliar mereka</i> . Bagi semua orang itu, jawaban luar biasa ini menunjukkan betapa sempitnya Anda di wajah Anda.</div><div>— <a href=https://superuser.com/users/203539/xpt target=_blank rel="nofollow noopener">xpt</a></div></li><li class=list-group-item><div>Saya hanya dapat memberikan hadiah +50 saya dalam 23 jam, jadi ambil +25 poin saya untuk saat ini.</div><div>— <a href=https://superuser.com/users/203539/xpt target=_blank rel="nofollow noopener">xpt</a></div></li><li class=list-group-item><div>Saya menemukan jawabannya sendiri dari pria <code>T label</code>: " <i>Jika tidak ada <code>s///</code> yang berhasil melakukan substitusi sejak baris input terakhir dibaca dan sejak perintah <code>t</code> atau <code>T</code> terakhir, maka percabangkan ke label</i> "</div><div>— <a href=https://superuser.com/users/203539/xpt target=_blank rel="nofollow noopener">xpt</a></div></li><li class=list-group-item><div>Maaf, saya tidak tahu banyak cara kerja "poin-poin" tapi terima kasih banyak untuk poinnya. Akhirnya saya punya cukup poin untuk dikomentari :) terima kasih. Ya, Anda benar, perintah 'T' melakukan tugas untuk melompat ke label 'a' jika tidak ada ']' di ruang pola. Semua perintah diterapkan hanya jika sed menemukan baris dengan alamat '/ [$ /', baris lain dicetak tanpa edisi apa pun.</div><div>— <a href=https://superuser.com/users/597091/paulo target=_blank rel="nofollow noopener">Paulo</a></div></li><li class=list-group-item><div>Jawaban bagus, tapi saya sarankan Anda menambahkan bagian penjelasan dengan rincian perintah untuk menggambarkan cara kerjanya. Tampaknya Anda menggunakan beberapa fungsionalitas <code>sed</code> yang tidak semua orang kenal.</div><div>— <a href=https://superuser.com/users/700617/simlev target=_blank rel="nofollow noopener">simlev</a></div></li><li class=list-group-item><div>Meskipun ini mungkin menjawab pertanyaan, akan menjadi jawaban yang lebih baik jika Anda dapat memberikan penjelasan <b>Mengapa</b> ia melakukannya.</div><div>— <a href=https://superuser.com/users/337631/davidpostill target=_blank rel="nofollow noopener">DavidPostill&#9830;</a></div></li><li class=list-group-item><div>Diedit untuk menambahkan penjelasan. Lihat 'info sed' untuk perintah GNU-sed. ps- maafkan saya untuk kesalahan bahasa Inggris.</div><div>— <a href=https://superuser.com/users/597091/paulo target=_blank rel="nofollow noopener">Paulo</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/bagaimana-windows-memulihkan-dari-quotroute-fquot-p3na8lrd/>Bagaimana Windows Memulihkan dari "ROUTE / F"?</a></div></li><li class=list-group-item><div><a href=/mtu-adalah-1500-mengapa-panjang-fragmen-pertama-adalah-1496-di-ipv6-fo85hn4h/>MTU adalah 1500, mengapa panjang fragmen pertama adalah 1496 di IPv6?</a></div></li><li class=list-group-item><div><a href=/apa-arti-tombol-m1-3-dan-mr-6lsoghr7/>Apa arti tombol M1-3 dan MR?</a></div></li><li class=list-group-item><div><a href=/scm-mana-yang-kurang-intensif-disk-git-vs-svn-vs-lainnya-tf6qqbrt/>SCM mana yang kurang intensif disk? (GIT vs SVN vs lainnya)</a></div></li><li class=list-group-item><div><a href=/yang-saya-inginkan-hanyalah-salin-dan-tempel-v1gm9jz3/>Yang saya inginkan hanyalah salin dan tempel</a></div></li><li class=list-group-item><div><a href=/apa-yang-dilakukan-oleh-opsi-kompatibilitas-quotnonaktifkan-tema-visualquot-qeveceyz/>Apa yang dilakukan oleh opsi kompatibilitas "Nonaktifkan tema visual"?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-menghapus-file-yang-lebih-besar-dari-tanggal-tertentu-di-linux-olcgnxzx/>Bagaimana cara menghapus file yang lebih besar dari tanggal tertentu di linux</a></div></li><li class=list-group-item><div><a href=/cara-mengaktifkan-menonaktifkan-perangkat-keras-dari-baris-perintah-windows-7-4i3hau8r/>Cara mengaktifkan / menonaktifkan perangkat keras dari baris perintah Windows 7</a></div></li><li class=list-group-item><div><a href=/windows-10-jalankan-virtual-desktop-pada-satu-monitor-saja-tkwqnwmr/>Windows 10: Jalankan virtual desktop pada satu monitor saja?</a></div></li><li class=list-group-item><div><a href=/keyboard-saya-tidak-dapat-diulang-dp2l3kw4/>Keyboard saya tidak dapat diulang</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

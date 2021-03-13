@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+    {{- partial "head.html" . -}}
+    <body {{- if eq .Page.Type "questions" }} itemscope itemtype="https://schema.org/QAPage"{{ end }}>
+        {{- partial "header.html" . -}}
+        {{- block "main" . }}{{- end }}
+        {{- partial "footer.html" . -}}
+
+        {{ if .Site.Params.cookieAlert }}
+        <div class="alert text-center cookiealert" role="alert">
+            {{ .Site.Params.terms.cookie_alert }} <a href="/privacy-policy">{{ .Site.Params.terms.learn_more }}</a>
+            <button type="button" class="btn btn-primary btn-sm acceptcookies">{{ .Site.Params.terms.agree }}</button>
+        </div>
+        {{ end }}
+
+        <script src="{{ "js/jquery-3.5.1.min.js" | relURL }}"></script>
+        <script src="{{ "js/bootstrap.bundle.min.js" | relURL }}"></script>
+        {{ if .Site.Params.cookieAlert }}
+        <script src="{{ "vendor/cookie-alert/cookiealert.min.js" | relURL }}"></script>
+        {{ end }}
+        <script>
+            $(document).ready(function () {
+                $("#showQuestionReplies").click(function () {
+                    $("#questionRepliesContainer").toggleClass("d-none");
+                });
+
+                $(".show-answer-replies").click(function () {
+                    var answerID = $(this).data("id");
+                    $(".answer-replies-container[data-id='" + answerID + "']").toggleClass("d-none");
+                });
+            });
+        </script>
+    </body>
+</html>

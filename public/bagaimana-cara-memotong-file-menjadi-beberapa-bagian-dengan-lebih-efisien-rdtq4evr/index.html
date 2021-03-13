@@ -1,0 +1,115 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Bagaimana cara memotong file menjadi beberapa bagian dengan lebih efisien?</title><meta name=description content="Misalkan saya memiliki file teks 10MB foo.txt, dan memiliki 100.000 baris. Sekarang, saya ingin memproses foo.txt jendela demi jendela, dengan ukuran jendela 10.  Skrip saya saat ini seperti ini:  for ((i=0;i&amp;lt;$lines;i=i+$step))do..."><link rel=canonical href=https://www.idxstack.com/bagaimana-cara-memotong-file-menjadi-beberapa-bagian-dengan-lebih-efisien-rdtq4evr/><meta property="og:title" content="Bagaimana cara memotong file menjadi beberapa bagian dengan lebih efisien?"><meta property="og:description" content="Misalkan saya memiliki file teks 10MB foo.txt, dan memiliki 100.000 baris. Sekarang, saya ingin memproses foo.txt jendela demi jendela, dengan ukuran jendela 10.  Skrip saya saat ini seperti ini:  for ((i=0;i&amp;lt;$lines;i=i+$step))do..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/bagaimana-cara-memotong-file-menjadi-beberapa-bagian-dengan-lebih-efisien-rdtq4evr/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Bagaimana cara memotong file menjadi beberapa bagian dengan lebih efisien?"><meta name=twitter:description content="Misalkan saya memiliki file teks 10MB foo.txt, dan memiliki 100.000 baris. Sekarang, saya ingin memproses foo.txt jendela demi jendela, dengan ukuran jendela 10.  Skrip saya saat ini seperti ini:  for ((i=0;i&amp;lt;$lines;i=i+$step))do..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Bagaimana cara memotong file menjadi beberapa bagian dengan lebih efisien?</h1><div itemprop=text><p>Misalkan saya memiliki file teks 10MB <code>foo.txt</code>, dan memiliki 100.000 baris. Sekarang, saya ingin memproses <code>foo.txt</code> jendela demi jendela, dengan ukuran jendela 10.</p><p>Skrip saya saat ini seperti ini:</p><pre><code>for ((i=0;i&lt;$lines;i=i+$step))
+do    
+    head -$((i+step)) $1 | tail -$step &gt; tmp1
+    head -$((i+step)) $2 | tail -$step &gt; tmp2
+    setstr=$setstr' '`./accuracy.sh tmp1 tmp2`
+done
+echo $setstr | awk '{for (i=1;i&lt;=NF;i++) sum+=$i; }END{print sum/NF}'
+</code></pre><p>Tapi itu berjalan lambat. Adakah cara sederhana dan lebih efisien untuk melakukan ini?</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/205629/jackwm target=_blank rel="nofollow noopener"><span itemprop=name>JackWM</span></a>
+—
+<a href=https://superuser.com/questions/504132/how-to-cut-a-file-into-pieces-more-efficiently target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>4</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>5</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>5</div><div class=card-body><div itemprop=text><p>Anda dapat melakukannya dengan <code>split</code>:</p><p>Berikut contoh cara menggunakannya:</p><pre><code>split -l 10 input_file output_file_prefix_
+</code></pre><p>Opsi <code>-l</code> adalah singkatan dari <code>--lines=</code></p><p>Dan ini akan membagi <code>input_file</code> menjadi potongan-potongan dengan masing-masing 10 baris, menjadi file-file ini:</p><pre><code>output_file_prefix_aa
+output_file_prefix_ab
+output_file_prefix_ac
+...
+</code></pre><p>dan seterusnya.</p><p>Untuk cara lain Anda dapat menggunakan <code>split</code>, lihat <code>man split</code> atau <a href=http://www.computerhope.com/unix/usplit.htm rel="nofollow noopener" target=_blank>sini</a></p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/bagaimana-cara-memotong-file-menjadi-beberapa-bagian-dengan-lebih-efisien-rdtq4evr/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/166178/sampson-chen target=_blank rel="nofollow noopener"><span itemprop=name>sampson-chen</span></a>
+—
+<a href=https://superuser.com/a/504133 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>terima kasih, sampson. Satu masalah dengan solusi Anda adalah itu akan menghasilkan file temporal dalam jumlah besar. Dalam contoh saya, itu akan menjadi 10.000 file. Terakhir kali, saya menggunakan Java untuk membagi file, dan butuh waktu lama untuk menghapusnya.</div><div>— User</div></li><li class=list-group-item><div>@JackWM Bagaimana Anda menghapus file-file sementara? Apakah itu seperti <code>rm output_file_prefix_*</code>?</div><div>— <a href=https://superuser.com/users/166178/sampson-chen target=_blank rel="nofollow noopener">sampson-chen</a></div></li><li class=list-group-item><div><code>rm</code> akan melaporkan kesalahan karena jumlah file yang besar. Dan meskipun kami menghindari ini, penghapusan masih membutuhkan banyak waktu.</div><div>— User</div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><p>Akan berguna untuk memiliki lebih banyak konteks tentang tujuan akhir Anda daripada cuplikan kode. Secara khusus, apakah Anda memiliki kendali atas akurasi.sh?</p><p>Bagaimanapun, jika Anda ingin tetap menggunakan bash, maka Anda bisa melakukannya</p><pre><code>for ((i=0;i&lt;$lines;i+=$step))
+do
+  let end=i+10
+  sed -n $i,${end}p $1 &gt;tmp1
+  sed -n $i,${end}p $2 &gt;tmp2
+  ...
+done
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/bagaimana-cara-memotong-file-menjadi-beberapa-bagian-dengan-lebih-efisien-rdtq4evr/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/173336/peter-sundstrom target=_blank rel="nofollow noopener"><span itemprop=name>Peter Sundstrom</span></a>
+—
+<a href=https://superuser.com/a/505393 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>0</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-2><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>0</div><div class=card-body><div itemprop=text><p>Tidak yakin mengapa ini dimigrasi dari StackOverflow. Sedangkan <code>split</code> adalah a <em>superuser</em> jawaban gaya, pertanyaannya tentang pemrograman. Misalnya, berikut adalah jawaban yang menerapkan apa yang Anda cari di tahun <code>awk</code>.</p><p>Salah satu aspek yang sangat berguna dari <code>awk</code> adalah cara menangani pipa.</p><pre><code>#!/usr/bin/awk -f
+
+BEGIN {
+  cmd="/path/to/handler"
+}
+
+{
+  print | cmd
+}
+
+NR % 10 == 0 {
+  close(cmd)
+}
+</code></pre><p><code>cmd</code> Anda akan dibuka kembali jika ditutup ... dan ditutup setiap baris ke-10, untuk membuka kembali baris keluaran berikutnya.</p><p>Efeknya akan menjalankan <code>handler</code> setiap 10 baris input. Di akhir file, <code>handler</code> akan dijalankan dengan baris apa pun yang tersisa, karena <code>cmd</code> secara otomatis ditutup saat keluar dari awk.</p><p>Sebenarnya, Anda tidak perlu menggunakan variabel seperti <code>cmd</code> untuk menyimpan perintah ... tetapi itu membuatnya lebih mudah untuk menyesuaikan perintah, karena Anda perlu memperhatikan dengan SANGAT hati-hati untuk kesalahan ketik pada <code>close()</code> Anda.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/bagaimana-cara-memotong-file-menjadi-beberapa-bagian-dengan-lebih-efisien-rdtq4evr/#answer-2 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/113356/ghoti target=_blank rel="nofollow noopener"><span itemprop=name>ghoti</span></a>
+—
+<a href=https://superuser.com/a/504247 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>0</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-3><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>0</div><div class=card-body><div itemprop=text><p>Solusi ini tidak menggunakan file sementara apa pun. Apa yang dilakukan adalah menyimpan setiap baris dalam array penyangga yang dapat menampung sepuluh baris. Setiap kali nomor baris habis dibagi sepuluh, itu mencetak semua baris di buffer.</p><p>Jebakan yang jelas adalah ketika file input (# baris) tidak habis dibagi sepuluh. Solusinya adalah melakukan pemeriksaan dalam klausa {} END. Sesuatu seperti:</p><pre>
+$ echo {1..33} | tr \  \\n |\
+    awk '{lines=NR} END{ if (lines%10!=0) { print "leftover lines"} }'
+leftover lines
+
+# STEP1 use modulo to do something every tenth
+$ echo {1..200} |tr \  \\n |\
+    awk '{a[NR%10]=$0; if (NR%10==0) {print "ten"} }' | cat -n
+     1  ten
+     2  ten
+     3  ten
+     4  ten
+     5  ten
+     6  ten
+     7  ten
+     8  ten
+     9  ten
+    10  ten
+    11  ten
+    12  ten
+    13  ten
+    14  ten
+    15  ten
+    16  ten
+    17  ten
+    18  ten
+    19  ten
+    20  ten
+
+# STEP 2 do something with every line
+$ echo {1..10} | tr \  \\n | awk '{ b+=$0} END {print b}'
+55
+
+# putting it together
+$ cat every10.awk
+{
+        a[NR%10]=$0;
+        if (NR%10==0) {
+                for (i in a) {
+                        printf "%s+", a[i]
+                        b+=a[i];
+                }
+                print "0=" b;
+                b=0
+        }
+}
+$ echo {1..200} | tr \  \\n | awk -f every10.awk  | column -s= -t
+4+5+6+7+8+9+10+1+2+3+0                     55
+14+15+16+17+18+19+20+11+12+13+0            155
+24+25+26+27+28+29+30+21+22+23+0            255
+34+35+36+37+38+39+40+31+32+33+0            355
+44+45+46+47+48+49+50+41+42+43+0            455
+54+55+56+57+58+59+60+51+52+53+0            555
+64+65+66+67+68+69+70+61+62+63+0            655
+74+75+76+77+78+79+80+71+72+73+0            755
+84+85+86+87+88+89+90+81+82+83+0            855
+94+95+96+97+98+99+100+91+92+93+0           955
+104+105+106+107+108+109+110+101+102+103+0  1055
+114+115+116+117+118+119+120+111+112+113+0  1155
+124+125+126+127+128+129+130+121+122+123+0  1255
+134+135+136+137+138+139+140+131+132+133+0  1355
+144+145+146+147+148+149+150+141+142+143+0  1455
+154+155+156+157+158+159+160+151+152+153+0  1555
+164+165+166+167+168+169+170+161+162+163+0  1655
+174+175+176+177+178+179+180+171+172+173+0  1755
+184+185+186+187+188+189+190+181+182+183+0  1855
+194+195+196+197+198+199+200+191+192+193+0  1955
+
+</pre><p>Idenya di sini adalah menggunakan blok cetak awk dari sepuluh baris dan memprosesnya, atau memproses dengan awk secara langsung jika operasi aritmatika sederhana atau operasi string.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/bagaimana-cara-memotong-file-menjadi-beberapa-bagian-dengan-lebih-efisien-rdtq4evr/#answer-3 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/86129/%d0%af%d1%80%d0%be%d1%81%d0%bb%d0%b0%d0%b2-%d0%a0%d0%b0%d1%85%d0%bc%d0%b0%d1%82%d1%83%d0%bb%d0%bb%d0%b8%d0%bd target=_blank rel="nofollow noopener"><span itemprop=name>Ярослав Рахматуллин</span></a>
+—
+<a href=https://superuser.com/a/507544 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/cara-mengatur-lastpass-untuk-memverifikasi-sebelum-membuka-lemari-besi-saya-dan-melihat-semua-kata-sandi-qg5vewhn/>Cara mengatur LastPass untuk memverifikasi sebelum membuka lemari besi saya dan melihat semua kata sandi</a></div></li><li class=list-group-item><div><a href=/apa-yang-dilakukan-quotmenginstal-perangkat-lunak-driver-perangkatquot-di-latar-belakang-y84or9qe/>Apa yang dilakukan "menginstal perangkat lunak driver perangkat" di latar belakang?</a></div></li><li class=list-group-item><div><a href=/zsh-cdpath-dan-pelengkapan-otomatis-imnaknbv/>zsh cdpath dan pelengkapan otomatis</a></div></li><li class=list-group-item><div><a href=/pintasan-keyboard-tmux-tidak-berfungsi-dengan-benar-jxqplngx/>Pintasan keyboard tmux tidak berfungsi dengan benar</a></div></li><li class=list-group-item><div><a href=/apakah-perubahan-dalam-tabel-perutean-memengaruhi-koneksi-tcp-ip-yang-ada-dghq4vy1/>Apakah perubahan dalam tabel perutean memengaruhi koneksi TCP / IP yang ada?</a></div></li><li class=list-group-item><div><a href=/cara-memperbaiki-quotperintah-tidak-ditemukanquot-ketika-muncul-terminal-mulai-di-ubuntu-kdhbgf0j/>Cara memperbaiki "perintah tidak ditemukan" ketika muncul terminal mulai di ubuntu</a></div></li><li class=list-group-item><div><a href=/apakah-hard-drive-sata-akan-berfungsi-dengan-motherboard-sata-vihycgbp/>Apakah hard drive SATA akan berfungsi dengan motherboard SATA?</a></div></li><li class=list-group-item><div><a href=/linux-shell-mengemas-kembali-arsip-bz2-ke-xz-biwsycya/>Linux shell: mengemas kembali arsip bz2 ke xz</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-beralih-di-antara-beberapa-rangkaian-konfigurasi-jaringan-pada-windows-xp-4rgbwxel/>Bagaimana cara beralih di antara beberapa rangkaian konfigurasi jaringan pada Windows XP?</a></div></li><li class=list-group-item><div><a href=/untuk-apa-opsi-quotaksesibilitas-windowsquot-juwbogb9/>Untuk apa opsi "Aksesibilitas Windows"?</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

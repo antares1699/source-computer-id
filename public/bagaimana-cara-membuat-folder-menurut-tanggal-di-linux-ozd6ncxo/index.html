@@ -1,0 +1,128 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Bagaimana cara membuat folder menurut tanggal di Linux?</title><meta name=description content="Apakah ada cara singkat / mudah dan cerdas lainnya untuk melakukan hal berikut di Linux?  cd /home/abcd/dammimkdir $(date +%Y-%m)cd $(date +%Y-%m)mkdir $(date +%d)# RESULT : /home/abcd/dammi/2011-05/26cd /home/wxyz/harrami..."><link rel=canonical href=https://www.idxstack.com/bagaimana-cara-membuat-folder-menurut-tanggal-di-linux-ozd6ncxo/><meta property="og:title" content="Bagaimana cara membuat folder menurut tanggal di Linux?"><meta property="og:description" content="Apakah ada cara singkat / mudah dan cerdas lainnya untuk melakukan hal berikut di Linux?  cd /home/abcd/dammimkdir $(date +%Y-%m)cd $(date +%Y-%m)mkdir $(date +%d)# RESULT : /home/abcd/dammi/2011-05/26cd /home/wxyz/harrami..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/bagaimana-cara-membuat-folder-menurut-tanggal-di-linux-ozd6ncxo/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Bagaimana cara membuat folder menurut tanggal di Linux?"><meta name=twitter:description content="Apakah ada cara singkat / mudah dan cerdas lainnya untuk melakukan hal berikut di Linux?  cd /home/abcd/dammimkdir $(date +%Y-%m)cd $(date +%Y-%m)mkdir $(date +%d)# RESULT : /home/abcd/dammi/2011-05/26cd /home/wxyz/harrami..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Bagaimana cara membuat folder menurut tanggal di Linux?</h1><div itemprop=text><p>Apakah ada cara singkat / mudah dan cerdas lainnya untuk melakukan hal berikut di Linux?</p><pre><code>cd /home/abcd/dammi
+mkdir $(date +%Y-%m)
+cd $(date +%Y-%m)
+mkdir $(date +%d)
+# RESULT : /home/abcd/dammi/2011-05/26
+cd /home/wxyz/harrami
+mkdir $(date +%Y-%m)
+cd $(date +%Y-%m)
+mkdir $(date +%d)
+cd /home/abcd/harrami
+mkdir $(date +%Y-%m)
+cd $(date +%Y-%m)
+mkdir $(date +%d)
+cd /home/wxyz/harrami
+mkdir $(date +%Y-%m)
+cd $(date +%Y-%m)
+mkdir $(date +%d)
+</code></pre><p>Saya perlu menggunakan crontab untuk membuat folder setiap hari dan setiap bulan di dalam / home / abcd / dammi, / home / abcd / harrami, / home / wxyz / dammi dan / home / wxyz / harrami. Adakah yang bisa membantu saya dengan ini?</p><p>Info:</p><pre><code>    GROUPS : USERS
+--------------------
+    abcd  : abcd
+    wxyz  : dammi, harrami
+</code></pre></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/77460/himalay target=_blank rel="nofollow noopener"><span itemprop=name>Himalay</span></a>
+—
+<a href=https://superuser.com/questions/289136/how-to-create-folders-according-to-date-in-linux target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>4</div><div class=card-body><div itemprop=text><p>Bagaimana dengan berikut ini:</p><pre><code>#!/bin/bash
+HOME_DIRS="/home/abcd/dammi /home/wxyz/harrami /home/abcd/harrami /home/wxyz/harrami"
+DATE_DIR=$(date +%Y-%m)
+DAY_DIR=$(date +%d)
+
+for FOLDER in $HOME_DIRS; do
+    mkdir -p "${FOLDER}/${DATE_DIR}/${DAY_DIR}"
+done
+</code></pre><p>Yah, tentu saja Anda juga bisa melakukannya tanpa variabel <code>DATE_DIR</code> dan <code>DAY_DIR</code> tetapi algoritme ini memastikan tanggal tidak dibuat berkali-kali sehingga lebih cepat dan memastikan tanggalnya sama untuk semua pengguna (bahkan jika Anda memulainya tepat sebelum tengah malam dan direktori terakhir dibuat setelah tengah malam).</p><p>Anda mungkin juga harus memikirkan tentang meningkatkan skrip menggunakan chown untuk memungkinkan pengguna menulis ke direktori yang baru dibuat.</p><p>Edit:
+Jika Anda ingin membuat struktur folder yang sama dalam dua sub-folder <code>/home</code>, Anda dapat menggabungkan skrip RolKau dengan yang saya:</p><pre><code>#!/bin/bash
+USER_LIST="dammi harrami"
+HOME_SUBDIRS="abcd wxyz"
+DATE_DIR=$(date +%Y-%m)
+DAY_DIR=$(date +%d)
+
+for HOME_SUBDIR in $HOME_SUBDIRS; do
+    for U in $USER_LIST; do
+        mkdir -p "/home/${HOME_SUBDIR}/${U}/${DATE_DIR}/${DAY_DIR}"
+    done
+done
+</code></pre><p>Edit2:
+Saya menganggap daftar pengguna berisi nama pengguna. Jadi mari kita perpanjang skrip sehingga pemilik direktori diubah dengan benar juga:</p><pre><code>#!/bin/bash
+USER_LIST="dammi harrami"
+HOME_SUBDIRS="abcd wxyz"
+DATE_DIR=$(date +%Y-%m)
+DAY_DIR=$(date +%d)
+
+for HOME_SUBDIR in $HOME_SUBDIRS; do
+    for U in $USER_LIST; do
+        mkdir -p "/home/${HOME_SUBDIR}/${U}/${DATE_DIR}/${DAY_DIR}"
+        chown -R "${U}" "/home/${HOME_SUBDIR}/${U}/${DATE_DIR}"
+    done
+done
+</code></pre><p>Edit3:
+Untuk mengubah kepemilikan menurut saya cara termudah adalah membaca kepemilikan dari direktori di <code>/home/&lt;subdir>/&lt;user></code></p><pre><code>#!/bin/bash
+USER_LIST="dammi harrami"
+HOME_SUBDIRS="abcd wxyz"
+DATE_DIR=$(date +%Y-%m)
+DAY_DIR=$(date +%d)
+
+for HOME_SUBDIR in $HOME_SUBDIRS; do
+    for U in $USER_LIST; do
+        mkdir -p "/home/${HOME_SUBDIR}/${U}/${DATE_DIR}/${DAY_DIR}"
+        GROUP_MEMBER=$(stat -c %G "/home/${HOME_SUBDIR}/${U}")
+        chown -R "${U}":"${GROUP_MEMBER}" "/home/${HOME_SUBDIR}/${U}/${DATE_DIR}"
+    done
+done
+</code></pre><p>Tentu Anda bisa menggunakan stat juga untuk membaca pemiliknya; tetapi itu sedikit lebih lambat daripada hanya membacanya dari variabel - seperti yang Anda minta:</p><pre><code>#!/bin/bash
+USER_LIST="dammi harrami"
+HOME_SUBDIRS="abcd wxyz"
+DATE_DIR=$(date +%Y-%m)
+DAY_DIR=$(date +%d)
+
+for HOME_SUBDIR in $HOME_SUBDIRS; do
+    for U in $USER_LIST; do
+        mkdir -p "/home/${HOME_SUBDIR}/${U}/${DATE_DIR}/${DAY_DIR}"
+        OWNER=$(stat -c %U "/home/${HOME_SUBDIR}/${U}")
+        GROUP_MEMBER=$(stat -c %G "/home/${HOME_SUBDIR}/${U}")
+        chown -R "${OWNER}":"${GROUP_MEMBER}" "/home/${HOME_SUBDIR}/${U}/${DATE_DIR}"
+    done
+done
+</code></pre><p>Edit4:
+Solusi alternatif menggunakan keanggotaan kelompok hard-code.</p><pre><code>#!/bin/bash
+USER_LIST="dammi:group1 harrami:group2"
+HOME_SUBDIRS="abcd wxyz"
+DATE_DIR=$(date +%Y-%m)
+DAY_DIR=$(date +%d)
+
+for HOME_SUBDIR in $HOME_SUBDIRS; do
+    for UG in $USER_LIST; do
+        G=${UG##*:}
+        U=${UG%%:*}
+        mkdir -p "/home/${HOME_SUBDIR}/${U}/${DATE_DIR}/${DAY_DIR}"
+        GROUP_MEMBER=$(stat -c %G "/home/${HOME_SUBDIR}/${U}")
+        chown -R "${U}":"${G}" "/home/${HOME_SUBDIR}/${U}/${DATE_DIR}"
+    done
+done
+</code></pre><p>Edit5:
+Melihat posting awal Anda, struktur yang diinginkan mungkin sedikit berbeda. Saya rasa Anda ingin memiliki sub-direktori di <code>/home</code> untuk setiap grup dan hanya menambahkan direktori pengguna untuk setiap anggota grup. Jadi ini dia:</p><pre><code>#!/bin/bash
+USER_LIST="dammi:abcd dammi:wxyz harrami:wxyz"
+DATE_DIR=$(date +%Y-%m)
+DAY_DIR=$(date +%d)
+
+for UG in $USER_LIST; do
+    G=${UG##*:}
+    U=${UG%%:*}
+    mkdir -p "/home/${G}/${U}/${DATE_DIR}/${DAY_DIR}"
+    chown -R "${U}":"${G}" "/home/${G}/${U}/${DATE_DIR}"
+done
+</code></pre><p>Jika pengguna adalah anggota dalam beberapa grup, cukup tentukan beberapa kali di USER_LIST.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/bagaimana-cara-membuat-folder-menurut-tanggal-di-linux-ozd6ncxo/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/78565/skybeam target=_blank rel="nofollow noopener"><span itemprop=name>SkyBeam</span></a>
+—
+<a href=https://superuser.com/a/289140 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>@SkyBeam ya izin menyebabkan masalah sekarang. bagaimana cara mengatasinya?</div><div>— <a href=https://superuser.com/users/77460/himalay target=_blank rel="nofollow noopener">Himalay</a></div></li><li class=list-group-item><div>Cukup tambahkan baris chown lain - Saya telah memperbarui jawabannya untuk menyertakan chown juga. Saya kira Anda tidak perlu mengubah kepemilikan grup. Jika perlu, gunakan saja 'chwon -R "$ {U}": groupname ...' sebagai gantinya.</div><div>— <a href=https://superuser.com/users/78565/skybeam target=_blank rel="nofollow noopener">SkyBeam</a></div></li><li class=list-group-item><div>@SkyBeam Saya memiliki dua grup berbeda untuk kedua pengguna tersebut. Haruskah saya melakukannya secara terpisah untuk ini menambahkan loop for lainnya?</div><div>— <a href=https://superuser.com/users/77460/himalay target=_blank rel="nofollow noopener">Himalay</a></div></li><li class=list-group-item><div>@SkyBeam sebenarnya ada tiga pengguna dan dua grup. Saya menambahkan pertanyaan di atas tentang itu.</div><div>— <a href=https://superuser.com/users/77460/himalay target=_blank rel="nofollow noopener">Himalay</a></div></li><li class=list-group-item><div>Meskipun ini terlihat mudah, ini mungkin sedikit lebih sulit untuk dijawab karena Anda harus memetakan setiap pengguna ke sebuah grup. Namun karena kita berbicara tentang direktori home, kemungkinan besar direktori / home / &lt;subdir> / &lt;user> sudah termasuk dalam grup yang benar. Jadi sebaiknya kita membacanya dari sana? Saya akan menambahkan pembaruan ...</div><div>— <a href=https://superuser.com/users/78565/skybeam target=_blank rel="nofollow noopener">SkyBeam</a></div></li><li class=list-group-item><div>@SkyBeam: Saya rasa Anda salah mengeja bagian dari kode Anda: <code>mkdir -p "${FOLDER}/${DATE_DIR}/${DA_DIR}"</code> seharusnya <code>mkdir -p "${FOLDER}/${DATE_DIR}/${DAY_DIR}"</code>. Pada dasarnya Anda lupa "Y"</div><div>— <a href=https://superuser.com/users/82376/chris-ting target=_blank rel="nofollow noopener">Chris Ting</a></div></li><li class=list-group-item><div>@SkyBeam itu berarti saya juga bisa melakukan $ (stat -c% U "/ home / $ {HOME_SUBDIR} / $ {U}") di tempat $ {U}?</div><div>— <a href=https://superuser.com/users/77460/himalay target=_blank rel="nofollow noopener">Himalay</a></div></li><li class=list-group-item><div>Saya baru saja menambahkan varian lain dalam "Edit4" yang memungkinkan Anda membuat kode keras pengguna DAN grup dalam variabel USER_LIST, dipisahkan dengan titik dua.</div><div>— <a href=https://superuser.com/users/78565/skybeam target=_blank rel="nofollow noopener">SkyBeam</a></div></li><li class=list-group-item><div>tentu Anda bisa menggunakan stat juga untuk mendapatkan nama pengguna, tetapi nama pengguna sudah tersedia (dengan asumsi identik dengan nama direktori) jadi tidak perlu membacanya dari sistem file (yang lebih lambat daripada membacanya dari variabel yang ada). Dan ya, saya mungkin salah mengeja beberapa kode saya. Saya tidak menjalankannya; mungkin perlu beberapa debugging;) - Saya baru saja menambahkan beberapa kode snipplet di Edit3 juga menggunakan stat untuk mengambil pemilik.</div><div>— <a href=https://superuser.com/users/78565/skybeam target=_blank rel="nofollow noopener">SkyBeam</a></div></li><li class=list-group-item><div>@SkyBeam OK Saya akan menggunakan solusi keanggotaan grup hard-code. Terima kasih banyak atas waktu dan pekerjaannya. Anda benar-benar banyak membantu saya dalam hal ini. Terima kasih banyak!!</div><div>— <a href=https://superuser.com/users/77460/himalay target=_blank rel="nofollow noopener">Himalay</a></div></li><li class=list-group-item><div>Nah, melihat hasil edit Anda pada posting awal tujuan Anda mungkin sedikit berbeda. Saat ini skrip membuat SEMUA folder pengguna dalam semua subdirektori beranda yang ditentukan. Melihat tabel Anda, Anda mungkin ingin memiliki hanya satu sub-direktori di / home yang merujuk ke grup dan kemudian hanya sub-direktori untuk anggota grup. Saya akan menambahkan potongan untuk ini juga.</div><div>— <a href=https://superuser.com/users/78565/skybeam target=_blank rel="nofollow noopener">SkyBeam</a></div></li><li class=list-group-item><div>Oke, ini mungkin hasil edit terakhir saya hari ini. Saya menjawab pertanyaan Anda tentang cara menyalin file ke direktori ini juga: <a href=http://superuser.com/questions/289154/how-to-move-around-files-using-ls-al-result-in-linux title="how to move around files using ls al result in linux" target=_blank rel="nofollow noopener">superuser.com/questions/289154/…</a></div><div>— <a href=https://superuser.com/users/78565/skybeam target=_blank rel="nofollow noopener">SkyBeam</a></div></li><li class=list-group-item><div>Anda juga bisa lolos hanya dengan satu doa 'kencan': <code>$(date "+%Y-%M/%d")</code></div><div>— <a href=https://superuser.com/users/4714/glenn-jackman target=_blank rel="nofollow noopener">glenn jackman</a></div></li><li class=list-group-item><div>@ Glenn: yeeeessss, benar. Tetapi saya memerlukan notasi YYYY-MM untuk direktori level teratas di chown call untuk memastikan bahwa direktori ini juga milik pengguna.</div><div>— <a href=https://superuser.com/users/78565/skybeam target=_blank rel="nofollow noopener">SkyBeam</a></div></li><li class=list-group-item><div>@SkyBeam, beberapa pemanggilan <code>date</code> sedemikian rupa tidak boleh dilakukan karena risiko teoretis dari perubahan tanggal. Jika Anda memerlukan direktori tingkat tanggal, Anda selalu dapat menambahkan <code>/..</code>, dll.</div><div>— <a href=https://superuser.com/users/163372/acumenus target=_blank rel="nofollow noopener">Acumenus</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>3</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>3</div><div class=card-body><div itemprop=text><p>Gunakan opsi <code>-p</code> ke mkdir untuk membuat lebih dari satu elemen jalur pada saat itu, dan gunakan for-loop untuk menghindari pengulangan diri Anda sendiri:</p><pre><code>sh -c '
+  for a in abcd wxyz; do 
+    for b in dammi harrami; do 
+      mkdir -p /home/$a/$b/$(date +%Y-%m)/$(date +%d); 
+    done; 
+  done
+'
+</code></pre><p>(jeda baris untuk menunjukkan struktur logis; bisa jadi semua dalam satu baris)</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/bagaimana-cara-membuat-folder-menurut-tanggal-di-linux-ozd6ncxo/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/52645/rolkau target=_blank rel="nofollow noopener"><span itemprop=name>RolKau</span></a>
+—
+<a href=https://superuser.com/a/289139 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=1>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=1><ul class="list-group list-group-flush"><li class=list-group-item><div>Jawaban yang bagus. Bahkan sedikit lebih cepat dariku. Saya suka Anda juga memutar ulang sub-direktori home. Namun dalam sampelnya ia membuat 3 kali subfolder "harrami" tetapi dammi tidak dibuat dalam folder "wxyz". Yah, ini mungkin bug di pertanyaan awal. Anda mungkin juga ingin mengeluarkan panggilan $ (date) dari loop. Panggilan tanggal seharusnya mengembalikan nilai yang sama untuk setiap loop. $ () mengeluarkan garpu yang bisa sangat lambat saat digunakan dalam loop.</div><div>— <a href=https://superuser.com/users/78565/skybeam target=_blank rel="nofollow noopener">SkyBeam</a></div></li><li class=list-group-item><div>Anda juga bisa lolos hanya dengan satu doa 'tanggal': <code>$(date "+%Y-%M/%d")</code></div><div>— <a href=https://superuser.com/users/4714/glenn-jackman target=_blank rel="nofollow noopener">glenn jackman</a></div></li><li class=list-group-item><div>Beberapa pemanggilan <code>date</code> buruk dan tidak boleh dilakukan karena risiko perubahan tanggal. Bug teoritis masih merupakan bug.</div><div>— <a href=https://superuser.com/users/163372/acumenus target=_blank rel="nofollow noopener">Acumenus</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/bagaimana-cara-membuat-klip-video-dari-segmen-file-avi-yang-sudah-ada-ikmuusdr/>Bagaimana cara membuat klip video dari segmen file AVI yang sudah ada?</a></div></li><li class=list-group-item><div><a href=/bagaimana-saya-dapat-melihat-proses-mana-pada-windows-xp-yang-mengakses-sistem-file-a1ist4rc/>Bagaimana saya dapat melihat proses mana pada Windows XP yang mengakses sistem file?</a></div></li><li class=list-group-item><div><a href=/program-baris-perintah-windows-untuk-mengubah-volume-file-mp3-4hazhazj/>program baris perintah windows untuk mengubah volume file mp3</a></div></li><li class=list-group-item><div><a href=/adakah-metode-untuk-mengompres-banyak-file-sekaligus-nglwlacp/>Adakah metode untuk mengompres banyak file sekaligus?</a></div></li><li class=list-group-item><div><a href=/dd-perintah-untuk-membuat-image-iso-bootable-dari-hard-disk-gyaqxrbp/>dd perintah untuk membuat image iso bootable dari hard disk</a></div></li><li class=list-group-item><div><a href=/mengapa-iis-dapat-menerima-lalu-lintas-http-80-meskipun-aturan-firewall-dinonaktifkan-vzheesed/>Mengapa IIS dapat menerima lalu lintas HTTP 80, meskipun aturan firewall dinonaktifkan?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-melakukan-pencarian-dan-penggantian-di-banyak-file-dengan-emacs-sekaligus-mbicmjma/>Bagaimana cara melakukan pencarian dan penggantian di banyak file dengan Emacs sekaligus?</a></div></li><li class=list-group-item><div><a href=/loop-di-bash-untuk-membuat-folder-dengan-nomor-urut-fqcfuiue/>Loop di Bash untuk membuat folder dengan nomor urut</a></div></li><li class=list-group-item><div><a href=/saya-tidak-sengaja-memberi-tahu-manajer-partisi-easeus-untuk-memformat-ubuntu-dapatkah-saya-membatalkan-ini-sebelum-mulai-berlaku-pada-boot-ulang-berikutnya-yyluguw5/>Saya tidak sengaja memberi tahu manajer partisi Easeus untuk memformat Ubuntu, dapatkah saya membatalkan ini sebelum mulai berlaku pada boot ulang berikutnya?</a></div></li><li class=list-group-item><div><a href=/resolusi-set-parameter-powershell-dengan-parameter-eksplisit-gagal-updbsug6/>Resolusi set parameter Powershell dengan parameter eksplisit gagal</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

@@ -1,0 +1,151 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Membedakan antara pengguna yang terhubung melalui ssh</title><meta name=description content="Rekan saya dan saya sama-sama ssh ke server ubuntu pekerjaan kami, sebagai pengguna &amp;quot;deploy&amp;quot; yang sama, menggunakan login kunci. Di konsol aplikasi rel kami, kami memiliki perangkat lunak yang mencatat siapa yang..."><link rel=canonical href=https://www.idxstack.com/membedakan-antara-pengguna-yang-terhubung-melalui-ssh-ye7je9ie/><meta property="og:title" content="Membedakan antara pengguna yang terhubung melalui ssh"><meta property="og:description" content="Rekan saya dan saya sama-sama ssh ke server ubuntu pekerjaan kami, sebagai pengguna &amp;quot;deploy&amp;quot; yang sama, menggunakan login kunci. Di konsol aplikasi rel kami, kami memiliki perangkat lunak yang mencatat siapa yang..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/membedakan-antara-pengguna-yang-terhubung-melalui-ssh-ye7je9ie/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Membedakan antara pengguna yang terhubung melalui ssh"><meta name=twitter:description content="Rekan saya dan saya sama-sama ssh ke server ubuntu pekerjaan kami, sebagai pengguna &amp;quot;deploy&amp;quot; yang sama, menggunakan login kunci. Di konsol aplikasi rel kami, kami memiliki perangkat lunak yang mencatat siapa yang..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Membedakan antara pengguna yang terhubung melalui ssh</h1><div itemprop=text><p>Rekan saya dan saya sama-sama ssh ke server ubuntu pekerjaan kami, sebagai pengguna "deploy" yang sama, menggunakan login kunci. Di konsol aplikasi rel kami, kami memiliki perangkat lunak yang mencatat siapa yang membuat perubahan, tetapi tidak dapat membedakan antara kami: ia hanya melihat pengguna penerapan. Adakah cara untuk membedakan kita? apakah sistem mencatat kunci mana yang digunakan untuk masuk? Itu bisa contoh hal yang bisa saya kaitkan untuk mengetahui siapa di antara kita yang benar-benar masuk.</p><p>Perhatikan bahwa ini bukan pertanyaan keamanan: jika kami berdua harus melakukan sesuatu yang sedikit berbeda untuk membuat ini berhasil, kami berdua akan melakukannya.</p><p>Jawaban yang paling jelas adalah "Jangan keduanya masuk sebagai pengguna 'terapkan'", dan itu memang akan memperbaikinya. Tapi kami tidak ingin melakukan itu.</p><p>terima kasih, maks</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/60790/max-williams target=_blank rel="nofollow noopener"><span itemprop=name>Max Williams</span></a>
+—
+<a href=https://superuser.com/questions/722766/distinguishing-between-users-connecting-via-ssh target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>3</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>5</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>5</div><div class=card-body><div itemprop=text><p>Perhatikan bahwa Anda dapat menentukan opsi setelah setiap kunci di authorized_keys. Mungkin gunakan opsi <code>environment="NAME=value"</code> dan tetapkan variabel umum ke nilai yang berbeda untuk setiap kunci. Variabel ini kemudian dapat digunakan untuk menyetel prompt bash dan digunakan dalam skrip.</p><p>Berikut ini adalah bagian yang relevan dari <code>man sshd</code>:</p><pre><code>AUTHORIZED_KEYS FILE FORMAT
+     AuthorizedKeysFile specifies the files containing public keys for public
+     key authentication; if none is specified, the default is
+     ~/.ssh/authorized_keys and ~/.ssh/authorized_keys2.  Each line of the
+     file contains one key (empty lines and lines starting with a ‘#’ are
+     ignored as comments).  Protocol 1 public keys consist of the following
+     space-separated fields: options, bits, exponent, modulus, comment.  Pro‐
+     tocol 2 public key consist of: options, keytype, base64-encoded key, com‐
+     ment.  The options field is optional; its presence is determined by
+     whether the line starts with a number or not (the options field never
+     starts with a number).  The bits, exponent, modulus, and comment fields
+     give the RSA key for protocol version 1; the comment field is not used
+     for anything (but may be convenient for the user to identify the key).
+     For protocol version 2 the keytype is “ecdsa-sha2-nistp256”,
+     “ecdsa-sha2-nistp384”, “ecdsa-sha2-nistp521”, “ssh-dss” or “ssh-rsa”.
+
+     Note that lines in this file are usually several hundred bytes long
+     (because of the size of the public key encoding) up to a limit of 8 kilo‐
+     bytes, which permits DSA keys up to 8 kilobits and RSA keys up to 16
+     kilobits.  You don't want to type them in; instead, copy the
+     identity.pub, id_dsa.pub, id_ecdsa.pub, or the id_rsa.pub file and edit
+     it.
+
+     sshd enforces a minimum RSA key modulus size for protocol 1 and protocol
+     2 keys of 768 bits.
+
+     The options (if present) consist of comma-separated option specifica‐
+     tions.  No spaces are permitted, except within double quotes.  The fol‐
+     lowing option specifications are supported (note that option keywords are
+     case-insensitive):
+
+     cert-authority
+             Specifies that the listed key is a certification authority (CA)
+             that is trusted to validate signed certificates for user authen‐
+             tication.
+
+             Certificates may encode access restrictions similar to these key
+             options.  If both certificate restrictions and key options are
+             present, the most restrictive union of the two is applied.
+
+     command="command"
+             Specifies that the command is executed whenever this key is used
+             for authentication.  The command supplied by the user (if any) is
+             ignored.  The command is run on a pty if the client requests a
+             pty; otherwise it is run without a tty.  If an 8-bit clean chan‐
+             nel is required, one must not request a pty or should specify
+             no-pty.  A quote may be included in the command by quoting it
+             with a backslash.  This option might be useful to restrict cer‐
+             tain public keys to perform just a specific operation.  An exam‐
+             ple might be a key that permits remote backups but nothing else.
+             Note that the client may specify TCP and/or X11 forwarding unless
+             they are explicitly prohibited.  The command originally supplied
+             by the client is available in the SSH_ORIGINAL_COMMAND environ‐
+             ment variable.  Note that this option applies to shell, command
+             or subsystem execution.  Also note that this command may be
+             superseded by either a sshd_config(5) ForceCommand directive or a
+             command embedded in a certificate.
+
+     environment="NAME=value"
+             Specifies that the string is to be added to the environment when
+             logging in using this key.  Environment variables set this way
+             override other default environment values.  Multiple options of
+             this type are permitted.  Environment processing is disabled by
+             default and is controlled via the PermitUserEnvironment option.
+             This option is automatically disabled if UseLogin is enabled.
+
+     from="pattern-list"
+             Specifies that in addition to public key authentication, either
+             the canonical name of the remote host or its IP address must be
+             present in the comma-separated list of patterns.  See PATTERNS in
+             ssh_config(5) for more information on patterns.
+
+             In addition to the wildcard matching that may be applied to host‐
+             names or addresses, a from stanza may match IP addresses using
+             CIDR address/masklen notation.
+
+             The purpose of this option is to optionally increase security:
+             public key authentication by itself does not trust the network or
+             name servers or anything (but the key); however, if somebody
+             somehow steals the key, the key permits an intruder to log in
+             from anywhere in the world.  This additional option makes using a
+             stolen key more difficult (name servers and/or routers would have
+             to be compromised in addition to just the key).
+
+     no-agent-forwarding
+             Forbids authentication agent forwarding when this key is used for
+             authentication.
+
+     no-port-forwarding
+             Forbids TCP forwarding when this key is used for authentication.
+             Any port forward requests by the client will return an error.
+             This might be used, e.g. in connection with the command option.
+
+     no-pty  Prevents tty allocation (a request to allocate a pty will fail).
+
+     no-user-rc
+             Disables execution of ~/.ssh/rc.
+
+     no-X11-forwarding
+             Forbids X11 forwarding when this key is used for authentication.
+             Any X11 forward requests by the client will return an error.
+
+     permitopen="host:port"
+             Limit local ``ssh -L'' port forwarding such that it may only con‐
+             nect to the specified host and port.  IPv6 addresses can be spec‐
+             ified by enclosing the address in square brackets.  Multiple
+             permitopen options may be applied separated by commas.  No pat‐
+             tern matching is performed on the specified hostnames, they must
+             be literal domains or addresses.
+
+     principals="principals"
+             On a cert-authority line, specifies allowed principals for cer‐
+             tificate authentication as a comma-separated list.  At least one
+             name from the list must appear in the certificate's list of prin‐
+             cipals for the certificate to be accepted.  This option is
+             ignored for keys that are not marked as trusted certificate sign‐
+             ers using the cert-authority option.
+
+     tunnel="n"
+             Force a tun(4) device on the server.  Without this option, the
+             next available device will be used if the client requests a tun‐
+             nel.
+
+     An example authorized_keys file:
+
+        # Comments allowed at start of line
+        ssh-rsa AAAAB3Nza...LiPk== user@example.net
+        from="*.sales.example.net,!pc.sales.example.net" ssh-rsa
+        AAAAB2...19Q== john@example.net
+        command="dump /home",no-pty,no-port-forwarding ssh-dss
+        AAAAC3...51R== example.net
+        permitopen="192.0.2.1:80",permitopen="192.0.2.2:25" ssh-dss
+        AAAAB5...21S==
+        tunnel="0",command="sh /etc/netstart tun0" ssh-rsa AAAA...==
+        jane@example.net
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/membedakan-antara-pengguna-yang-terhubung-melalui-ssh-ye7je9ie/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/44887/dan-d target=_blank rel="nofollow noopener"><span itemprop=name>Dan D.</span></a>
+—
+<a href=https://superuser.com/a/722784 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>aha - ya. kunci yang sudah saya miliki di kunci resmi terlihat seperti ini: <code>ssh-rsa &lt;long string of chars> max@max-thinkpad-linux</code>. (<code>max@max-thinkpad-linux</code> masing-masing adalah nama pengguna lokal dan nama komputer lokal saya). Dapatkah saya membaca <code>max@max-thinkpad-linux</code> dari lingkungan? jika tidak, maka saya dapat menambahkan pasangan nama-nilai ekstra ke entri saya dan kolega saya di kunci resmi - nonaktifkan untuk mencobanya sekarang!</div><div>— <a href=https://superuser.com/users/60790/max-williams target=_blank rel="nofollow noopener">Max Williams</a></div></li><li class=list-group-item><div>Oke - sejauh ini saya tidak bisa menjalankannya. Saya menambahkan <code>environment="RAILS_USER_ID=1182"</code> di akhir entri saya pada <code>.ssh/authorized_keys</code> di server. Saya kemudian keluar dan terhubung lagi dengan ssh. Saya kemudian melakukan <code>echo $RAILS_USER_ID</code> dan tidak mendapatkan apa-apa kembali. (Saya juga mencoba menambahkannya ke kunci rsa.pub lokal saya juga, tidak ada kegembiraan). Apakah saya salah paham?</div><div>— <a href=https://superuser.com/users/60790/max-williams target=_blank rel="nofollow noopener">Max Williams</a></div></li><li class=list-group-item><div>Opsi diletakkan sebelum kunci di awal baris, bukan setelah di akhir. Lihat contohnya.</div><div>— <a href=https://superuser.com/users/44887/dan-d target=_blank rel="nofollow noopener">Dan D.</a></div></li><li class=list-group-item><div>ah, saya mohon maaf. Terima kasih. Oke, saya memindahkannya ke awal, dan sekarang saya tidak bisa masuk: saya mendapatkan <code>Permission denied (publickey,keyboard-interactive).</code>. Saya mengedit file id_rsa.pub lokal saya agar sama dengan entri authorized_keys di server: keduanya <code>environment="RAILS_USER_ID=1182" ssh-rsa &lt;long string of chars> max@max-thinkpad-linux</code>. Apakah saya perlu melakukan sesuatu yang lain ketika saya memperbarui entri kunci saya seperti ini?</div><div>— <a href=https://superuser.com/users/60790/max-williams target=_blank rel="nofollow noopener">Max Williams</a></div></li><li class=list-group-item><div>Btw, saya tetap membuka tab lain di server jadi saya masih memiliki akses meskipun saya terkunci di tab pengujian saya :)</div><div>— <a href=https://superuser.com/users/60790/max-williams target=_blank rel="nofollow noopener">Max Williams</a></div></li><li class=list-group-item><div>Ups, baru saja melihat ini: <code>Environment processing is disabled by default</code></div><div>— <a href=https://superuser.com/users/60790/max-williams target=_blank rel="nofollow noopener">Max Williams</a></div></li><li class=list-group-item><div>Saya baru saja mengedit (di server) <code>/etc/ssh/sshd_config</code> dan menambahkan <code>PermitUserEnvironment yes</code>, lalu mencoba lagi, dan saya masih terkunci.</div><div>— <a href=https://superuser.com/users/60790/max-williams target=_blank rel="nofollow noopener">Max Williams</a></div></li><li class=list-group-item><div>Doh, saya bodoh - saya lupa memulai ulang sshd setelah melakukan perubahan konfigurasi. Selesai dan berhasil. Terima kasih!</div><div>— <a href=https://superuser.com/users/60790/max-williams target=_blank rel="nofollow noopener">Max Williams</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><p>OpenSSH menetapkan beberapa variabel lingkungan yang mungkin dapat Anda gunakan, tetapi hanya jika alamat IP klien berguna bagi Anda. Secara khusus, <code>SSH_CLIENT</code> diatur ke alamat IP sistem klien dan nomor port yang digunakan.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/membedakan-antara-pengguna-yang-terhubung-melalui-ssh-ye7je9ie/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/203009/flup target=_blank rel="nofollow noopener"><span itemprop=name>Flup</span></a>
+—
+<a href=https://superuser.com/a/722768 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=1>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=1><ul class="list-group list-group-flush"><li class=list-group-item><div>Saya tidak yakin apakah itu akan berhasil: kami berdua terhubung dari kantor kami, jadi akan memiliki ip yang sama sejauh menyangkut server. AFAIK ssh selalu menggunakan port 22 bukan?</div><div>— <a href=https://superuser.com/users/60790/max-williams target=_blank rel="nofollow noopener">Max Williams</a></div></li><li class=list-group-item><div>Sebenarnya tahukah kamu apa angka kedua di SSH_CLIENT itu? Saya mendapatkan misalnya <code>&lt;ip address> 35568 22</code> - apa itu 35568?</div><div>— <a href=https://superuser.com/users/60790/max-williams target=_blank rel="nofollow noopener">Max Williams</a></div></li><li class=list-group-item><div>Ah, cukup adil. ssh memang menggunakan port 22 secara default, tetapi <code>SSH_CLIENT</code> juga berisi nomor port sementara di ujung lainnya. Sayangnya, itu tidak membantu Anda!</div><div>— <a href=https://superuser.com/users/203009/flup target=_blank rel="nofollow noopener">Flup</a></div></li><li class=list-group-item><div>ah - saya pikir kami baru saja memposting pada saat yang sama :) apakah nomor kedua adalah "nomor port sementara"?</div><div>— <a href=https://superuser.com/users/60790/max-williams target=_blank rel="nofollow noopener">Max Williams</a></div></li><li class=list-group-item><div>Ya - itu adalah nomor yang dialokasikan oleh OS klien yang mengikat proses ssh. Ini adalah bagaimana OS mengetahui proses mana untuk merutekan kembali paket balasan.</div><div>— <a href=https://superuser.com/users/203009/flup target=_blank rel="nofollow noopener">Flup</a></div></li><li class=list-group-item><div>Anda mungkin dapat melakukan sesuatu yang cerdas dengan <code>netstat -anp | grep &lt;ephemeral port number></code>, lalu menghubungkan PID yang memiliki porta tersebut dengan pengguna. Yuck :)</div><div>— <a href=https://superuser.com/users/203009/flup target=_blank rel="nofollow noopener">Flup</a></div></li><li class=list-group-item><div>Masuk akal (nomor port sementara) - terima kasih atas infonya. Pendekatan netstat memang tampak sedikit menjijikkan, ya :)</div><div>— <a href=https://superuser.com/users/60790/max-williams target=_blank rel="nofollow noopener">Max Williams</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-2><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><p>Apakah Anda menyadari peluang yang ditawarkan sudo?
+Apakah sudo cukup keren untuk meyakinkan Anda untuk tidak menggunakan akun yang sama?
+Dengan log sudo Anda dapat merekam dengan tepat apa yang dilakukan satu sama lain.</p><p>Anda masing-masing dapat terhubung dengan akun pengguna Anda sendiri dan kemudian menggunakan <code>sudo -u deploy /yoursoftware/command param1 param2</code></p><p>Kemudian di log sudo Anda, Anda akan melihat sesuatu seperti</p><pre><code>Feb 28 xy:22:47 yourHost sudo:   MaxWilliams: TTY=pts/0 ; PWD=/mount/yourCWD ; USER=deploy; COMMAND=/yourSoftware/command param1 param2
+</code></pre><p>Saya membayangkan, Anda dapat mengatur ini untuk dijalankan menggunakan kunci login. Saya berasumsi Anda menjalankan perintah dari jarak jauh dan tidak benar-benar masuk saat pengguna menyebarkan. Jika demikian, Anda perlu memperluas jawaban ini.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/membedakan-antara-pengguna-yang-terhubung-melalui-ssh-ye7je9ie/#answer-2 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/301056/unlimitedinfinity target=_blank rel="nofollow noopener"><span itemprop=name>UnlimitedInfinity</span></a>
+—
+<a href=https://superuser.com/a/722777 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=2>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=2><ul class="list-group list-group-flush"><li class=list-group-item><div>Hai - kami berdua terhubung sebagai pengguna penerapan, dengan <code>ssh deploy@hostname</code>.</div><div>— <a href=https://superuser.com/users/60790/max-williams target=_blank rel="nofollow noopener">Max Williams</a></div></li><li class=list-group-item><div>@ Max Williams saya mengerti. Namun, Anda meminta sshd untuk melakukan pekerjaan yang sudo telah dikembangkan. Meskipun Dan D. tampaknya telah menemukan trik agar sshd melakukan apa yang Anda inginkan.</div><div>— <a href=https://superuser.com/users/301056/unlimitedinfinity target=_blank rel="nofollow noopener">UnlimitedInfinity</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/bisakah-kita-menonaktifkan-tab-di-ie8-yailivel/>Bisakah kita menonaktifkan tab di IE8?</a></div></li><li class=list-group-item><div><a href=/osx-mungkin-menggunakan-total-terminal-dengan-iterm2-ign8x9pg/>OSX: Mungkin menggunakan Total Terminal dengan iTerm2?</a></div></li><li class=list-group-item><div><a href=/os-x-mavericks-tidak-dapat-diunduh-di-app-store-gzl3xvgx/>OS / X Mavericks tidak dapat diunduh di App Store</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-agar-bookmark-chrome-tetap-mutakhir-o5engpaq/>Bagaimana cara agar bookmark Chrome tetap mutakhir?</a></div></li><li class=list-group-item><div><a href=/router-tingkat-lanjut-jaringan-daya-tfhwfmdw/>Router Tingkat Lanjut - Jaringan daya</a></div></li><li class=list-group-item><div><a href=/mengapa-windows-7-tidak-menjalankan-chkdsk-6nmjxmz9/>mengapa windows 7 tidak menjalankan chkdsk?</a></div></li><li class=list-group-item><div><a href=/menggunakan-excel-di-ubuntu-linux-otib3hck/>Menggunakan Excel di Ubuntu (Linux)?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengimpor-template-email-html-ke-thunderbird-agpg62zf/>Bagaimana cara mengimpor template email HTML ke Thunderbird?</a></div></li><li class=list-group-item><div><a href=/kunci-otorisasi-ssh-untuk-beberapa-sistem-5armljcc/>Kunci otorisasi SSH untuk beberapa sistem</a></div></li><li class=list-group-item><div><a href=/kemungkinan-efek-samping-negatif-dari-peningkatan-ruang-alamat-virtual-untuk-aplikasi-resjsdwx/>Kemungkinan efek samping negatif dari peningkatan ruang alamat virtual untuk aplikasi?</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

@@ -1,0 +1,105 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Docker dengan Ubuntu 20.10: `strconv.Atoi: parsing&amp;quot; 0-beta1 &amp;quot;: sintaks` tidak valid</title><meta name=description content="Saya baru saja memperbarui semua paket yang diinstal di mesin saya dengan menggunakan yang biasa:  sudo apt update &amp;amp;&amp;amp; sudo apt upgrade -y &amp;amp;&amp;amp; sudo apt autoremove -y  Setelah me-reboot sistem, saya..."><link rel=canonical href=https://www.idxstack.com/docker-dengan-ubuntu-2010-strconvatoi-parsingquot-0-beta1-quot-sintaks-tidak-valid-yewszd1k/><meta property="og:title" content="Docker dengan Ubuntu 20.10: `strconv.Atoi: parsing&amp;quot; 0-beta1 &amp;quot;: sintaks` tidak valid"><meta property="og:description" content="Saya baru saja memperbarui semua paket yang diinstal di mesin saya dengan menggunakan yang biasa:  sudo apt update &amp;amp;&amp;amp; sudo apt upgrade -y &amp;amp;&amp;amp; sudo apt autoremove -y  Setelah me-reboot sistem, saya..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/docker-dengan-ubuntu-2010-strconvatoi-parsingquot-0-beta1-quot-sintaks-tidak-valid-yewszd1k/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Docker dengan Ubuntu 20.10: `strconv.Atoi: parsing&amp;quot; 0-beta1 &amp;quot;: sintaks` tidak valid"><meta name=twitter:description content="Saya baru saja memperbarui semua paket yang diinstal di mesin saya dengan menggunakan yang biasa:  sudo apt update &amp;amp;&amp;amp; sudo apt upgrade -y &amp;amp;&amp;amp; sudo apt autoremove -y  Setelah me-reboot sistem, saya..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Docker dengan Ubuntu 20.10: `strconv.Atoi: parsing" 0-beta1 ": sintaks` tidak valid</h1><div itemprop=text><p>Saya baru saja memperbarui semua paket yang diinstal di mesin saya dengan menggunakan yang biasa:</p><pre><code>sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt autoremove -y
+</code></pre><p>Setelah me-reboot sistem, saya melihat container Docker saya hilang dari eksekusi, lalu saya memutuskan untuk memulai container <code>hello-world</code> yang biasa. Saya mendapatkan kembali pesan kesalahan berikut.</p><pre><code>sudouser@machine:~$ sudo docker run hello-world
+docker: Error response from daemon: AppArmor enabled on system but the docker-default profile could not be loaded: strconv.Atoi: parsing &quot;0-beta1&quot;: invalid syntax.
+ERRO[0004] error waiting for container: context canceled 
+</code></pre><h2 class=h4>Solusi mencoba</h2><ul><li>Copot dan instal ulang Docker: <em>tidak ada perubahan</em> .</li></ul><h3 class=h5>Informasi berguna</h3><pre><code>Distributor ID: Ubuntu
+Description:    Ubuntu Groovy Gorilla (development branch)
+Release:    20.10
+Codename:   groovy
+Kernel:     GNU/Linux 5.8.0-19-generic x86_64
+</code></pre></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1222509/piero-macaluso target=_blank rel="nofollow noopener"><span itemprop=name>Piero Macaluso</span></a>
+—
+<a href=https://superuser.com/questions/1588174/docker-with-ubuntu-20-10-strconv-atoi-parsing-0-beta1-invalid-syntax target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>3</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>6</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>6</div><div class=card-body><div itemprop=text><p>halo saya memecahkan masalah dengan menambahkan file buruh pelabuhan secara manual di direktori /etc/apparmor.d:</p><pre><code>$ /etc/apparmor.d$ cat docker 
+#include &lt;tunables/global&gt;
+profile docker-default flags=(attach_disconnected,mediate_deleted) {
+  #include &lt;abstractions/base&gt;
+  network,
+  capability,
+  file,
+  umount,
+  deny @{PROC}/* w,   # deny write for all files directly in /proc (not in a subdir)
+  # deny write to files not in /proc/&lt;number&gt;/** or /proc/sys/**
+  deny @{PROC}/{[^1-9],[^1-9][^0-9],[^1-9s][^0-9y][^0-9s],[^1-9][^0-9][^0-9][^0-9]*}/** w,
+  deny @{PROC}/sys/[^k]** w,  # deny /proc/sys except /proc/sys/k* (effectively /proc/sys/kernel)
+  deny @{PROC}/sys/kernel/{?,??,[^s][^h][^m]**} w,  # deny everything except shm* in /proc/sys/kernel/
+  deny @{PROC}/sysrq-trigger rwklx,
+  deny @{PROC}/mem rwklx,
+  deny @{PROC}/kmem rwklx,
+  deny @{PROC}/kcore rwklx,
+  deny mount,
+  deny /sys/[^f]*/** wklx,
+  deny /sys/f[^s]*/** wklx,
+  deny /sys/fs/[^c]*/** wklx,
+  deny /sys/fs/c[^g]*/** wklx,
+  deny /sys/fs/cg[^r]*/** wklx,
+  deny /sys/firmware/efi/efivars/** rwklx,
+  deny /sys/kernel/security/** rwklx,
+  # suppress ptrace denials when using 'docker ps' or using 'ps' inside a container ptrace (trace,read) peer=docker-default,
+}
+
+$ /etc/init.d/apparmor restart
+$ docker run hello-world
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/docker-dengan-ubuntu-2010-strconvatoi-parsingquot-0-beta1-quot-sintaks-tidak-valid-yewszd1k/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1225109/roma59 target=_blank rel="nofollow noopener"><span itemprop=name>roma59</span></a>
+—
+<a href=https://superuser.com/a/1590230 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Saya harus membuat file <code>docker</code> dan membuat kesalahan dengan awalnya meletakkannya <code>/etc/apparmor</code> bukan <code>/etc/apparmor.d</code> tetapi setelah saya memperbaikinya, solusi ini bekerja seperti mimpi! Terima kasih @ roma59</div><div>— <a href=https://superuser.com/users/1225660/screamer target=_blank rel="nofollow noopener">Screamer</a></div></li><li class=list-group-item><div>Saya mengonfirmasi menambahkan file buruh pelabuhan ke /etc/apparmor.d dan memulai ulang apparmor memperbaiki kesalahan. Saya tidak tahu mengapa itu berhasil. Terima kasih atas solusinya.</div><div>— <a href=https://superuser.com/users/599830/rex target=_blank rel="nofollow noopener">Rex</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>2</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>2</div><div class=card-body><div itemprop=text><p>Saya melihat ini juga setelah peningkatan dari 20,04.</p><p>Berikut adalah langkah-langkah yang saya ambil dan saya bisa menjalankan Docker kembali.</p><pre><code>sudo apt install docker.io
+
+# Unmask docker, otherwise cannot start docker because &quot;docker.service is masked&quot;
+sudo systemctl unmask docker
+
+sudo service docker start
+</code></pre><p>Kemudian saya bisa menjalankan perintah buruh pelabuhan</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/docker-dengan-ubuntu-2010-strconvatoi-parsingquot-0-beta1-quot-sintaks-tidak-valid-yewszd1k/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1222680/pat-viafore target=_blank rel="nofollow noopener"><span itemprop=name>Pat Viafore</span></a>
+—
+<a href=https://superuser.com/a/1588330 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=1>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=1><ul class="list-group list-group-flush"><li class=list-group-item><div>Terima kasih @PatViafore! Solusi Anda sepertinya berhasil! Saya akan mengujinya di hari-hari berikutnya dan saya akan membalas Anda untuk "Jawaban yang diterima".</div><div>— <a href=https://superuser.com/users/1222509/piero-macaluso target=_blank rel="nofollow noopener">Piero Macaluso</a></div></li><li class=list-group-item><div>Gagal memulai docker.service: Unit docker.service disamarkan.</div><div>— <a href=https://superuser.com/users/13818/natim target=_blank rel="nofollow noopener">Natim</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>0</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-2><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>0</div><div class=card-body><div itemprop=text><p>Jawaban @PatViafore benar jika Anda tidak ingin menjalankan <strong>buruh pelabuhan</strong></p><p>Jika Anda ingin menjalankan paket docker-ce, Anda harus mengedit file sources.list Anda dan menambahkan / mengedit baris sebagai berikut:</p><pre><code>deb https://download.docker.com/linux/ubuntu focal stable edge test
+</code></pre><p>Setelah meningkatkan <strong>buruh pelabuhan</strong> paket, Anda harus menjalankan buruh pelabuhan sekarang:</p><pre><code>$ docker run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+</code></pre><p>Diuji di laptop keren saya:</p><pre><code>$ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu Groovy Gorilla (development branch)
+Release:    20.10
+Codename:   groovy
+$ docker --version
+Docker version 19.03.13, build 4484c46d9d
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/docker-dengan-ubuntu-2010-strconvatoi-parsingquot-0-beta1-quot-sintaks-tidak-valid-yewszd1k/#answer-2 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1223425/cubells target=_blank rel="nofollow noopener"><span itemprop=name>cubells</span></a>
+—
+<a href=https://superuser.com/a/1588901 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=2>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=2><ul class="list-group list-group-flush"><li class=list-group-item><div>Sayangnya, tidak menghapus kesalahan untuk saya (versi Ubuntu dan Docker yang sama persis). Sepertinya tidak membedakan antara <code>stable</code>, <code>test</code> dan <code>nightly</code>. Bagaimanapun, beralih ke <b>docker.io</b> adalah opsi yang valid: <a href=https://stackoverflow.com/questions/45023363/what-is-docker-io-in-relation-to-docker-ce-and-docker-ee title="what is docker io in relation to docker ce and docker ee" target=_blank rel="nofollow noopener">stackoverflow.com/questions/45023363/…</a></div><div>— <a href=https://superuser.com/users/1047589/user-rebo target=_blank rel="nofollow noopener">User Rebo</a></div></li><li class=list-group-item><div>Terima kasih atas komentar Anda @cubells! Sayangnya ini tidak menyelesaikan masalah seperti yang ditunjukkan oleh @User Rebo. Apakah Anda punya saran lain?</div><div>— <a href=https://superuser.com/users/1222509/piero-macaluso target=_blank rel="nofollow noopener">Piero Macaluso</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/bagaimana-cara-memperbaiki-masalah-ketidakcocokan-cipher-dengan-sftp-pncjaco5/>Bagaimana cara memperbaiki masalah ketidakcocokan cipher dengan sftp?</a></div></li><li class=list-group-item><div><a href=/beralih-dari-windows-xp-ke-windows-8-6xpo55hb/>Beralih dari Windows XP ke Windows 8</a></div></li><li class=list-group-item><div><a href=/mengapa-dialog-quotperangkat-pemutaranquot-membutuhkan-waktu-lama-untuk-dibuka-inahn2pa/>Mengapa dialog "Perangkat Pemutaran" membutuhkan waktu lama untuk dibuka?</a></div></li><li class=list-group-item><div><a href=/bagaimana-anda-menentukan-perangkat-root-jika-dev-root-hilang-ddleeakq/>Bagaimana Anda menentukan perangkat root jika / dev / root hilang?</a></div></li><li class=list-group-item><div><a href=/bisakah-dongle-mouse-nirkabel-digunakan-untuk-menghubungkan-ke-ponsel-xew2cri1/>Bisakah dongle mouse nirkabel digunakan untuk menghubungkan ke ponsel?</a></div></li><li class=list-group-item><div><a href=/apakah-aman-membiarkan-jendela-keepass-terbuka-saat-tidak-digunakan-ddrum9dp/>Apakah aman membiarkan jendela Keepass terbuka saat tidak digunakan?</a></div></li><li class=list-group-item><div><a href=/bisakah-saya-menggunakan-triple-channel-3x2gb-plus-3x4gb-ddr3-ram-knvtxhbp/>Bisakah saya menggunakan triple channel 3x2GB plus 3x4GB ddr3 RAM?</a></div></li><li class=list-group-item><div><a href=/windows-8-gagal-memuat-setelah-perbaikan-boot-cmlalkvx/>Windows 8 gagal memuat setelah Perbaikan Boot</a></div></li><li class=list-group-item><div><a href=/mengirim-email-dari-baris-perintah-dengan-cara-otomatis-0qxbrsdd/>Mengirim email dari baris perintah, dengan cara otomatis</a></div></li><li class=list-group-item><div><a href=/bagaimana-alt-f4-dinonaktifkan-di-windows-7-eew1quig/>Bagaimana Alt-F4 dinonaktifkan di Windows 7?</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

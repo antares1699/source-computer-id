@@ -1,0 +1,74 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Kehilangan konektivitas jaringan di Hetzner dengan jembatan Netplan</title><meta name=description content="Saya menginstal Ubuntu 18.04 dan ingin memiliki antarmuka jembatan daripada menggunakan antarmuka utama secara langsung untuk virtualisasi KVM:  Berikut adalah konfigurasi default Netplan setelah instalasi, yang bekerja dengan baik:  ----# This..."><link rel=canonical href=https://www.idxstack.com/kehilangan-konektivitas-jaringan-di-hetzner-dengan-jembatan-netplan-be6h6hey/><meta property="og:title" content="Kehilangan konektivitas jaringan di Hetzner dengan jembatan Netplan"><meta property="og:description" content="Saya menginstal Ubuntu 18.04 dan ingin memiliki antarmuka jembatan daripada menggunakan antarmuka utama secara langsung untuk virtualisasi KVM:  Berikut adalah konfigurasi default Netplan setelah instalasi, yang bekerja dengan baik:  ----# This..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/kehilangan-konektivitas-jaringan-di-hetzner-dengan-jembatan-netplan-be6h6hey/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Kehilangan konektivitas jaringan di Hetzner dengan jembatan Netplan"><meta name=twitter:description content="Saya menginstal Ubuntu 18.04 dan ingin memiliki antarmuka jembatan daripada menggunakan antarmuka utama secara langsung untuk virtualisasi KVM:  Berikut adalah konfigurasi default Netplan setelah instalasi, yang bekerja dengan baik:  ----# This..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Kehilangan konektivitas jaringan di Hetzner dengan jembatan Netplan</h1><div itemprop=text><p>Saya menginstal Ubuntu 18.04 dan ingin memiliki antarmuka jembatan daripada menggunakan antarmuka utama secara langsung untuk virtualisasi KVM:</p><p>Berikut adalah konfigurasi default Netplan setelah instalasi, yang bekerja dengan baik:</p><pre><code>----
+# This file describes the network interfaces available on your system
+# For more information, see netplan(5).
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp4s0:
+      addresses: [ 176.9.199.230/27 ]
+      gateway4: 176.9.199.225
+      nameservers:
+          addresses:
+              - "8.8.8.8"
+</code></pre><p>Setelah membaca dokumentasi untuk Netplan, saya mencoba pengaturan ini untuk mode jembatan:</p><pre><code>---
+
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp4s0:
+      dhcp4: no
+      dhcp6: no
+  bridges:
+    vmbr0:
+      dhcp4: no
+      dhcp6: no
+      interfaces: [ enp4s0 ]
+      addresses: [ 176.9.199.230/27 ]
+      gateway4: 176.9.199.225
+      nameservers:
+        addresses:
+          - "127.0.0.1"
+      parameters:
+        stp: false
+        forward-delay: 1
+        hello-time: 2
+        max-age: 12
+</code></pre><p>Seperti yang Anda ketahui dari alamat IP, server dihosting di Hetzner.</p><p>Di Ubuntu 16.04, jembatan bekerja dengan baik dengan ifupdown, tetapi sekarang Ubuntu 18.04 memiliki Netplan alih-alih ifupdown, saya perlu tahu cara mengkonfigurasi jembatan di Netplan.</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/122243/sweb target=_blank rel="nofollow noopener"><span itemprop=name>sweb</span></a>
+—
+<a href=https://superuser.com/questions/1389309/lost-network-connectivity-on-hetzner-with-netplan-bridge target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>1</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>6</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>6</div><div class=card-body><div itemprop=text><p><a href=https://bugs.launchpad.net/netplan/+bug/1782221 rel="nofollow noopener" target=_blank>Alamat MAC diacak jika Anda tidak secara eksplisit mengaturnya dalam konfigurasi bridge Anda di Netplan.</a></p><p>Jika saya ingat dengan benar, Hetzner membatasi alamat IP Anda yang dialokasikan ke alamat MAC server Anda, jadi Anda mungkin perlu mengatur alamat MAC jembatan ke antarmuka fisik.</p><p>Untuk mendapatkan alamat MAC antarmuka fisik, jalankan perintah ini:</p><pre><code>cat /sys/class/net/enp4s0/address
+</code></pre><p>(Ganti <code>enp4s0</code> dengan nama antarmuka yang sesuai, jika perlu.)</p><p>Di file konfigurasi Netplan Anda, tambahkan alamat MAC di bawah nama antarmuka bridge seperti:</p><pre><code>macaddress: xx:xx:xx:xx:xx:xx
+</code></pre><p>Untuk Anda, konfigurasi Netplan Anda akan terlihat seperti ini:</p><pre><code>---
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp4s0:
+      dhcp4: no
+      dhcp6: no
+  bridges:
+    vmbr0:
+      macaddress: xx:xx:xx:xx:xx:xx
+      dhcp4: no
+      dhcp6: no
+      interfaces: [ enp4s0 ]
+      addresses: [ 176.9.199.230/27 ]
+      gateway4: 176.9.199.225
+      nameservers:
+        addresses:
+          - &quot;127.0.0.1&quot;
+      parameters:
+        stp: false
+        forward-delay: 1
+        hello-time: 2
+        max-age: 12
+</code></pre><p>Terapkan konfigurasi dengan menghapus antarmuka yang terpengaruh (diperlukan Netplan untuk membuatnya kembali dengan alamat MAC baru) dan menjalankan Netplan:</p><pre><code>sudo ip link delete br0
+sudo netplan apply
+</code></pre><p>Sekarang Anda harus memiliki jembatan dengan konektivitas host yang berfungsi.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/kehilangan-konektivitas-jaringan-di-hetzner-dengan-jembatan-netplan-be6h6hey/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/83694/deltik target=_blank rel="nofollow noopener"><span itemprop=name>Deltik</span></a>
+—
+<a href=https://superuser.com/a/1389344 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>terima kasih atas jawabannya saya akan mencobanya dan tandai sebagai benar jika berhasil.</div><div>— <a href=https://superuser.com/users/122243/sweb target=_blank rel="nofollow noopener">sweb</a></div></li><li class=list-group-item><div>bekerja seperti pesona</div><div>— <a href=https://superuser.com/users/122243/sweb target=_blank rel="nofollow noopener">sweb</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/bagaimana-cara-menyalin-data-dari-server-ubuntu-menggunakan-terminal-melalui-telnet-jm7sm9fn/>Bagaimana cara menyalin data dari server Ubuntu menggunakan terminal melalui telnet?</a></div></li><li class=list-group-item><div><a href=/mengapa-quotukuran-pada-diskquot-jauh-lebih-besar-daripada-quotukuranquot-ketika-saya-menyalin-data-dari-ntfs-ke-exfat-ls3qqvkj/>Mengapa "ukuran pada disk" jauh lebih besar daripada "ukuran" ketika saya menyalin data dari NTFS ke exFAT?</a></div></li><li class=list-group-item><div><a href=/apa-keuntungan-menggunakan-mutt-daripada-klien-email-gui-tutup-qbeystwt/>Apa keuntungan menggunakan mutt daripada klien email GUI? [Tutup]</a></div></li><li class=list-group-item><div><a href=/apa-perbedaan-antara-run-registry-key-dan-startup-folder-di-start-menu-nag503yb/>Apa perbedaan antara Run registry key dan Startup Folder (di Start Menu)?</a></div></li><li class=list-group-item><div><a href=/apakah-ninite-merupakan-solusi-trusuted-untuk-manajemen-paket-awal-pada-instalasi-baru-bersih-windows-7-64bit-4ekmtvyw/>Apakah Ninite merupakan solusi trusuted untuk manajemen paket awal pada instalasi baru / bersih Windows 7 64Bit?</a></div></li><li class=list-group-item><div><a href=/chrome-melompat-ke-tab-yang-ada-saat-saya-mengetik-url-tmrksdhw/>Chrome melompat ke tab yang ada saat saya mengetik URL</a></div></li><li class=list-group-item><div><a href=/firefox-selalu-blokir-dan-gunakan-ruang-dari-elemen-tertentu-74tz0cvk/>Firefox - Selalu blokir dan gunakan ruang dari elemen tertentu</a></div></li><li class=list-group-item><div><a href=/apa-itu-nama-domain-dashworldscom-4npziryp/>Apa itu nama domain Dashworlds.com</a></div></li><li class=list-group-item><div><a href=/bagaimana-saya-melakukan-setara-dengan-quotapachectl-configtestquot-dengan-apache-untuk-windows-di7ijfg0/>Bagaimana Saya Melakukan Setara dengan "apachectl configtest" Dengan Apache Untuk Windows?</a></div></li><li class=list-group-item><div><a href=/pemecahan-masalah-perangkat-bluetooth-tidak-menerima-koneksi-audio-stereo-j5qgteau/>Pemecahan masalah perangkat Bluetooth tidak menerima koneksi audio stereo</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

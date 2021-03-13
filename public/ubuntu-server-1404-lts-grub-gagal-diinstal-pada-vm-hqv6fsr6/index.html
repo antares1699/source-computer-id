@@ -1,0 +1,73 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Ubuntu Server 14.04 LTS - GRUB gagal diinstal pada VM</title><meta name=description content="Saya mencoba menginstal dan menjalankan  Ubuntu Server 14.04.1 LTS  di VirtualBox untuk tujuan pengujian. Namun, saya bahkan tidak dapat melewati proses instalasi tanpa kesalahan, dan itu akan gagal untuk menginstal boot loader..."><link rel=canonical href=https://www.idxstack.com/ubuntu-server-1404-lts-grub-gagal-diinstal-pada-vm-hqv6fsr6/><meta property="og:title" content="Ubuntu Server 14.04 LTS - GRUB gagal diinstal pada VM"><meta property="og:description" content="Saya mencoba menginstal dan menjalankan  Ubuntu Server 14.04.1 LTS  di VirtualBox untuk tujuan pengujian. Namun, saya bahkan tidak dapat melewati proses instalasi tanpa kesalahan, dan itu akan gagal untuk menginstal boot loader..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/ubuntu-server-1404-lts-grub-gagal-diinstal-pada-vm-hqv6fsr6/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Ubuntu Server 14.04 LTS - GRUB gagal diinstal pada VM"><meta name=twitter:description content="Saya mencoba menginstal dan menjalankan  Ubuntu Server 14.04.1 LTS  di VirtualBox untuk tujuan pengujian. Namun, saya bahkan tidak dapat melewati proses instalasi tanpa kesalahan, dan itu akan gagal untuk menginstal boot loader..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Ubuntu Server 14.04 LTS - GRUB gagal diinstal pada VM</h1><div itemprop=text><p>Saya mencoba menginstal dan menjalankan <strong>Ubuntu Server 14.04.1 LTS</strong> di VirtualBox untuk tujuan pengujian. Namun, saya bahkan tidak dapat melewati proses instalasi tanpa kesalahan, dan itu akan gagal untuk menginstal boot loader GRUB setiap saat, tidak peduli bagaimana saya memilih untuk mengkonfigurasi sistem.</p><p>Saya menjalankan instalasi meninggalkan semuanya dengan nilai defaultnya:</p><pre><code>Partitioning Method: Guided - use entire disk and set up LVM
+Disk: SCSI3 (0,0,0) (sda) - 2.1 GB ATA VBOX HARDDISK
+Amount of volume group to use for guided partitioning: 1.9 GB
+
+The partition tables of the following devices are changed:
+   LVM VG dev-vg, LV root
+   LVM VG dev-vg, LV swap_1
+   SCSI3 (0,0,0) (sda)
+
+The following partitions are going to be formatted:
+   LVM VG dev-vg, LV root as ext4
+   LVM VG dev-vg, LV swap_1 as swap
+   partition #1 of SCSI3 (0,0,0) (sda) as ext2
+
+Write the changes to disk (y/N): y
+
+Automatic updates:
+   [*] No automatic updates
+
+Additional packages to install:
+   [*] LAMP server
+   [*] PostgreSQL server
+</code></pre><p>Semuanya berjalan mulus, hingga:</p><pre><code>[!!] Install the GRUB boot loader on a hard disk
+   Installation step failed
+   An installation step failed. You can try to run the failing item again
+   from the menu, or skip it and choose something else. The failing step is:
+   Install the GRUB boot loader on a hard disk
+</code></pre><p>Setelah memulai ulang, saya dibiarkan dengan layar hitam tanpa kemungkinan untuk mem-boot-nya secara manual.</p><p>Saya tidak bisa benar-benar melihat sumber kesalahan, jadi saya akan senang untuk memikirkan hal ini.</p><p>VirtualBox saya:</p><pre><code>[General]
+Name:               sdm
+Operating System:   Ubuntu (64 bit)
+
+[System]
+Base Memory:    512 MB
+Boot Order:     Floppy, CD/DVD, Hard Disk
+Acceleration:   VT-x/AMD-V, Nested Paging
+
+[Display]
+Video Memory:           12 MB
+Remote Desktop Server:  Disabled
+Video Capture:          Disabled
+
+[Storage]
+Controller: IDE
+  IDE Secondary Master: [CD/DVD] Empty
+Controller: SATA
+  SATA Port 0:          sdm.vmdk (Normal, 2.00 GB)
+
+[Audio]
+Host Driver:    Core Audio
+Controller:     ICH AC97
+
+[Network]
+Adapter 1:  Intel PRO/1000 MT Desktop (NAT)
+
+[USB]
+Device Filter:  0 (0 active)
+
+[Shared Folder]
+None
+
+[Description]
+None
+</code></pre></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/393869/marcello-m%c3%b6nkemeyer target=_blank rel="nofollow noopener"><span itemprop=name>Marcello M&#246;nkemeyer</span></a>
+—
+<a href=https://superuser.com/questions/845630/ubuntu-server-14-04-lts-grub-fails-to-install-on-a-vm target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>4</div><div class=card-body><div itemprop=text><p>Saya akhirnya menyingkirkan kesalahan itu. Dan sejujurnya, itu bodoh.</p><p>Masalahnya sebenarnya adalah, bahwa partisi <code>/boot</code> tidak dibuat, meskipun ditampilkan di UI. Masih mungkin untuk menjalankan semuanya dengan partisi terpandu, tetapi ketika Anda diminta ke <code>Write the changes to the disk?</code>, Anda harus menuju <code>&lt;Back></code> untuk melihat daftar terperinci dari semua partisi. Saat mengklik <code>&lt;Next></code>, penginstalan akhirnya akan mengenali dan mempartisi semuanya dengan benar dan seperti yang diharapkan.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/ubuntu-server-1404-lts-grub-gagal-diinstal-pada-vm-hqv6fsr6/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/393869/marcello-m%c3%b6nkemeyer target=_blank rel="nofollow noopener"><span itemprop=name>Marcello M&#246;nkemeyer</span></a>
+—
+<a href=https://superuser.com/a/845720 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Itu berhasil juga untuk saya. Apakah itu bug dengan virtualbox?</div><div>— <a href=https://superuser.com/users/127821/juzer-ali target=_blank rel="nofollow noopener">Juzer Ali</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>2</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>2</div><div class=card-body><div itemprop=text><p>Saya memiliki masalah serupa dengan virtualbox. <a href=https://superuser.com/a/845720/2013 target=_blank rel="nofollow noopener">Jawaban lainnya</a> tidak membantu. Apa yang saya lakukan juga sederhana. Saya membuat harddisk vmdk dan bukan vmi (setel HD ke ukuran yang saya inginkan). Itu saja, semoga ini membantu!</p><p>FYI, saya menginstal cd install kwickserver untuk mail dan pesan instan</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/ubuntu-server-1404-lts-grub-gagal-diinstal-pada-vm-hqv6fsr6/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/729596/dre target=_blank rel="nofollow noopener"><span itemprop=name>Dre</span></a>
+—
+<a href=https://superuser.com/a/1210492 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=1>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=1><ul class="list-group list-group-flush"><li class=list-group-item><div>Sama, beralih ke VMDK melalui VMI memungkinkan grub untuk diinstal. Saat diminta, instal grub pada <code>/sda</code>. Win 10 host, Debian 9 guest, Virtualbox 6</div><div>— <a href=https://superuser.com/users/362992/tom target=_blank rel="nofollow noopener">Tom</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/bash-awalan-string-dengan-tilde-untuk-memperluas-ke-direktori-home-nzd7nni4/>Bash awalan string dengan tilde untuk memperluas ke direktori home</a></div></li><li class=list-group-item><div><a href=/copot-pemasangan-nodejs-cs1x4qan/>Copot pemasangan Node.js</a></div></li><li class=list-group-item><div><a href=/hotspot-seluler-digunakan-untuk-server-hosting-4lrb8bij/>Hotspot seluler digunakan untuk server hosting</a></div></li><li class=list-group-item><div><a href=/akankah-menyalakan-bitlocker-menghapus-data-yang-ada-di-partisi-terenkripsi-ivu1u4te/>Akankah menyalakan bitlocker menghapus data yang ada di partisi terenkripsi?</a></div></li><li class=list-group-item><div><a href=/plugin-chrome-apa-pun-untuk-melindungi-sandi-yang-disimpan-194wmndd/>plugin chrome apa pun untuk melindungi sandi yang disimpan</a></div></li><li class=list-group-item><div><a href=/di-vim-bagaimana-anda-menghapus-ke-akhir-baris-saat-dalam-mode-perintah-cijnktkn/>Di VIM, bagaimana Anda menghapus ke akhir baris saat dalam mode perintah:?</a></div></li><li class=list-group-item><div><a href=/apakah-mungkin-untuk-membuat-kode-pada-dua-komputer-yang-berbeda-secara-bersamaan-ptrhpafr/>Apakah mungkin untuk membuat kode pada dua komputer yang berbeda secara bersamaan?</a></div></li><li class=list-group-item><div><a href=/cara-menggunakan-beberapa-array-dalam-satu-rumus-countif-xjgqny78/>Cara menggunakan beberapa array dalam satu rumus countif</a></div></li><li class=list-group-item><div><a href=/apa-ding-shell-meminta-dengan-waktu-di-dalamnya-lilqjd4o/>Apa DING !? Shell meminta dengan waktu di dalamnya</a></div></li><li class=list-group-item><div><a href=/izinkan-lalu-lintas-jaringan-hanya-untuk-program-tertentu-di-windows-7-gifsvxct/>Izinkan lalu lintas jaringan hanya untuk program tertentu di windows 7</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

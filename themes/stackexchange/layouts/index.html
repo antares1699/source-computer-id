@@ -1,0 +1,21 @@
+{{ define "main" }}
+
+<div class="container my-2">
+    <div class="card shadow-sm mb-2">
+        <div class="card-body">
+            <h1 class="h3 mb-0">{{ .Site.Title }}</h1>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="form-row">
+        {{ range first 20 (sort (where .Site.RegularPages "Type" "in" "questions") ".Params.votes" "desc") }}
+            <div class="col-12 col-lg-6 d-flex align-items-stretch">
+                {{ partial "question.html" . }}
+            </div>
+        {{ end }}
+    </div>
+</div>
+
+{{ end }}

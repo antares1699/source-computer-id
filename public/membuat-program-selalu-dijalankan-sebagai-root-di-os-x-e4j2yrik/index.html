@@ -1,0 +1,90 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Membuat program selalu dijalankan sebagai root di OS X</title><meta name=description content="Saya mencoba membuat program C selalu berjalan sebagai root, tidak peduli siapa yang memanggilnya.Pada dasarnya, saya ingin menjalankan &amp;quot;mkdir / test&amp;quot; sebagai contoh.Jadi saya membuat program C sebagai berikut:  #include..."><link rel=canonical href=https://www.idxstack.com/membuat-program-selalu-dijalankan-sebagai-root-di-os-x-e4j2yrik/><meta property="og:title" content="Membuat program selalu dijalankan sebagai root di OS X"><meta property="og:description" content="Saya mencoba membuat program C selalu berjalan sebagai root, tidak peduli siapa yang memanggilnya.Pada dasarnya, saya ingin menjalankan &amp;quot;mkdir / test&amp;quot; sebagai contoh.Jadi saya membuat program C sebagai berikut:  #include..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/membuat-program-selalu-dijalankan-sebagai-root-di-os-x-e4j2yrik/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Membuat program selalu dijalankan sebagai root di OS X"><meta name=twitter:description content="Saya mencoba membuat program C selalu berjalan sebagai root, tidak peduli siapa yang memanggilnya.Pada dasarnya, saya ingin menjalankan &amp;quot;mkdir / test&amp;quot; sebagai contoh.Jadi saya membuat program C sebagai berikut:  #include..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Membuat program selalu dijalankan sebagai root di OS X</h1><div itemprop=text><p>Saya mencoba membuat program C selalu berjalan sebagai root, tidak peduli siapa yang memanggilnya.
+Pada dasarnya, saya ingin menjalankan "mkdir / test" sebagai contoh.
+Jadi saya membuat program C sebagai berikut:</p><pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+system("mkdir /test");
+printf("bye...\n");
+return 0;
+}
+</code></pre><p>Sekarang, saya baru saja menyusunnya:
+gcc test.c -o test</p><p>Dan sekarang saya mencoba mengatur izin:</p><pre><code>chmod +s test
+</code></pre><p>Namun menjalankannya sebagai pengguna biasa, saya mendapatkan kesalahan izin ditolak. Jadi, itu mengeksekusi file tetapi tidak dengan izin root.
+Saya juga mencoba mengatur izin sebagai:</p><pre><code>chmod a+s test
+chmod o+s test
+</code></pre><p>Tapi saya selalu mendapatkan masalah yang sama.</p><p>Adakah yang bisa membantu saya dengan ini?
+Ngomong-ngomong, file test.c sedang dibuat oleh root dan juga sedang dikompilasi sebagai root.</p><pre><code>bash-3.2# ls -al | grep test 
+-rwxr-xr-x   1 root   staff       8796  5 Ago 19:07 test
+bash-3.2# chmod +s test
+bash-3.2# ls -al | grep test 
+-rwsr-sr-x   1 root   staff       8796  5 Ago 19:07 test
+bash-3.2# whoami
+root
+bash-3.2#
+</code></pre><p>Terima kasih sebelumnya!
+Cheerz!</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/150489/yaroze target=_blank rel="nofollow noopener"><span itemprop=name>yaroze</span></a>
+—
+<a href=https://superuser.com/questions/457868/making-a-program-always-run-as-root-in-os-x target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>11</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>11</div><div class=card-body><div itemprop=text><p>Ada dua hal yang perlu diketahui di sini:</p><ul><li><p>Itu <a href=http://en.wikipedia.org/wiki/Sticky_bit rel="nofollow noopener" target=_blank>sedikit lengket</a> , yang dapat digunakan pada file dan direktori, tetapi tidak akan melakukan apa yang Anda inginkan. Dari <a href=https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man8/sticky.8.html rel="nofollow noopener" target=_blank><code>sticky(8)</code></a> : <em>Bit lengket tidak berpengaruh pada file yang dapat dieksekusi</em> .</p></li><li><p>Itu <a href=http://en.wikipedia.org/wiki/Setuid rel="nofollow noopener" target=_blank><code>setuid</code></a> flag, yang akan memungkinkan program dijalankan dengan izin pemiliknya. Apa yang tampaknya menjadi batasan di OS X, dan tampaknya tidak didokumentasikan, adalah bahwa bit setuid pada yang dapat dieksekusi memiliki efek hanya jika yang dapat dieksekusi ada dalam direktori yang dimiliki oleh root (dan tidak terbuka untuk ditulis oleh orang lain), dll, hingga direktori root. Jika tidak, itu akan diabaikan untuk alasan keamanan.</p></li></ul><p>Bagaimanapun, Anda dapat memodifikasi file sudoers sedemikian rupa sehingga tidak memerlukan kata sandi untuk satu perintah. Ingatlah bahwa Anda <em>memiliki</em> menggunakan <code>visudo</code> untuk mengeditnya. Jika Anda berhasil mendapatkan sintaks yang salah saat mengedit file, Anda tidak akan dapat menjalankan <code>sudo</code> sama sekali.</p><pre><code>sudo visudo
+</code></pre><p>Lalu tekan <kbd>saya</kbd> , dan di sisipan bawah:</p><pre><code>username    ALL= NOPASSWD: /path/to/command
+</code></pre><p>Di sini, Anda jelas perlu mengubah <code>username</code> untuk pengguna yang seharusnya menjalankan perintah tanpa harus mengetikkan kata sandi. Juga, ubah jalur ke file yang dapat dieksekusi. Perhatikan bahwa pada titik ini, executable dapat dimiliki oleh <code>root</code> dan memiliki izin eksekusi hanya untuk <code>root</code> juga.</p><p>tekan <kbd>ESC</kbd> , lalu tulis <code>:wq</code>, lalu <kbd>Memasukkan</kbd> .</p><p>Sekarang, pengguna <code>username</code> dapat menjalankan perintah dengan <code>sudo /path/to/command</code> dan tidak perlu memasukkan kata sandi untuk melakukannya.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/membuat-program-selalu-dijalankan-sebagai-root-di-os-x-e4j2yrik/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/48078/slhck target=_blank rel="nofollow noopener"><span itemprop=name>slhck</span></a>
+—
+<a href=https://superuser.com/a/457870 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Bagian lengket tidak ada hubungannya dengan setuid, itulah mengapa saya merasa aneh saat penanya mengungkitnya.</div><div>— <a href=https://superuser.com/users/26316/ignacio-vazquez-abrams target=_blank rel="nofollow noopener">Ignacio Vazquez-Abrams</a></div></li><li class=list-group-item><div>Keren! Saya tidak tahu itu. Ya, sepertinya lebih aman seperti itu.</div><div>— <a href=https://superuser.com/users/150489/yaroze target=_blank rel="nofollow noopener">yaroze</a></div></li><li class=list-group-item><div>@ IgnacioVazquez-Abrams, Anda sepenuhnya benar. Terima kasih telah menunjukkannya. Saya sudah mengedit pertanyaannya.</div><div>— <a href=https://superuser.com/users/150489/yaroze target=_blank rel="nofollow noopener">yaroze</a></div></li><li class=list-group-item><div>Jika program memerlukan izin root untuk berfungsi, Anda selalu dapat memeriksa ID pengguna Anda saat ini, dan jika bukan nol, coba jalankan <code>sudo $0</code> (atau yang setara). Jika itu berhasil, bagus; jika tidak cetak pesan kesalahan dan keluar. Karena ini bukanlah perilaku yang diharapkan, Anda tidak boleh melakukan ini untuk sesuatu yang ingin Anda distribusikan.</div><div>— <a href=https://superuser.com/users/22317/daniel-beck target=_blank rel="nofollow noopener">Daniel Beck&#9830;</a></div></li><li class=list-group-item><div>Bit setuid tidak diabaikan di OS X, menurut Anda bagaimana program seperti sudo yang Anda sebutkan akan dapat bekerja jika tidak karena itu adalah setuid root? Apa yang tampaknya menjadi batasan di OS X, dan tampaknya tidak didokumentasikan, adalah bahwa bit setuid pada yang dapat dieksekusi memiliki efek hanya jika yang dapat dieksekusi ada dalam direktori yang dimiliki oleh root (dan tidak terbuka untuk ditulis oleh orang lain), dll, hingga direktori root.</div><div>— <a href=https://superuser.com/users/106134/tml target=_blank rel="nofollow noopener">tml</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><p>Saya bekerja di Linux, tetapi karena OSX hanyalah BSD, saya menganggapnya mengikuti aturan (umum) yang sama seperti Unix lainnya.</p><p>Dalam program Anda, Anda perlu memanggil setuid (UID), yang mengembalikan 0 jika berhasil, untuk membuatnya berjalan sebagai UID itu dan Anda ingin menjalankannya sebagai root. UID root adalah <strong><em>mungkin</em></strong> 0, tetapi jika Anda sangat paranoid, gunakan getpwnam (const char * szUserName) untuk mendapatkan UID.</p><p>Jadi, sesuatu seperti ini:</p><pre><code>#include &lt;stdio.h&gt; // needed for printf
+
+#include &lt;sys/types.h&gt;
+#include &lt;pwd.h&gt;
+#include &lt;unistd.h&gt;
+
+void change_to_user (const char *szUserName)
+{
+  struct passwd *pw;
+
+  pw = getpwnam(szUserName);
+  if (pw != NULL)
+  {
+    uid_t uid = pw-&gt;pw_uid; // we now have the UID of the username
+
+    printf ("UID of user %s is %d\n", szUserName, (int)uid);
+    if (setuid (uid) != 0)
+    {
+      perror ("setuid");
+    }
+    else
+    {
+      // this will fail if you try to change to root without the SUID
+      // bit set.  This executive needs to be owned by root (probably
+      // group owned by root as well), and set the SUID bit with:
+      //   suid a+s {executable}
+      printf ("UID is now %d\n", (int)uid);
+    }
+  }
+  else
+  {
+    perror ("getpwnam");
+  }
+}
+
+
+int main (int argc, char **argv)
+{
+  int iIter;
+
+  if (argc == 1)
+  {
+    printf ("Give me a user name\n");
+    return 1;
+  }
+
+  for (iIter = 1 ; iIter &lt; argc ; iIter++)
+  {
+    change_to_user (argv[iIter]);
+  }
+  return 0;
+}
+</code></pre><p>Anda dapat mengaturuid ke nama pengguna APA PUN, jadi mungkin Anda menjalankan skrip cgi, dan Anda ingin menjalankan sebagai nama pengguna di akun Anda sendiri, bukan "www-data" atau apa pun - Anda dapat menggunakannya di sana. Saya melakukan ini, itulah sebabnya saya dapat menjawab pertanyaan Anda secara rinci.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/membuat-program-selalu-dijalankan-sebagai-root-di-os-x-e4j2yrik/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/898017/richard-wicks target=_blank rel="nofollow noopener"><span itemprop=name>Richard Wicks</span></a>
+—
+<a href=https://superuser.com/a/1316546 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/mengapa-firefox-tidak-menampilkan-jenis-indikasi-keberadaan-feed-ketika-ada-rss-atom-feed-yang-diasosiasikan-dengan-halaman-tersebut-duplikat-trrl2sl9/>Mengapa Firefox tidak menampilkan jenis indikasi keberadaan feed ketika ada RSS / Atom feed yang diasosiasikan dengan halaman tersebut? [duplikat]</a></div></li><li class=list-group-item><div><a href=/masalah-notebook-terlalu-panas-4ai7kner/>Masalah notebook terlalu panas</a></div></li><li class=list-group-item><div><a href=/macbook-tidak-masuk-mode-tidur-saat-dicolokkan-sejak-memutakhirkan-ke-lion-qfsu1zj6/>MacBook tidak masuk mode tidur saat dicolokkan sejak memutakhirkan ke Lion</a></div></li><li class=list-group-item><div><a href=/tidak-dapat-menghapus-folder-dengan-spasi-di-nama-di-windows-10-nabc7fpd/>Tidak dapat menghapus folder dengan spasi di nama di windows 10</a></div></li><li class=list-group-item><div><a href=/keluar-dari-e2fsck-saat-boot-wfw6b9o1/>keluar dari e2fsck saat boot</a></div></li><li class=list-group-item><div><a href=/kebalikan-dari-mount-o-loop-dapatkah-saya-membaca-perangkat-blok-sebagai-file-biasa-kqkbsaxo/>Kebalikan dari mount -o loop: dapatkah saya membaca perangkat blok sebagai file biasa?</a></div></li><li class=list-group-item><div><a href=/perintah-ps-di-solaris-p9uzygzt/>Perintah PS di Solaris</a></div></li><li class=list-group-item><div><a href=/luncurkan-program-dengan-wine-menggunakan-argumen-exe-ifzrouze/>Luncurkan program dengan Wine menggunakan argumen .exe</a></div></li><li class=list-group-item><div><a href=/docker-build-build-arg-kehilangan-nilai-dan-mengembang-menjadi-string-kosong-r3j38ivw/>docker build --build-arg kehilangan nilai dan mengembang menjadi string kosong</a></div></li><li class=list-group-item><div><a href=/windows-10-meminta-saya-untuk-memasukkan-kata-sandi-ha1rq4ue/>Windows 10 Meminta saya untuk Memasukkan Kata Sandi</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

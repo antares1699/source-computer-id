@@ -1,0 +1,153 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Kontainer Docker tidak dapat terhubung ke internet di Fedora 32?</title><meta name=description content="Masalah  Saya baru-baru ini membuat container buruh pelabuhan yang harus menarik repositori github publik, namun tidak dapat menyelesaikan host github.com. Bahkan, ia bahkan tidak dapat menjalankan perintah ping.  CATATAN: semua operasi jaringan..."><link rel=canonical href=https://www.idxstack.com/kontainer-docker-tidak-dapat-terhubung-ke-internet-di-fedora-32-nn8ecbua/><meta property="og:title" content="Kontainer Docker tidak dapat terhubung ke internet di Fedora 32?"><meta property="og:description" content="Masalah  Saya baru-baru ini membuat container buruh pelabuhan yang harus menarik repositori github publik, namun tidak dapat menyelesaikan host github.com. Bahkan, ia bahkan tidak dapat menjalankan perintah ping.  CATATAN: semua operasi jaringan..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/kontainer-docker-tidak-dapat-terhubung-ke-internet-di-fedora-32-nn8ecbua/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Kontainer Docker tidak dapat terhubung ke internet di Fedora 32?"><meta name=twitter:description content="Masalah  Saya baru-baru ini membuat container buruh pelabuhan yang harus menarik repositori github publik, namun tidak dapat menyelesaikan host github.com. Bahkan, ia bahkan tidak dapat menjalankan perintah ping.  CATATAN: semua operasi jaringan..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Kontainer Docker tidak dapat terhubung ke internet di Fedora 32?</h1><div itemprop=text><h1 class=h3>Masalah</h1><p>Saya baru-baru ini membuat container buruh pelabuhan yang harus menarik repositori github publik, namun tidak dapat menyelesaikan host github.com. Bahkan, ia bahkan tidak dapat menjalankan perintah ping.</p><p><strong>CATATAN: semua operasi jaringan di sini berada di dalam wadah setelah bangunan, ketika wadah berjalan</strong></p><p><code>ping www.google.com</code> menghasilkan <code>cannot resolve host</code></p><p>Itu tidak dapat terhubung ke internet sama sekali.</p><p>Setelah mencari di internet dan <a href=https://docs.docker.com/engine/install/linux-postinstall/#ip-forwarding-problems rel="nofollow noopener" target=_blank>Dokumentasi Docker</a></p><h1 class=h3>Solusi Sudah Dicoba</h1><h2 class=h4>1) Mengaktifkan Penerusan IP seperti yang diberikan dalam <a href=https://docs.docker.com/engine/install/linux-postinstall/#ip-forwarding-problems rel="nofollow noopener" target=_blank>Dokumentasi Docker</a></h2><p>Saya mencoba mengaktifkan IPForwarding tetapi tidak berhasil.</p><p>Isi <code>/usr/lib/systemd/network/80-container-host0.network</code> setelah mengaktifkan IPForwarding</p><pre><code>...
+[Network]
+DHCP=yes
+LinkLocalAddressing=yes
+LLDP=yes
+EmitLLDP=customer-bridge
+IPForward=true // this line was changed
+[DHCP]
+UseTimezone=yes
+</code></pre><h2 class=h4>2) Membuat Ulang Jembatan Docker seperti yang diberikan pada <a href=https://superuser.com/a/1130993/1214210 target=_blank rel="nofollow noopener">Stack Overflow</a></h2><pre><code>pkill docker
+iptables -t nat -F
+ifconfig docker0 down
+brctl delbr docker0
+sudo service restart docker
+</code></pre><p>Ini awalnya efektif di <a href=https://github.com/moby/moby/issues/866#issuecomment-19218300 rel="nofollow noopener" target=_blank>masalah ini</a></p><p>Ada solusi untuk ubuntu, tetapi konfigurasi jaringan saya tidak memilikinya <a href=https://superuser.com/a/1274161/1214210 target=_blank rel="nofollow noopener">bermasalah</a> garis</p><p><code>sudo pico /etc/NetworkManager/NetworkManager.conf</code> saya hanya diisi dengan komentar</p><pre><code>[main]
+#plugins=ifcfg-rh
+
+
+[logging]
+#level=TRACE
+#domains=ALL
+
+</code></pre><h2 class=h4>3) Menginstal layanan Tabel-IP <a href=https://stackoverflow.com/a/60074328/2851473 target=_blank rel="nofollow noopener">StackOverflow</a></h2><pre><code>sudo yum install iptables-services
+sudo service docker restart
+
+</code></pre><h2 class=h4>4) Mengganti konfigurasi DNS di docker-compose- <a href=https://stackoverflow.com/questions/41717180/docker-compose-container-using-host-dns-server target=_blank rel="nofollow noopener">StackOverflow</a></h2><pre><code>version: &quot;3.3&quot;
+services:
+    airflow:
+        build: 
+            context: ./airflow
+            dockerfile: Dockerfile
+        ports: 
+            - 8080:8080
+        environment: 
+            GITHUB_DAG_REPO: https://github.com/siddharths067/HelloAirflow.git
+        dns:
+            - 8.8.8.8
+            - 8.8.4.4
+</code></pre><h1 class=h3>Jaringan Docker Periksa Jaringan Gambar</h1><p>Saya tidak tahu apakah ini akan berguna</p><pre><code>docker network inspect airflowsetup_default 
+[
+    {
+        &quot;Name&quot;: &quot;airflowsetup_default&quot;,
+        &quot;Id&quot;: &quot;141a518c1440e603f75774c54f42de33e9173e3f062a0a0bc772db13a7f1ef5d&quot;,
+        &quot;Created&quot;: &quot;2020-08-30T14:42:30.951975699+05:30&quot;,
+        &quot;Scope&quot;: &quot;local&quot;,
+        &quot;Driver&quot;: &quot;bridge&quot;,
+        &quot;EnableIPv6&quot;: false,
+        &quot;IPAM&quot;: {
+            &quot;Driver&quot;: &quot;default&quot;,
+            &quot;Options&quot;: null,
+            &quot;Config&quot;: [
+                {
+                    &quot;Subnet&quot;: &quot;172.18.0.0/16&quot;,
+                    &quot;Gateway&quot;: &quot;172.18.0.1&quot;
+                }
+            ]
+        },
+        &quot;Internal&quot;: false,
+        &quot;Attachable&quot;: true,
+        &quot;Ingress&quot;: false,
+        &quot;ConfigFrom&quot;: {
+            &quot;Network&quot;: &quot;&quot;
+        },
+        &quot;ConfigOnly&quot;: false,
+        &quot;Containers&quot;: {},
+        &quot;Options&quot;: {},
+        &quot;Labels&quot;: {
+            &quot;com.docker.compose.network&quot;: &quot;default&quot;,
+            &quot;com.docker.compose.project&quot;: &quot;airflowsetup&quot;,
+            &quot;com.docker.compose.version&quot;: &quot;1.25.4&quot;
+        }
+    }
+]
+</code></pre><h3 class=h5>Keluaran</h3><pre><code>airflow_1  | GITHUB DAG REPO IS
+airflow_1  | https://github.com/siddharths067/HelloAirflow.git
+airflow_1  | Cloning into 'HelloAirflow'...
+airflow_1  | fatal: unable to access 'https://github.com/siddharths067/HelloAirflow.git/': Could not resolve host: github.com
+</code></pre></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1214210/siddharth-singh target=_blank rel="nofollow noopener"><span itemprop=name>Siddharth Singh</span></a>
+—
+<a href=https://superuser.com/questions/1581738/docker-containers-cannot-connect-to-internet-in-fedora-32 target=_blank rel="nofollow noopener">Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm" id=showQuestionReplies>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 d-none" id=questionRepliesContainer><ul class="list-group list-group-flush"><li class=list-group-item><div>periksa jawaban saya untuk akar penyebab masalah Anda yang paling mungkin dan solusi yang mungkin.</div><div>— <a href=https://superuser.com/users/917018/konrad-botor target=_blank rel="nofollow noopener">Konrad Botor</a></div></li></ul></div></div></div><hr><h2 class=h4><span itemprop=answerCount>3</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>5</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>5</div><div class=card-body><div itemprop=text><p>Meskipun OP menemukan solusi untuk masalahnya dan menutup masalah ini, dia tidak menemukan akar masalahnya. Fakta bahwa jaringan jembatan default Docker <code>bridge</code> terhubung ke internet dan <code>airflowsetup_default</code> tidak menunjukkan bahwa ada yang salah dengan pengaturan jaringan Docker.</p><p>Saya melakukan beberapa penelitian dan ternyata Fedora 32 memutuskan tidak terlalu peduli apakah Docker berfungsi atau tidak.</p><p>Bahkan tidak mungkin untuk menginstal Docker dengan cara yang dijelaskan dalam dokumentasi dan jika Anda menginstal paket yang disediakan oleh Fedora, itu masih tidak berfungsi dengan benar - informasi lebih lanjut tentang masalah itu dapat ditemukan <a href=https://serverfault.com/questions/1021293/docker-ce-not-available-for-fedora-32 target=_blank rel="nofollow noopener">sini</a> , <a href=https://fedoramagazine.org/docker-and-fedora-32/ rel="nofollow noopener" target=_blank>sini</a> dan <a href=https://github.com/docker/for-linux/issues/955 rel="nofollow noopener" target=_blank>sini</a> .</p><p>Masalah utamanya adalah tidak ada konektivitas internet di dalam container jika container terhubung ke jaringan khusus apa pun yang dijembatani - baik itu dibuat menggunakan <code>docker network create</code> atau oleh docker-compose.</p><p>Alasan mengapa sederhana - Docker mengasumsikan bahwa firewall yang digunakan oleh OS adalah <a href=https://en.wikipedia.org/wiki/Iptables rel="nofollow noopener" target=_blank>iptables</a> , tetapi Fedora 32 menggunakan <a href=https://en.wikipedia.org/wiki/Firewalld rel="nofollow noopener" target=_blank>firewalld</a> secara default. Itu berarti Docker tidak dapat mengkonfigurasi firewall secara manual - itu harus dikonfigurasi secara manual.</p><p>Untuk tujuan referensi, pertama-tama saya akan menjelaskan cara mengatur Docker pada instalasi Fedora 32 yang bersih.</p><p>Pertama jalankan perintah berikut:</p><pre><code>sudo grubby --update-kernel=ALL --args=&quot;systemd.unified_cgroup_hierarchy=0&quot;
+sudo groupadd docker
+sudo usermod -aG docker $USER
+</code></pre><p>Ini akan mengkonfigurasi cgroups agar kompatibel dengan Docker daemon dan memungkinkan pengguna Anda menggunakan Docker CLI tanpa sudo.</p><p>Selanjutnya restart sistem Anda untuk menerapkan perubahan dan menjalankan:</p><pre><code>sudo dnf install -y moby-engine docker-compose nano
+sudo systemctl enable docker
+sudo systemctl start docker
+</code></pre><p>untuk menginstal dan mengaktifkan Docker.</p><p>Sekarang, masuklah ke direktori yang berisi <code>docker-compose.yml</code> Anda dan jalankan <code>docker-compose up -d</code>. Yuo akan melihat <code>docker-compose</code> membuat jaringan untuk Anda dan kemudian membuat wadah. Jika penampung Anda memerlukan koneksi internet saat startup (seperti OP), penampung akan gagal untuk memulai.</p><p>Sekarang jalankan <code>sudo iptables-save | grep DOCKER</code> dan Anda akan melihat sesuatu seperti:</p><pre><code>:DOCKER - [0:0]
+:DOCKER-ISOLATION-STAGE-1 - [0:0]
+:DOCKER-ISOLATION-STAGE-2 - [0:0]
+:DOCKER-USER - [0:0]
+-A FORWARD -j DOCKER-USER
+-A FORWARD -j DOCKER-ISOLATION-STAGE-1
+-A FORWARD -o docker0 -j DOCKER
+-A FORWARD -o br-b56fa303f315 -j DOCKER
+-A DOCKER-ISOLATION-STAGE-1 -i docker0 ! -o docker0 -j DOCKER-ISOLATION-STAGE-2
+-A DOCKER-ISOLATION-STAGE-1 -i br-b56fa303f315 ! -o br-b56fa303f315 -j DOCKER-ISOLATION-STAGE-2
+-A DOCKER-ISOLATION-STAGE-1 -j RETURN
+-A DOCKER-ISOLATION-STAGE-2 -o docker0 -j DROP
+-A DOCKER-ISOLATION-STAGE-2 -o br-b56fa303f315 -j DROP
+-A DOCKER-ISOLATION-STAGE-2 -j RETURN
+-A DOCKER-USER -j RETURN
+:DOCKER - [0:0]
+-A PREROUTING -m addrtype --dst-type LOCAL -j DOCKER
+-A OUTPUT ! -d 127.0.0.0/8 -m addrtype --dst-type LOCAL -j DOCKER
+-A DOCKER -i docker0 -j RETURN
+-A DOCKER -i br-b56fa303f315 -j RETURN
+</code></pre><p><code>docker0</code> adalah jaringan jembatan default Docker, sedangkan <code>br-b56fa303f315</code> adalah jaringan baru yang dibuat oleh<pre><code>sudo dnf install -y moby-engine docker-compose nano
+sudo systemctl enable docker
+sudo systemctl start docker
+</code></pre>(milik Anda mungkin memiliki nama yang berbeda). Jika OS Anda menggunakan <code>iptables</code> semuanya akan bekerja seperti yang diharapkan, tetapi tidak, jadi kami perlu memeriksa konfigurasi <code>docker0</code> di <code>iptables</code>.</p><p>Jalankan <code>firewall-cmd --get-active-zones</code> dan Anda akan mendapatkan sesuatu yang mirip dengan:</p><pre><code>docker
+  interfaces: docker0
+public
+  interfaces: eth0 eth1
+</code></pre><p>Anda dapat melihat bahwa jaringan <code>bridge</code> berada di zona <code>docker</code>, tetapi jaringan baru tidak. Faktanya itu tidak terdaftar sama sekali, yang berarti berada di zona default. Anda dapat memeriksa apa itu dengan menjalankan <code>firewall-cmd --get-default-zone</code>. Pada instalasi Fedora 32 yang bersih, ini <code>public</code>.</p><p>Jadi jalankan (ingat untuk mengganti <code>br-b56fa303f315</code> dengan nama antarmuka Anda):</p><pre><code>sudo firewall-cmd --zone=docker --add-interface=br-b56fa303f315
+</code></pre><p>jalankan <code>docker-compose up -d</code> jika layanan Anda gagal untuk memulai sebelumnya dan voila - penampung Anda memiliki konektivitas jaringan.</p><p>Sayangnya jika Anda me-restart sistem Anda, itu akan kehilangan konektivitas itu lagi.</p><p>Anda dapat mencegahnya dengan menggunakan:</p><pre><code>sudo firewall-cmd --permanent --zone=docker --add-interface=br-b56fa303f315
+sudo firewall-cmd --reload
+</code></pre><p>Namun jika Anda membuat jaringan baru atau membuat ulang jaringan yang sudah ada (misalnya dengan menjalankan <code>docker-compose down</code> lalu <code>docker-compose up -d</code> lagi), Anda harus mengulangi prosesnya.</p><p>Jadi apa solusi untuk masalah ini?</p><p>Pertama, tuliskan semua antarmuka jaringan yang saat ini terpasang ke zona default - dalam contoh ini <code>eth0</code> dan<pre><code>sudo firewall-cmd --zone=docker --add-interface=br-b56fa303f315
+</code></pre>.</p><p>Kemudian jalankan perintah berikut (mengganti <code>public</code> dengan nama zona default Anda)</p><pre><code>sudo firewall-cmd --set-default-zone=docker
+sudo firewall-cmd --permanent --zone=public --add-interface=eth0
+sudo firewall-cmd --permanent --zone=public --add-interface=eth1
+sudo firewall-cmd --reload
+</code></pre><p>Sekarang antarmuka yang sebelumnya berada di zona default Anda seharusnya ada lagi, tetapi semua antarmuka baru (dan karenanya semua jaringan Docker baru) akan secara otomatis ditambahkan ke zona <code>docker</code>, yang akan memberi mereka konektivitas jaringan penuh.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/kontainer-docker-tidak-dapat-terhubung-ke-internet-di-fedora-32-nn8ecbua/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/917018/konrad-botor target=_blank rel="nofollow noopener"><span itemprop=name>Konrad Botor</span></a>
+—
+<a href=https://superuser.com/a/1583411 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Sial, tidak heran mengapa aku tidak bisa memahaminya. Ini terlalu rumit bagi saya untuk memahaminya sendiri. Bisakah saya menginstal iptables di fedora? apakah itu akan berhasil?</div><div>— <a href=https://superuser.com/users/1214210/siddharth-singh target=_blank rel="nofollow noopener">Siddharth Singh</a></div></li><li class=list-group-item><div>Tidak sesederhana itu. Saya tidak ingin lebih membingungkan masalah ini dalam jawaban saya, tetapi di Linux firewall selalu menjadi bagian dari kernel. Pertama <code>ipfirewall</code>, kemudian <code>ipchains</code>, kemudian <code>iptables</code> dan sekarang <code>nftables</code>. “Firewall” lainnya, termasuk <code>firewalld</code>, hanyalah frontend yang membuat pengelolaannya lebih mudah. Anda dapat membaca alasan mengapa Docker dulu bekerja dengan <code>firewalld</code> di Fedora 31, tetapi tidak 32 di sini: <a href=https://fedoraproject.org/wiki/Changes/firewalld_default_to_nftables rel="nofollow noopener" target=_blank>fedoraproject.org/wiki/Changes/firewalld_default_to_nftables</a></div><div>— <a href=https://superuser.com/users/917018/konrad-botor target=_blank rel="nofollow noopener">Konrad Botor</a></div></li><li class=list-group-item><div>Saya pikir mengatur zona default ke <code>docker</code> adalah solusi terbaik, tetapi Anda juga dapat mencoba memaksa <code>firewalld</code> untuk menggunakan <code>iptables</code> seperti yang dijelaskan di sini: <a href=https://dev.to/ozorest/fedora-32-how-to-solve-docker-internal-network-issue-22me rel="nofollow noopener" target=_blank>dev.to/ozorest/…</a></div><div>— <a href=https://superuser.com/users/917018/konrad-botor target=_blank rel="nofollow noopener">Konrad Botor</a></div></li><li class=list-group-item><div>Ketika saya mengambil zona aktif, saya bahkan tidak mendapatkan antarmuka <code>public</code> <a href=https://pastebin.pl/view/7cf674b7 rel="nofollow noopener" target=_blank>pastebin.pl/view/7cf674b7</a></div><div>— <a href=https://superuser.com/users/1214210/siddharth-singh target=_blank rel="nofollow noopener">Siddharth Singh</a></div></li><li class=list-group-item><div>Output dari perintah itu tergantung pada konfigurasi sistem Anda saat ini. Mungkin Anda tidak memiliki antarmuka di zona <code>public</code>. Periksa zona apa yang Anda miliki: <code>firewall-cmd --get-zones</code>. Jika ada yang bernama <code>docker</code>, Anda masih dapat melakukan <code>sudo firewall-cmd --set-default-zone=docker</code> untuk memperbaiki jaringan Docker. Jika tidak, <code>sudo firewall-cmd --set-default-zone=trusted</code> seharusnya berfungsi, tetapi akan membuat sistem Anda kurang aman.</div><div>— <a href=https://superuser.com/users/917018/konrad-botor target=_blank rel="nofollow noopener">Konrad Botor</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>1</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>1</div><div class=card-body><div itemprop=text><p>Saya mengikuti solusi alternatif <a href=https://fedoramagazine.org/docker-and-fedora-32/ rel="nofollow noopener" target=_blank>dari Majalah Fedora</a> :</p><blockquote><p>Masukkan buruh pelabuhan ke daftar putih di firewall</p><p>Untuk mengizinkan Docker memiliki akses jaringan, diperlukan dua perintah.</p><pre><code>sudo firewall-cmd --permanent --zone=trusted --add-interface=docker0
+sudo firewall-cmd --permanent --zone=FedoraWorkstation
+--add-masquerade
+</code></pre><p>Perintah pertama akan menambahkan antarmuka Docker ke tepercaya
+lingkungan yang memungkinkan Docker membuat koneksi jarak jauh. Kedua
+perintah akan memungkinkan buruh pelabuhan untuk membuat koneksi lokal. Ini adalah
+sangat berguna ketika beberapa kontainer Docker ada sebagai file
+pengembangan lingkungan.</p></blockquote><p>Kemudian Anda harus menjalankan perintah ini untuk memvalidasi perubahan</p><pre><code>sudo firewall-cmd --reload
+</code></pre><p>Biasanya, Anda tidak perlu me-reboot komputer Anda dan container Anda berikutnya akan terhubung.</p><p>Jika tidak berhasil, Anda dapat mencoba untuk:</p><ol><li>Pertama, mulai ulang penampung baru</li><li>Kedua, restart buruh pelabuhan: <code>sudo systemctl restart docker</code></li><li>Terakhir, reboot komputer Anda</li></ol></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/kontainer-docker-tidak-dapat-terhubung-ke-internet-di-fedora-32-nn8ecbua/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1249068/eric-masseran target=_blank rel="nofollow noopener"><span itemprop=name>Eric Masseran</span></a>
+—
+<a href=https://superuser.com/a/1608243 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>0</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-2><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>0</div><div class=card-body><div itemprop=text><p>Menambahkan <code>network-mode: bridge</code> ke file docker-compose saya sepertinya berhasil. Tetapi saya merasa ini mungkin bukan cara yang tepat untuk melakukan ini. Saya tidak perlu melakukan over-ride apa pun untuk memungkinkan wadah saya terhubung.</p><pre><code>version: &quot;3.3&quot;
+services:
+    airflow:
+        build: 
+            context: ./airflow
+            dockerfile: Dockerfile
+        ports: 
+            - 8080:8080
+        environment: 
+            GITHUB_DAG_REPO: https://github.com/siddharths067/HelloAirflow.git
+        # dns:
+        #     - 8.8.8.8
+        #     - 8.8.4.4
+        network_mode: bridge
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/kontainer-docker-tidak-dapat-terhubung-ke-internet-di-fedora-32-nn8ecbua/#answer-2 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1214210/siddharth-singh target=_blank rel="nofollow noopener"><span itemprop=name>Siddharth Singh</span></a>
+—
+<a href=https://superuser.com/a/1581747 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=2>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=2><ul class="list-group list-group-flush"><li class=list-group-item><div>Ini aneh - sejauh yang saya tahu pengaturan <code>network_mode</code> ke <code>bridge</code> memaksa kontainer untuk terhubung ke jaringan jembatan Docker default daripada ke jaringan jembatan khusus proyek yang dibuat secara default oleh docker-compose. Apakah Anda menggunakan kunci <code>networks</code> tingkat atas untuk menyesuaikan jaringan khusus proyek itu? Mungkin itu masalahnya.</div><div>— <a href=https://superuser.com/users/917018/konrad-botor target=_blank rel="nofollow noopener">Konrad Botor</a></div></li><li class=list-group-item><div>Saya akan jujur, saya tidak mengerti apa yang Anda katakan. Saya baru saja mencari di internet untuk file buruh pelabuhan dan menggunakan pengaturan ini :(</div><div>— <a href=https://superuser.com/users/1214210/siddharth-singh target=_blank rel="nofollow noopener">Siddharth Singh</a></div></li><li class=list-group-item><div>Maksud saya, ketika Anda menentukan <code>network_mode: bridge</code>, Anda menghubungkan container Anda ke jaringan yang disebut <code>bridge</code> - yang dibuat selama instalasi Docker - bukan ke jaringan <code>airflowsetup_default</code> - yang dibuat oleh docker-compose.</div><div>— <a href=https://superuser.com/users/917018/konrad-botor target=_blank rel="nofollow noopener">Konrad Botor</a></div></li></ul></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/virtualbox-tidak-dapat-membuat-bridged-networking-berfungsi-host-win7-pxqugz6n/>VirtualBox: Tidak dapat membuat Bridged Networking berfungsi (host Win7)</a></div></li><li class=list-group-item><div><a href=/apa-yang-dimaksud-92r-dalam-konteks-memori-ram-a8jx3eyb/>Apa yang dimaksud 9.2R dalam konteks memori RAM?</a></div></li><li class=list-group-item><div><a href=/nonaktifkan-daemon-quotondemandquot-penskalaan-frekuensi-di-ubuntu-1004-jdmbxrqo/>Nonaktifkan daemon "ondemand" Penskalaan Frekuensi di Ubuntu 10.04</a></div></li><li class=list-group-item><div><a href=/server-debian-linux-ukuran-cache-l1-dan-l2-duplikat-peotvi5w/>Server Debian Linux - Ukuran cache L1 dan L2 [duplikat]</a></div></li><li class=list-group-item><div><a href=/file-host-dan-subdomain-yang-tidak-diblokir-0mwozvhs/>file host dan subdomain yang tidak diblokir</a></div></li><li class=list-group-item><div><a href=/apakah-mungkin-untuk-mengubah-konfigurasi-router-linksys-dari-baris-perintah-nz4pnekn/>Apakah mungkin untuk mengubah konfigurasi router Linksys dari baris perintah?</a></div></li><li class=list-group-item><div><a href=/virtualbox-tidak-ada-akselerasi-pada-host-windows-10-rnmihmsj/>VirtualBox tidak ada akselerasi pada host Windows 10</a></div></li><li class=list-group-item><div><a href=/ubah-warna-isi-sel-jika-nilai-sel-itu-sama-dengan-nilai-sel-spesifik-lainnya-lefjiwmb/>Ubah Warna Isi sel jika nilai sel itu sama dengan nilai sel spesifik lainnya</a></div></li><li class=list-group-item><div><a href=/pemindaian-jaringan-hp-laserjet-2840-amp-windows-7-linux-tzzdjq2g/>Pemindaian Jaringan: HP Laserjet 2840 & Windows 7 (+ Linux?)</a></div></li><li class=list-group-item><div><a href=/ubuntu-910-ikon-systray-system-tray-tidak-ada-l4g5qwxz/>Ubuntu 9.10, ikon systray (system tray) tidak ada</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

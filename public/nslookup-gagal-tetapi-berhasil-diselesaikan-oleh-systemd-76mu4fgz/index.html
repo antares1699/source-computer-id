@@ -1,0 +1,129 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>nslookup gagal tetapi berhasil diselesaikan oleh systemd</title><meta name=description content="Ini adalah masalah aneh yang saya habiskan sepanjang hari. Akan sangat bagus jika seseorang bisa menjelaskan hal ini.  Masalahnya muncul sebagai masalah dengan resolusi nama, tapi saya tidak yakin itu penyebab utamanya:..."><link rel=canonical href=https://www.idxstack.com/nslookup-gagal-tetapi-berhasil-diselesaikan-oleh-systemd-76mu4fgz/><meta property="og:title" content="nslookup gagal tetapi berhasil diselesaikan oleh systemd"><meta property="og:description" content="Ini adalah masalah aneh yang saya habiskan sepanjang hari. Akan sangat bagus jika seseorang bisa menjelaskan hal ini.  Masalahnya muncul sebagai masalah dengan resolusi nama, tapi saya tidak yakin itu penyebab utamanya:..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/nslookup-gagal-tetapi-berhasil-diselesaikan-oleh-systemd-76mu4fgz/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="nslookup gagal tetapi berhasil diselesaikan oleh systemd"><meta name=twitter:description content="Ini adalah masalah aneh yang saya habiskan sepanjang hari. Akan sangat bagus jika seseorang bisa menjelaskan hal ini.  Masalahnya muncul sebagai masalah dengan resolusi nama, tapi saya tidak yakin itu penyebab utamanya:..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>nslookup gagal tetapi berhasil diselesaikan oleh systemd</h1><div itemprop=text><p>Ini adalah masalah aneh yang saya habiskan sepanjang hari. Akan sangat bagus jika seseorang bisa menjelaskan hal ini.</p><p>Masalahnya muncul sebagai masalah dengan resolusi nama, tapi saya tidak yakin itu penyebab utamanya:</p><pre><code># host www.google.com
+;; connection timed out; no servers could be reached
+</code></pre><p>sejauh ini membosankan, tapi tunggu !:</p><pre><code>#systemd-resolve www.google.com
+www.google.com: 209.85.202.103
+                209.85.202.106
+                209.85.202.105
+                209.85.202.104
+                209.85.202.147
+                209.85.202.99
+</code></pre><p>Sederhana, masalahnya ada pada resolv.conf bukan?</p><pre><code># This file is managed by man:systemd-resolved(8). Do not edit.
+#
+# 127.0.0.53 is the systemd-resolved stub resolver.
+# run "systemd-resolve --status" to see details about the actual nameservers.
+nameserver 127.0.0.53
+
+search xxx.uk xyz
+</code></pre><p>Jadi sistem menggunakan resolver systemd?</p><pre><code>#dig @127.0.0.53 www.google.com
+; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Ubuntu &lt;&lt;&gt;&gt; @127.0.0.53 www.google.com
+; (1 server found)
+;; global options: +cmd
+;; connection timed out; no servers could be reached
+</code></pre><p>ok, jadi jika resolver systemd mengatakan ada di 127.0.0.53 mengapa tidak merespons.</p><pre><code>#sudo netstat -lupn | grep 127
+udp        0      0 127.0.0.53:53           0.0.0.0:*                           1679/systemd-resolv
+</code></pre><p>Jika tidak mendengarkan, apa yang dilakukan systemd-resolv?</p><pre><code>Global
+          DNSSEC NTA: 10.in-addr.arpa
+                      16.172.in-addr.arpa
+                      168.192.in-addr.arpa
+                      17.172.in-addr.arpa
+                      18.172.in-addr.arpa
+                      19.172.in-addr.arpa
+                      20.172.in-addr.arpa
+                      21.172.in-addr.arpa
+                      22.172.in-addr.arpa
+                      23.172.in-addr.arpa
+                      24.172.in-addr.arpa
+                      25.172.in-addr.arpa
+                      26.172.in-addr.arpa
+                      27.172.in-addr.arpa
+                      28.172.in-addr.arpa
+                      29.172.in-addr.arpa
+                      30.172.in-addr.arpa
+                      31.172.in-addr.arpa
+                      corp
+                      d.f.ip6.arpa
+                      home
+                      internal
+                      intranet
+                      lan
+                      local
+                      private
+                      test
+
+Link 20 (veth10858e2)
+      Current Scopes: LLMNR/IPv6
+       LLMNR setting: yes
+MulticastDNS setting: no
+      DNSSEC setting: no
+    DNSSEC supported: no
+
+Link 14 (vnet0)
+      Current Scopes: LLMNR/IPv6
+       LLMNR setting: yes
+MulticastDNS setting: no
+      DNSSEC setting: no
+    DNSSEC supported: no
+
+Link 13 (virbr0-nic)
+      Current Scopes: none
+       LLMNR setting: yes
+MulticastDNS setting: no
+      DNSSEC setting: no
+    DNSSEC supported: no
+
+Link 12 (virbr0)
+      Current Scopes: LLMNR/IPv4
+       LLMNR setting: yes
+MulticastDNS setting: no
+      DNSSEC setting: no
+    DNSSEC supported: no
+
+Link 11 (docker0)
+      Current Scopes: none
+       LLMNR setting: yes
+MulticastDNS setting: no
+      DNSSEC setting: no
+    DNSSEC supported: no
+
+Link 10 (docker_gwbridge)
+      Current Scopes: LLMNR/IPv4 LLMNR/IPv6
+       LLMNR setting: yes
+MulticastDNS setting: no
+      DNSSEC setting: no
+    DNSSEC supported: no
+
+Link 3 (em2)
+      Current Scopes: DNS LLMNR/IPv4 LLMNR/IPv6
+       LLMNR setting: yes
+MulticastDNS setting: no
+      DNSSEC setting: no
+    DNSSEC supported: no
+         DNS Servers: 192.168.100.1
+                      192.168.100.2
+                      192.168.100.3
+                      192.168.100.4
+          DNS Domain: cqp
+
+Link 2 (em1)
+      Current Scopes: DNS LLMNR/IPv4 LLMNR/IPv6
+       LLMNR setting: yes
+MulticastDNS setting: no
+      DNSSEC setting: no
+    DNSSEC supported: no
+         DNS Servers: xxx.xxx.x.xx
+                      xxx.xxx.x.xx
+          DNS Domain: xxx.uk
+</code></pre><p>Saya memiliki beberapa server, semuanya menjalankan ubuntu berseni terbaru, masalah ini telah berpindah antar server dalam proses mencoba memperbaikinya.<br>Mereka adalah bagian dari kawanan buruh pelabuhan dan menghapus, kemudian menambahkan kembali memperbaiki masalah pada satu titik.</p><hr><p>Saya dihidupkan <a href=https://superuser.com/questions/1187633/how-to-debug-systemd-networkd target=_blank rel="nofollow noopener">debugging yang diselesaikan systemd</a> tapi tidak ada keluaran saat permintaan dibuat.</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/899258/richard-collins target=_blank rel="nofollow noopener"><span itemprop=name>Richard Collins</span></a>
+—
+<a href=https://superuser.com/questions/1317623/nslookup-failed-but-systemd-resolved-works target=_blank rel="nofollow noopener">Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm" id=showQuestionReplies>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 d-none" id=questionRepliesContainer><ul class="list-group list-group-flush"><li class=list-group-item><div>Mungkin firewall Anda memblokirnya?</div><div>— <a href=https://superuser.com/users/1686/user1686 target=_blank rel="nofollow noopener">user1686</a></div></li><li class=list-group-item><div>Anda mungkin benar, tetapi saya tidak dapat melihat aturan yang akan mempengaruhinya - yang tidak saya mengerti adalah bagaimana sistem memutuskan apa yang harus ditanyakan, saya pikir itu membaca resolv.conf untuk ke mana mengirim permintaan</div><div>— <a href=https://superuser.com/users/899258/richard-collins target=_blank rel="nofollow noopener">Richard Collins</a></div></li><li class=list-group-item><div>nslookup bukanlah "sistem". systemd-resolvectl bukanlah "sistem". Keduanya menggunakan pendekatan yang lebih langsung daripada "sistem", dan keduanya menggunakan API yang berbeda (systemd-resolvectl menggunakan D-Bus, bukan UDP.)</div><div>— <a href=https://superuser.com/users/1686/user1686 target=_blank rel="nofollow noopener">user1686</a></div></li><li class=list-group-item><div>Saya tahu bahwa itu pada akhirnya bermuara pada gethostbyname (), yang merupakan kegagalan, bagaimana cara memutuskan bagaimana menyelesaikan alamat jika tidak menggunakan 127.0.0.53 seperti yang dikatakan resol.conf?</div><div>— <a href=https://superuser.com/users/899258/richard-collins target=_blank rel="nofollow noopener">Richard Collins</a></div></li><li class=list-group-item><div>Maksud saya adalah itu <b>tidak</b> intinya menjadi gethostbyname (). Alat <code>nslookup</code> masih menggunakan resolv.conf tetapi sebenarnya menggunakan DNS secara langsung. Dan alat <code>systemd-resolve</code> tidak berbicara DNS sama sekali, alat itu berbicara D-Bus.</div><div>— <a href=https://superuser.com/users/1686/user1686 target=_blank rel="nofollow noopener">user1686</a></div></li></ul></div></div></div><hr><h2 class=h4><span itemprop=answerCount>2</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>6</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>6</div><div class=card-body><div itemprop=text><p>saya menemukan <a href="https://news.ycombinator.com/item?id=17042047" rel="nofollow noopener" target=_blank>jawaban ini di Hacker News</a> yang menyarankan menghubungkan <code>/etc/resolv.conf</code> ke <code>/run/systemd/resolve/resolv.conf</code>:</p><pre><code>sudo rm /etc/resolv.conf
+sudo ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+</code></pre><p>Itu berhasil untuk saya. Saya tidak berpikir saya harus memulai ulang layanan apa pun setelah membuat ulang symlink.</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/nslookup-gagal-tetapi-berhasil-diselesaikan-oleh-systemd-76mu4fgz/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/905023/neil-smith target=_blank rel="nofollow noopener"><span itemprop=name>Neil Smith</span></a>
+—
+<a href=https://superuser.com/a/1322684 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=0>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=0><ul class="list-group list-group-flush"><li class=list-group-item><div>Terima kasih tapi ini sudah terjadi.</div><div>— <a href=https://superuser.com/users/899258/richard-collins target=_blank rel="nofollow noopener">Richard Collins</a></div></li><li class=list-group-item><div>@ Richard Collins: Jadi ini bukan jawabannya?</div><div>— <a href=https://superuser.com/users/964771/u-windl target=_blank rel="nofollow noopener">U. Windl</a></div></li><li class=list-group-item><div>Tidak, mungkin ada beberapa tautan dengan masalah dengan buruh pelabuhan dan firewalld - tidak ada bukti kuat untuk itu</div><div>— <a href=https://superuser.com/users/899258/richard-collins target=_blank rel="nofollow noopener">Richard Collins</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>0</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>0</div><div class=card-body><div itemprop=text><p>Kedengarannya gila, tetapi Anda harus mengizinkan akses ke <code>127.0.0.53</code> untuk menggunakan <code>systemd-resolved</code></p><pre><code>iptables -I INPUT -s localhost -d 127.0.0.53  -j ACCEPT
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/nslookup-gagal-tetapi-berhasil-diselesaikan-oleh-systemd-76mu4fgz/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1194100/david-ordyan target=_blank rel="nofollow noopener"><span itemprop=name>David Ordyan</span></a>
+—
+<a href=https://superuser.com/a/1565642 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/nas-menggunakan-disk-sata-dan-ata-hl58szcp/>NAS menggunakan disk SATA dan ATA</a></div></li><li class=list-group-item><div><a href=/mengapa-uuid-linux-etc-fstab-peka-huruf-besar-kecil-ounqmiei/>Mengapa UUID Linux / etc / fstab peka huruf besar kecil?</a></div></li><li class=list-group-item><div><a href=/vmware-workstation-8-berbagi-vm-tanpa-menyalinnya-ke-quotlokasi-vm-bersamaquot-nymgwlvm/>VMWare Workstation 8, Berbagi VM tanpa menyalinnya ke "Lokasi VM bersama"</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-memecahkan-masalah-boot-ulang-acak-w1exqnib/>Bagaimana cara memecahkan masalah boot ulang acak?</a></div></li><li class=list-group-item><div><a href=/bagaimana-saya-dapat-melihat-proses-mana-pada-windows-xp-yang-mengakses-sistem-file-a1ist4rc/>Bagaimana saya dapat melihat proses mana pada Windows XP yang mengakses sistem file?</a></div></li><li class=list-group-item><div><a href=/cara-mewarnai-latar-belakang-sel-secara-otomatis-dengan-nilai-yang-dipilih-dari-daftar-dropdown-kustom-di-ms-excel-2010-qlimynn9/>Cara mewarnai latar belakang sel secara otomatis dengan nilai yang dipilih dari daftar dropdown kustom di MS Excel 2010</a></div></li><li class=list-group-item><div><a href=/cara-terbaik-untuk-mendapatkan-kecepatan-1gbps-dengan-laptop-dengan-kartu-ethernet-inbuilt-yang-hanya-mendukung-hingga-100mbps-9vk5ctuh/>cara terbaik untuk mendapatkan kecepatan 1Gbps dengan laptop dengan kartu ethernet inbuilt yang hanya mendukung hingga 100Mbps</a></div></li><li class=list-group-item><div><a href=/memaksimalkan-jendela-command-prompt-hkh4d0fr/>memaksimalkan jendela Command prompt</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-mengalihkan-keluaran-dari-stdout-ke-vim-duplikat-8vn4heie/>Bagaimana cara mengalihkan keluaran dari stdout ke vim? [duplikat]</a></div></li><li class=list-group-item><div><a href=/cara-menemukan-dan-mengganti-jalur-tautan-di-beberapa-file-excel-sekaligus-bm3deep6/>Cara menemukan dan mengganti jalur tautan di beberapa file Excel sekaligus</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>

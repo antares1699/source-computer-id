@@ -1,0 +1,22 @@
+<div class="card shadow-sm mb-2 w-100">
+    <div class="card-body">
+        <div class="mb-2">
+            {{ range .Params.categories }}
+                <span class="badge badge-dark">{{ . }}</span>
+            {{ end }}
+        </div>
+        <h2 class="h5">
+            <a href="{{ .RelPermalink }}">{{ .Title | safeHTML }}</a>
+        </h2>
+        <p class="mb-0 limit-3-lines">
+            {{ .Params.snippet }}
+        </p>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+        <span class="btn btn-sm btn-votes">
+            <i class="far fa-heart fa-fw text-danger"></i>
+            {{ .Params.votes }}
+        </span>
+        <a href="{{ .RelPermalink }}" class="btn btn-primary btn-sm">{{ replace .Site.Params.terms.answers "#" .Params.answers_count }}</a>
+    </div>
+</div>

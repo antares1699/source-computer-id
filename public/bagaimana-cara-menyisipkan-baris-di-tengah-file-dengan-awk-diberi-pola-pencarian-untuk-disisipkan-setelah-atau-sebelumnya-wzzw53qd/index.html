@@ -1,0 +1,124 @@
+<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><title>Bagaimana cara menyisipkan baris di tengah file, dengan awk, diberi pola pencarian untuk disisipkan SETELAH atau SEBELUMNYA</title><meta name=description content="Saya ingin memasukkan beberapa teks di tengah file. Teks yang akan disisipkan berada setelah baris tertentu, katakanlah, &amp;quot;&amp;lt;begin&amp;gt;&amp;quot;. Saya tidak tahu nomor barisnya, saya juga tidak tahu jumlah baris dalam teks yang..."><link rel=canonical href=https://www.idxstack.com/bagaimana-cara-menyisipkan-baris-di-tengah-file-dengan-awk-diberi-pola-pencarian-untuk-disisipkan-setelah-atau-sebelumnya-wzzw53qd/><meta property="og:title" content="Bagaimana cara menyisipkan baris di tengah file, dengan awk, diberi pola pencarian untuk disisipkan SETELAH atau SEBELUMNYA"><meta property="og:description" content="Saya ingin memasukkan beberapa teks di tengah file. Teks yang akan disisipkan berada setelah baris tertentu, katakanlah, &amp;quot;&amp;lt;begin&amp;gt;&amp;quot;. Saya tidak tahu nomor barisnya, saya juga tidak tahu jumlah baris dalam teks yang..."><meta property="og:type" content="website"><meta property="og:url" content="https://www.idxstack.com/bagaimana-cara-menyisipkan-baris-di-tengah-file-dengan-awk-diberi-pola-pencarian-untuk-disisipkan-setelah-atau-sebelumnya-wzzw53qd/"><meta property="og:site_name" content="IDXStack"><meta property="og:locale" content="id_ID"><meta name=twitter:card content="summary"><meta name=twitter:title content="Bagaimana cara menyisipkan baris di tengah file, dengan awk, diberi pola pencarian untuk disisipkan SETELAH atau SEBELUMNYA"><meta name=twitter:description content="Saya ingin memasukkan beberapa teks di tengah file. Teks yang akan disisipkan berada setelah baris tertentu, katakanlah, &amp;quot;&amp;lt;begin&amp;gt;&amp;quot;. Saya tidak tahu nomor barisnya, saya juga tidak tahu jumlah baris dalam teks yang..."><link rel=stylesheet href=/css/style.min.c181a38d9857323db0ab0ad950bbd049d24d2f1d58d7566522f92aae4e1057df.css><link rel=stylesheet href=/vendor/fontawesome/css/all.min.css></head><body itemscope itemtype=https://schema.org/QAPage><nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class=container><a href=/ class=navbar-brand>IDXStack</a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav mr-auto"><li class=nav-item><a href=/ class=nav-link>Beranda</a></li></ul><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a href=# class="nav-link dropdown-toggle" id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>About</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a href=/about-us class=dropdown-item>About</a>
+<a href=/contact class=dropdown-item>Contact</a>
+<a href=/disclaimer class=dropdown-item>Disclaimer</a></div></li></ul></div></div></nav><div class="container my-2" itemprop=mainEntity itemscope itemtype=https://schema.org/Question><div class="card shadow-sm mb-2"><div class=card-body><div class=mb-2><span class="badge badge-dark">Komputer</span></div><h1 class=h3 itemprop=name>Bagaimana cara menyisipkan baris di tengah file, dengan awk, diberi pola pencarian untuk disisipkan SETELAH atau SEBELUMNYA</h1><div itemprop=text><p>Saya ingin memasukkan beberapa teks di tengah file. Teks yang akan disisipkan berada setelah baris tertentu, katakanlah, "<code>&lt;begin></code>". Saya tidak tahu nomor barisnya, saya juga tidak tahu jumlah baris dalam teks yang akan disisipkan. Saya hanya tahu bahwa setelah baris yang bertuliskan "<code>&lt;begin></code>" saya perlu memasukkan konten file lain.</p><p>Saya hanya tidak tahu bagaimana menggunakan awk untuk melakukan sesuatu seperti ini.</p><p>Terima kasih :-)</p></div></div><div class="card-footer bg-white d-flex justify-content-between"><div><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>4</span></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/7768/jfmessier target=_blank rel="nofollow noopener"><span itemprop=name>jfmessier</span></a>
+—
+<a href=https://superuser.com/questions/209379/how-can-i-insert-a-line-in-the-middle-of-a-file-with-awk-given-a-search-patter target=_blank rel="nofollow noopener">Sumber</a></div></div></div><hr><h2 class=h4><span itemprop=answerCount>3</span> Jawaban</h2><div class=form-row itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>2</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-0><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>2</div><div class=card-body><div itemprop=text><p>Buat file dengan kode berikut. Anda bisa menyimpannya sebagai:<br>insertfile.awk (atau apa pun yang Anda inginkan)</p><pre><code>    BEGIN{
+        while ( (getline &lt; outerfile) &gt; 0 )
+        {
+            if ($0 == matchline) 
+            {  
+                if ("after" == includematch)
+                {
+                    print
+                }
+                if ("before" == includematch)
+                {
+                    holdline = $0
+                }
+                  while ( (getline &lt; innerfile) &gt; 0) 
+                {
+                    print
+                }
+                close(innerfile)
+                if ("before" == includematch)
+                {
+                     print holdline
+                     holdline = ""
+                }
+            }
+            else
+            {
+                print
+            }
+        }
+        close(outerfile)
+    }
+</code></pre><p>Parameter baris perintah awk yang digunakan adalah:</p><pre><code>-v outerfile="file1.txt"    This is the name of the file you are searching (and printing).
+-v innerfile="file2.txt"    This is the name of the file you will insert when you file a match
+-v matchline="Search Text"  This is what you will search for as a line in file1.txt
+-v includematch="before"    Optional: insert the file, before the matchline
+-v includematch="after"     Optional: insert the file, after the matchline
+-v includematch=""          If "includematch" is any other value, or empty, or not present, 
+                            then insert the file, REPLACING matchline.
+-f "insertfile.awk"         This is the name of the awk command file.
+</code></pre><p>Kemudian, untuk menggunakannya Anda memanggil awk seperti ini:</p><pre><code>awk -v outerfile="file1.txt" -v innerfile="file2.txt" -v matchline="cat" -f "insertfile.awk"  
+(Read and print "file1.txt".  Search for line containing only "cat". REPLACE "cat" lines with "file2.txt"  
+
+awk -v outerfile="file1.txt" -v innerfile="file2.txt" -v matchline="dog" -v includematch="before" -f "insertfile.awk"
+(Read and print "file1.txt".  Search for line containing only "dog". Insert "file2.txt" Before matched line.
+
+awk -v outerfile="file1.txt" -v innerfile="file2.txt" -v matchline="bird" -v includematch="after" -f "insertfile.awk"
+(Read and print "file1.txt".  Search for line containing only "bird". Insert "file2.txt" After matched line.
+</code></pre><p>Di skrip awk, Anda dapat mengeditnya seperti ini:</p><pre><code>Change $0 to $1 or $2 or other to match a specific word instead of the whole line.  
+"hard-code" the file-names instead of outerfile and innerfile if you wish.
+</code></pre><p>Jika Anda ingin "menyalurkan" data input ke dalam skrip alih-alih mendapatkannya dari file, edit skrip insertfile.awk seperti ini:</p><pre><code>        {
+            if ($0 == matchline) 
+            {
+
+                if ("after" == includematch)
+                {
+                    print
+                }
+                if ("before" == includematch)
+                {
+                    holdline = $0
+                }
+
+                while ( (getline &lt; innerfile) &gt; 0) 
+                {
+                    print
+                }
+                close(innerfile)
+
+                if ("before" == includematch)
+                {
+                     print holdline
+                     holdline = ""
+                }
+
+            }
+            else
+            {
+                print
+            }
+            close(outerfile)
+        }
+</code></pre><p>Kemudian, untuk menggunakannya Anda memanggil awk seperti ini:</p><pre><code>type "somefile.txt" | awk -v innerfile="file2.txt" -v matchline="cat" -f "insertfile.awk"  
+(Read and print STDIN.  Search for line containing only "cat". REPLACE "cat" lines with "file2.txt"  
+
+type "anyfile.txt" | awk -v innerfile="file2.txt" -v matchline="dog" -v includematch="before" -f "insertfile.awk"
+(Read and print STDIN.  Search for line containg only "dog". Insert "file2.txt" Before matched line.
+
+type "otherfile.txt" | awk -v innerfile="file2.txt" -v matchline="bird" -v includematch="after" -f "insertfile.awk"
+(Read and print STDIN.  Search for line containg only "bird". Insert "file2.txt" After matched line.
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/bagaimana-cara-menyisipkan-baris-di-tengah-file-dengan-awk-diberi-pola-pencarian-untuk-disisipkan-setelah-atau-sebelumnya-wzzw53qd/#answer-0 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/144147/kevin-fegan target=_blank rel="nofollow noopener"><span itemprop=name>Kevin Fegan</span></a>
+—
+<a href=https://superuser.com/a/502686 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>5</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-1><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>5</div><div class=card-body><div itemprop=text><pre><code>/&lt;begin&gt;/{
+    insert_file("before_file.html")
+    print $0
+    insert_file("after_file.html")
+    next
+}
+{
+    print $0
+}
+</code></pre><p>di mana Anda harus menulis fungsi <code>insert_file</code> yang mungkin terlihat seperti ini</p><pre><code>function insert_file(file) {
+    while (getline line &lt;file)
+        print line
+    close(file)
+}
+</code></pre><p><s>Perhatikan bahwa versi persis ini tampaknya tidak berfungsi seperti yang diharapkan di Mac saya ketika before_file dan after_file sama ... Saya hanya mendapatkan satu-satunya salinan pertama. Ini mungkin ada hubungannya dengan gagal menutup file. Saya akan menyelidiki.</s> Ya, itu perlu file <code>close</code>, dan itu harus dilakukan secara umum untuk praktik yang baik.</p><hr><p>Juga, saya pikir ini mungkin lebih mudah di <code>sed</code> ...</p><p>Untuk memasukkan file <em>setelah</em> garis kunci</p><pre><code>sed '/&lt;begin&gt;/r after_file.html' input_file
+</code></pre><p>Memasukkan file sebelumnya sedikit lebih rumit,</p><pre><code> sed -n -e '/^function/r before_file.html' -e 'x' -e 'p' input_file
+</code></pre><p>sehingga Anda bisa menggunakan skrip seperti</p><pre><code>/^function/r before_file.html
+x
+p
+</code></pre><p>dengan</p><pre><code>sed -n -f script input_file
+</code></pre></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/bagaimana-cara-menyisipkan-baris-di-tengah-file-dengan-awk-diberi-pola-pencarian-untuk-disisipkan-setelah-atau-sebelumnya-wzzw53qd/#answer-1 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/1711/dmckee-ex-moderator-kitten target=_blank rel="nofollow noopener"><span itemprop=name>dmckee --- ex-moderator kitten</span></a>
+—
+<a href=https://superuser.com/a/209409 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div><div class=form-row><div class="col-2 col-lg-1"></div><div class="col-10 col-lg-11"><div class=mb-2><button class="btn btn-secondary btn-sm show-answer-replies" data-id=1>Tampilkan Balasan</button></div><div class="card shadow-sm mb-2 answer-replies-container d-none" data-id=1><ul class="list-group list-group-flush"><li class=list-group-item><div>Dengan skrip sed ini, Anda akan mengalami masalah dengan baris terakhir, yang tidak tercetak di ruang tunggu. Anda dapat memperbaikinya dengan menambahkan <code>-e '${g;p}'</code> akhir, atau dengan memastikan masukan Anda memiliki <code>\n</code> tambahan di akhir.</div><div>— <a href=https://superuser.com/users/28187/dubiousjim target=_blank rel="nofollow noopener">dubiousjim</a></div></li></ul></div></div></div></div></div><div class=form-row itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer><div class="col-12 col-md-2 col-lg-1"><div class="card shadow-sm mb-2 d-none d-md-block"><div class="card-body text-center px-1 py-3"><i class="far fa-heart fa-fw text-danger"></i><span itemprop=upvoteCount>2</span></div></div></div><div class="col-12 col-md-10 col-lg-11"><div class="card mb-2 shadow-sm" id=answer-2><div class="card-header d-block d-md-none"><i class="far fa-heart fa-fw text-danger"></i>2</div><div class=card-body><div itemprop=text><p>Perl adalah kakak laki-laki awk.</p><pre><code>perl -p -i -e 'print "some text\n" if /&lt;begin&gt;/' filename
+</code></pre><p>Jika Anda memiliki beberapa &lt;begin> maka itu perlu diubah.</p><p>EDIT: Oh, Anda ingin memasukkan file</p><pre><code>perl -MFile::Slurp -p -i -e 'print read_file("file2") if /&lt;begin&gt;/' filename
+</code></pre><p>(diuji OK, tetapi Anda mungkin perlu <code>cpan File::Slurp</code> terlebih dahulu.)</p></div></div><div class="card-footer text-right bg-white d-flex justify-content-between"><div><a href=https://www.idxstack.com/bagaimana-cara-menyisipkan-baris-di-tengah-file-dengan-awk-diberi-pola-pencarian-untuk-disisipkan-setelah-atau-sebelumnya-wzzw53qd/#answer-2 itemprop=url>Bagikan</a></div><div itemprop=author itemscope itemtype=https://schema.org/Person><a href=https://superuser.com/users/52492/redgrittybrick target=_blank rel="nofollow noopener"><span itemprop=name>RedGrittyBrick</span></a>
+—
+<a href=https://superuser.com/a/209499 rel="nofollow noopener" target=_blank>Sumber</a></div></div></div></div></div><div class="card shadow-sm my-2"><div class=card-header>Pertanyaan Serupa</div><ul class="list-group list-group-flush"><li class=list-group-item><div><a href=/cadangkan-sebelum-menginstal-windows-vista-sp2-woszcviy/>Cadangkan sebelum menginstal Windows Vista SP2?</a></div></li><li class=list-group-item><div><a href=/adakah-yang-bisa-membaca-mengendus-pesan-google-talk-saya-xch78394/>Adakah yang bisa membaca (mengendus) pesan Google Talk saya?</a></div></li><li class=list-group-item><div><a href=/apa-sebenarnya-kartu-pci-isa-itu-lfejgeew/>Apa sebenarnya kartu PCI-ISA itu?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-menguji-apakah-denyhosts-dapat-mengirimi-saya-email-vrzjdjtj/>Bagaimana cara menguji apakah denyhosts dapat mengirimi saya email?</a></div></li><li class=list-group-item><div><a href=/bagaimana-cara-membuat-folder-menurut-tanggal-di-linux-ozd6ncxo/>Bagaimana cara membuat folder menurut tanggal di Linux?</a></div></li><li class=list-group-item><div><a href=/tetapkan-klik-kiri-mouse-ke-tombol-keyboard-se4pcfk2/>Tetapkan klik kiri mouse ke tombol keyboard</a></div></li><li class=list-group-item><div><a href=/bisakah-kita-menonaktifkan-tab-di-ie8-yailivel/>Bisakah kita menonaktifkan tab di IE8?</a></div></li><li class=list-group-item><div><a href=/di-manakah-quotitem-terbaruquot-dan-quotaplikasi-yang-paling-sering-digunakanquot-di-windows-8-iso801wh/>Di manakah "Item Terbaru" dan "Aplikasi yang Paling Sering Digunakan" di Windows 8?</a></div></li><li class=list-group-item><div><a href=/file-yang-akan-dihapus-dari-windows-xp-untuk-menghemat-ruang-2wyimvm0/>File yang akan dihapus dari Windows XP untuk menghemat ruang</a></div></li><li class=list-group-item><div><a href=/bagaimana-uninstall-menghapus-quotsnipping-toolquot-dari-menu-start-hszx5x5o/>Bagaimana uninstall / menghapus "Snipping Tool" dari menu start</a></div></li></ul></div></div><div class="mt-5 bg-light"><div class=container><div class="py-4 d-flex justify-content-between small text-muted"><div>By using our site, you agree to our <a href=/terms-of-service>Terms of Service</a>, <a href=/privacy-policy>Privacy Policy</a>, and <a href=/cookie-policy>Cookie Policy</a></div><div>Berlisensi di bawah <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank rel="nofollow noopener">CC BY-SA 4.0</a> dengan attribusi</div></div></div></div><script src=/js/jquery-3.5.1.min.js></script><script src=/js/bootstrap.bundle.min.js></script><script>$(document).ready(function(){$("#showQuestionReplies").click(function(){$("#questionRepliesContainer").toggleClass("d-none")}),$(".show-answer-replies").click(function(){var a=$(this).data("id");$(".answer-replies-container[data-id='"+a+"']").toggleClass("d-none")})})</script></body></html>
